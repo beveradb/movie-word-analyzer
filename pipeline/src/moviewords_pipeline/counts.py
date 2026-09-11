@@ -70,6 +70,13 @@ def build(zip_path, index_rows, cache_dir, out_counts, out_stats, runtimes):
 
 
 def _compact(records, out_counts, out_stats):
+    # One `write_table` call per movie == one row group per movie in the output
+    # parquet file. derive.py's per-movie hot-path queries (`SELECT word, count
+    # FROM wc WHERE imdb_id = ?`) rely on this layout for row-group pruning: DuckDB
+    # can skip whole row groups whose min/max imdb_id doesn't match the filter
+    # instead of scanning the entire file. If this ever gets rewritten to batch
+    # multiple movies into a single write_table call, that pruning benefit is lost
+    # and derive's per-movie queries get much slower on the full corpus.
     with pq.ParquetWriter(out_counts, COUNTS_SCHEMA) as writer:
         for r in records:
             words, nums = zip(*sorted(r["counts"].items())) if r["counts"] else ((), ())

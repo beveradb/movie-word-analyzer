@@ -5,7 +5,13 @@ from collections import Counter
 # Hyphenated words are deliberately split into separate tokens (e.g. "well-known" ->
 # ["well", "known"]) since hyphens aren't part of this character class; this is intentional
 # corpus-tokenization behavior, not an oversight.
-TOKEN_RE = re.compile(r"[a-z']+")
+#
+# Boundary-guarded on both sides against adjacent word/digit characters so that a token
+# glued to a digit (e.g. "1950s" -> "s", "42nd" -> "nd") is rejected outright instead of
+# yielding a junk trailing/leading fragment. `\w` includes digits and underscore, so this
+# also still excludes any [a-z']+ run directly touching another word character (there
+# shouldn't be one post-lowercasing/accent-stripping, but the guard is cheap insurance).
+TOKEN_RE = re.compile(r"(?<![\w'])[a-z']+(?![\w'])")
 
 # Matches an apostrophe-quoted span that is functioning as a quotation mark rather than as
 # part of a word, e.g. "she said 'no way' to him". The (?<!\w)/(?!\w) boundary checks mean an

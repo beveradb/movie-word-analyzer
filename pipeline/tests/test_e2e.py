@@ -44,3 +44,18 @@ def test_full_pipeline_on_fixture_corpus(data_tree, monkeypatch):
     assert (config.OUT_DIR / "report.md").exists()
     wy = duckdb.sql(f"SELECT * FROM '{config.OUT_DIR / 'word_year.parquet'}'").df()
     assert set(wy.columns) == {"word", "year", "count", "movie_count"}
+
+    wordlists = json.loads((config.OUT_DIR / "json" / "wordlists.json").read_text())
+    assert set(wordlists) == {"stopwords", "profanity"}
+    assert isinstance(wordlists["stopwords"], list) and len(wordlists["stopwords"]) > 0
+    assert isinstance(wordlists["profanity"], list) and len(wordlists["profanity"]) > 0
+
+    words_by_movie = duckdb.sql(
+        f"SELECT imdb_id, count FROM '{config.OUT_DIR / 'words_by_movie' / 'data.parquet'}'"
+    ).fetchall()
+    assert words_by_movie == sorted(words_by_movie, key=lambda r: (r[0], -r[1]))
+
+    words_by_word = duckdb.sql(
+        f"SELECT word, imdb_id FROM '{config.OUT_DIR / 'words_by_word' / 'data.parquet'}'"
+    ).fetchall()
+    assert words_by_word == sorted(words_by_word)

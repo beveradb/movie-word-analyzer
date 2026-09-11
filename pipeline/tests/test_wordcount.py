@@ -35,3 +35,11 @@ def test_tokenize_keeps_unpaired_leading_elision():
 
 def test_tokenize_normalizes_accented_letters():
     assert tokenize("café naïve") == ["cafe", "naive"]
+
+
+def test_tokenize_rejects_digit_suffix_junk_token():
+    assert tokenize("the 1950s were great") == ["the", "were", "great"]
+
+
+def test_tokenize_rejects_digit_prefix_junk_token():
+    assert tokenize("on 42nd street") == ["on", "street"]

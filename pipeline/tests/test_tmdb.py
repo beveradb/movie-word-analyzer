@@ -89,3 +89,38 @@ def test_run_skips_cached_ids_fetches_new_and_caches_null_for_no_match(tmp_path,
     # pre-cached record is untouched
     assert json.loads((cache_dir / "tt_cached.json").read_text()) == {
         "imdb_id": "tt_cached", "countries": ["GB"], "original_language": "en"}
+
+
+def test_run_skips_non_dict_payload_and_continues_processing_other_ids(tmp_path, monkeypatch):
+    # A malformed (non-dict) TMDB JSON payload for one movie must not crash the
+    # whole run; that id is skipped (no cache written) and other ids still process.
+    monkeypatch.setattr(config, "WORK_DIR", tmp_path)
+    monkeypatch.setenv("TMDB_API_TOKEN", "fake-token")
+
+    table = pa.table({"imdb_id": pa.array(["tt_bad", "tt_good"], type=pa.string())})
+    pq.write_table(table, str(tmp_path / "corpus_index.parquet"))
+
+    cache_dir = tmp_path / "tmdb"
+
+    class BadPayloadSession(FakeSession):
+        def get(self, url, **kw):
+            if "/find/tt_bad" in url:
+                self.urls_requested.append(url)
+
+                class R:
+                    def raise_for_status(self): pass
+                    def json(self): return ["not", "a", "dict"]
+                return R()
+            return super().get(url, **kw)
+
+    fake_session = BadPayloadSession({
+        "/find/tt_good": {"movie_results": []},
+    })
+
+    monkeypatch.setattr("requests.Session", lambda: fake_session)
+
+    tmdb.run()
+
+    assert not (cache_dir / "tt_bad.json").exists()
+    assert (cache_dir / "tt_good.json").exists()
+    assert json.loads((cache_dir / "tt_good.json").read_text()) is None

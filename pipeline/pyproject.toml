@@ -1,7 +1,7 @@
 [project]
 name = "moviewords-pipeline"
 version = "0.1.0"
-description = "Add your description here"
+description = "Data pipeline that downloads OPUS OpenSubtitles, curates by IMDb votes, tokenizes and counts words per film, enriches with TMDB metadata, and derives per-movie/cross-film word statistics for movie-word-analyzer."
 readme = "README.md"
 authors = [
     { name = "Andrew Beveridge", email = "andrew@beveridge.uk" }

@@ -46,9 +46,17 @@ uv run python -m moviewords_pipeline.cli index
 # Parse subtitles and count word frequencies
 # Duration: CPU-bound, ~1–3 hours
 # Per-movie cache in work/counts/en/ (skips already-processed films)
+#
+# RUNBOOK NOTE: the tokenizer (wordcount.TOKEN_RE) changed to reject
+# digit-adjacent tokens (e.g. "1950s" -> "s", "42nd" -> "nd" junk tokens).
+# If you have an existing work/counts/en/ cache built before this change,
+# delete it before the first real run afterwards so every film is re-parsed
+# with the corrected tokenizer — otherwise stale per-movie caches will keep
+# serving counts derived from the old, junk-token-producing regex.
+#   rm -rf ../data/work/counts/
 uv run python -m moviewords_pipeline.cli count
 
-# Fetch production country, language, and poster data from TMDB
+# Fetch production country and original-language metadata from TMDB
 # Duration: ~1 hour (API rate-limited to ~20 req/s)
 # Requires TMDB_API_TOKEN environment variable
 # Per-movie cache in work/tmdb/ (skips already-fetched films)
@@ -93,21 +101,37 @@ lower-voted films):
    - **enrich** fetches metadata only for new films (existing TMDB lookups are reused)
    - **derive** regenerates all reports
 
-For additional languages:
+For additional languages (English-only today, not yet a supported path):
 
-- Modify `config.py` to add `LANG = "fr"` (or another ISO 639-1 code)
-- Update `OPUS_URL` to point to the language's zip file
-- Re-run `download → curate → index → count → enrich → derive`
-- The count stage will create a new per-language cache: `work/counts/fr/`
-- The TMDB cache (`work/tmdb/`) is language-independent and reused across runs
+- The `LANG`/`OPUS_URL` config knobs and the per-language `work/counts/<lang>/`
+  cache layout are designed to make this possible in principle, but the rest of
+  the pipeline currently assumes English: `wordcount.TOKEN_RE` only matches
+  `[a-z']` characters (no accented/non-Latin scripts beyond NFKD-foldable Latin
+  ones), and the stopword/profanity wordlists shipped in this package
+  (`stopwords_en.txt`, `profanity_en.txt`) are English-only.
+- Adding a real second language would require a language-aware tokenizer and
+  per-language wordlists in addition to changing `config.py` and `OPUS_URL`.
 
 ## Output
 
 Artifacts land in `data/out/`:
 
-- `report.md` — summary statistics and per-movie word frequency tables
-- `movie_by_word.parquet` — (optional) words indexed by film, sorted by word
-- `word_by_movie.parquet` — (optional) films indexed by word, sorted by film
-- `word_year_trends.parquet` — (optional) annual word frequency trends
+- `movies.parquet` — one row per published film: IMDb id, title, year,
+  countries, genres, runtime, rating, votes, word-count stats
+- `words_by_movie/data.parquet` — per-movie word counts, ordered by
+  `(imdb_id ASC, count DESC)`
+- `words_by_word/data.parquet` — per-movie word counts, ordered by
+  `(word ASC, imdb_id ASC)`
+- `word_year.parquet` — annual word frequency trends (words with corpus-wide
+  count >= 20 only)
+- `json/movie/<imdb_id>.json` — per-movie hot-path payload (stats, top words,
+  top words excluding stopwords, log-odds-distinctive words)
+- `json/leaderboard-default.json` — cross-corpus word leaderboard (top 1000
+  non-stopwords, top 50 stopwords)
+- `json/wordlists.json` — `{"stopwords": [...], "profanity": [...]}`, the
+  same lists the pipeline uses internally, published so the frontend can
+  offer a stopword-hiding toggle and compute swearing counts without
+  shipping its own copies
+- `report.md` — summary statistics and stage-by-stage drop reasons
 
 All outputs are uploaded to the R2 bucket `moviewords-data/` via `upload_r2.sh`.

@@ -100,6 +100,7 @@ def run():
     """)
 
     _write_json_hot_paths(con, out)
+    _write_wordlists(out)
     _write_report(con, out)
 
 
@@ -146,6 +147,16 @@ def _write_json_hot_paths(con, out):
     (out / "json" / "leaderboard-default.json").write_text(json.dumps({
         "words": [[wd, c, mc] for wd, c, mc in board if wd not in stop][:1000],
         "stopwords": [[wd, c, mc] for wd, c, mc in board if wd in stop][:50],
+    }))
+
+
+def _write_wordlists(out):
+    # Published alongside the dataset so the frontend can offer a stopword-hiding
+    # toggle and compute swearing counts client-side without shipping its own
+    # copies of these lists (which would drift from the pipeline's).
+    (out / "json" / "wordlists.json").write_text(json.dumps({
+        "stopwords": sorted(load_stopwords()),
+        "profanity": sorted(load_profanity()),
     }))
 
 

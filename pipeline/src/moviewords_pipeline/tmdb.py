@@ -47,11 +47,16 @@ def run():
         time.sleep(0.05)  # ~20 req/s, well under TMDB limits; throttle every attempt
         try:
             record = lookup(imdb_id, session)
-        except (requests.RequestException, KeyError, TypeError, ValueError) as exc:
-            # Never let one poison record kill an unattended ~1h run.
+        except (requests.RequestException, KeyError, TypeError, ValueError,
+                AttributeError) as exc:
+            # Never let one poison record kill an unattended ~1h run. AttributeError
+            # covers non-dict TMDB payloads (e.g. a bare list/None), which otherwise
+            # crash on `.get(...)` and kill the whole run.
             print(f"tmdb {imdb_id}: {exc}")
             failed += 1
             continue
-        dest.write_text(json.dumps(record))  # 'null' for no-match: cached too
+        tmp = cache / f"{imdb_id}.json.tmp"
+        tmp.write_text(json.dumps(record))  # 'null' for no-match: cached too
+        os.replace(tmp, dest)  # atomic within the same dir; no partial-write cache entries
         done += 1
     print(f"enrich stage: fetched={done} failed={failed} total={len(ids)}")
