@@ -1,0 +1,27 @@
+[project]
+name = "moviewords-pipeline"
+version = "0.1.0"
+description = "Data pipeline that downloads OPUS OpenSubtitles, curates by IMDb votes, tokenizes and counts words per film, enriches with TMDB metadata, and derives per-movie/cross-film word statistics for movie-word-analyzer."
+readme = "README.md"
+authors = [
+    { name = "Andrew Beveridge", email = "andrew@beveridge.uk" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "duckdb>=1.5.5",
+    "pyarrow>=25.0.1",
+    "requests>=2.34.2",
+]
+
+[build-system]
+requires = ["uv_build>=0.9.11,<0.10.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pandas>=3.0.5",
+    "pytest>=9.1.1",
+]
+
+[tool.pytest.ini_options]
+addopts = "--import-mode=importlib"

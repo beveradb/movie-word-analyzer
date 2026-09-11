@@ -561,23 +561,41 @@ git add pipeline && git commit -m "feat(pipeline): IMDb curation stage (movies w
 
 - [ ] **Step 1: Write the fixture-corpus builder (shared with e2e test)**
 
-`pipeline/tests/fixtures/make_mini_corpus.py`:
+`pipeline/tests/fixtures/make_mini_corpus.py` — note: repeating a whole XML
+document N times is invalid XML (multiple roots), so the builder repeats the
+`<s>` sentence elements *inside* one document instead:
 ```python
-"""Build a tiny OPUS-layout zip from the XML fixtures for tests."""
+"""Build a tiny OPUS-layout zip in valid OPUS XML for tests."""
 import zipfile
-from pathlib import Path
 
-FIX = Path(__file__).parent
+BASIC_LINES = [
+    "You know what they call a Quarter Pounder with Cheese in Paris?",
+    "They call it a Royale with Cheese.",
+]
+NOISY_LINES = [
+    "Previously on the show...",
+    "Hello there.",
+    "General Kenobi!",
+]
+
+
+def make_xml(lines, times=1):
+    body = "".join(f'<s id="{i}">{line}</s>'
+                   for i, line in enumerate(lines * times, 1))
+    return (f'<?xml version="1.0" encoding="utf-8"?>'
+            f'<document id="1">{body}</document>').encode()
 
 
 def build(zip_path):
-    basic = (FIX / "sub_basic.xml").read_bytes()
-    noisy = (FIX / "sub_noisy.xml").read_bytes()
     with zipfile.ZipFile(zip_path, "w") as z:
-        z.writestr("OpenSubtitles/raw/en/1994/110912/1.xml", basic * 200)
-        z.writestr("OpenSubtitles/raw/en/1994/110912/2.xml", basic)  # too small
-        z.writestr("OpenSubtitles/raw/en/2001/9999999/3.xml", noisy * 200)
-        z.writestr("OpenSubtitles/raw/en/1894/1/4.xml", basic)       # not curated
+        z.writestr("OpenSubtitles/raw/en/1994/110912/1.xml",
+                   make_xml(BASIC_LINES, 200))
+        z.writestr("OpenSubtitles/raw/en/1994/110912/2.xml",
+                   make_xml(BASIC_LINES))                    # too small
+        z.writestr("OpenSubtitles/raw/en/2001/9999999/3.xml",
+                   make_xml(NOISY_LINES, 200))
+        z.writestr("OpenSubtitles/raw/en/1894/1/4.xml",
+                   make_xml(BASIC_LINES))                    # not curated
     return zip_path
 ```
 
