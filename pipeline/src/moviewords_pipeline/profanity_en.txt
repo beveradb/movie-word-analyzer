@@ -1,0 +1,25 @@
+# Common English profanities, one word per line.
+fuck
+fucking
+shit
+damn
+hell
+ass
+bitch
+bastard
+crap
+piss
+dick
+cock
+pussy
+asshole
+motherfucker
+bullshit
+goddamn
+cunt
+prick
+wanker
+bollocks
+arse
+twat
+shite
