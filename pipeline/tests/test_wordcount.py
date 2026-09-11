@@ -43,3 +43,8 @@ def test_tokenize_rejects_digit_suffix_junk_token():
 
 def test_tokenize_rejects_digit_prefix_junk_token():
     assert tokenize("on 42nd street") == ["on", "street"]
+
+
+def test_single_letter_noise_dropped_but_a_and_i_kept():
+    assert tokenize("i want u to see a c note") == ["i", "want", "to", "see", "a", "note"]
+    assert tokenize("don' t worry 't happens") == ["don'", "worry", "happens"]

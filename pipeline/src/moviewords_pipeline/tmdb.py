@@ -10,6 +10,20 @@ from . import config
 BASE = "https://api.themoviedb.org/3"
 
 
+def make_session():
+    """Auth from env: TMDB_API_TOKEN (v4 bearer) or TMDB_API_KEY (v3 query param)."""
+    session = requests.Session()
+    token = os.environ.get("TMDB_API_TOKEN")
+    key = os.environ.get("TMDB_API_KEY")
+    if token:
+        session.headers["Authorization"] = f"Bearer {token}"
+    elif key:
+        session.params = {"api_key": key}
+    else:
+        raise SystemExit("Set TMDB_API_TOKEN (v4 read token) or TMDB_API_KEY (v3 key)")
+    return session
+
+
 def lookup(imdb_id, session):
     found = session.get(f"{BASE}/find/{imdb_id}",
                         params={"external_source": "imdb_id"}, timeout=30)
@@ -35,8 +49,7 @@ def lookup(imdb_id, session):
 def run():
     cache = config.WORK_DIR / "tmdb"
     cache.mkdir(parents=True, exist_ok=True)
-    session = requests.Session()
-    session.headers["Authorization"] = f"Bearer {os.environ['TMDB_API_TOKEN']}"
+    session = make_session()
     ids = [r[0] for r in duckdb.sql(
         f"SELECT imdb_id FROM '{config.WORK_DIR / 'corpus_index.parquet'}'").fetchall()]
     done = failed = 0

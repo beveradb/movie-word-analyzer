@@ -124,3 +124,20 @@ def test_run_skips_non_dict_payload_and_continues_processing_other_ids(tmp_path,
     assert not (cache_dir / "tt_bad.json").exists()
     assert (cache_dir / "tt_good.json").exists()
     assert json.loads((cache_dir / "tt_good.json").read_text()) is None
+
+
+def test_make_session_v3_key_fallback(monkeypatch):
+    from moviewords_pipeline.tmdb import make_session
+    monkeypatch.delenv("TMDB_API_TOKEN", raising=False)
+    monkeypatch.setenv("TMDB_API_KEY", "v3key")
+    s = make_session()
+    assert s.params == {"api_key": "v3key"}
+    assert "Authorization" not in s.headers
+
+
+def test_make_session_bearer_preferred(monkeypatch):
+    from moviewords_pipeline.tmdb import make_session
+    monkeypatch.setenv("TMDB_API_TOKEN", "v4token")
+    monkeypatch.setenv("TMDB_API_KEY", "v3key")
+    s = make_session()
+    assert s.headers["Authorization"] == "Bearer v4token"
