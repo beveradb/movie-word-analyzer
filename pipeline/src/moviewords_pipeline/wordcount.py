@@ -40,7 +40,10 @@ def tokenize(text):
     for tok in TOKEN_RE.findall(text):
         if tok.startswith("'") and tok.endswith("'") and len(tok) > 1:
             tok = tok.strip("'")
-        if tok.strip("'"):  # drop bare apostrophes
+        letters = tok.strip("'")
+        # Single-letter tokens other than "a"/"i" are corpus noise (chat-speak "u",
+        # OCR fragments, stranded elisions like "'t") — drop them.
+        if letters and (len(letters) > 1 or letters in ("a", "i")):
             tokens.append(tok)
     return tokens
 
