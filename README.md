@@ -7,4 +7,5 @@ Built from the [OPUS OpenSubtitles corpus](https://opus.nlpl.eu/datasets/OpenSub
 (per-movie subtitles with IMDb IDs) plus IMDb/TMDB metadata. Only derived word-count
 data (bags of words) is published — no subtitle text is redistributed.
 
-**Status:** early design phase — see `docs/` for design documents.
+**Status:** early design phase — see `docs/` for design documents. To build the dataset,
+see `pipeline/README.md` for the full-run runbook.
