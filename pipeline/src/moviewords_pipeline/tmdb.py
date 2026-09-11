@@ -17,11 +17,18 @@ def lookup(imdb_id, session):
     results = found.json().get("movie_results", [])
     if not results:
         return None
-    detail = session.get(f"{BASE}/movie/{results[0]['id']}", timeout=30)
+    movie_id = results[0].get("id")
+    if movie_id is None:
+        # Malformed entry (missing "id"): treat as no-match rather than
+        # raising KeyError and killing the whole run.
+        return None
+    detail = session.get(f"{BASE}/movie/{movie_id}", timeout=30)
     detail.raise_for_status()
     data = detail.json()
+    countries = [c["iso_3166_1"] for c in data.get("production_countries", [])
+                 if "iso_3166_1" in c]
     return {"imdb_id": imdb_id,
-            "countries": [c["iso_3166_1"] for c in data.get("production_countries", [])],
+            "countries": countries,
             "original_language": data.get("original_language")}
 
 
@@ -37,13 +44,14 @@ def run():
         dest = cache / f"{imdb_id}.json"
         if dest.exists():
             continue
+        time.sleep(0.05)  # ~20 req/s, well under TMDB limits; throttle every attempt
         try:
             record = lookup(imdb_id, session)
-        except requests.RequestException as exc:
+        except (requests.RequestException, KeyError, TypeError, ValueError) as exc:
+            # Never let one poison record kill an unattended ~1h run.
             print(f"tmdb {imdb_id}: {exc}")
             failed += 1
             continue
         dest.write_text(json.dumps(record))  # 'null' for no-match: cached too
         done += 1
-        time.sleep(0.05)  # ~20 req/s, well under TMDB limits
     print(f"enrich stage: fetched={done} failed={failed} total={len(ids)}")
