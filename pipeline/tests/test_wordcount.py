@@ -12,3 +12,26 @@ def test_tokenize_strips_wrapping_quotes_and_numbers():
 def test_count_words():
     counts = count_words("the cat and the hat")
     assert counts["the"] == 2 and counts["cat"] == 1
+
+
+def test_tokenize_normalizes_curly_apostrophes():
+    assert tokenize("don’t stop") == ["don't", "stop"]
+
+
+def test_tokenize_strips_multi_word_quote_pairs():
+    assert tokenize("she said 'no way' to him") == [
+        "she",
+        "said",
+        "no",
+        "way",
+        "to",
+        "him",
+    ]
+
+
+def test_tokenize_keeps_unpaired_leading_elision():
+    assert tokenize("'tis the season") == ["'tis", "the", "season"]
+
+
+def test_tokenize_normalizes_accented_letters():
+    assert tokenize("café naïve") == ["cafe", "naive"]
