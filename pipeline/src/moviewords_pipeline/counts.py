@@ -1,4 +1,5 @@
 import json
+import os
 import zipfile
 
 import duckdb
@@ -15,13 +16,30 @@ STATS_SCHEMA = pa.schema([("imdb_id", pa.string()), ("total_words", pa.int64()),
                           ("unique_words", pa.int32()),
                           ("words_per_minute", pa.float64())])
 
+_CACHE_RECORD_FIELDS = ("imdb_id", "zip_name", "counts", "total_words",
+                        "unique_words", "words_per_minute")
+
 
 def _cached(cache_dir, imdb_id, zip_name):
     dest = cache_dir / f"{imdb_id}.json"
     if not dest.exists():
         return None
-    record = json.loads(dest.read_text())
+    try:
+        record = json.loads(dest.read_text())
+    except json.JSONDecodeError:
+        return None
+    if not isinstance(record, dict):
+        return None
+    if any(field not in record for field in _CACHE_RECORD_FIELDS):
+        return None
     return record if record.get("zip_name") == zip_name else None
+
+
+def _write_cache(cache_dir, imdb_id, record):
+    dest = cache_dir / f"{imdb_id}.json"
+    tmp = cache_dir / f"{imdb_id}.json.tmp"
+    tmp.write_text(json.dumps(record))
+    os.replace(tmp, dest)
 
 
 def build(zip_path, index_rows, cache_dir, out_counts, out_stats, runtimes):
@@ -44,7 +62,7 @@ def build(zip_path, index_rows, cache_dir, out_counts, out_stats, runtimes):
             record = {"imdb_id": imdb_id, "zip_name": zip_name, "counts": counts,
                       "total_words": total, "unique_words": len(counts),
                       "words_per_minute": total / runtime if runtime else None}
-            (cache_dir / f"{imdb_id}.json").write_text(json.dumps(record))
+            _write_cache(cache_dir, imdb_id, record)
             processed += 1
             records.append(record)
     _compact(records, out_counts, out_stats)

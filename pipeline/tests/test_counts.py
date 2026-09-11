@@ -1,3 +1,5 @@
+import json
+
 import duckdb
 
 from moviewords_pipeline.counts import build
@@ -50,3 +52,33 @@ def test_unparseable_file_is_skipped_not_fatal_and_not_cached(tmp_path):
     report = build(zip_path, [INDEX[0]], *args, runtimes={})
     assert report == {"processed": 0, "skipped": 0, "failed": 1}
     assert not (tmp_path / "cache" / "tt0110912.json").exists()
+
+
+def test_truncated_cache_file_is_treated_as_miss_and_repaired(tmp_path):
+    zip_path = build_zip(tmp_path / "mini.zip")
+    cache_dir = tmp_path / "cache"
+    cache_dir.mkdir(parents=True)
+    out_c, out_s = tmp_path / "wc.parquet", tmp_path / "ms.parquet"
+    # Simulate a process killed mid-write: truncated JSON.
+    (cache_dir / "tt0110912.json").write_text('{"imdb_id": "tt0110912", "zip_')
+    report = build(zip_path, INDEX, cache_dir, out_c, out_s, RUNTIMES)
+    assert report == {"processed": 2, "skipped": 0, "failed": 0}
+    record = json.loads((cache_dir / "tt0110912.json").read_text())
+    assert record["imdb_id"] == "tt0110912"
+    assert "counts" in record
+
+
+def test_cache_file_missing_required_fields_is_treated_as_miss(tmp_path):
+    zip_path = build_zip(tmp_path / "mini.zip")
+    cache_dir = tmp_path / "cache"
+    cache_dir.mkdir(parents=True)
+    out_c, out_s = tmp_path / "wc.parquet", tmp_path / "ms.parquet"
+    # Valid JSON but missing the "counts" field that _compact() needs.
+    (cache_dir / "tt0110912.json").write_text(json.dumps({
+        "imdb_id": "tt0110912",
+        "zip_name": INDEX[0][1],
+    }))
+    report = build(zip_path, INDEX, cache_dir, out_c, out_s, RUNTIMES)
+    assert report == {"processed": 2, "skipped": 0, "failed": 0}
+    record = json.loads((cache_dir / "tt0110912.json").read_text())
+    assert "counts" in record

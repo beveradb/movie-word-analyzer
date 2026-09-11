@@ -24,5 +24,4 @@ dev = [
 ]
 
 [tool.pytest.ini_options]
-rootdir = "."
 addopts = "--import-mode=importlib"
