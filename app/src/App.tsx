@@ -83,11 +83,15 @@ export default function App() {
           . Only derived word counts are published — no subtitle text is redistributed.
         </p>
         <p className="mt-1">
-          Data: word counts derived from{' '}
-          <a className="underline" href="https://opus.nlpl.eu/OpenSubtitles">
-            OPUS OpenSubtitles
+          Data: word counts derived from the{' '}
+          <a className="underline" href="https://opus.nlpl.eu/datasets/OpenSubtitles">
+            OPUS OpenSubtitles corpus
           </a>{' '}
-          (Lison &amp; Tiedemann, 2016), IMDb non-commercial datasets, and{' '}
+          (Lison &amp; Tiedemann, 2016), built from subtitles by{' '}
+          <a className="underline" href="http://www.opensubtitles.org/">
+            OpenSubtitles.org
+          </a>
+          ; IMDb non-commercial datasets; and{' '}
           <a className="underline" href="https://www.themoviedb.org">
             TMDB
           </a>
