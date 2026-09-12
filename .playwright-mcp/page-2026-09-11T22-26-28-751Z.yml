@@ -1,0 +1,97 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - link "MOVIEWORDS" [ref=e5] [cursor=pointer]:
+      - /url: "#/"
+    - navigation "Sections" [ref=e6]:
+      - link "Explore" [ref=e7] [cursor=pointer]:
+        - /url: "#/"
+      - link "Trends" [ref=e8] [cursor=pointer]:
+        - /url: "#/trends"
+      - link "Leaderboard" [ref=e9] [cursor=pointer]:
+        - /url: "#/leaderboard"
+      - link "Compare" [ref=e10] [cursor=pointer]:
+        - /url: "#/compare"
+  - main [ref=e11]:
+    - generic [ref=e597]:
+      - paragraph [ref=e598]: Put up to three films side by side.
+      - textbox "Search movies" [ref=e601]:
+        - /placeholder: Add another film…
+      - generic [ref=e605]:
+        - generic [ref=e606]:
+          - generic [ref=e607]:
+            - generic [ref=e608]: 1. The Godfather — 1972
+            - button "remove" [ref=e610]
+          - generic [ref=e611]:
+            - term [ref=e612]: Words spoken
+            - definition [ref=e613]: 6,959
+            - term [ref=e614]: Distinct words
+            - definition [ref=e615]: 1,297
+            - term [ref=e616]: Vocabulary richness
+            - definition [ref=e617]: 18.6%
+            - term [ref=e618]: Swears / 1k words
+            - definition [ref=e619]: "2.2"
+          - generic [ref=e620]:
+            - heading "Signature words" [level=3] [ref=e621]
+            - paragraph [ref=e622]:
+              - button "sonny" [ref=e623]
+              - button "corleone" [ref=e624]
+              - button "sollozzo" [ref=e625]
+              - button "barzini" [ref=e626]
+              - button "godfather" [ref=e627]
+              - button "luca" [ref=e628]
+              - button "tom" [ref=e629]
+              - button "mike" [ref=e630]
+              - button "michael" [ref=e631]
+              - button "paulie" [ref=e632]
+              - button "clemenza" [ref=e633]
+              - button "don" [ref=e634]
+          - link "full breakdown →" [ref=e636] [cursor=pointer]:
+            - /url: "#/movie/m203"
+        - generic [ref=e637]:
+          - generic [ref=e638]:
+            - generic [ref=e639]: 2. Zulu Dawn — 1979
+            - button "remove" [ref=e641]
+          - generic [ref=e642]:
+            - term [ref=e643]: Words spoken
+            - definition [ref=e644]: 1,002
+            - term [ref=e645]: Distinct words
+            - definition [ref=e646]: "454"
+            - term [ref=e647]: Vocabulary richness
+            - definition [ref=e648]: 45.3%
+            - term [ref=e649]: Swears / 1k words
+            - definition [ref=e650]: "0.0"
+          - generic [ref=e651]:
+            - heading "Signature words" [level=3] [ref=e652]
+            - paragraph [ref=e653]:
+              - button "zulu" [ref=e654]
+              - button "lord" [ref=e655]
+              - button "chelmsford" [ref=e656]
+              - button "dumford" [ref=e657]
+              - button "vereker" [ref=e658]
+              - button "zulus" [ref=e659]
+              - button "rumours" [ref=e660]
+              - button "'t" [ref=e661]
+              - button "durnford" [ref=e662]
+              - button "pulleine" [ref=e663]
+              - button "sikali" [ref=e664]
+              - button "crealock" [ref=e665]
+          - link "full breakdown →" [ref=e667] [cursor=pointer]:
+            - /url: "#/movie/m616"
+      - generic [ref=e668]:
+        - heading "Words they share" [level=2] [ref=e669]
+        - paragraph [ref=e670]: don
+  - contentinfo [ref=e27]:
+    - paragraph [ref=e28]: Fade out.
+    - paragraph [ref=e29]:
+      - text: "Open source:"
+      - link "github.com/beveradb/movie-word-analyzer" [ref=e30] [cursor=pointer]:
+        - /url: https://github.com/beveradb/movie-word-analyzer
+      - text: . Only derived word counts are published — no subtitle text is redistributed.
+    - paragraph [ref=e31]:
+      - text: "Data: Cornell Movie-Dialogs Corpus (Danescu-Niculescu-Mizil & Lee, 2011) · corpus pipeline built on"
+      - link "OPUS OpenSubtitles" [ref=e32] [cursor=pointer]:
+        - /url: https://opus.nlpl.eu/OpenSubtitles
+      - text: (Lison & Tiedemann, 2016), IMDb non-commercial datasets, and
+      - link "TMDB" [ref=e33] [cursor=pointer]:
+        - /url: https://www.themoviedb.org
+      - text: . Non-commercial project.

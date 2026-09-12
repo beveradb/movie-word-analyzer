@@ -157,11 +157,47 @@ def _write_signatures(con, out):
         (out / "json" / "signature" / f"{kind}.json").write_text(json.dumps(payload))
 
 
+def word_meta(vocab):
+    """Per-word metadata: Zipf commonness + part-of-speech classes.
+
+    classes: WordNet POS letters present for the word (n=noun, v=verb,
+    a=adjective incl. satellites, r=adverb); "x" when WordNet doesn't know it
+    (names, invented words, OCR survivors) — its own filterable class.
+    """
+    import nltk
+    try:
+        from nltk.corpus import wordnet as wn
+        wn.synsets("test")
+    except LookupError:
+        nltk.download("wordnet", quiet=True)
+        from nltk.corpus import wordnet as wn
+    from wordfreq import zipf_frequency
+
+    meta = {}
+    for word in vocab:
+        pos = {s.pos() for s in wn.synsets(word)}
+        if "s" in pos:  # adjective satellites count as adjectives
+            pos.discard("s")
+            pos.add("a")
+        classes = "".join(sorted(pos)) or "x"
+        meta[word] = (round(zipf_frequency(word, "en"), 1), classes)
+    return meta
+
+
 def _write_json_hot_paths(con, out):
     stop = load_stopwords()
     corpus = dict(con.sql(
         "SELECT word, SUM(count) FROM wc JOIN movies USING (imdb_id) GROUP BY word"
     ).fetchall())
+    wmeta = word_meta(corpus.keys())
+    con.sql("CREATE TABLE word_meta (word VARCHAR, zipf DOUBLE, classes VARCHAR)")
+    con.executemany("INSERT INTO word_meta VALUES (?, ?, ?)",
+                    [(w, z, c) for w, (z, c) in wmeta.items()])
+    con.sql(f"COPY (SELECT * FROM word_meta ORDER BY word) TO '{out / 'word_meta.parquet'}' (FORMAT parquet)")
+
+    def tag(word, value):
+        z, c = wmeta.get(word, (0.0, "x"))
+        return [word, value, z, c]
 
     movie_cols = ["imdb_id", "title", "year", "total_words", "unique_words",
                   "words_per_minute"]
@@ -182,10 +218,10 @@ def _write_json_hot_paths(con, out):
                 "unique_words": m["unique_words"],
                 "words_per_minute": m["words_per_minute"],
             },
-            "top": [[wd, c] for wd, c in rows if wd not in stop][:200],
-            "top_all": [[wd, c] for wd, c in rows][:50],
-            "distinctive": [[wd, round(z, 2)]
-                             for wd, z in log_odds(counts, corpus)[:50]],
+            "top": [tag(wd, c) for wd, c in rows if wd not in stop][:200],
+            "top_all": [tag(wd, c) for wd, c in rows][:50],
+            "distinctive": [tag(wd, round(z, 2))
+                            for wd, z in log_odds(counts, corpus)[:50]],
         }
         (out / "json" / "movie" / f"{imdb_id}.json").write_text(
             json.dumps(payload))
@@ -214,8 +250,10 @@ def _write_json_hot_paths(con, out):
         ORDER BY count DESC
     """).fetchall()
     (out / "json" / "leaderboard-default.json").write_text(json.dumps({
-        "words": [[wd, c, mc] for wd, c, mc in board if wd not in stop][:1000],
-        "stopwords": [[wd, c, mc] for wd, c, mc in board if wd in stop][:50],
+        "words": [[wd, c, mc, *wmeta.get(wd, (0.0, "x"))]
+                  for wd, c, mc in board if wd not in stop][:1000],
+        "stopwords": [[wd, c, mc, *wmeta.get(wd, (0.0, "x"))]
+                      for wd, c, mc in board if wd in stop][:50],
     }))
 
 
