@@ -10,8 +10,8 @@ interface Row {
   movies: number
 }
 
-const YEAR_MIN = 1920
-const YEAR_MAX = 2015
+const YEAR_MIN = 1900
+const YEAR_MAX = 2025
 
 export function LeaderboardView() {
   const [rows, setRows] = useState<Row[] | null>(null)

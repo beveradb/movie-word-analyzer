@@ -7,6 +7,65 @@ import { ErrorBox, Spinner } from '../components/ui'
 const COLORS = ['#3e6fa8', '#cc5a2e', '#6b5aa8', '#128a5e']
 const MAX_WORDS = 4
 
+interface TopFilmRow {
+  imdb_id: string
+  title: string
+  year: number
+  count: number
+  total_words: number
+}
+
+/** Answers "which movie says this word the most?" */
+function TopFilms({ word }: { word: string }) {
+  const [rows, setRows] = useState<TopFilmRow[] | null>(null)
+
+  useEffect(() => {
+    let cancelled = false
+    setRows(null)
+    q<TopFilmRow>(
+      `SELECT w.imdb_id, m.title, m.year, w.count::DOUBLE AS count, m.total_words::DOUBLE AS total_words
+       FROM ${pq('words_by_word/data.parquet')} w
+       JOIN ${pq('movies.parquet')} m USING (imdb_id)
+       WHERE w.word = ${lit(word)} ORDER BY w.count DESC LIMIT 15`,
+    )
+      .then((r) => !cancelled && setRows(r))
+      .catch(() => !cancelled && setRows([]))
+    return () => {
+      cancelled = true
+    }
+  }, [word])
+
+  if (rows === null) return <Spinner label={`Finding films that say “${word}” most…`} />
+  if (rows.length === 0) return null
+  const max = rows[0].count
+  return (
+    <div className="mt-6 border-2 border-ink bg-white p-4">
+      <h2 className="slug text-sm">Films that say “{word}” the most</h2>
+      <ol className="mt-3">
+        {rows.map((r, i) => (
+          <li key={r.imdb_id} className="flex items-center gap-3 py-1">
+            <span className="w-6 text-right font-script text-xs text-ink-3">{i + 1}</span>
+            <a
+              href={`#/movie/${r.imdb_id}`}
+              className="w-56 shrink-0 truncate font-script hover:bg-mark sm:w-72"
+            >
+              {r.title} <span className="text-xs text-ink-2">({r.year})</span>
+            </a>
+            <div className="h-4 min-w-1 rounded-r-[4px] bg-s1" style={{ width: `${(r.count / max) * 60}%` }} />
+            <span className="shrink-0 font-script text-xs tabular-nums text-ink-2">
+              {r.count.toLocaleString()}×
+              <span className="hidden text-ink-3 sm:inline">
+                {' '}
+                · {((r.count / r.total_words) * 1000).toFixed(1)}/1k words
+              </span>
+            </span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  )
+}
+
 interface YearRow {
   word: string
   year: number
@@ -136,6 +195,7 @@ export function TrendsView() {
           <p className="mt-2 text-right text-xs text-ink-2">uses per million words of dialogue</p>
         </div>
       )}
+      {words.length === 1 && !loading && !error && <TopFilms word={words[0]} />}
       {!words.length && (
         <div className="mt-8 font-script text-ink-2">
           <p>Try:</p>

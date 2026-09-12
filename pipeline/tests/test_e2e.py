@@ -59,3 +59,25 @@ def test_full_pipeline_on_fixture_corpus(data_tree, monkeypatch):
         f"SELECT word, imdb_id FROM '{config.OUT_DIR / 'words_by_word' / 'data.parquet'}'"
     ).fetchall()
     assert words_by_word == sorted(words_by_word)
+
+
+def test_signature_artifacts(data_tree, monkeypatch):
+    import json
+    build_zip(config.RAW_DIR / "opus_en.zip")
+    (config.RAW_DIR / "title.basics.tsv.gz").write_bytes(
+        (FIX / "mini.basics.tsv.gz").read_bytes())
+    (config.RAW_DIR / "title.ratings.tsv.gz").write_bytes(
+        (FIX / "mini.ratings.tsv.gz").read_bytes())
+    tmdb_dir = config.WORK_DIR / "tmdb"
+    tmdb_dir.mkdir(parents=True)
+    (tmdb_dir / "tt0110912.json").write_text(json.dumps(
+        {"imdb_id": "tt0110912", "countries": ["US"], "original_language": "en"}))
+    curate.run(); corpus_index.run(); counts.run(); derive.run()
+
+    decades = json.loads((config.OUT_DIR / "json" / "signature" / "decades.json").read_text())
+    assert "1990" in decades
+    assert decades["1990"]["movie_count"] == 1
+    assert decades["1990"]["total_words"] > 0
+    genres = json.loads((config.OUT_DIR / "json" / "signature" / "genres.json").read_text())
+    assert {"Crime", "Drama"} <= set(genres)
+    assert all(len(v["top"]) > 0 for v in genres.values())

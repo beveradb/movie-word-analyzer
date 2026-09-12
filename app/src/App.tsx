@@ -56,7 +56,7 @@ export default function App() {
           . Only derived word counts are published — no subtitle text is redistributed.
         </p>
         <p className="mt-1">
-          Data: Cornell Movie-Dialogs Corpus (Danescu-Niculescu-Mizil &amp; Lee, 2011) · corpus pipeline built on{' '}
+          Data: word counts derived from{' '}
           <a className="underline" href="https://opus.nlpl.eu/OpenSubtitles">
             OPUS OpenSubtitles
           </a>{' '}

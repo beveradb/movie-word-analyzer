@@ -43,6 +43,16 @@ export async function fetchJSON<T>(path: string): Promise<T> {
   return data
 }
 
+export interface SignatureEntry {
+  movie_count: number
+  total_words: number
+  top: [string, number][]
+  signature: [string, number][]
+}
+
+export const getSignatures = (kind: 'decades' | 'genres') =>
+  fetchJSON<Record<string, SignatureEntry>>(`json/signature/${kind}.json`)
+
 export const getMovieIndex = () => fetchJSON<MovieIndexEntry[]>('json/movies-index.json')
 export const getMovie = (id: string) => fetchJSON<MovieDetail>(`json/movie/${id}.json`)
 export const getLeaderboard = () => fetchJSON<Leaderboard>('json/leaderboard-default.json')

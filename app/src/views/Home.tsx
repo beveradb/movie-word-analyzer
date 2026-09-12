@@ -27,18 +27,20 @@ function Hero() {
 
 export function HomeView() {
   const [featured, setFeatured] = useState<MovieIndexEntry[]>([])
+  const [count, setCount] = useState(0)
 
   useEffect(() => {
     getMovieIndex()
-      .then((idx) =>
+      .then((idx) => {
+        setCount(idx.length)
         setFeatured(
           [...idx]
             .sort((a, b) => b.votes - a.votes)
             .slice(0, 60)
             .sort(() => 0.5 - Math.random())
             .slice(0, 8),
-        ),
-      )
+        )
+      })
       .catch(() => {})
   }, [])
 
@@ -72,12 +74,13 @@ export function HomeView() {
       <section className="mt-10 border-2 border-ink bg-paper-2 p-4 text-sm text-ink-2">
         <p className="font-script font-bold uppercase text-ink">About this dataset</p>
         <p className="mt-1">
-          Currently showing <strong>610 films</strong> from the{' '}
-          <a className="underline" href="https://www.cs.cornell.edu/~cristian/Cornell_Movie-Dialogs_Corpus.html">
-            Cornell Movie-Dialogs Corpus
-          </a>
-          . The full build — ~30,000 films from OpenSubtitles with country and runtime metadata — is in the works;
-          the country filter and words-per-minute stats unlock then.
+          Covering <strong>{count ? count.toLocaleString() : '30,000+'} English-language films</strong> — every word
+          of dialogue from the{' '}
+          <a className="underline" href="https://opus.nlpl.eu/OpenSubtitles">
+            OPUS OpenSubtitles corpus
+          </a>{' '}
+          for movies with at least 1,000 IMDb votes, counted per film. Only word counts are published; no subtitle
+          text is redistributed.
         </p>
       </section>
     </div>
