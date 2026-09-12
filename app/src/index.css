@@ -52,6 +52,10 @@ body { @apply bg-paper text-ink font-body antialiased; }
 .dark .hl > .hl-mark { opacity: 0.45; }
 .dark .hl > .hl-word { color: var(--color-ink); }
 
+/* Text sitting on a solid highlighter background is always dark ink — in dark
+   mode the page ink is near-white, which is unreadable on yellow. */
+.dark :is(.bg-mark, .hover\:bg-mark:hover) { color: #201d1a; }
+
 @media (prefers-reduced-motion: no-preference) {
   .hl > .hl-mark { transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
 }
