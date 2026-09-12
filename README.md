@@ -46,6 +46,27 @@ Details, decisions, and performance lessons: [`docs/ARCHITECTURE.md`](docs/ARCHI
    `VITE_DATA_BASE` at your data host. Deploy anywhere static
    (`wrangler pages deploy dist --project-name moviewords`).
 
+## Download the data
+
+The full published dataset is five Parquet files on a public bucket — download
+them, or point DuckDB straight at the URLs:
+
+| File | Size | Contents |
+|---|---|---|
+| [movies.parquet](https://moviewords-data.beveradb.com/movies.parquet) | 0.8 MB | one row per film: title, year, genres, rating, word totals |
+| [words_by_movie/data.parquet](https://moviewords-data.beveradb.com/words_by_movie/data.parquet) | 88 MB | (imdb_id, word, count), sorted by film |
+| [words_by_word/data.parquet](https://moviewords-data.beveradb.com/words_by_word/data.parquet) | 93 MB | same rows, sorted by word |
+| [word_year.parquet](https://moviewords-data.beveradb.com/word_year.parquet) | 6 MB | (word, year, count, movie_count) for trends |
+| [word_meta.parquet](https://moviewords-data.beveradb.com/word_meta.parquet) | 3.5 MB | per-word commonness (zipf), part of speech, distinctiveness |
+
+```sh
+duckdb -c "SELECT title, year, words_per_minute FROM 'https://moviewords-data.beveradb.com/movies.parquet' ORDER BY words_per_minute DESC LIMIT 10"
+```
+
+Full schema: [the dataset contract](docs/ARCHITECTURE.md#the-dataset-contract).
+Got an analysis idea we haven't thought of? Email
+[andrew@beveridge.uk](mailto:andrew@beveridge.uk).
+
 ## Data & licensing
 
 Code: MIT. Published dataset: derived word counts, CC BY-NC-SA 4.0
