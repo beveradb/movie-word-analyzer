@@ -10,11 +10,12 @@ from collections import defaultdict
 DECADES = list(range(1930, 2030, 10))
 
 
-def risers_fallers(con, min_total=5000, min_decades=6, top_n=50):
+def risers_fallers(con, min_total=5000, min_decades=6, top_n=50, quality=None):
     """Words whose per-million rate changed most between early cinema
     (1930s–40s) and now (2010s–20s). Rates are computed against per-decade
     totals so noisier early decades don't skew; +0.1/M smoothing keeps
-    born/died words finite.
+    born/died words finite. `quality` is an optional word predicate the
+    caller uses to drop OCR junk ('rm') that survives the count floors.
     """
     rows = con.sql("""
         SELECT (year // 10) * 10 AS decade, word, SUM(count)::BIGINT AS c
@@ -31,6 +32,8 @@ def risers_fallers(con, min_total=5000, min_decades=6, top_n=50):
     scored = []
     for word, dc in per_word.items():
         if sum(dc.values()) < min_total or len(dc) < min_decades:
+            continue
+        if quality is not None and not quality(word):
             continue
         rates = {d: dc.get(d, 0) / totals[d] * 1e6 for d in decades}
         early = (rates.get(1930, 0.0) + rates.get(1940, 0.0)) / 2
@@ -88,19 +91,26 @@ def film_superlatives(con, profanity, min_words=5000, top_n=20):
     return out
 
 
-def one_film_wonders(con, min_total=300, min_share=0.6, top_n=50):
-    """Words whose corpus-wide uses are concentrated in a single film —
-    character names, invented words, catchphrases."""
+def one_film_wonders(con, min_top=100, min_films=5, dominance=2.0, top_n=50):
+    """Words one film says at least `dominance`× more than the rest of cinema
+    combined — character names, invented words, catchphrases. Junk guards:
+    presence in ≥`min_films` films (subtitle/OCR artifacts like 'apos' cluster
+    in one or two releases) and a real-word shape (≥4 chars incl. a vowel,
+    killing 'yy'/'rm'-style OCR shrapnel).
+    """
     rows = con.sql(f"""
         WITH t AS (
-            SELECT word, SUM(count)::BIGINT AS total, MAX(count)::BIGINT AS top
+            SELECT word, SUM(count)::BIGINT AS total, MAX(count)::BIGINT AS top,
+                   COUNT(DISTINCT imdb_id) AS films
             FROM words_by_movie GROUP BY word
         )
         SELECT t.word, w.imdb_id, m.title, m.year, w.count::BIGINT, t.total
         FROM t
         JOIN words_by_movie w ON w.word = t.word AND w.count = t.top
         JOIN movies m USING (imdb_id)
-        WHERE t.total >= {min_total} AND t.top >= t.total * {min_share}
+        WHERE t.top >= {min_top} AND t.films >= {min_films}
+          AND t.top >= (t.total - t.top) * {dominance}
+          AND LENGTH(t.word) >= 4 AND regexp_matches(t.word, '[aeiouy]')
         QUALIFY ROW_NUMBER() OVER (PARTITION BY t.word ORDER BY w.imdb_id) = 1
         ORDER BY w.count DESC LIMIT {top_n}
     """).fetchall()
@@ -109,13 +119,15 @@ def one_film_wonders(con, min_total=300, min_share=0.6, top_n=50):
             for w, i, t, y, c, total in rows]
 
 
-def ubiquity(con, top_n=50):
-    """Words present in the highest share of films — the words every movie says."""
+def ubiquity(con, top_n=50, exclude=frozenset()):
+    """Words present in the highest share of films — the words every movie
+    says. Callers exclude stopwords, otherwise the list is just 'the/a/and'.
+    """
     n_films = con.sql("SELECT COUNT(*) FROM movies").fetchone()[0]
     rows = con.sql(f"""
         SELECT word, COUNT(DISTINCT imdb_id) AS films
         FROM words_by_movie GROUP BY word
-        ORDER BY films DESC, word LIMIT {top_n}
+        ORDER BY films DESC, word LIMIT {top_n + len(exclude)}
     """).fetchall()
     return [{"word": w, "films": f, "share": round(f / n_films, 4)}
-            for w, f in rows]
+            for w, f in rows if w not in exclude][:top_n]

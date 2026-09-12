@@ -3,7 +3,7 @@ import type { MovieDetail, MovieIndexEntry } from '../lib/data'
 import { getMovie, getMovieIndex } from '../lib/data'
 import { navigate } from '../lib/route'
 import { ErrorBox, HighlightWord, Poster, Slug, Spinner } from '../components/ui'
-import { WordFilterBar, emptyFilter, passesFilter, type WordRow } from '../components/WordFilter'
+import { WordFilterBar, defaultFilter, passesFilter, type WordRow } from '../components/WordFilter'
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
@@ -18,8 +18,7 @@ export function MovieView({ id }: { id: string }) {
   const [movie, setMovie] = useState<MovieDetail | null>(null)
   const [meta, setMeta] = useState<MovieIndexEntry | null>(null)
   const [error, setError] = useState<string | null>(null)
-  const [showStopwords, setShowStopwords] = useState(false)
-  const [filter, setFilter] = useState(emptyFilter())
+  const [filter, setFilter] = useState(defaultFilter())
 
   useEffect(() => {
     setMovie(null)
@@ -33,10 +32,15 @@ export function MovieView({ id }: { id: string }) {
   if (error) return <ErrorBox message={error} retry={() => navigate('/')} />
   if (!movie) return <Spinner label="Loading script…" />
 
-  const words = (showStopwords ? movie.top_all : movie.top)
+  // 'all words' mode swaps to the raw head of the list (stopwords included)
+  const words = (filter.common === 'all' ? movie.top_all : movie.top)
     .filter((r) => passesFilter(r as WordRow, filter))
     .slice(0, 25)
-  const distinctive = movie.distinctive.filter((r) => passesFilter(r as WordRow, filter)).slice(0, 20)
+  // signature words are already statistically distinctive — only kind chips
+  // apply, not the commonness toggle (log-odds may rightly pick zipf≥5 words)
+  const distinctive = movie.distinctive
+    .filter((r) => passesFilter(r as WordRow, { ...filter, common: 'all' }))
+    .slice(0, 20)
   const sigMax = distinctive.length ? distinctive[0][1] : 1
 
   return (
@@ -100,18 +104,7 @@ export function MovieView({ id }: { id: string }) {
         </section>
 
         <section>
-          <div className="flex items-baseline justify-between">
-            <h2 className="slug text-sm">Most spoken words</h2>
-            <label className="flex cursor-pointer items-center gap-2 text-xs text-ink-2">
-              <input
-                type="checkbox"
-                checked={showStopwords}
-                onChange={(e) => setShowStopwords(e.target.checked)}
-                className="accent-[var(--color-ink)]"
-              />
-              include stopwords
-            </label>
-          </div>
+          <h2 className="slug text-sm">Most spoken words</h2>
           <ol className="mt-3 grid grid-cols-2 gap-x-6">
             {words.map(([w, c], i) => (
               <li key={w} className="flex items-baseline gap-2 border-b border-paper-2 py-1.5 font-script">

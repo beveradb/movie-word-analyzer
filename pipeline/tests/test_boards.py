@@ -66,12 +66,36 @@ def test_film_superlatives(con):
 
 
 def test_one_film_wonders(con):
-    out = one_film_wonders(con, min_total=300, min_share=0.6)
+    out = one_film_wonders(con, min_top=400, min_films=2)
     words = [r["word"] for r in out]
-    assert "wilson" in words  # 495 of 500 in tt3
+    assert "wilson" in words  # 495 vs 5 elsewhere: dominant
     assert "hello" not in words  # spread across films
     wilson = next(r for r in out if r["word"] == "wilson")
     assert wilson["id"] == "tt3" and wilson["share"] == 0.99
+
+
+def test_one_film_wonders_min_films_kills_ocr_junk(con):
+    # wilson drops to a single film: below the min_films floor
+    con.sql("DELETE FROM words_by_movie WHERE word = 'wilson' AND imdb_id = 'tt1'")
+    out = one_film_wonders(con, min_top=400, min_films=3)
+    assert all(r["word"] != "wilson" for r in out)
+
+
+def test_one_film_wonders_rejects_short_or_vowelless_words(con):
+    con.sql("""
+        INSERT INTO words_by_movie
+        SELECT imdb_id, 'yy', 300 FROM (VALUES ('tt1'), ('tt2'), ('tt3')) t(imdb_id)
+        UNION ALL
+        SELECT 'tt3', 'zz', 900
+    """)
+    out = one_film_wonders(con, min_top=100, min_films=2)
+    assert all(r["word"] not in ("yy", "zz") for r in out)
+
+
+def test_risers_fallers_quality_predicate(con):
+    out = risers_fallers(con, min_total=100, min_decades=6,
+                         quality=lambda w: w != "phone")
+    assert all(r["word"] != "phone" for r in out["risers"])
 
 
 def test_ubiquity(con):
@@ -79,3 +103,8 @@ def test_ubiquity(con):
     assert out[0]["word"] == "hello"
     assert out[0]["films"] == 3
     assert out[0]["share"] == 1.0
+
+
+def test_ubiquity_excludes_stopwords(con):
+    out = ubiquity(con, top_n=2, exclude={"hello"})
+    assert all(r["word"] != "hello" for r in out)

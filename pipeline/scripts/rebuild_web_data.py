@@ -124,11 +124,20 @@ def stage_movies(con):
 def stage_boards(con):
     out = OUT / "json" / "leaderboards"
     out.mkdir(parents=True, exist_ok=True)
-    (out / "shifts.json").write_text(json.dumps(boards.risers_fallers(con)))
+    meta = load_meta_parquet(con)
+
+    def quality(word):
+        # drop OCR junk: unknown-POS words that everyday English barely knows
+        zipf, _, pos, _ = meta.get(word, (0.0, "x", "x", 0.0))
+        return pos in "nvar" or zipf >= 4.0
+
+    (out / "shifts.json").write_text(json.dumps(
+        boards.risers_fallers(con, quality=quality)))
     (out / "films.json").write_text(json.dumps(
         boards.film_superlatives(con, load_profanity())))
     (out / "wonders.json").write_text(json.dumps(boards.one_film_wonders(con)))
-    (out / "everywhere.json").write_text(json.dumps(boards.ubiquity(con)))
+    (out / "everywhere.json").write_text(json.dumps(
+        boards.ubiquity(con, exclude=load_stopwords())))
 
 
 def stage_signatures(con):
