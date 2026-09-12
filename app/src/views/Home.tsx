@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import type { MovieIndexEntry } from '../lib/data'
 import { getMovieIndex } from '../lib/data'
 import { navigate } from '../lib/route'
-import { MovieSearch } from '../components/ui'
+import { MovieSearch, Poster } from '../components/ui'
 
 /** Hero: a line of dialogue with live highlighter marks — the site's thesis. */
 function Hero() {
@@ -59,17 +59,31 @@ export function HomeView() {
               <button
                 key={m.id}
                 onClick={() => navigate(`/movie/${m.id}`)}
-                className="border-2 border-ink bg-white p-3 text-left transition-transform hover:-translate-y-0.5 hover:bg-mark/30 hover:shadow-[4px_4px_0_0_#201d1a]"
+                className="border-2 border-ink bg-card text-left transition-transform hover:-translate-y-0.5 hover:shadow-[4px_4px_0_0_var(--color-ink)]"
               >
-                <div className="line-clamp-2 font-script font-bold leading-snug">{m.title}</div>
-                <div className="mt-1 text-xs text-ink-2">
-                  {m.year} · {m.total_words.toLocaleString()} words
+                <Poster id={m.id} title={m.title} className="w-full border-b-2 border-ink" />
+                <div className="p-2.5">
+                  <div className="line-clamp-2 font-script text-sm font-bold leading-snug">{m.title}</div>
+                  <div className="mt-1 text-xs text-ink-2">
+                    {m.year} · {m.total_words.toLocaleString()} words
+                  </div>
                 </div>
               </button>
             ))}
           </div>
         </section>
       )}
+
+      <section className="mt-10">
+        <h2 className="slug border-b-2 border-ink pb-1 text-sm">Or wander a decade</h2>
+        <div className="mt-3 flex flex-wrap gap-2 font-script text-sm font-bold">
+          {['1930', '1950', '1970', '1980', '1990', '2000', '2010'].map((d) => (
+            <a key={d} href={`#/decade/${d}`} className="border-2 border-ink bg-card px-3 py-1 hover:bg-mark">
+              {d}s
+            </a>
+          ))}
+        </div>
+      </section>
 
       <section className="mt-10 border-2 border-ink bg-paper-2 p-4 text-sm text-ink-2">
         <p className="font-script font-bold uppercase text-ink">About this dataset</p>

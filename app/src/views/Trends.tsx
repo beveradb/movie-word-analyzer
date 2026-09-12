@@ -4,7 +4,7 @@ import { navigate, useRoute } from '../lib/route'
 import { LineChart, type Series } from '../components/LineChart'
 import { ErrorBox, Spinner } from '../components/ui'
 
-const COLORS = ['#3e6fa8', '#cc5a2e', '#6b5aa8', '#128a5e']
+const COLORS = ['var(--color-s1)', 'var(--color-s2)', 'var(--color-s3)', 'var(--color-s4)']
 const MAX_WORDS = 4
 
 interface TopFilmRow {
@@ -39,7 +39,7 @@ function TopFilms({ word }: { word: string }) {
   if (rows.length === 0) return null
   const max = rows[0].count
   return (
-    <div className="mt-6 border-2 border-ink bg-white p-4">
+    <div className="mt-6 border-2 border-ink bg-card p-4">
       <h2 className="slug text-sm">Films that say “{word}” the most</h2>
       <ol className="mt-3">
         {rows.map((r, i) => (
@@ -159,7 +159,7 @@ export function TrendsView() {
           onChange={(e) => setInput(e.target.value)}
           placeholder={words.length ? 'Add another word…' : 'Type a word, e.g. love'}
           aria-label="Word to chart"
-          className="w-64 border-2 border-ink bg-white px-3 py-2 font-script placeholder:text-ink-3"
+          className="w-64 border-2 border-ink bg-card px-3 py-2 font-script placeholder:text-ink-3"
         />
         <button type="submit" className="border-2 border-ink px-4 font-script font-bold uppercase hover:bg-mark">
           Chart it
@@ -172,7 +172,7 @@ export function TrendsView() {
             <button
               key={w}
               onClick={() => navigate(`/trends?w=${encodeURIComponent(words.filter((x) => x !== w).join(','))}`)}
-              className="flex items-center gap-1.5 border-2 border-ink bg-white px-2.5 py-1 font-script text-sm hover:bg-paper-2"
+              className="flex items-center gap-1.5 border-2 border-ink bg-card px-2.5 py-1 font-script text-sm hover:bg-paper-2"
               title={`Remove “${w}”`}
             >
               <span className="inline-block size-2.5 rounded-full" style={{ background: COLORS[i] }} />
@@ -190,7 +190,7 @@ export function TrendsView() {
       {error && <ErrorBox message={error} />}
       {loading && <Spinner label="Querying corpus…" />}
       {series && series.length > 0 && !loading && (
-        <div className="mt-6 border-2 border-ink bg-white p-4">
+        <div className="mt-6 border-2 border-ink bg-card p-4">
           <LineChart series={series} yLabel="uses per million words" />
           <p className="mt-2 text-right text-xs text-ink-2">uses per million words of dialogue</p>
         </div>
@@ -204,7 +204,7 @@ export function TrendsView() {
               <button
                 key={w}
                 onClick={() => navigate(`/trends?w=${w}`)}
-                className="border-2 border-ink bg-white px-3 py-1 hover:bg-mark"
+                className="border-2 border-ink bg-card px-3 py-1 hover:bg-mark"
               >
                 {w}
               </button>

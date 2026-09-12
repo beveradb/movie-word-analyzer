@@ -3,7 +3,7 @@ import type { MovieIndexEntry } from '../lib/data'
 import { getMovieIndex } from '../lib/data'
 
 /** Screenplay slug-line header: INT. PULP FICTION — 1994 */
-export function Slug({ prefix = 'INT.', text, right }: { prefix?: string; text: string; right?: string }) {
+export function Slug({ prefix = 'INT.', text, right }: { prefix?: string; text: string; right?: React.ReactNode }) {
   return (
     <div className="slug flex items-baseline justify-between border-b-2 border-ink pb-1 text-sm sm:text-base">
       <span>
@@ -19,11 +19,14 @@ export function HighlightWord({
   word,
   count,
   max,
+  display,
   onClick,
 }: {
   word: string
   count: number
   max: number
+  /** Override for the right-hand figure (defaults to the count). */
+  display?: string
   onClick?: () => void
 }) {
   const frac = Math.max(count / max, 0.04)
@@ -31,16 +34,40 @@ export function HighlightWord({
     <button
       onClick={onClick}
       className="group flex w-full items-baseline gap-3 rounded px-1 py-0.5 text-left hover:bg-paper-2"
-      title={`“${word}” — spoken ${count.toLocaleString()} times`}
+      title={`“${word}” — ${display ?? `spoken ${count.toLocaleString()} times`}`}
     >
       <span className="hl min-w-0 flex-1 font-script text-lg leading-6">
         <span className="hl-mark" style={{ width: `calc(${(frac * 100).toFixed(1)}% + 0.3em)` }} />
         <span className="hl-word">{word}</span>
       </span>
       <span className="ml-auto shrink-0 font-script text-sm text-ink-2 tabular-nums group-hover:text-ink">
-        {count.toLocaleString()}
+        {display ?? count.toLocaleString()}
       </span>
     </button>
+  )
+}
+
+const POSTER_BASE = 'https://moviewords-data.beveradb.com/posters'
+
+/** Movie poster from our R2 bucket, falling back to a script-cover placeholder. */
+export function Poster({ id, title, className }: { id: string; title: string; className?: string }) {
+  const [failed, setFailed] = useState(false)
+  if (failed)
+    return (
+      <div
+        className={`flex aspect-[2/3] items-center justify-center bg-paper-2 p-2 text-center font-script text-xs font-bold uppercase leading-tight text-ink-2 ${className ?? ''}`}
+      >
+        {title}
+      </div>
+    )
+  return (
+    <img
+      src={`${POSTER_BASE}/${id}.jpg`}
+      alt={`${title} poster`}
+      loading="lazy"
+      onError={() => setFailed(true)}
+      className={`aspect-[2/3] object-cover ${className ?? ''}`}
+    />
   )
 }
 
@@ -115,10 +142,10 @@ export function MovieSearch({
         onFocus={() => setOpen(true)}
         placeholder={placeholder}
         aria-label="Search movies"
-        className="w-full border-2 border-ink bg-white px-3 py-2 font-script text-base placeholder:text-ink-3"
+        className="w-full border-2 border-ink bg-card px-3 py-2 font-script text-base placeholder:text-ink-3"
       />
       {open && hits.length > 0 && (
-        <ul className="absolute z-20 mt-1 w-full border-2 border-ink bg-white shadow-[4px_4px_0_0_#201d1a]">
+        <ul className="absolute z-20 mt-1 w-full border-2 border-ink bg-card shadow-[4px_4px_0_0_var(--color-ink)]">
           {hits.map((m) => (
             <li key={m.id}>
               <button

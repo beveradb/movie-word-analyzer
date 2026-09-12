@@ -5,7 +5,7 @@ import { lit, pq, q } from '../lib/duck'
 import { navigate, useRoute } from '../lib/route'
 import { ErrorBox, MovieSearch, Slug, Spinner } from '../components/ui'
 
-const COLORS = ['#3e6fa8', '#cc5a2e', '#6b5aa8']
+const COLORS = ['var(--color-s1)', 'var(--color-s2)', 'var(--color-s3)']
 const MAX = 3
 
 /** URL entity encoding: movie ids verbatim, decades as d:1980, genres as g:Crime. */
@@ -98,7 +98,7 @@ function EntityPicker({ refs }: { refs: EntityRef[] }) {
   }, [])
   const add = (ref: EntityRef) =>
     navigate(`/compare?e=${[...refs, ref].map(encodeRef).join(',')}`)
-  const selectCls = 'border-2 border-ink bg-white px-2 py-2 font-script text-sm'
+  const selectCls = 'border-2 border-ink bg-card px-2 py-2 font-script text-sm'
   return (
     <div className="mt-4 flex flex-wrap items-center gap-3">
       <div className="w-64">
@@ -191,8 +191,8 @@ export function CompareView() {
               ? ((swears.get(c.ref.id)! / c.totalWords) * 1000).toFixed(1)
               : null
           return (
-            <section key={encodeRef(c.ref)} className="border-2 border-ink bg-white">
-              <div className="border-b-2 border-ink px-4 py-2" style={{ background: `${COLORS[i]}22` }}>
+            <section key={encodeRef(c.ref)} className="border-2 border-ink bg-card">
+              <div className="border-b-2 border-ink px-4 py-2" style={{ background: `color-mix(in srgb, ${COLORS[i]} 14%, transparent)` }}>
                 <Slug prefix={`${i + 1}.`} text={c.label} />
                 <button
                   onClick={() =>
@@ -249,7 +249,7 @@ export function CompareView() {
       </div>
 
       {shared.length > 0 && (
-        <div className="mt-8 border-2 border-ink bg-white p-4">
+        <div className="mt-8 border-2 border-ink bg-card p-4">
           <h2 className="slug text-sm">Signature words they share</h2>
           <p className="mt-2 font-script">
             {shared.map((w) => (
@@ -277,7 +277,7 @@ export function CompareView() {
               <button
                 key={e}
                 onClick={() => navigate(`/compare?e=${e}`)}
-                className="border-2 border-ink bg-white px-3 py-1 hover:bg-mark"
+                className="border-2 border-ink bg-card px-3 py-1 hover:bg-mark"
               >
                 {label}
               </button>

@@ -131,15 +131,21 @@ def _write_signatures(con, out):
         for (key,) in con.sql(keys_sql).fetchall():
             if key is None:
                 continue
-            rows = con.sql(f"""
-                SELECT wc.word, SUM(wc.count)::BIGINT AS c
-                FROM wc JOIN movies m USING (imdb_id) {genre_join}
-                WHERE {key_expr} = ? GROUP BY wc.word ORDER BY c DESC
-            """, params=[key]).fetchall()
             n_movies = con.sql(f"""
                 SELECT COUNT(DISTINCT m.imdb_id) FROM movies m {genre_join}
                 WHERE {key_expr} = ?
             """, params=[key]).fetchone()[0]
+            # A word must appear in several distinct films to count as an entity
+            # signature — otherwise one film's OCR junk ("chffffff" x400) or a
+            # single character name dominates the decade/genre log-odds.
+            min_films = min(3, n_movies)
+            rows = con.sql(f"""
+                SELECT wc.word, SUM(wc.count)::BIGINT AS c
+                FROM wc JOIN movies m USING (imdb_id) {genre_join}
+                WHERE {key_expr} = ? GROUP BY wc.word
+                HAVING COUNT(DISTINCT wc.imdb_id) >= {min_films}
+                ORDER BY c DESC
+            """, params=[key]).fetchall()
             counts = dict(rows)
             payload[str(key)] = {
                 "movie_count": n_movies,
