@@ -4,8 +4,67 @@ import { navigate, useRoute } from '../lib/route'
 import { LineChart, type Series } from '../components/LineChart'
 import { ErrorBox, Spinner } from '../components/ui'
 
-const COLORS = ['#3e6fa8', '#cc5a2e', '#6b5aa8', '#128a5e']
+const COLORS = ['var(--color-s1)', 'var(--color-s2)', 'var(--color-s3)', 'var(--color-s4)']
 const MAX_WORDS = 4
+
+interface TopFilmRow {
+  imdb_id: string
+  title: string
+  year: number
+  count: number
+  total_words: number
+}
+
+/** Answers "which movie says this word the most?" */
+function TopFilms({ word }: { word: string }) {
+  const [rows, setRows] = useState<TopFilmRow[] | null>(null)
+
+  useEffect(() => {
+    let cancelled = false
+    setRows(null)
+    q<TopFilmRow>(
+      `SELECT w.imdb_id, m.title, m.year, w.count::DOUBLE AS count, m.total_words::DOUBLE AS total_words
+       FROM ${pq('words_by_word/data.parquet')} w
+       JOIN ${pq('movies.parquet')} m USING (imdb_id)
+       WHERE w.word = ${lit(word)} ORDER BY w.count DESC LIMIT 15`,
+    )
+      .then((r) => !cancelled && setRows(r))
+      .catch(() => !cancelled && setRows([]))
+    return () => {
+      cancelled = true
+    }
+  }, [word])
+
+  if (rows === null) return <Spinner label={`Finding films that say “${word}” most…`} />
+  if (rows.length === 0) return null
+  const max = rows[0].count
+  return (
+    <div className="mt-6 border-2 border-ink bg-card p-4">
+      <h2 className="slug text-sm">Films that say “{word}” the most</h2>
+      <ol className="mt-3">
+        {rows.map((r, i) => (
+          <li key={r.imdb_id} className="flex items-center gap-3 py-1">
+            <span className="w-6 text-right font-script text-xs text-ink-3">{i + 1}</span>
+            <a
+              href={`#/movie/${r.imdb_id}`}
+              className="w-56 shrink-0 truncate font-script hover:bg-mark sm:w-72"
+            >
+              {r.title} <span className="text-xs text-ink-2">({r.year})</span>
+            </a>
+            <div className="h-4 min-w-1 rounded-r-[4px] bg-s1" style={{ width: `${(r.count / max) * 60}%` }} />
+            <span className="shrink-0 font-script text-xs tabular-nums text-ink-2">
+              {r.count.toLocaleString()}×
+              <span className="hidden text-ink-3 sm:inline">
+                {' '}
+                · {((r.count / r.total_words) * 1000).toFixed(1)}/1k words
+              </span>
+            </span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  )
+}
 
 interface YearRow {
   word: string
@@ -100,7 +159,7 @@ export function TrendsView() {
           onChange={(e) => setInput(e.target.value)}
           placeholder={words.length ? 'Add another word…' : 'Type a word, e.g. love'}
           aria-label="Word to chart"
-          className="w-64 border-2 border-ink bg-white px-3 py-2 font-script placeholder:text-ink-3"
+          className="w-64 border-2 border-ink bg-card px-3 py-2 font-script placeholder:text-ink-3"
         />
         <button type="submit" className="border-2 border-ink px-4 font-script font-bold uppercase hover:bg-mark">
           Chart it
@@ -113,7 +172,7 @@ export function TrendsView() {
             <button
               key={w}
               onClick={() => navigate(`/trends?w=${encodeURIComponent(words.filter((x) => x !== w).join(','))}`)}
-              className="flex items-center gap-1.5 border-2 border-ink bg-white px-2.5 py-1 font-script text-sm hover:bg-paper-2"
+              className="flex items-center gap-1.5 border-2 border-ink bg-card px-2.5 py-1 font-script text-sm hover:bg-paper-2"
               title={`Remove “${w}”`}
             >
               <span className="inline-block size-2.5 rounded-full" style={{ background: COLORS[i] }} />
@@ -131,11 +190,12 @@ export function TrendsView() {
       {error && <ErrorBox message={error} />}
       {loading && <Spinner label="Querying corpus…" />}
       {series && series.length > 0 && !loading && (
-        <div className="mt-6 border-2 border-ink bg-white p-4">
+        <div className="mt-6 border-2 border-ink bg-card p-4">
           <LineChart series={series} yLabel="uses per million words" />
           <p className="mt-2 text-right text-xs text-ink-2">uses per million words of dialogue</p>
         </div>
       )}
+      {words.length === 1 && !loading && !error && <TopFilms word={words[0]} />}
       {!words.length && (
         <div className="mt-8 font-script text-ink-2">
           <p>Try:</p>
@@ -144,7 +204,7 @@ export function TrendsView() {
               <button
                 key={w}
                 onClick={() => navigate(`/trends?w=${w}`)}
-                className="border-2 border-ink bg-white px-3 py-1 hover:bg-mark"
+                className="border-2 border-ink bg-card px-3 py-1 hover:bg-mark"
               >
                 {w}
               </button>

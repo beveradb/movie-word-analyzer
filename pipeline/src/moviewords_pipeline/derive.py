@@ -100,8 +100,61 @@ def run():
     """)
 
     _write_json_hot_paths(con, out)
+    _write_signatures(con, out)
     _write_wordlists(out)
     _write_report(con, out)
+
+
+def _write_signatures(con, out):
+    """Signature (log-odds) and top words for whole decades and genres.
+
+    A decade/genre is treated exactly like a movie: one bag of words compared
+    against the whole corpus. Output is one small JSON per entity kind so the
+    frontend can compare decades/genres without scanning the big parquets.
+    """
+    stop = load_stopwords()
+    corpus = dict(con.sql(
+        "SELECT word, SUM(count) FROM wc JOIN movies USING (imdb_id) GROUP BY word"
+    ).fetchall())
+    (out / "json" / "signature").mkdir(parents=True, exist_ok=True)
+
+    kinds = {
+        "decades": ("(m.year // 10) * 10",
+                    "SELECT DISTINCT (year // 10) * 10 FROM movies ORDER BY 1"),
+        "genres": ("g.genre",
+                   "SELECT DISTINCT UNNEST(genres) FROM movies ORDER BY 1"),
+    }
+    for kind, (key_expr, keys_sql) in kinds.items():
+        genre_join = ("JOIN (SELECT imdb_id, UNNEST(genres) AS genre FROM movies) g "
+                      "USING (imdb_id)") if kind == "genres" else ""
+        payload = {}
+        for (key,) in con.sql(keys_sql).fetchall():
+            if key is None:
+                continue
+            n_movies = con.sql(f"""
+                SELECT COUNT(DISTINCT m.imdb_id) FROM movies m {genre_join}
+                WHERE {key_expr} = ?
+            """, params=[key]).fetchone()[0]
+            # A word must appear in several distinct films to count as an entity
+            # signature — otherwise one film's OCR junk ("chffffff" x400) or a
+            # single character name dominates the decade/genre log-odds.
+            min_films = min(3, n_movies)
+            rows = con.sql(f"""
+                SELECT wc.word, SUM(wc.count)::BIGINT AS c
+                FROM wc JOIN movies m USING (imdb_id) {genre_join}
+                WHERE {key_expr} = ? GROUP BY wc.word
+                HAVING COUNT(DISTINCT wc.imdb_id) >= {min_films}
+                ORDER BY c DESC
+            """, params=[key]).fetchall()
+            counts = dict(rows)
+            payload[str(key)] = {
+                "movie_count": n_movies,
+                "total_words": sum(counts.values()),
+                "top": [[w, c] for w, c in rows if w not in stop][:100],
+                "signature": [[w, round(z, 2)]
+                              for w, z in log_odds(counts, corpus, min_count=20)[:100]],
+            }
+        (out / "json" / "signature" / f"{kind}.json").write_text(json.dumps(payload))
 
 
 def _write_json_hot_paths(con, out):
@@ -112,13 +165,13 @@ def _write_json_hot_paths(con, out):
 
     movie_cols = ["imdb_id", "title", "year", "total_words", "unique_words",
                   "words_per_minute"]
-    movies = con.sql(f"SELECT {', '.join(movie_cols)} FROM movies").fetchall()
+    meta = {row[0]: dict(zip(movie_cols, row)) for row in
+            con.sql(f"SELECT {', '.join(movie_cols)} FROM movies").fetchall()}
 
-    for row in movies:
-        m = dict(zip(movie_cols, row))
-        rows = con.sql(
-            "SELECT word, count FROM wc WHERE imdb_id = ? ORDER BY count DESC",
-            params=[m["imdb_id"]]).fetchall()
+    def flush(imdb_id, rows):
+        m = meta.get(imdb_id)
+        if m is None:
+            return
         counts = dict(rows)
         payload = {
             "imdb_id": m["imdb_id"],
@@ -134,8 +187,24 @@ def _write_json_hot_paths(con, out):
             "distinctive": [[wd, round(z, 2)]
                              for wd, z in log_odds(counts, corpus)[:50]],
         }
-        (out / "json" / "movie" / f"{m['imdb_id']}.json").write_text(
+        (out / "json" / "movie" / f"{imdb_id}.json").write_text(
             json.dumps(payload))
+
+    # One streaming pass over the already-sorted (imdb_id, count DESC) parquet
+    # instead of one query per movie: at ~30k movies, per-movie queries each
+    # re-touch every row group's metadata, which turns O(n) work into hours.
+    cur = con.execute(
+        f"SELECT imdb_id, word, count FROM '{out / 'words_by_movie' / 'data.parquet'}'")
+    current, rows = None, []
+    while batch := cur.fetchmany(1_000_000):
+        for imdb_id, word, count in batch:
+            if imdb_id != current:
+                if current is not None:
+                    flush(current, rows)
+                current, rows = imdb_id, []
+            rows.append((word, count))
+    if current is not None:
+        flush(current, rows)
 
     board = con.sql("""
         SELECT word, SUM(count)::BIGINT AS count,

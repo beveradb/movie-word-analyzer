@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react'
 import type { MovieDetail, MovieIndexEntry } from '../lib/data'
 import { getMovie, getMovieIndex } from '../lib/data'
 import { navigate } from '../lib/route'
-import { ErrorBox, HighlightWord, Slug, Spinner } from '../components/ui'
+import { ErrorBox, HighlightWord, Poster, Slug, Spinner } from '../components/ui'
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="border-2 border-ink bg-white px-4 py-3">
+    <div className="border-2 border-ink bg-card px-4 py-3">
       <div className="font-script text-2xl font-bold tabular-nums">{value}</div>
       <div className="mt-0.5 text-xs uppercase tracking-wide text-ink-2">{label}</div>
     </div>
@@ -36,16 +36,39 @@ export function MovieView({ id }: { id: string }) {
 
   return (
     <div>
-      <Slug text={`${movie.title} — ${movie.year}`} right={[...new Set(meta?.genres ?? [])].slice(0, 3).join(' / ')} />
+      <Slug
+        text={`${movie.title} — ${movie.year}`}
+        right={
+          <span>
+            {[...new Set(meta?.genres ?? [])].slice(0, 3).map((g, i) => (
+              <span key={g}>
+                {i > 0 && ' / '}
+                <a href={`#/genre/${encodeURIComponent(g)}`} className="hover:bg-mark">
+                  {g}
+                </a>
+              </span>
+            ))}
+          </span>
+        }
+      />
 
-      <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <Stat label="Words spoken" value={movie.stats.total_words.toLocaleString()} />
-        <Stat label="Distinct words" value={movie.stats.unique_words.toLocaleString()} />
-        <Stat
-          label="Vocabulary richness"
-          value={`${((movie.stats.unique_words / movie.stats.total_words) * 100).toFixed(1)}%`}
-        />
-        <Stat label="IMDb rating" value={meta ? meta.rating.toFixed(1) : '—'} />
+      <div className="mt-5 flex gap-4">
+        <a
+          href={`#/decade/${Math.floor(movie.year / 10) * 10}`}
+          className="w-28 shrink-0 sm:w-36"
+          title={`More from the ${Math.floor(movie.year / 10) * 10}s`}
+        >
+          <Poster id={movie.imdb_id} title={movie.title} className="w-full border-2 border-ink" />
+        </a>
+        <div className="grid flex-1 grid-cols-2 content-start gap-3">
+          <Stat label="Words spoken" value={movie.stats.total_words.toLocaleString()} />
+          <Stat label="Distinct words" value={movie.stats.unique_words.toLocaleString()} />
+          <Stat
+            label="Vocabulary richness"
+            value={`${((movie.stats.unique_words / movie.stats.total_words) * 100).toFixed(1)}%`}
+          />
+          <Stat label="IMDb rating" value={meta ? meta.rating.toFixed(1) : '—'} />
+        </div>
       </div>
 
       <div className="mt-8 grid gap-10 md:grid-cols-2">
@@ -57,7 +80,7 @@ export function MovieView({ id }: { id: string }) {
                 type="checkbox"
                 checked={showStopwords}
                 onChange={(e) => setShowStopwords(e.target.checked)}
-                className="accent-[#201d1a]"
+                className="accent-[var(--color-ink)]"
               />
               include stopwords
             </label>

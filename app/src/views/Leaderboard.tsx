@@ -10,8 +10,8 @@ interface Row {
   movies: number
 }
 
-const YEAR_MIN = 1920
-const YEAR_MAX = 2015
+const YEAR_MIN = 1900
+const YEAR_MAX = 2025
 
 export function LeaderboardView() {
   const [rows, setRows] = useState<Row[] | null>(null)
@@ -69,7 +69,7 @@ export function LeaderboardView() {
     <div>
       <p className="mt-1 text-sm text-ink-2">The most spoken words across every film in the corpus.</p>
 
-      <div className="mt-4 flex flex-wrap items-end gap-4 border-2 border-ink bg-white p-3 font-script text-sm">
+      <div className="mt-4 flex flex-wrap items-end gap-4 border-2 border-ink bg-card p-3 font-script text-sm">
         <label className="flex flex-col gap-1">
           <span className="text-xs uppercase text-ink-2">From</span>
           <input
@@ -106,7 +106,7 @@ export function LeaderboardView() {
             type="checkbox"
             checked={hideStopwords}
             onChange={(e) => setHideStopwords(e.target.checked)}
-            className="accent-[#201d1a]"
+            className="accent-[var(--color-ink)]"
           />
           hide stopwords
         </label>

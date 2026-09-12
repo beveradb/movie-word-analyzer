@@ -1,9 +1,31 @@
+import { useState } from 'react'
 import { useRoute } from './lib/route'
 import { HomeView } from './views/Home'
 import { MovieView } from './views/Movie'
 import { TrendsView } from './views/Trends'
 import { LeaderboardView } from './views/Leaderboard'
 import { CompareView } from './views/Compare'
+import { EntityView } from './views/Entity'
+
+function ThemeToggle() {
+  const [dark, setDark] = useState(() => document.documentElement.classList.contains('dark'))
+  const toggle = () => {
+    const next = !dark
+    setDark(next)
+    document.documentElement.classList.toggle('dark', next)
+    localStorage.setItem('theme', next ? 'dark' : 'light')
+  }
+  return (
+    <button
+      onClick={toggle}
+      aria-label={dark ? 'Switch to day mode' : 'Switch to night mode'}
+      title={dark ? 'Day shoot' : 'Night shoot'}
+      className="border-2 border-ink px-2.5 py-1 font-script text-sm font-bold hover:bg-mark"
+    >
+      {dark ? 'DAY' : 'NIGHT'}
+    </button>
+  )
+}
 
 const TABS = [
   { hash: '#/', label: 'Explore', match: '' },
@@ -22,20 +44,23 @@ export default function App() {
         <a href="#/" className="font-script text-xl font-bold tracking-tight">
           MOVIE<span className="bg-mark px-0.5">WORDS</span>
         </a>
-        <nav className="flex gap-1 font-script text-sm font-bold uppercase" aria-label="Sections">
-          {TABS.map((t) => (
-            <a
-              key={t.label}
-              href={t.hash}
-              aria-current={section === t.match ? 'page' : undefined}
-              className={`px-3 py-1.5 ${
-                section === t.match ? 'bg-ink text-paper' : 'hover:bg-mark'
-              }`}
-            >
-              {t.label}
-            </a>
-          ))}
-        </nav>
+        <div className="flex items-center gap-3">
+          <nav className="flex gap-1 font-script text-sm font-bold uppercase" aria-label="Sections">
+            {TABS.map((t) => (
+              <a
+                key={t.label}
+                href={t.hash}
+                aria-current={section === t.match ? 'page' : undefined}
+                className={`px-3 py-1.5 ${
+                  section === t.match ? 'bg-ink text-paper' : 'hover:bg-mark'
+                }`}
+              >
+                {t.label}
+              </a>
+            ))}
+          </nav>
+          <ThemeToggle />
+        </div>
       </header>
 
       <main className="pt-4">
@@ -44,6 +69,8 @@ export default function App() {
         {section === 'trends' && <TrendsView />}
         {section === 'leaderboard' && <LeaderboardView />}
         {section === 'compare' && <CompareView />}
+        {section === 'decade' && route.path[1] && <EntityView kind="decade" id={route.path[1]} />}
+        {section === 'genre' && route.path[1] && <EntityView kind="genre" id={decodeURIComponent(route.path[1])} />}
       </main>
 
       <footer className="mt-20 border-t-2 border-ink pt-4 text-xs leading-5 text-ink-2">
@@ -56,7 +83,7 @@ export default function App() {
           . Only derived word counts are published — no subtitle text is redistributed.
         </p>
         <p className="mt-1">
-          Data: Cornell Movie-Dialogs Corpus (Danescu-Niculescu-Mizil &amp; Lee, 2011) · corpus pipeline built on{' '}
+          Data: word counts derived from{' '}
           <a className="underline" href="https://opus.nlpl.eu/OpenSubtitles">
             OPUS OpenSubtitles
           </a>{' '}

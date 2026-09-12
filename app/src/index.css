@@ -1,8 +1,12 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-paper: #faf9f5;
   --color-paper-2: #f2f0e8;
+  --color-card: #ffffff;
+  --color-grid: #e8e5dc;
   --color-ink: #201d1a;
   --color-ink-2: #6e675e;
   --color-ink-3: #a39b8f;
@@ -13,6 +17,23 @@
   --color-s4: #128a5e;
   --font-script: "Courier Prime", "Courier New", monospace;
   --font-body: "Inter", system-ui, sans-serif;
+}
+
+/* Night shoot: same screenplay, shot day-for-night. Series colors re-validated
+   against this surface (dataviz validator, dark mode) — do not eyeball-edit. */
+.dark {
+  --color-paper: #191714;
+  --color-paper-2: #221f1b;
+  --color-card: #26221d;
+  --color-grid: #35302a;
+  --color-ink: #ede9e1;
+  --color-ink-2: #a89f92;
+  --color-ink-3: #6e675e;
+  --color-mark: #d9b62e;
+  --color-s1: #5b8bc4;
+  --color-s2: #d9744c;
+  --color-s3: #8a77c0;
+  --color-s4: #2fa477;
 }
 
 html { background: var(--color-paper); }
@@ -28,6 +49,8 @@ body { @apply bg-paper text-ink font-body antialiased; }
   transform: skewX(-8deg); z-index: 0; opacity: 0.85;
 }
 .hl > .hl-word { position: relative; z-index: 1; }
+.dark .hl > .hl-mark { opacity: 0.45; }
+.dark .hl > .hl-word { color: var(--color-ink); }
 
 @media (prefers-reduced-motion: no-preference) {
   .hl > .hl-mark { transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1); }

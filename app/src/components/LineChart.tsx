@@ -62,11 +62,11 @@ export function LineChart({
 
   const hover = hoverX !== null && (
     <g>
-      <line x1={sx(hoverX)} x2={sx(hoverX)} y1={M.top} y2={M.top + ih} stroke="#a39b8f" strokeDasharray="3 3" />
+      <line x1={sx(hoverX)} x2={sx(hoverX)} y1={M.top} y2={M.top + ih} stroke="var(--color-ink-3)" strokeDasharray="3 3" />
       {series.map((s) => {
         const p = s.points.find((p) => p.x === hoverX)
         return p ? (
-          <circle key={s.name} cx={sx(p.x)} cy={sy(p.y)} r={4.5} fill={s.color} stroke="#faf9f5" strokeWidth={2} />
+          <circle key={s.name} cx={sx(p.x)} cy={sy(p.y)} r={4.5} fill={s.color} stroke="var(--color-paper)" strokeWidth={2} />
         ) : null
       })}
     </g>
@@ -92,18 +92,18 @@ export function LineChart({
       >
         {yTicks.map((t) => (
           <g key={t}>
-            <line x1={M.left} x2={width - M.right} y1={sy(t)} y2={sy(t)} stroke="#e8e5dc" />
-            <text x={M.left - 6} y={sy(t) + 4} textAnchor="end" fontSize="11" fill="#6e675e">
+            <line x1={M.left} x2={width - M.right} y1={sy(t)} y2={sy(t)} stroke="var(--color-grid)" />
+            <text x={M.left - 6} y={sy(t) + 4} textAnchor="end" fontSize="11" fill="var(--color-ink-2)">
               {t >= 1000 ? `${t / 1000}k` : Math.round(t * 10) / 10}
             </text>
           </g>
         ))}
         {xTicks.map((t) => (
-          <text key={t} x={sx(t)} y={height - 6} textAnchor="middle" fontSize="11" fill="#6e675e">
+          <text key={t} x={sx(t)} y={height - 6} textAnchor="middle" fontSize="11" fill="var(--color-ink-2)">
             {t}
           </text>
         ))}
-        <line x1={M.left} x2={width - M.right} y1={M.top + ih} y2={M.top + ih} stroke="#201d1a" strokeWidth={1.5} />
+        <line x1={M.left} x2={width - M.right} y1={M.top + ih} y2={M.top + ih} stroke="var(--color-ink)" strokeWidth={1.5} />
         {series.map((s) => (
           <polyline
             key={s.name}
@@ -119,7 +119,7 @@ export function LineChart({
       </svg>
       {tooltip.length > 0 && (
         <div
-          className="pointer-events-none absolute top-2 border-2 border-ink bg-white px-3 py-2 font-script text-xs shadow-[3px_3px_0_0_#201d1a]"
+          className="pointer-events-none absolute top-2 border-2 border-ink bg-card px-3 py-2 font-script text-xs shadow-[3px_3px_0_0_var(--color-ink)]"
           style={{ left: `${Math.min((sx(hoverX!) / width) * 100, 70)}%` }}
         >
           <div className="font-bold">{hoverX}</div>
