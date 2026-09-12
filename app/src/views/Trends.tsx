@@ -179,7 +179,9 @@ export function TrendsView() {
     return () => {
       cancelled = true
     }
-  }, [chartWords.join(',')])
+    // featured is in the deps: the same word set renders differently (1930
+    // trim) depending on whether it's the featured chart or a user chart
+  }, [chartWords.join(','), featured])
 
   const addWord = () => {
     const w = input.trim().toLowerCase()
@@ -246,15 +248,17 @@ export function TrendsView() {
           )}
           {featured && (
             <div className="mb-3 flex flex-wrap gap-2 font-script text-sm">
-              {featured.words.map((w, i) => (
+              {/* legend built from the drawn series so colors always match,
+                  even if a featured word is missing from the dataset */}
+              {series.map((s) => (
                 <button
-                  key={w}
-                  onClick={() => navigate(`/trends?w=${encodeURIComponent(w)}`)}
+                  key={s.name}
+                  onClick={() => navigate(`/trends?w=${encodeURIComponent(s.name)}`)}
                   className="flex items-center gap-1.5 border-2 border-ink bg-paper px-2.5 py-0.5 hover:bg-mark"
-                  title={`Explore “${w}”`}
+                  title={`Explore “${s.name}”`}
                 >
-                  <span className="inline-block size-2.5 rounded-full" style={{ background: COLORS[i] }} />
-                  {w}
+                  <span className="inline-block size-2.5 rounded-full" style={{ background: s.color }} />
+                  {s.name}
                 </button>
               ))}
             </div>

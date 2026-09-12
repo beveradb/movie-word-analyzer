@@ -9,7 +9,10 @@ mkdir -p "$DEST/signature"
 fetch() { # $1 remote path, $2 local name
   if [ ! -s "$DEST/$2" ]; then
     echo "fetching $1"
-    curl -fSs --retry 3 -o "$DEST/$2" "$BASE/$1"
+    # download to a temp name then move: an interrupted transfer must not
+    # leave a truncated file that the -s check would treat as cached
+    curl -fSs --retry 3 -o "$DEST/$2.tmp" "$BASE/$1"
+    mv "$DEST/$2.tmp" "$DEST/$2"
   else
     echo "cached  $2"
   fi

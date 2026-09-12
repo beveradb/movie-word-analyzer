@@ -227,7 +227,8 @@ export function CompareView() {
     }
   }, [activeRefs.map(encodeRef).join(',')])
 
-  const loaded = (cards ?? []).filter((c): c is EntityCard => c !== null)
+  // memoized so the h2h/shared memos below actually cache between renders
+  const loaded = useMemo(() => (cards ?? []).filter((c): c is EntityCard => c !== null), [cards])
 
   const h2h = useMemo(() => {
     if (loaded.length < 2) return null
@@ -264,7 +265,9 @@ export function CompareView() {
       )}
       {cards === null && <Spinner label="Loading…" />}
       {cards !== null && loaded.length === 0 && (
-        <ErrorBox message="Nothing found for that selection." retry={() => navigate('/compare')} />
+        // reload rather than navigate: on the featured (empty-URL) state the
+        // hash wouldn't change, so navigating re-fetches nothing
+        <ErrorBox message="Nothing found for that selection." retry={() => window.location.reload()} />
       )}
 
       <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">

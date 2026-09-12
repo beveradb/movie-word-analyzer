@@ -144,18 +144,27 @@ export function WondersBoard() {
 export function UbiquityBoard() {
   const { data, error } = useBoard(getUbiquity)
   if (error) return <ErrorBox message={error} />
-  if (!data) return <Spinner label="Loading…" />
+  if (!data || data.length === 0) return <Spinner label="Loading…" />
+  // derive the corpus size from the data instead of hardcoding it
+  const nFilms = Math.round(data[0].films / data[0].share)
+  // bars span the visible share range; shares cluster near 100% so an
+  // absolute scale would render 50 indistinguishable full-width bars
+  const lo = data[data.length - 1].share
+  const span = data[0].share - lo || 1
   return (
     <div>
       <p className="mt-1 text-sm text-ink-2">
-        Beyond pure connectives, these words appear in almost every one of the 18,761 films.
+        Beyond pure connectives, these words appear in almost every one of the {nFilms.toLocaleString()} films.
       </p>
       <ol className="mt-5 max-w-xl">
         {data.map((r: UbiquityRow, i: number) => (
           <li key={r.word} className="flex items-center gap-3 py-1">
             <span className="w-6 shrink-0 text-right font-script text-xs text-ink-3">{i + 1}</span>
             {wordBtn(r.word, 'w-28 truncate')}
-            <div className="h-4 min-w-1 rounded-r-[4px] bg-s3" style={{ width: `${(r.share - 0.9) * 900}%` }} />
+            <div
+              className="h-4 min-w-1 rounded-r-[4px] bg-s3"
+              style={{ width: `${(((r.share - lo) / span) * 0.9 + 0.1) * 100}%` }}
+            />
             <span className="ml-1 shrink-0 font-script text-xs tabular-nums text-ink-2">
               {(r.share * 100).toFixed(1)}% of films
             </span>

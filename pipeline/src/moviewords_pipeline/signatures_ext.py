@@ -21,16 +21,20 @@ def extend_signatures(con, sig: dict, kind: str, profanity: set[str],
     for key, entry in sig.items():
         param = int(key) if kind == "decades" else key
         rows = con.sql(f"""
-            SELECT w.word, SUM(w.count)::BIGINT AS c
+            SELECT w.word, SUM(w.count)::BIGINT AS c,
+                   COUNT(DISTINCT w.imdb_id) AS films
             FROM words_by_movie w JOIN movies m USING (imdb_id) {genre_join}
             WHERE {key_expr} = ? GROUP BY w.word ORDER BY c DESC, w.word
         """, params=[param]).fetchall()
-        total = sum(c for _, c in rows)
-        swears = sum(c for w, c in rows if w in profanity)
+        total = sum(c for _, c, _ in rows)
+        swears = sum(c for w, c, _ in rows if w in profanity)
+        # top_words mirrors derive.py's ≥3-distinct-films signature floor so
+        # one film's OCR junk or character name can't dominate head-to-head
+        min_films = min(3, entry.get("movie_count", 3))
         out[key] = {
             **entry,
             "swears_per_1k": round(swears / total * 1000, 2) if total else 0.0,
             "unique_words": len(rows),
-            "top_words": [[w, c] for w, c in rows[:top_n]],
+            "top_words": [[w, c] for w, c, films in rows if films >= min_films][:top_n],
         }
     return out

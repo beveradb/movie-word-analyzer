@@ -32,15 +32,20 @@ export interface Wordlists {
   profanity: string[]
 }
 
-const cache = new Map<string, unknown>()
+// caches the in-flight promise, not the value, so concurrent callers (e.g.
+// three compare cards mounting together) share one download of movies-index
+const cache = new Map<string, Promise<unknown>>()
 
-export async function fetchJSON<T>(path: string): Promise<T> {
-  if (cache.has(path)) return cache.get(path) as T
-  const res = await fetch(`${DATA_BASE}/${path}`)
-  if (!res.ok) throw new Error(`${res.status} fetching ${path}`)
-  const data = (await res.json()) as T
-  cache.set(path, data)
-  return data
+export function fetchJSON<T>(path: string): Promise<T> {
+  if (!cache.has(path)) {
+    const p = fetch(`${DATA_BASE}/${path}`).then((res) => {
+      if (!res.ok) throw new Error(`${res.status} fetching ${path}`)
+      return res.json()
+    })
+    p.catch(() => cache.delete(path))
+    cache.set(path, p)
+  }
+  return cache.get(path) as Promise<T>
 }
 
 export interface SignatureEntry {

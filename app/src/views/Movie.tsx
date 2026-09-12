@@ -32,10 +32,12 @@ export function MovieView({ id }: { id: string }) {
   if (error) return <ErrorBox message={error} retry={() => navigate('/')} />
   if (!movie) return <Spinner label="Loading script…" />
 
-  // 'all words' mode swaps to the raw head of the list (stopwords included)
-  const words = (filter.common === 'all' ? movie.top_all : movie.top)
-    .filter((r) => passesFilter(r as WordRow, filter))
-    .slice(0, 25)
+  // 'all words' mode merges the raw head (stopwords included) with the wider
+  // stopword-free top list, so mid-list common words stay reachable
+  const allRows = filter.common === 'all'
+    ? [...new Map([...movie.top, ...movie.top_all].map((r) => [r[0], r])).values()].sort((a, b) => b[1] - a[1])
+    : movie.top
+  const words = allRows.filter((r) => passesFilter(r as WordRow, filter)).slice(0, 25)
   // signature words are already statistically distinctive — only kind chips
   // apply, not the commonness toggle (log-odds may rightly pick zipf≥5 words)
   const distinctive = movie.distinctive

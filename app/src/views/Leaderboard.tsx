@@ -55,6 +55,9 @@ export function LeaderboardView() {
 
 function WordsBoard() {
   const [rows, setRows] = useState<Row[] | null>(null)
+  // stopword rows from the pre-baked JSON; merged in for 'all words' mode
+  // (the WASM path already includes them in `rows`)
+  const [stopRows, setStopRows] = useState<Row[]>([])
   const [stop, setStop] = useState<Set<string>>(new Set())
   const [genres, setGenres] = useState<string[]>([])
   const [error, setError] = useState<string | null>(null)
@@ -78,25 +81,25 @@ function WordsBoard() {
     setError(null)
     if (!filtered) {
       // hot path: pre-baked JSON, no WASM needed
+      const toRow = (e: [string, number, number, ...unknown[]]): Row => ({
+        word: e[0] as string,
+        count: e[1] as number,
+        movies: e[2] as number,
+        zipf: e[3] as number | undefined,
+        classes: e[4] as string | undefined,
+        pos: e[5] as string | undefined,
+        dist: e[6] as number | undefined,
+      })
       getLeaderboard()
-        .then(
-          (lb) =>
-            !cancelled &&
-            setRows(
-              lb.words.map((e) => ({
-                word: e[0],
-                count: e[1],
-                movies: e[2],
-                zipf: e[3] as number | undefined,
-                classes: e[4] as string | undefined,
-                pos: e[5] as string | undefined,
-                dist: e[6] as number | undefined,
-              })),
-            ),
-        )
+        .then((lb) => {
+          if (cancelled) return
+          setRows(lb.words.map(toRow))
+          setStopRows(lb.stopwords.map(toRow))
+        })
         .catch((e) => !cancelled && setError(String(e)))
       return
     }
+    setStopRows([])
     setLoading(true)
     q<Row>(
       `SELECT w.word, SUM(w.count)::DOUBLE AS count, COUNT(DISTINCT w.imdb_id)::DOUBLE AS movies,
@@ -119,7 +122,7 @@ function WordsBoard() {
 
   const visible = useMemo(
     () =>
-      (rows ?? [])
+      [...(rows ?? []), ...(wf.common === 'all' ? stopRows : [])]
         .filter((r) => passesFilter([r.word, r.count, r.zipf, r.classes, r.pos] as WordRow, wf, stop))
         .sort((a, b) =>
           sort === 'movieish'
@@ -127,9 +130,11 @@ function WordsBoard() {
             : b.count - a.count,
         )
         .slice(0, 50),
-    [rows, stop, wf, sort],
+    [rows, stopRows, stop, wf, sort],
   )
-  const max = visible.length ? visible[0].count : 1
+  // bars scale to the largest count on screen, which under the movie-ish
+  // sort is not necessarily the first row
+  const max = visible.length ? Math.max(...visible.map((r) => r.count)) : 1
 
   return (
     <div>

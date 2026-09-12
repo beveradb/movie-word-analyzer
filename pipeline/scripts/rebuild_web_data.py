@@ -25,7 +25,6 @@ import duckdb
 from moviewords_pipeline import boards
 from moviewords_pipeline.derive import load_profanity, load_stopwords, log_odds, word_meta
 from moviewords_pipeline.signatures_ext import extend_signatures
-from moviewords_pipeline.word_meta2 import distinctiveness, dominant_pos
 
 ROOT = Path(__file__).resolve().parent.parent / "webdata"
 IN, OUT = ROOT / "in", ROOT / "out"
@@ -45,13 +44,7 @@ def build_full_meta(con):
         SELECT word, SUM(count)::BIGINT AS c, COUNT(DISTINCT imdb_id) AS mc
         FROM words_by_movie GROUP BY word ORDER BY c DESC
     """).fetchall()
-    total = sum(c for _, c, _ in rows)
-    v1 = word_meta([w for w, _, _ in rows])
-    meta = {}
-    for w, c, _ in rows:
-        z, cls = v1[w]
-        meta[w] = (z, cls, dominant_pos(w, z), distinctiveness(c / total * 1e6, z))
-    return rows, meta
+    return rows, word_meta({w: c for w, c, _ in rows})
 
 
 def load_meta_parquet(con):
@@ -82,6 +75,7 @@ def stage_movies(con):
     meta = load_meta_parquet(con)
     stop = load_stopwords()
     corpus = dict(con.sql("SELECT word, SUM(count) FROM words_by_movie GROUP BY word").fetchall())
+    n_corpus = sum(corpus.values())
     movie_cols = ["imdb_id", "title", "year", "total_words", "unique_words", "words_per_minute"]
     movies = {r[0]: dict(zip(movie_cols, r)) for r in
               con.sql(f"SELECT {', '.join(movie_cols)} FROM movies").fetchall()}
@@ -101,7 +95,8 @@ def stage_movies(con):
                       "words_per_minute": m["words_per_minute"]},
             "top": [tag(w, c) for w, c in rows if w not in stop][:200],
             "top_all": [tag(w, c) for w, c in rows][:50],
-            "distinctive": [tag(w, round(z, 2)) for w, z in log_odds(dict(rows), corpus)[:50]],
+            "distinctive": [tag(w, round(z, 2))
+                            for w, z in log_odds(dict(rows), corpus, n_corpus=n_corpus)[:50]],
         }
         (OUT / "json" / "movie" / f"{imdb_id}.json").write_text(json.dumps(payload))
 

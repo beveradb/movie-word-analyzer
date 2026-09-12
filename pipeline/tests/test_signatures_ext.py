@@ -34,9 +34,11 @@ def test_extend_decades_adds_stats_and_top_words(con):
     assert nineties["movie_count"] == 2  # existing keys preserved
     assert nineties["unique_words"] == 3  # hello, fuck, ring
     assert nineties["swears_per_1k"] == 100.0  # 10 / 100 words * 1000
-    assert nineties["top_words"][0] == ["hello", 80]
+    # min-films floor: only 'hello' spans both 1990s films; single-film
+    # words (fuck, ring) are excluded from top_words like derive signatures
+    assert nineties["top_words"] == [["hello", 80]]
     assert out["2010"]["swears_per_1k"] == 200.0
-    assert out["2010"]["top_words"][0] == ["scream", 400]
+    assert out["2010"]["top_words"][0] == ["scream", 400]  # 1-film entity keeps all
 
 
 def test_extend_genres_unnests_membership(con):
@@ -48,5 +50,7 @@ def test_extend_genres_unnests_membership(con):
     # Horror = tt2 + tt3: hello 30, ring 10, scream 400, fuck 100
     horror = out["Horror"]
     assert horror["unique_words"] == 4
-    assert horror["top_words"][0] == ["scream", 400]
     assert horror["swears_per_1k"] == round(100 / 540 * 1000, 2)
+    # every Horror word lives in a single film → all fall under the floor
+    assert horror["top_words"] == []
+    assert out["Comedy"]["top_words"] == [["hello", 80]]
