@@ -10,12 +10,22 @@ Before running the pipeline, ensure you have:
 
 - **uv** — Python package manager (https://astral.sh/uv)
 - **rclone** — Sync tool for R2 upload (https://rclone.org)
-- **~60GB free disk** — pipeline uses significant temporary space
-- **TMDB API token** — retrieve from https://www.themoviedb.org/settings/api
-  - Visit Settings → API → Read (API Key)
-- **Cloudflare R2 S3 credentials** — create in the Cloudflare dashboard
-  - Navigate to R2 → Manage API Tokens → Create API Token
-  - Save: Account ID, Access Key ID, Secret Access Key (separate from main API token)
+- **~60GB free disk** — the OPUS en corpus alone is ~34GB (never extracted;
+  the pipeline streams straight out of the zip)
+- **TMDB API key** — free, from https://www.themoviedb.org/settings/api.
+  Either auth style works: `TMDB_API_TOKEN` (v4 read token, preferred) or
+  `TMDB_API_KEY` (v3 key)
+- **Cloudflare R2 S3 credentials** — either create in the dashboard
+  (R2 → Manage API Tokens), or derive from any CF API token that has R2
+  write permission: Access Key ID = the token's id (from
+  `GET /client/v4/user/tokens/verify`), Secret = `sha256` hex of the token
+
+No TMDB key / no big disk? Build the 610-film starter dataset instead —
+real data (Cornell Movie-Dialogs Corpus) through the same derive stage:
+
+```bash
+cd pipeline && uv run python scripts/build_demo_dataset.py
+```
 
 ## One-Time Setup
 
@@ -57,21 +67,60 @@ uv run python -m moviewords_pipeline.cli index
 uv run python -m moviewords_pipeline.cli count
 
 # Fetch production country and original-language metadata from TMDB
-# Duration: ~1 hour (API rate-limited to ~20 req/s)
-# Requires TMDB_API_TOKEN environment variable
+# Duration: ~1.5 hours for ~33k films (throttled ~20 req/s)
+# Requires TMDB_API_TOKEN or TMDB_API_KEY environment variable
 # Per-movie cache in work/tmdb/ (skips already-fetched films)
-TMDB_API_TOKEN=... uv run python -m moviewords_pipeline.cli enrich
+TMDB_API_KEY=... uv run python -m moviewords_pipeline.cli enrich
 
-# Derive per-movie and cross-film statistics
-# Quick: re-run anytime to regenerate reports
+# Derive all published artifacts (parquets, JSON hot paths, decade/genre
+# signatures, word_meta with Zipf + WordNet POS classes). First run downloads
+# the WordNet data via nltk. Re-run anytime; takes minutes.
 uv run python -m moviewords_pipeline.cli derive
 
-# Inspect sanity metrics (expect ~30–40k curated films, >70% TMDB match rate)
+# Inspect sanity metrics (expect ~30–40k curated films, >70% TMDB match rate;
+# roughly 45% of counted films drop at the original_language == en filter)
 cat ../data/out/report.md
+
+# Build the client-side search index (deploy artifact consumed by the app)
+uv run python - <<'EOF'
+import duckdb, json
+rows = duckdb.sql("SELECT imdb_id, title, year, rating, votes, total_words, unique_words, genres FROM '../data/out/movies.parquet' ORDER BY votes DESC").fetchall()
+out = [{'id':r[0],'title':r[1],'year':r[2],'rating':r[3],'votes':r[4],'total_words':r[5],'unique_words':r[6],'genres':r[7]} for r in rows]
+open('../data/out/json/movies-index.json','w').write(json.dumps(out))
+EOF
+
+# Fetch movie posters from TMDB into data/out/posters/ (self-hosted per site
+# policy). Resumable; ~40 min for ~19k films at 8 workers.
+uv run python scripts/fetch_posters.py --workers 8
 
 # Upload to R2 (requires env vars CLOUDFLARE_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY)
 ./scripts/upload_r2.sh
 ```
+
+## Running on a throwaway cloud VM (how the production dataset was built)
+
+The 2026-09 production run used a GCP `e2-highmem-4` (4 vCPU / 32GB / 200GB
+disk, ~$0.19/h) in us-central1 — total wall-clock ~3h: download+curate+index
+28 min, count 15 min, enrich 83 min, derive minutes, posters ~40 min. Pattern:
+
+1. `gcloud compute instances create ... --metadata-from-file=startup-script=...
+   --metadata=tmdb-key=$TMDB_API_KEY` — the startup script installs uv, clones
+   this repo, and runs the stages in sequence, touching `/opt/PIPELINE_DONE`
+   or `/opt/PIPELINE_FAILED` marker files.
+2. Chain follow-up steps as `systemd-run` transient units that wait on the
+   marker files — survives SSH disconnects, observable with short SSH polls
+   (`tail /var/log/moviewords*.log`, `ls /opt/*_DONE`).
+3. Upload straight from the VM with rclone (stage the derived S3 creds in a
+   root-only file, delete after the sync) — datacenter bandwidth beats
+   residential by an order of magnitude.
+4. Delete the instance when done; the per-movie caches make it cheap to
+   recreate later if scope expands.
+
+Gotchas encountered (so you don't re-learn them): `ls A B` in a wait loop
+requires BOTH files (use `[ -e A ] || [ -e B ]`); `pkill -f pattern` over SSH
+kills your own session if the pattern matches the remote command line (use
+`[c]lassic` self-exclusion); rclone→R2 logs harmless `501 NotImplemented`
+errors when touching modtimes on unchanged files.
 
 ## Resumability & Idempotence
 
@@ -124,14 +173,26 @@ Artifacts land in `data/out/`:
   `(word ASC, imdb_id ASC)`
 - `word_year.parquet` — annual word frequency trends (words with corpus-wide
   count >= 20 only)
-- `json/movie/<imdb_id>.json` — per-movie hot-path payload (stats, top words,
-  top words excluding stopwords, log-odds-distinctive words)
-- `json/leaderboard-default.json` — cross-corpus word leaderboard (top 1000
-  non-stopwords, top 50 stopwords)
+- `word_meta.parquet` — per-word Zipf commonness (wordfreq) + WordNet POS
+  class letters (n/v/a/r; "x" = unknown to WordNet ≈ names), used by the
+  frontend's word filters
+- `json/movie/<imdb_id>.json` — per-movie hot-path payload; word entries are
+  `[word, value, zipf, classes]` (stats, top words, top incl. stopwords,
+  log-odds signature words)
+- `json/signature/decades.json`, `json/signature/genres.json` — per-entity
+  top + signature words (log-odds vs corpus; a word must appear in ≥3
+  distinct films of the entity to qualify)
+- `json/leaderboard-default.json` — cross-corpus leaderboard; entries
+  `[word, count, movie_count, zipf, classes]`
 - `json/wordlists.json` — `{"stopwords": [...], "profanity": [...]}`, the
   same lists the pipeline uses internally, published so the frontend can
   offer a stopword-hiding toggle and compute swearing counts without
   shipping its own copies
+- `json/movies-index.json` — slim all-movies search index (built by the
+  post-derive snippet in the Full Run section)
+- `posters/<imdb_id>.jpg` — TMDB w342 posters (via `scripts/fetch_posters.py`)
 - `report.md` — summary statistics and stage-by-stage drop reasons
 
 All outputs are uploaded to the R2 bucket `moviewords-data/` via `upload_r2.sh`.
+The full dataset contract and the methodology behind these artifacts are
+documented in `../docs/ARCHITECTURE.md`.

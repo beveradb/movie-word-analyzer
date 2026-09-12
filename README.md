@@ -1,19 +1,56 @@
-# movie-word-analyzer
+# Movie Words — movie-word-analyzer
 
-Explore the words spoken in movies: per-film word frequencies and cross-film trends,
-filterable by year, country, genre, and more.
+**Live: https://moviewords.beveradb.com** — explore the words spoken in
+**18,761 English-language films**: what any movie actually says, how words rise
+and fall across decades, and what makes a film, a decade, or a genre sound like
+itself.
 
-Built from the [OPUS OpenSubtitles corpus](https://opus.nlpl.eu/datasets/OpenSubtitles)
-(per-movie subtitles with IMDb IDs) plus IMDb/TMDB metadata. Only derived word-count
-data (bags of words) is published — no subtitle text is redistributed.
+Every film's dialogue (from the [OPUS OpenSubtitles corpus](https://opus.nlpl.eu/datasets/OpenSubtitles),
+subtitles by [OpenSubtitles.org](http://www.opensubtitles.org/)) is reduced to a
+bag of words and compared against the whole corpus with log-odds — which is how
+you learn that *The Godfather Part II*'s signature words are "corleone, fredo,
+roth, michael, vito", Horror's are "help, god, please, her, house", and the film
+that says "dude" the most is, of course, *The Big Lebowski* (120×).
 
-**Live:** https://moviewords.beveradb.com — frontend on Cloudflare Pages (`app/`,
-Vite + React + DuckDB-WASM), dataset on R2 at `moviewords-data.beveradb.com`.
+**Only derived word counts are published — no subtitle text is redistributed.**
 
-Currently serving a 610-film starter dataset built from the Cornell Movie-Dialogs
-Corpus (`pipeline/scripts/build_demo_dataset.py`). The full ~30k-film OpenSubtitles
-build is pending — see `pipeline/README.md` for the runbook (needs a TMDB key —
-`TMDB_API_TOKEN` or `TMDB_API_KEY` env — and ~60GB free disk).
+## What's here
 
-Deploy: `cd app && npm run build && wrangler pages deploy dist --project-name moviewords`.
-Dataset upload: `pipeline/scripts/upload_r2.sh` (rclone) or per-object `wrangler r2 object put`.
+| Path | What it is |
+|---|---|
+| `pipeline/` | Python batch pipeline: OPUS + IMDb + TMDB → the published dataset. Runbook in [`pipeline/README.md`](pipeline/README.md) |
+| `app/` | The website: Vite + React + Tailwind + DuckDB-WASM, hosted on Cloudflare Pages. Dev guide in [`app/README.md`](app/README.md) |
+| `docs/ARCHITECTURE.md` | **Start here to understand or reproduce the system** — architecture, methodology, dataset contract, decisions, toolchain |
+| `docs/superpowers/` | Original design spec and implementation plan |
+| `docs/sessions/` | Session records (how this was actually built, with gotchas) |
+
+## Architecture in one paragraph
+
+A batch pipeline (Python/DuckDB, fully resumable via per-movie caches) turns the
+34GB OPUS corpus into ~2GB of Parquet + JSON + posters on a public Cloudflare R2
+bucket. The site is a static SPA on Cloudflare Pages that reads pre-baked JSON
+for hot paths and runs real SQL in the browser (DuckDB-WASM over HTTP range
+requests) for everything interactive. There are no servers and hosting is free.
+Details, decisions, and performance lessons: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+
+## Reproducing from scratch
+
+1. **Build the dataset** — [`pipeline/README.md`](pipeline/README.md). Needs
+   ~60GB disk, a free [TMDB API key](https://www.themoviedb.org/settings/api)
+   (`TMDB_API_KEY` or `TMDB_API_TOKEN`), and a few hours (we used a throwaway
+   GCP e2-highmem-4; a laptop works too). A 610-film starter dataset needing
+   neither is one command: `uv run python scripts/build_demo_dataset.py`.
+2. **Host the data** — any static host with range-request + CORS support; we
+   use an R2 public bucket (`pipeline/scripts/upload_r2.sh`).
+3. **Run the app** — `cd app && npm install && npm run dev`, pointing
+   `VITE_DATA_BASE` at your data host. Deploy anywhere static
+   (`wrangler pages deploy dist --project-name moviewords`).
+
+## Data & licensing
+
+Code: MIT. Published dataset: derived word counts, CC BY-NC-SA 4.0
+(respecting IMDb's non-commercial dataset terms). Built from: OPUS
+OpenSubtitles v2024 (Lison & Tiedemann, 2016) with subtitles from
+OpenSubtitles.org; IMDb non-commercial datasets; TMDB (metadata & posters —
+this product uses the TMDB API but is not endorsed or certified by TMDB).
+Non-commercial project.
