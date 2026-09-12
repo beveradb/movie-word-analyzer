@@ -96,6 +96,10 @@ verified in a Playwright browser at desktop + mobile sizes.
   data rebuild changes the shifts list materially.
 - PR #1 merged without CodeRabbit local review (SSO) — bot review comments,
   if any, may be worth a skim.
+- `.playwright-mcp/` browser-session artifacts (console logs, page snapshots
+  from 2026-09-11/12) are tracked in git — almost certainly accidental
+  commits from the build session; candidate for `git rm -r` + .gitignore
+  entry in a future tidy.
 
 ## Related docs
 
