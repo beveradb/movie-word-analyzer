@@ -20,3 +20,13 @@ def test_log_odds_ignores_rare_noise():
     corpus = {"cheese": 500, "the": 100_000}
     ranked = dict(log_odds(movie, corpus, min_count=3))
     assert "zzxq" not in ranked
+
+
+def test_word_meta_classes_and_zipf():
+    from moviewords_pipeline.derive import word_meta
+    meta = word_meta(["run", "beautiful", "jellicle", "quickly"])
+    zipf, classes = meta["run"]
+    assert zipf > 4 and "n" in classes and "v" in classes
+    assert "a" in meta["beautiful"][1]
+    assert meta["jellicle"][1] == "x"  # not in WordNet -> name/other class
+    assert "r" in meta["quickly"][1]

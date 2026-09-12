@@ -1,0 +1,69 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - link "MOVIEWORDS" [ref=e5] [cursor=pointer]:
+      - /url: "#/"
+    - navigation "Sections" [ref=e6]:
+      - link "Explore" [ref=e7] [cursor=pointer]:
+        - /url: "#/"
+      - link "Trends" [ref=e8] [cursor=pointer]:
+        - /url: "#/trends"
+      - link "Leaderboard" [ref=e9] [cursor=pointer]:
+        - /url: "#/leaderboard"
+      - link "Compare" [ref=e10] [cursor=pointer]:
+        - /url: "#/compare"
+  - main [ref=e11]:
+    - generic [ref=e282]:
+      - paragraph [ref=e283]: The most spoken words across every film in the corpus.
+      - generic [ref=e284]:
+        - generic [ref=e285]:
+          - generic [ref=e286]: From
+          - spinbutton "From" [ref=e287]: "1920"
+        - generic [ref=e288]:
+          - generic [ref=e289]: To
+          - spinbutton "To" [ref=e290]: "2015"
+        - generic [ref=e291]:
+          - generic [ref=e292]: Genre
+          - combobox "Genre" [ref=e293]:
+            - option "All genres" [selected]
+            - option "action"
+            - option "adult"
+            - option "adventure"
+            - option "animation"
+            - option "biography"
+            - option "comedy"
+            - option "crime"
+            - option "documentary"
+            - option "drama"
+            - option "family"
+            - option "fantasy"
+            - option "film-noir"
+            - option "history"
+            - option "horror"
+            - option "music"
+            - option "musical"
+            - option "mystery"
+            - option "romance"
+            - option "sci-fi"
+            - option "short"
+            - option "sport"
+            - option "thriller"
+            - option "war"
+            - option "western"
+        - generic [ref=e294] [cursor=pointer]:
+          - checkbox "hide stopwords" [checked] [ref=e295]
+          - text: hide stopwords
+  - contentinfo [ref=e27]:
+    - paragraph [ref=e28]: Fade out.
+    - paragraph [ref=e29]:
+      - text: "Open source:"
+      - link "github.com/beveradb/movie-word-analyzer" [ref=e30] [cursor=pointer]:
+        - /url: https://github.com/beveradb/movie-word-analyzer
+      - text: . Only derived word counts are published — no subtitle text is redistributed.
+    - paragraph [ref=e31]:
+      - text: "Data: Cornell Movie-Dialogs Corpus (Danescu-Niculescu-Mizil & Lee, 2011) · corpus pipeline built on"
+      - link "OPUS OpenSubtitles" [ref=e32] [cursor=pointer]:
+        - /url: https://opus.nlpl.eu/OpenSubtitles
+      - text: (Lison & Tiedemann, 2016), IMDb non-commercial datasets, and
+      - link "TMDB" [ref=e33] [cursor=pointer]:
+        - /url: https://www.themoviedb.org
+      - text: . Non-commercial project.

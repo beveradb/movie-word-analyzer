@@ -3,11 +3,14 @@ import { getLeaderboard, getMovieIndex, getWordlists } from '../lib/data'
 import { lit, pq, q } from '../lib/duck'
 import { navigate } from '../lib/route'
 import { ErrorBox, Spinner } from '../components/ui'
+import { WordFilterBar, emptyFilter, passesFilter, type WordRow } from '../components/WordFilter'
 
 interface Row {
   word: string
   count: number
   movies: number
+  zipf?: number
+  classes?: string
 }
 
 const YEAR_MIN = 1900
@@ -20,6 +23,7 @@ export function LeaderboardView() {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [hideStopwords, setHideStopwords] = useState(true)
+  const [wf, setWf] = useState(emptyFilter())
   const [genre, setGenre] = useState('')
   const [from, setFrom] = useState(YEAR_MIN)
   const [to, setTo] = useState(YEAR_MAX)
@@ -38,15 +42,17 @@ export function LeaderboardView() {
     if (!filtered) {
       // hot path: pre-baked JSON, no WASM needed
       getLeaderboard()
-        .then((lb) => !cancelled && setRows(lb.words.map(([word, count, movies]) => ({ word, count, movies }))))
+        .then((lb) => !cancelled && setRows(lb.words.map((e) => ({ word: e[0], count: e[1], movies: e[2], zipf: e[3] as number | undefined, classes: e[4] as string | undefined }))))
         .catch((e) => !cancelled && setError(String(e)))
       return
     }
     setLoading(true)
     q<Row>(
-      `SELECT w.word, SUM(w.count)::DOUBLE AS count, COUNT(DISTINCT w.imdb_id)::DOUBLE AS movies
+      `SELECT w.word, SUM(w.count)::DOUBLE AS count, COUNT(DISTINCT w.imdb_id)::DOUBLE AS movies,
+              ANY_VALUE(wm.zipf) AS zipf, ANY_VALUE(wm.classes) AS classes
        FROM ${pq('words_by_word/data.parquet')} w
        JOIN ${pq('movies.parquet')} m USING (imdb_id)
+       LEFT JOIN ${pq('word_meta.parquet')} wm ON wm.word = w.word
        WHERE m.year BETWEEN ${from} AND ${to}
          ${genre ? `AND list_contains(m.genres, ${lit(genre)})` : ''}
        GROUP BY w.word ORDER BY count DESC LIMIT 400`,
@@ -60,8 +66,12 @@ export function LeaderboardView() {
   }, [filtered, from, to, genre])
 
   const visible = useMemo(
-    () => (rows ?? []).filter((r) => !hideStopwords || !stop.has(r.word)).slice(0, 50),
-    [rows, hideStopwords, stop],
+    () =>
+      (rows ?? [])
+        .filter((r) => !hideStopwords || !stop.has(r.word))
+        .filter((r) => passesFilter([r.word, r.count, r.zipf, r.classes] as WordRow, wf))
+        .slice(0, 50),
+    [rows, hideStopwords, stop, wf],
   )
   const max = visible.length ? visible[0].count : 1
 
@@ -112,6 +122,7 @@ export function LeaderboardView() {
         </label>
       </div>
 
+      <WordFilterBar filter={wf} onChange={setWf} />
       {error && <ErrorBox message={error} />}
       {loading && <Spinner label="Filtering corpus… (first filtered query loads the analytics engine)" />}
       {!loading && rows && (

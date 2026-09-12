@@ -1,0 +1,190 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - link "MOVIEWORDS" [ref=e5] [cursor=pointer]:
+      - /url: "#/"
+    - generic [ref=e6]:
+      - navigation "Sections" [ref=e7]:
+        - link "Explore" [ref=e8] [cursor=pointer]:
+          - /url: "#/"
+        - link "Trends" [ref=e9] [cursor=pointer]:
+          - /url: "#/trends"
+        - link "Leaderboard" [ref=e10] [cursor=pointer]:
+          - /url: "#/leaderboard"
+        - link "Compare" [ref=e11] [cursor=pointer]:
+          - /url: "#/compare"
+      - button "Switch to day mode" [ref=e32]: DAY
+  - main [ref=e13]:
+    - generic [ref=e14]:
+      - paragraph [ref=e15]: How often a word is spoken across all films in the corpus, per million words of dialogue, by release year.
+      - generic [ref=e16]:
+        - textbox "Word to chart" [ref=e17]:
+          - /placeholder: Add another word…
+        - button "Chart it" [ref=e18]
+      - list "Charted words" [ref=e19]:
+        - button "dude ✕" [ref=e20]
+      - generic [ref=e33]:
+        - img "uses per million words by year" [ref=e35]:
+          - generic [ref=e36]: "0"
+          - generic [ref=e38]: "50"
+          - generic [ref=e40]: "100"
+          - generic [ref=e42]: "150"
+          - generic [ref=e44]: "200"
+          - generic [ref=e46]: "1940"
+          - generic [ref=e47]: "1960"
+          - generic [ref=e48]: "1980"
+          - generic [ref=e49]: "2000"
+          - generic [ref=e50]: "2020"
+        - paragraph [ref=e52]: uses per million words of dialogue
+      - generic [ref=e53]:
+        - heading "Films that say “dude” the most" [level=2] [ref=e54]
+        - list [ref=e55]:
+          - listitem [ref=e56]:
+            - generic [ref=e57]: "1"
+            - link "The Big Lebowski (1998)" [ref=e58] [cursor=pointer]:
+              - /url: "#/movie/tt0118715"
+              - text: The Big Lebowski
+              - generic [ref=e59]: (1998)
+            - generic [ref=e61]:
+              - text: 120×
+              - generic [ref=e62]: · 11.5/1k words
+          - listitem [ref=e63]:
+            - generic [ref=e64]: "2"
+            - link "Dude, Where's My Car? (2000)" [ref=e65] [cursor=pointer]:
+              - /url: "#/movie/tt0242423"
+              - text: Dude, Where's My Car?
+              - generic [ref=e66]: (2000)
+            - generic [ref=e68]:
+              - text: 81×
+              - generic [ref=e69]: · 11.9/1k words
+          - listitem [ref=e70]:
+            - generic [ref=e71]: "3"
+            - link "Bill & Ted's Bogus Journey (1991)" [ref=e72] [cursor=pointer]:
+              - /url: "#/movie/tt0101452"
+              - text: Bill & Ted's Bogus Journey
+              - generic [ref=e73]: (1991)
+            - generic [ref=e75]:
+              - text: 80×
+              - generic [ref=e76]: · 16.7/1k words
+          - listitem [ref=e77]:
+            - generic [ref=e78]: "4"
+            - link "Jackass Number Two (2006)" [ref=e79] [cursor=pointer]:
+              - /url: "#/movie/tt0493430"
+              - text: Jackass Number Two
+              - generic [ref=e80]: (2006)
+            - generic [ref=e82]:
+              - text: 75×
+              - generic [ref=e83]: · 9.5/1k words
+          - listitem [ref=e84]:
+            - generic [ref=e85]: "5"
+            - link "Bellflower (2011)" [ref=e86] [cursor=pointer]:
+              - /url: "#/movie/tt1242599"
+              - text: Bellflower
+              - generic [ref=e87]: (2011)
+            - generic [ref=e89]:
+              - text: 66×
+              - generic [ref=e90]: · 9.1/1k words
+          - listitem [ref=e91]:
+            - generic [ref=e92]: "6"
+            - link "The Puffy Chair (2005)" [ref=e93] [cursor=pointer]:
+              - /url: "#/movie/tt0436689"
+              - text: The Puffy Chair
+              - generic [ref=e94]: (2005)
+            - generic [ref=e96]:
+              - text: 63×
+              - generic [ref=e97]: · 9.2/1k words
+          - listitem [ref=e98]:
+            - generic [ref=e99]: "7"
+            - link "Tobacco Road (1941)" [ref=e100] [cursor=pointer]:
+              - /url: "#/movie/tt0034297"
+              - text: Tobacco Road
+              - generic [ref=e101]: (1941)
+            - generic [ref=e103]:
+              - text: 61×
+              - generic [ref=e104]: · 6.8/1k words
+          - listitem [ref=e105]:
+            - generic [ref=e106]: "8"
+            - link "Bill & Ted's Excellent Adventure (1989)" [ref=e107] [cursor=pointer]:
+              - /url: "#/movie/tt0096928"
+              - text: Bill & Ted's Excellent Adventure
+              - generic [ref=e108]: (1989)
+            - generic [ref=e110]:
+              - text: 61×
+              - generic [ref=e111]: · 11.3/1k words
+          - listitem [ref=e112]:
+            - generic [ref=e113]: "9"
+            - link "Buzzard (2014)" [ref=e114] [cursor=pointer]:
+              - /url: "#/movie/tt2656588"
+              - text: Buzzard
+              - generic [ref=e115]: (2014)
+            - generic [ref=e117]:
+              - text: 60×
+              - generic [ref=e118]: · 7.6/1k words
+          - listitem [ref=e119]:
+            - generic [ref=e120]: "10"
+            - link "Rio Bravo (1959)" [ref=e121] [cursor=pointer]:
+              - /url: "#/movie/tt0053221"
+              - text: Rio Bravo
+              - generic [ref=e122]: (1959)
+            - generic [ref=e124]:
+              - text: 55×
+              - generic [ref=e125]: · 6.0/1k words
+          - listitem [ref=e126]:
+            - generic [ref=e127]: "11"
+            - link "#ChadGetstheAxe (2022)" [ref=e128] [cursor=pointer]:
+              - /url: "#/movie/tt16194990"
+              - text: "#ChadGetstheAxe"
+              - generic [ref=e129]: (2022)
+            - generic [ref=e131]:
+              - text: 50×
+              - generic [ref=e132]: · 6.3/1k words
+          - listitem [ref=e133]:
+            - generic [ref=e134]: "12"
+            - link "Jackass 3D (2010)" [ref=e135] [cursor=pointer]:
+              - /url: "#/movie/tt1116184"
+              - text: Jackass 3D
+              - generic [ref=e136]: (2010)
+            - generic [ref=e138]:
+              - text: 46×
+              - generic [ref=e139]: · 6.3/1k words
+          - listitem [ref=e140]:
+            - generic [ref=e141]: "13"
+            - link "3 Ninjas (1992)" [ref=e142] [cursor=pointer]:
+              - /url: "#/movie/tt0103596"
+              - text: 3 Ninjas
+              - generic [ref=e143]: (1992)
+            - generic [ref=e145]:
+              - text: 44×
+              - generic [ref=e146]: · 7.7/1k words
+          - listitem [ref=e147]:
+            - generic [ref=e148]: "14"
+            - link "Bunny and the Bull (2009)" [ref=e149] [cursor=pointer]:
+              - /url: "#/movie/tt1251725"
+              - text: Bunny and the Bull
+              - generic [ref=e150]: (2009)
+            - generic [ref=e152]:
+              - text: 43×
+              - generic [ref=e153]: · 5.7/1k words
+          - listitem [ref=e154]:
+            - generic [ref=e155]: "15"
+            - link "Evil Bong (2006)" [ref=e156] [cursor=pointer]:
+              - /url: "#/movie/tt0829424"
+              - text: Evil Bong
+              - generic [ref=e157]: (2006)
+            - generic [ref=e159]:
+              - text: 42×
+              - generic [ref=e160]: · 6.2/1k words
+  - contentinfo [ref=e25]:
+    - paragraph [ref=e26]: Fade out.
+    - paragraph [ref=e27]:
+      - text: "Open source:"
+      - link "github.com/beveradb/movie-word-analyzer" [ref=e28] [cursor=pointer]:
+        - /url: https://github.com/beveradb/movie-word-analyzer
+      - text: . Only derived word counts are published — no subtitle text is redistributed.
+    - paragraph [ref=e29]:
+      - text: "Data: word counts derived from"
+      - link "OPUS OpenSubtitles" [ref=e30] [cursor=pointer]:
+        - /url: https://opus.nlpl.eu/OpenSubtitles
+      - text: (Lison & Tiedemann, 2016), IMDb non-commercial datasets, and
+      - link "TMDB" [ref=e31] [cursor=pointer]:
+        - /url: https://www.themoviedb.org
+      - text: . Non-commercial project.

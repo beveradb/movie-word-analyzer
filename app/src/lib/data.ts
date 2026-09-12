@@ -23,8 +23,8 @@ export interface MovieDetail {
 }
 
 export interface Leaderboard {
-  words: [string, number, number][]
-  stopwords: [string, number, number][]
+  words: [string, number, number, ...unknown[]][]
+  stopwords: [string, number, number, ...unknown[]][]
 }
 
 export interface Wordlists {

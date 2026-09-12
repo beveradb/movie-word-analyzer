@@ -3,6 +3,7 @@ import type { MovieDetail, MovieIndexEntry } from '../lib/data'
 import { getMovie, getMovieIndex } from '../lib/data'
 import { navigate } from '../lib/route'
 import { ErrorBox, HighlightWord, Poster, Slug, Spinner } from '../components/ui'
+import { WordFilterBar, emptyFilter, passesFilter, type WordRow } from '../components/WordFilter'
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
@@ -18,6 +19,7 @@ export function MovieView({ id }: { id: string }) {
   const [meta, setMeta] = useState<MovieIndexEntry | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [showStopwords, setShowStopwords] = useState(false)
+  const [filter, setFilter] = useState(emptyFilter())
 
   useEffect(() => {
     setMovie(null)
@@ -31,8 +33,11 @@ export function MovieView({ id }: { id: string }) {
   if (error) return <ErrorBox message={error} retry={() => navigate('/')} />
   if (!movie) return <Spinner label="Loading script…" />
 
-  const words = showStopwords ? movie.top_all.slice(0, 25) : movie.top.slice(0, 25)
-  const max = words.length ? words[0][1] : 1
+  const words = (showStopwords ? movie.top_all : movie.top)
+    .filter((r) => passesFilter(r as WordRow, filter))
+    .slice(0, 25)
+  const distinctive = movie.distinctive.filter((r) => passesFilter(r as WordRow, filter)).slice(0, 20)
+  const sigMax = distinctive.length ? distinctive[0][1] : 1
 
   return (
     <div>
@@ -71,7 +76,29 @@ export function MovieView({ id }: { id: string }) {
         </div>
       </div>
 
+      <WordFilterBar filter={filter} onChange={setFilter} />
+
       <div className="mt-8 grid gap-10 md:grid-cols-2">
+        {/* Signature words lead and get the highlighter — they're the story. */}
+        <section>
+          <h2 className="slug text-sm">Signature words</h2>
+          <p className="mt-1 text-xs text-ink-2">
+            Words this film uses far more than movies overall (log-odds vs the whole corpus).
+          </p>
+          <div className="mt-3">
+            {distinctive.map(([w, z]) => (
+              <HighlightWord
+                key={w}
+                word={w}
+                count={z}
+                max={sigMax}
+                display={z.toFixed(1)}
+                onClick={() => navigate(`/trends?w=${encodeURIComponent(w)}`)}
+              />
+            ))}
+          </div>
+        </section>
+
         <section>
           <div className="flex items-baseline justify-between">
             <h2 className="slug text-sm">Most spoken words</h2>
@@ -85,26 +112,14 @@ export function MovieView({ id }: { id: string }) {
               include stopwords
             </label>
           </div>
-          <div className="mt-3">
-            {words.map(([w, c]) => (
-              <HighlightWord key={w} word={w} count={c} max={max} onClick={() => navigate(`/trends?w=${encodeURIComponent(w)}`)} />
-            ))}
-          </div>
-        </section>
-
-        <section>
-          <h2 className="slug text-sm">Signature words</h2>
-          <p className="mt-1 text-xs text-ink-2">
-            Words this film uses far more than movies overall (log-odds vs the whole corpus).
-          </p>
           <ol className="mt-3 grid grid-cols-2 gap-x-6">
-            {movie.distinctive.slice(0, 20).map(([w, z], i) => (
+            {words.map(([w, c], i) => (
               <li key={w} className="flex items-baseline gap-2 border-b border-paper-2 py-1.5 font-script">
                 <span className="w-5 text-right text-xs text-ink-3">{i + 1}</span>
                 <button className="hover:bg-mark" onClick={() => navigate(`/trends?w=${encodeURIComponent(w)}`)}>
                   {w}
                 </button>
-                <span className="ml-auto text-xs tabular-nums text-ink-2">{z.toFixed(1)}</span>
+                <span className="ml-auto text-xs tabular-nums text-ink-2">{c.toLocaleString()}</span>
               </li>
             ))}
           </ol>

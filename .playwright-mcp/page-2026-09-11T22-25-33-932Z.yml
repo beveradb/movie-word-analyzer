@@ -1,0 +1,52 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - link "MOVIEWORDS" [ref=e5] [cursor=pointer]:
+      - /url: "#/"
+    - navigation "Sections" [ref=e6]:
+      - link "Explore" [ref=e7] [cursor=pointer]:
+        - /url: "#/"
+      - link "Trends" [ref=e8] [cursor=pointer]:
+        - /url: "#/trends"
+      - link "Leaderboard" [ref=e9] [cursor=pointer]:
+        - /url: "#/leaderboard"
+      - link "Compare" [ref=e10] [cursor=pointer]:
+        - /url: "#/compare"
+  - main [ref=e11]:
+    - generic [ref=e244]:
+      - paragraph [ref=e245]: How often a word is spoken across all films in the corpus, per million words of dialogue, by release year.
+      - generic [ref=e246]:
+        - textbox "Word to chart" [ref=e247]:
+          - /placeholder: Add another word…
+        - button "Chart it" [ref=e248]
+      - list "Charted words" [ref=e249]:
+        - button "love ✕" [ref=e250]
+        - button "war ✕" [ref=e252]
+        - button "phone ✕" [ref=e254]
+      - generic [ref=e259]:
+        - img "uses per million words by year" [ref=e261]:
+          - generic [ref=e262]: "0"
+          - generic [ref=e264]: 1k
+          - generic [ref=e266]: 2k
+          - generic [ref=e268]: 3k
+          - generic [ref=e270]: 4k
+          - generic [ref=e272]: 5k
+          - generic [ref=e274]: "1940"
+          - generic [ref=e275]: "1960"
+          - generic [ref=e276]: "1980"
+          - generic [ref=e277]: "2000"
+        - paragraph [ref=e281]: uses per million words of dialogue
+  - contentinfo [ref=e27]:
+    - paragraph [ref=e28]: Fade out.
+    - paragraph [ref=e29]:
+      - text: "Open source:"
+      - link "github.com/beveradb/movie-word-analyzer" [ref=e30] [cursor=pointer]:
+        - /url: https://github.com/beveradb/movie-word-analyzer
+      - text: . Only derived word counts are published — no subtitle text is redistributed.
+    - paragraph [ref=e31]:
+      - text: "Data: Cornell Movie-Dialogs Corpus (Danescu-Niculescu-Mizil & Lee, 2011) · corpus pipeline built on"
+      - link "OPUS OpenSubtitles" [ref=e32] [cursor=pointer]:
+        - /url: https://opus.nlpl.eu/OpenSubtitles
+      - text: (Lison & Tiedemann, 2016), IMDb non-commercial datasets, and
+      - link "TMDB" [ref=e33] [cursor=pointer]:
+        - /url: https://www.themoviedb.org
+      - text: . Non-commercial project.
