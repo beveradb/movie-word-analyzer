@@ -90,7 +90,7 @@ export function HomeView() {
         <p className="mt-1">
           Covering <strong>{count ? count.toLocaleString() : '30,000+'} English-language films</strong> — every word
           of dialogue from the{' '}
-          <a className="underline" href="https://opus.nlpl.eu/OpenSubtitles">
+          <a className="underline" href="https://opus.nlpl.eu/datasets/OpenSubtitles">
             OPUS OpenSubtitles corpus
           </a>{' '}
           for movies with at least 1,000 IMDb votes, counted per film. Only word counts are published; no subtitle
