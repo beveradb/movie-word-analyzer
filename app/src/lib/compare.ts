@@ -19,7 +19,7 @@ export interface H2HRow {
 
 export function headToHead(
   entities: H2HEntity[],
-  { minCount = 30, minRatio = 3, topN = 10 } = {},
+  { minCount = 30, minRatio = 2.5, topN = 10 } = {},
 ): Map<string, H2HRow[]> {
   const rate = (count: number, total: number) => (count / Math.max(total, 1)) * 1e6
   const maps = entities.map((e) => new Map(e.words))

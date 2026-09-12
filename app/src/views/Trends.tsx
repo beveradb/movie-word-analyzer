@@ -167,6 +167,9 @@ export function TrendsView() {
               color: COLORS[i],
               points: byWord
                 .get(w)!
+                // featured charts start at 1930: the pre-talkies corpus is a
+                // handful of films, so its rates are wild and wreck the y-scale
+                .filter((r) => !featured || r.year >= 1930)
                 .map((r) => ({ x: r.year, y: (r.count / (totals.get(r.year) ?? 1)) * 1_000_000 })),
             })),
         )

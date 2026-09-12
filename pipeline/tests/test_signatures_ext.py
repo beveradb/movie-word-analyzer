@@ -24,7 +24,7 @@ def con():
     return con
 
 
-def test_extend_decades_adds_stats_and_top500(con):
+def test_extend_decades_adds_stats_and_top_words(con):
     sig = {
         "1990": {"movie_count": 2, "total_words": 100, "top": [], "signature": []},
         "2010": {"movie_count": 1, "total_words": 500, "top": [], "signature": []},
@@ -34,9 +34,9 @@ def test_extend_decades_adds_stats_and_top500(con):
     assert nineties["movie_count"] == 2  # existing keys preserved
     assert nineties["unique_words"] == 3  # hello, fuck, ring
     assert nineties["swears_per_1k"] == 100.0  # 10 / 100 words * 1000
-    assert nineties["top500"][0] == ["hello", 80]
+    assert nineties["top_words"][0] == ["hello", 80]
     assert out["2010"]["swears_per_1k"] == 200.0
-    assert out["2010"]["top500"][0] == ["scream", 400]
+    assert out["2010"]["top_words"][0] == ["scream", 400]
 
 
 def test_extend_genres_unnests_membership(con):
@@ -48,5 +48,5 @@ def test_extend_genres_unnests_membership(con):
     # Horror = tt2 + tt3: hello 30, ring 10, scream 400, fuck 100
     horror = out["Horror"]
     assert horror["unique_words"] == 4
-    assert horror["top500"][0] == ["scream", 400]
+    assert horror["top_words"][0] == ["scream", 400]
     assert horror["swears_per_1k"] == round(100 / 540 * 1000, 2)

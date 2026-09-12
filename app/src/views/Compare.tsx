@@ -73,7 +73,7 @@ async function loadCard(ref: EntityRef): Promise<EntityCard | null> {
       films: sig.movie_count,
       totalWords: sig.total_words,
       signature: sig.signature,
-      words: sig.top500 ?? sig.top,
+      words: sig.top_words ?? sig.top,
       uniqueWords: sig.unique_words,
       swearsPer1k: sig.swears_per_1k,
     }
@@ -121,7 +121,8 @@ function FilmsPerYear({ entityRef, color }: { entityRef: EntityRef; color: strin
     if (!index) return []
     const per = new Map<number, number>()
     for (const m of index) {
-      if (entityRef.kind === 'genre' && !m.genres.includes(entityRef.id)) continue
+      // genres can be null in the index for films TMDB knows no genres for
+      if (entityRef.kind === 'genre' && !(m.genres ?? []).includes(entityRef.id)) continue
       if (entityRef.kind === 'decade' && Math.floor(m.year / 10) * 10 !== Number(entityRef.id)) continue
       per.set(m.year, (per.get(m.year) ?? 0) + 1)
     }

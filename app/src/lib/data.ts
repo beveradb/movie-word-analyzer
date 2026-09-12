@@ -51,7 +51,7 @@ export interface SignatureEntry {
   /** v2 fields (extended signatures) — absent on older cached JSON. */
   swears_per_1k?: number
   unique_words?: number
-  top500?: [string, number][]
+  top_words?: [string, number][]
 }
 
 export interface ShiftRow {
