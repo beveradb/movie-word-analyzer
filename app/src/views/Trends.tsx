@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { getShifts, type Shifts } from '../lib/data'
 import { lit, pq, q } from '../lib/duck'
 import { navigate, useRoute } from '../lib/route'
 import { LineChart, type Series } from '../components/LineChart'
@@ -6,6 +7,49 @@ import { ErrorBox, Spinner } from '../components/ui'
 
 const COLORS = ['var(--color-s1)', 'var(--color-s2)', 'var(--color-s3)', 'var(--color-s4)']
 const MAX_WORDS = 4
+
+/** Landing charts, rotated daily so the page never opens empty. Every word is
+ * a verified riser/faller from the shifts leaderboard. */
+const FEATURED: { title: string; words: string[] }[] = [
+  { title: 'The phone replaced the telegram', words: ['phone', 'telegram'] },
+  { title: "How movies stopped saying 'shall'", words: ['gonna', 'shall'] },
+  { title: 'Screens took over the script', words: ['computer', 'tv', 'radio'] },
+  { title: "From 'fellow' to 'dude'", words: ['dude', 'fellow'] },
+  { title: 'Cinema learned to swear', words: ['fucking', 'darling'] },
+  { title: 'Monsieur, madame — au revoir', words: ['monsieur', 'madame', 'okay'] },
+]
+
+const dayIndex = () => Math.floor(Date.now() / 86_400_000) % FEATURED.length
+
+/** Riser/faller chips under the featured chart — one tap to chart a mover. */
+function ShiftStrip() {
+  const [shifts, setShifts] = useState<Shifts | null>(null)
+  useEffect(() => {
+    getShifts().then(setShifts).catch(() => {})
+  }, [])
+  if (!shifts) return null
+  const chip = (w: string, dir: '↑' | '↓') => (
+    <button
+      key={w}
+      onClick={() => navigate(`/trends?w=${encodeURIComponent(w)}`)}
+      className="border-2 border-ink bg-card px-2 py-0.5 hover:bg-mark"
+    >
+      {dir} {w}
+    </button>
+  )
+  return (
+    <div className="mt-6 font-script text-sm text-ink-2">
+      <p className="text-xs uppercase tracking-wide">Big movers since the 1930s</p>
+      <div className="mt-2 flex flex-wrap items-center gap-2">
+        {shifts.risers.slice(0, 6).map((r) => chip(r.word, '↑'))}
+        {shifts.fallers.slice(0, 6).map((r) => chip(r.word, '↓'))}
+        <a href="#/leaderboard?b=shifts" className="ml-1 underline hover:bg-mark">
+          full list →
+        </a>
+      </div>
+    </div>
+  )
+}
 
 interface TopFilmRow {
   imdb_id: string
@@ -95,18 +139,18 @@ export function TrendsView() {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
 
+  // no words in the URL → chart today's featured shift instead of a blank page
+  const featured = words.length === 0 ? FEATURED[dayIndex()] : null
+  const chartWords = featured ? featured.words : words
+
   useEffect(() => {
-    if (words.length === 0) {
-      setSeries(null)
-      return
-    }
     let cancelled = false
     setLoading(true)
     setError(null)
     Promise.all([
       q<YearRow>(
         `SELECT word, year, count::DOUBLE AS count FROM ${pq('word_year.parquet')}
-         WHERE word IN (${words.map(lit).join(',')}) ORDER BY word, year`,
+         WHERE word IN (${chartWords.map(lit).join(',')}) ORDER BY word, year`,
       ),
       yearTotals(),
     ])
@@ -114,15 +158,18 @@ export function TrendsView() {
         if (cancelled) return
         const byWord = new Map<string, YearRow[]>()
         rows.forEach((r) => byWord.set(r.word, [...(byWord.get(r.word) ?? []), r]))
-        setMissing(words.filter((w) => !byWord.has(w)))
+        setMissing(chartWords.filter((w) => !byWord.has(w)))
         setSeries(
-          words
+          chartWords
             .filter((w) => byWord.has(w))
             .map((w, i) => ({
               name: w,
               color: COLORS[i],
               points: byWord
                 .get(w)!
+                // featured charts start at 1930: the pre-talkies corpus is a
+                // handful of films, so its rates are wild and wreck the y-scale
+                .filter((r) => !featured || r.year >= 1930)
                 .map((r) => ({ x: r.year, y: (r.count / (totals.get(r.year) ?? 1)) * 1_000_000 })),
             })),
         )
@@ -132,7 +179,9 @@ export function TrendsView() {
     return () => {
       cancelled = true
     }
-  }, [words])
+    // featured is in the deps: the same word set renders differently (1930
+    // trim) depending on whether it's the featured chart or a user chart
+  }, [chartWords.join(','), featured])
 
   const addWord = () => {
     const w = input.trim().toLowerCase()
@@ -182,7 +231,7 @@ export function TrendsView() {
         </div>
       )}
 
-      {missing.length > 0 && (
+      {missing.length > 0 && !featured && (
         <p className="mt-3 font-script text-sm text-s2">
           Not enough data for: {missing.join(', ')} (needs ≥20 uses across the corpus).
         </p>
@@ -191,14 +240,38 @@ export function TrendsView() {
       {loading && <Spinner label="Querying corpus…" />}
       {series && series.length > 0 && !loading && (
         <div className="mt-6 border-2 border-ink bg-card p-4">
+          {featured && (
+            <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2 border-b-2 border-ink pb-2">
+              <h2 className="slug text-sm">Featured: {featured.title}</h2>
+              <span className="font-script text-xs text-ink-2">a new shift every day — or chart your own word above</span>
+            </div>
+          )}
+          {featured && (
+            <div className="mb-3 flex flex-wrap gap-2 font-script text-sm">
+              {/* legend built from the drawn series so colors always match,
+                  even if a featured word is missing from the dataset */}
+              {series.map((s) => (
+                <button
+                  key={s.name}
+                  onClick={() => navigate(`/trends?w=${encodeURIComponent(s.name)}`)}
+                  className="flex items-center gap-1.5 border-2 border-ink bg-paper px-2.5 py-0.5 hover:bg-mark"
+                  title={`Explore “${s.name}”`}
+                >
+                  <span className="inline-block size-2.5 rounded-full" style={{ background: s.color }} />
+                  {s.name}
+                </button>
+              ))}
+            </div>
+          )}
           <LineChart series={series} yLabel="uses per million words" />
           <p className="mt-2 text-right text-xs text-ink-2">uses per million words of dialogue</p>
         </div>
       )}
       {words.length === 1 && !loading && !error && <TopFilms word={words[0]} />}
+      {featured && !loading && <ShiftStrip />}
       {!words.length && (
-        <div className="mt-8 font-script text-ink-2">
-          <p>Try:</p>
+        <div className="mt-8 font-script text-sm text-ink-2">
+          <p>Or try a classic:</p>
           <div className="mt-2 flex flex-wrap gap-2">
             {['love', 'war', 'money', 'god', 'phone'].map((w) => (
               <button

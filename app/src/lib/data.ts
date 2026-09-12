@@ -32,15 +32,20 @@ export interface Wordlists {
   profanity: string[]
 }
 
-const cache = new Map<string, unknown>()
+// caches the in-flight promise, not the value, so concurrent callers (e.g.
+// three compare cards mounting together) share one download of movies-index
+const cache = new Map<string, Promise<unknown>>()
 
-export async function fetchJSON<T>(path: string): Promise<T> {
-  if (cache.has(path)) return cache.get(path) as T
-  const res = await fetch(`${DATA_BASE}/${path}`)
-  if (!res.ok) throw new Error(`${res.status} fetching ${path}`)
-  const data = (await res.json()) as T
-  cache.set(path, data)
-  return data
+export function fetchJSON<T>(path: string): Promise<T> {
+  if (!cache.has(path)) {
+    const p = fetch(`${DATA_BASE}/${path}`).then((res) => {
+      if (!res.ok) throw new Error(`${res.status} fetching ${path}`)
+      return res.json()
+    })
+    p.catch(() => cache.delete(path))
+    cache.set(path, p)
+  }
+  return cache.get(path) as Promise<T>
 }
 
 export interface SignatureEntry {
@@ -48,7 +53,58 @@ export interface SignatureEntry {
   total_words: number
   top: [string, number][]
   signature: [string, number][]
+  /** v2 fields (extended signatures) — absent on older cached JSON. */
+  swears_per_1k?: number
+  unique_words?: number
+  top_words?: [string, number][]
 }
+
+export interface ShiftRow {
+  word: string
+  score: number
+  rates: [number, number][]
+}
+
+export interface Shifts {
+  decades: number[]
+  risers: ShiftRow[]
+  fallers: ShiftRow[]
+}
+
+export interface FilmSuperlative {
+  id: string
+  title: string
+  year: number
+  value: number
+}
+
+export interface Superlatives {
+  chattiest: FilmSuperlative[]
+  vocabulary: FilmSuperlative[]
+  sweariest: FilmSuperlative[]
+  repetitive: FilmSuperlative[]
+}
+
+export interface WonderRow {
+  word: string
+  id: string
+  title: string
+  year: number
+  count: number
+  total: number
+  share: number
+}
+
+export interface UbiquityRow {
+  word: string
+  films: number
+  share: number
+}
+
+export const getShifts = () => fetchJSON<Shifts>('json/leaderboards/shifts.json')
+export const getSuperlatives = () => fetchJSON<Superlatives>('json/leaderboards/films.json')
+export const getWonders = () => fetchJSON<WonderRow[]>('json/leaderboards/wonders.json')
+export const getUbiquity = () => fetchJSON<UbiquityRow[]>('json/leaderboards/everywhere.json')
 
 export const getSignatures = (kind: 'decades' | 'genres') =>
   fetchJSON<Record<string, SignatureEntry>>(`json/signature/${kind}.json`)

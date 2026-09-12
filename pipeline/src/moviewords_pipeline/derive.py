@@ -22,14 +22,18 @@ def load_profanity() -> set[str]:
 
 
 def log_odds(movie_counts: dict[str, int], corpus_counts: dict[str, int],
-             alpha0: float = 100.0, min_count: int = 3) -> list[tuple[str, float]]:
+             alpha0: float = 100.0, min_count: int = 3,
+             n_corpus: int | None = None) -> list[tuple[str, float]]:
     """Monroe et al. log-odds-ratio with an informative Dirichlet prior drawn
     from corpus word frequencies. Returns (word, z) pairs sorted descending
     by z, i.e. words most overrepresented in `movie_counts` relative to the
-    corpus come first.
+    corpus come first. Callers looping over many movies should pass the
+    precomputed `n_corpus` — re-summing the ~1M-entry corpus dict per movie
+    dominates an otherwise-fast pass.
     """
     n_movie = sum(movie_counts.values())
-    n_corpus = sum(corpus_counts.values())
+    if n_corpus is None:
+        n_corpus = sum(corpus_counts.values())
     out = []
     for word, y in movie_counts.items():
         if y < min_count:
@@ -116,6 +120,7 @@ def _write_signatures(con, out):
     corpus = dict(con.sql(
         "SELECT word, SUM(count) FROM wc JOIN movies USING (imdb_id) GROUP BY word"
     ).fetchall())
+    n_corpus = sum(corpus.values())
     (out / "json" / "signature").mkdir(parents=True, exist_ok=True)
 
     kinds = {
@@ -152,35 +157,38 @@ def _write_signatures(con, out):
                 "total_words": sum(counts.values()),
                 "top": [[w, c] for w, c in rows if w not in stop][:100],
                 "signature": [[w, round(z, 2)]
-                              for w, z in log_odds(counts, corpus, min_count=20)[:100]],
+                              for w, z in log_odds(counts, corpus, min_count=20,
+                                                   n_corpus=n_corpus)[:100]],
             }
         (out / "json" / "signature" / f"{kind}.json").write_text(json.dumps(payload))
 
 
-def word_meta(vocab):
-    """Per-word metadata: Zipf commonness + part-of-speech classes.
+def word_meta(counts: dict[str, int]):
+    """Per-word metadata: (zipf, classes, pos, dist) keyed by word.
 
-    classes: WordNet POS letters present for the word (n=noun, v=verb,
-    a=adjective incl. satellites, r=adverb); "x" when WordNet doesn't know it
-    (names, invented words, OCR survivors) — its own filterable class.
+    classes: all WordNet POS letters the word can be (n/v/a/r, satellites fold
+    into 'a'); kept for back-compat. pos: the single dominant POS (see
+    word_meta2.dominant_pos) that powers the app's word-kind filters. dist:
+    movie-distinctiveness — how over-represented the word is in film dialogue
+    vs everyday English, from the corpus rate implied by `counts`. "x" classes
+    = WordNet doesn't know it (names, invented words, OCR survivors).
     """
-    import nltk
-    try:
-        from nltk.corpus import wordnet as wn
-        wn.synsets("test")
-    except LookupError:
-        nltk.download("wordnet", quiet=True)
-        from nltk.corpus import wordnet as wn
     from wordfreq import zipf_frequency
 
+    from .word_meta2 import _wordnet, distinctiveness, dominant_pos
+
+    wn = _wordnet()
+    total = sum(counts.values()) or 1
     meta = {}
-    for word in vocab:
-        pos = {s.pos() for s in wn.synsets(word)}
-        if "s" in pos:  # adjective satellites count as adjectives
-            pos.discard("s")
-            pos.add("a")
-        classes = "".join(sorted(pos)) or "x"
-        meta[word] = (round(zipf_frequency(word, "en"), 1), classes)
+    for word, count in counts.items():
+        pos_set = {s.pos() for s in wn.synsets(word)}
+        if "s" in pos_set:  # adjective satellites count as adjectives
+            pos_set.discard("s")
+            pos_set.add("a")
+        classes = "".join(sorted(pos_set)) or "x"
+        zipf = round(zipf_frequency(word, "en"), 1)
+        meta[word] = (zipf, classes, dominant_pos(word, zipf),
+                      distinctiveness(count / total * 1e6, zipf))
     return meta
 
 
@@ -189,15 +197,16 @@ def _write_json_hot_paths(con, out):
     corpus = dict(con.sql(
         "SELECT word, SUM(count) FROM wc JOIN movies USING (imdb_id) GROUP BY word"
     ).fetchall())
-    wmeta = word_meta(corpus.keys())
-    con.sql("CREATE TABLE word_meta (word VARCHAR, zipf DOUBLE, classes VARCHAR)")
-    con.executemany("INSERT INTO word_meta VALUES (?, ?, ?)",
-                    [(w, z, c) for w, (z, c) in wmeta.items()])
+    wmeta = word_meta(corpus)
+    n_corpus = sum(corpus.values())
+    con.sql("CREATE TABLE word_meta (word VARCHAR, zipf DOUBLE, classes VARCHAR, pos VARCHAR, dist DOUBLE)")
+    con.executemany("INSERT INTO word_meta VALUES (?, ?, ?, ?, ?)",
+                    [(w, *m) for w, m in wmeta.items()])
     con.sql(f"COPY (SELECT * FROM word_meta ORDER BY word) TO '{out / 'word_meta.parquet'}' (FORMAT parquet)")
 
     def tag(word, value):
-        z, c = wmeta.get(word, (0.0, "x"))
-        return [word, value, z, c]
+        z, c, p, _ = wmeta.get(word, (0.0, "x", "x", 0.0))
+        return [word, value, z, c, p]
 
     movie_cols = ["imdb_id", "title", "year", "total_words", "unique_words",
                   "words_per_minute"]
@@ -221,7 +230,7 @@ def _write_json_hot_paths(con, out):
             "top": [tag(wd, c) for wd, c in rows if wd not in stop][:200],
             "top_all": [tag(wd, c) for wd, c in rows][:50],
             "distinctive": [tag(wd, round(z, 2))
-                            for wd, z in log_odds(counts, corpus)[:50]],
+                            for wd, z in log_odds(counts, corpus, n_corpus=n_corpus)[:50]],
         }
         (out / "json" / "movie" / f"{imdb_id}.json").write_text(
             json.dumps(payload))
@@ -250,9 +259,9 @@ def _write_json_hot_paths(con, out):
         ORDER BY count DESC
     """).fetchall()
     (out / "json" / "leaderboard-default.json").write_text(json.dumps({
-        "words": [[wd, c, mc, *wmeta.get(wd, (0.0, "x"))]
+        "words": [[wd, c, mc, *wmeta.get(wd, (0.0, "x", "x", 0.0))]
                   for wd, c, mc in board if wd not in stop][:1000],
-        "stopwords": [[wd, c, mc, *wmeta.get(wd, (0.0, "x"))]
+        "stopwords": [[wd, c, mc, *wmeta.get(wd, (0.0, "x", "x", 0.0))]
                       for wd, c, mc in board if wd in stop][:50],
     }))
 

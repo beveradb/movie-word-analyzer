@@ -44,8 +44,8 @@ export default function App() {
         <a href="#/" className="font-script text-xl font-bold tracking-tight">
           MOVIE<span className="bg-mark px-0.5">WORDS</span>
         </a>
-        <div className="flex items-center gap-3">
-          <nav className="flex gap-1 font-script text-sm font-bold uppercase" aria-label="Sections">
+        <div className="flex flex-wrap items-center gap-3">
+          <nav className="flex flex-wrap gap-1 font-script text-sm font-bold uppercase" aria-label="Sections">
             {TABS.map((t) => (
               <a
                 key={t.label}
