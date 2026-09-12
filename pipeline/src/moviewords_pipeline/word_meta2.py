@@ -25,16 +25,33 @@ def _wordnet():
     return _WN
 
 
-def dominant_pos(word: str) -> str:
+# Frequent discourse words whose WordNet entries are misleading (abbreviations
+# like OH/US, or noun-ified interjections like "hello, an expression of
+# greeting"). In dialogue these are interjections/function words → 'x'.
+_DISCOURSE_X = {
+    "oh", "yes", "no", "yeah", "yep", "nope", "hey", "hi", "hello", "wow",
+    "ah", "aw", "ooh", "oh-oh", "whoa", "huh", "um", "uh", "er", "hmm", "mm",
+    "okay", "ok", "bye", "goodbye", "gee", "gosh", "ugh", "oops", "ouch",
+    "phew", "shh", "yay", "yikes", "yo", "ha", "haha", "wham", "bam",
+}
+
+
+def dominant_pos(word: str, zipf: float = 0.0) -> str:
     """The single part of speech a word is most often used as.
 
     n/v/a/r from WordNet, choosing the POS with the highest summed lemma sense
-    counts (SemCor-derived usage frequencies); adjective satellites fold into
-    'a'. When all counts are zero (rare words), fall back to the POS of
-    WordNet's first-listed synset, which WordNet orders by frequency. Words
-    WordNet doesn't know (names, interjections, contractions) are 'x'.
+    counts (SemCor-derived usage frequencies). Inflected forms are resolved
+    per-POS with morphy so 'going'/'got' inherit go.v's counts; adjective
+    satellites fold into 'a'. When every sense count is zero the word's real
+    usage is unattested: rare words fall back to WordNet's first-listed synset,
+    but *common* words (zipf ≥ 5) become 'x' — if a top-2,000 English word has
+    zero SemCor sense hits, WordNet only knows a niche homograph of it
+    (oh→Ohio, us→United States). Words WordNet doesn't know at all (names,
+    contractions, invented words) are 'x'.
     """
     wn = _wordnet()
+    if word in _DISCOURSE_X:
+        return "x"
     synsets = wn.synsets(word)
     if not synsets:
         return "x"
@@ -43,19 +60,29 @@ def dominant_pos(word: str) -> str:
         return "a" if p == "s" else p
 
     counts: dict[str, int] = {}
-    target = word.lower()
-    for s in synsets:
-        pos = fold(s.pos())
-        for lemma in s.lemmas():
-            if lemma.name().lower() == target:
-                counts[pos] = counts.get(pos, 0) + lemma.count()
+    for letter in "nvar":
+        pos_synsets = wn.synsets(word, pos=letter)
+        if not pos_synsets:
+            continue
+        base = (wn.morphy(word, letter) or word).lower()
+        c = 0
+        for s in pos_synsets:
+            for lemma in s.lemmas():
+                # case-sensitive: 'US'/'God' lemma counts must not attach to
+                # the dialogue words 'us'/'god'... (proper-noun homographs)
+                if lemma.name() == base:
+                    c += lemma.count()
+        counts[letter] = counts.get(letter, 0) + c
     best = max(counts.values(), default=0)
     if best > 0:
-        # break ties by WordNet's first-synset (frequency) ordering
+        # break ties by WordNet's overall first-synset (frequency) ordering
         for s in synsets:
             p = fold(s.pos())
             if counts.get(p, 0) == best:
                 return p
+        return max(counts, key=lambda k: counts[k])
+    if zipf >= 5.0:
+        return "x"
     return fold(synsets[0].pos())
 
 
