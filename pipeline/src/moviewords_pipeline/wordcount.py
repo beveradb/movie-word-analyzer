@@ -27,6 +27,10 @@ def tokenize(text):
     # to the ASCII apostrophe so contractions like "don't" tokenize consistently regardless
     # of which apostrophe character the source used.
     text = text.replace("’", "'").replace("‘", "'")
+    # OCR-era subtitle files often double apostrophes (don''t); collapse runs
+    # so they merge with normal contraction tokens instead of forming one-film
+    # artifact tokens that dominate log-odds signatures.
+    text = re.sub(r"''+", "'", text)
     # Strip quote-functioning apostrophe pairs down to their inner span before extracting
     # tokens, so quoted phrases don't distort word counts with leading/trailing apostrophes.
     text = QUOTE_PAIR_RE.sub(r"\1", text)

@@ -48,3 +48,8 @@ def test_tokenize_rejects_digit_prefix_junk_token():
 def test_single_letter_noise_dropped_but_a_and_i_kept():
     assert tokenize("i want u to see a c note") == ["i", "want", "to", "see", "a", "note"]
     assert tokenize("don' t worry 't happens") == ["don'", "worry", "happens"]
+
+
+def test_doubled_apostrophes_collapse():
+    assert tokenize("don" + "''" + "t stop") == ["don't", "stop"]
+    assert tokenize("he" + "''''" + "s here") == ["he's", "here"]
