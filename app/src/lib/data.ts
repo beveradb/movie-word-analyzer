@@ -48,7 +48,58 @@ export interface SignatureEntry {
   total_words: number
   top: [string, number][]
   signature: [string, number][]
+  /** v2 fields (extended signatures) — absent on older cached JSON. */
+  swears_per_1k?: number
+  unique_words?: number
+  top500?: [string, number][]
 }
+
+export interface ShiftRow {
+  word: string
+  score: number
+  rates: [number, number][]
+}
+
+export interface Shifts {
+  decades: number[]
+  risers: ShiftRow[]
+  fallers: ShiftRow[]
+}
+
+export interface FilmSuperlative {
+  id: string
+  title: string
+  year: number
+  value: number
+}
+
+export interface Superlatives {
+  chattiest: FilmSuperlative[]
+  vocabulary: FilmSuperlative[]
+  sweariest: FilmSuperlative[]
+  repetitive: FilmSuperlative[]
+}
+
+export interface WonderRow {
+  word: string
+  id: string
+  title: string
+  year: number
+  count: number
+  total: number
+  share: number
+}
+
+export interface UbiquityRow {
+  word: string
+  films: number
+  share: number
+}
+
+export const getShifts = () => fetchJSON<Shifts>('json/leaderboards/shifts.json')
+export const getSuperlatives = () => fetchJSON<Superlatives>('json/leaderboards/films.json')
+export const getWonders = () => fetchJSON<WonderRow[]>('json/leaderboards/wonders.json')
+export const getUbiquity = () => fetchJSON<UbiquityRow[]>('json/leaderboards/everywhere.json')
 
 export const getSignatures = (kind: 'decades' | 'genres') =>
   fetchJSON<Record<string, SignatureEntry>>(`json/signature/${kind}.json`)

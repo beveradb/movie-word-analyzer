@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState } from 'react'
+import { FilmsBoard, ShiftsBoard, UbiquityBoard, WondersBoard } from '../components/boards'
 import { getLeaderboard, getMovieIndex, getWordlists } from '../lib/data'
 import { lit, pq, q } from '../lib/duck'
-import { navigate } from '../lib/route'
+import { navigate, useRoute } from '../lib/route'
 import { ErrorBox, Spinner } from '../components/ui'
-import { WordFilterBar, emptyFilter, passesFilter, type WordRow } from '../components/WordFilter'
+import { WordFilterBar, defaultFilter, passesFilter, type WordRow } from '../components/WordFilter'
 
 interface Row {
   word: string
@@ -11,19 +12,55 @@ interface Row {
   movies: number
   zipf?: number
   classes?: string
+  pos?: string
+  dist?: number
 }
 
 const YEAR_MIN = 1900
 const YEAR_MAX = 2025
 
+const TABS: [string, string][] = [
+  ['words', 'Top words'],
+  ['shifts', 'Risers & fallers'],
+  ['films', 'Film superlatives'],
+  ['wonders', 'One-film wonders'],
+  ['everywhere', 'Said by every film'],
+]
+
 export function LeaderboardView() {
+  const { params } = useRoute()
+  const tab = params.get('b') ?? 'words'
+  return (
+    <div>
+      <div className="mt-3 flex flex-wrap gap-2 font-script text-xs">
+        {TABS.map(([key, label]) => (
+          <button
+            key={key}
+            onClick={() => navigate(`/leaderboard${key === 'words' ? '' : `?b=${key}`}`)}
+            aria-pressed={tab === key}
+            className={`border-2 border-ink px-3 py-1 font-bold uppercase ${tab === key ? 'bg-ink text-paper' : 'hover:bg-mark'}`}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+      {tab === 'shifts' && <ShiftsBoard />}
+      {tab === 'films' && <FilmsBoard />}
+      {tab === 'wonders' && <WondersBoard />}
+      {tab === 'everywhere' && <UbiquityBoard />}
+      {(tab === 'words' || !TABS.some(([k]) => k === tab)) && <WordsBoard />}
+    </div>
+  )
+}
+
+function WordsBoard() {
   const [rows, setRows] = useState<Row[] | null>(null)
   const [stop, setStop] = useState<Set<string>>(new Set())
   const [genres, setGenres] = useState<string[]>([])
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
-  const [hideStopwords, setHideStopwords] = useState(true)
-  const [wf, setWf] = useState(emptyFilter())
+  const [wf, setWf] = useState(defaultFilter())
+  const [sort, setSort] = useState<'spoken' | 'movieish'>('spoken')
   const [genre, setGenre] = useState('')
   const [from, setFrom] = useState(YEAR_MIN)
   const [to, setTo] = useState(YEAR_MAX)
@@ -42,14 +79,29 @@ export function LeaderboardView() {
     if (!filtered) {
       // hot path: pre-baked JSON, no WASM needed
       getLeaderboard()
-        .then((lb) => !cancelled && setRows(lb.words.map((e) => ({ word: e[0], count: e[1], movies: e[2], zipf: e[3] as number | undefined, classes: e[4] as string | undefined }))))
+        .then(
+          (lb) =>
+            !cancelled &&
+            setRows(
+              lb.words.map((e) => ({
+                word: e[0],
+                count: e[1],
+                movies: e[2],
+                zipf: e[3] as number | undefined,
+                classes: e[4] as string | undefined,
+                pos: e[5] as string | undefined,
+                dist: e[6] as number | undefined,
+              })),
+            ),
+        )
         .catch((e) => !cancelled && setError(String(e)))
       return
     }
     setLoading(true)
     q<Row>(
       `SELECT w.word, SUM(w.count)::DOUBLE AS count, COUNT(DISTINCT w.imdb_id)::DOUBLE AS movies,
-              ANY_VALUE(wm.zipf) AS zipf, ANY_VALUE(wm.classes) AS classes
+              ANY_VALUE(wm.zipf) AS zipf, ANY_VALUE(wm.classes) AS classes,
+              ANY_VALUE(wm.pos) AS pos, ANY_VALUE(wm.dist) AS dist
        FROM ${pq('words_by_word/data.parquet')} w
        JOIN ${pq('movies.parquet')} m USING (imdb_id)
        LEFT JOIN ${pq('word_meta.parquet')} wm ON wm.word = w.word
@@ -68,16 +120,20 @@ export function LeaderboardView() {
   const visible = useMemo(
     () =>
       (rows ?? [])
-        .filter((r) => !hideStopwords || !stop.has(r.word))
-        .filter((r) => passesFilter([r.word, r.count, r.zipf, r.classes] as WordRow, wf))
+        .filter((r) => passesFilter([r.word, r.count, r.zipf, r.classes, r.pos] as WordRow, wf, stop))
+        .sort((a, b) =>
+          sort === 'movieish'
+            ? b.count * Math.max(b.dist ?? 0, 0) - a.count * Math.max(a.dist ?? 0, 0)
+            : b.count - a.count,
+        )
         .slice(0, 50),
-    [rows, hideStopwords, stop, wf],
+    [rows, stop, wf, sort],
   )
   const max = visible.length ? visible[0].count : 1
 
   return (
     <div>
-      <p className="mt-1 text-sm text-ink-2">The most spoken words across every film in the corpus.</p>
+      <p className="mt-3 text-sm text-ink-2">The most spoken words across every film in the corpus.</p>
 
       <div className="mt-4 flex flex-wrap items-end gap-4 border-2 border-ink bg-card p-3 font-script text-sm">
         <label className="flex flex-col gap-1">
@@ -111,15 +167,26 @@ export function LeaderboardView() {
             ))}
           </select>
         </label>
-        <label className="mb-1.5 ml-auto flex cursor-pointer items-center gap-2">
-          <input
-            type="checkbox"
-            checked={hideStopwords}
-            onChange={(e) => setHideStopwords(e.target.checked)}
-            className="accent-[var(--color-ink)]"
-          />
-          hide stopwords
-        </label>
+        <div className="mb-0.5 ml-auto flex flex-col gap-1">
+          <span className="text-xs uppercase text-ink-2">Rank by</span>
+          <div className="flex text-xs">
+            <button
+              onClick={() => setSort('spoken')}
+              aria-pressed={sort === 'spoken'}
+              className={`border-2 border-ink px-2 py-1 ${sort === 'spoken' ? 'bg-mark font-bold' : 'hover:bg-mark'}`}
+            >
+              most spoken
+            </button>
+            <button
+              onClick={() => setSort('movieish')}
+              aria-pressed={sort === 'movieish'}
+              title="Weights each word by how much more movies say it than everyday English"
+              className={`-ml-0.5 border-2 border-ink px-2 py-1 ${sort === 'movieish' ? 'bg-mark font-bold' : 'hover:bg-mark'}`}
+            >
+              most movie-ish
+            </button>
+          </div>
+        </div>
       </div>
 
       <WordFilterBar filter={wf} onChange={setWf} />
@@ -144,6 +211,9 @@ export function LeaderboardView() {
             </li>
           ))}
         </ol>
+      )}
+      {!loading && rows && visible.length === 0 && (
+        <p className="mt-6 font-script text-sm text-ink-2">No words match these filters — try “all words” or “any kind”.</p>
       )}
     </div>
   )

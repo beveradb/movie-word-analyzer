@@ -8,6 +8,34 @@ export interface Series {
 
 const M = { top: 12, right: 16, bottom: 26, left: 46 }
 
+/** Tiny inline trend line for list rows and compare cards. */
+export function Sparkline({
+  points,
+  width = 110,
+  height = 26,
+  color = 'var(--color-s1)',
+}: {
+  points: [number, number][]
+  width?: number
+  height?: number
+  color?: string
+}) {
+  if (points.length < 2) return null
+  const xs = points.map((p) => p[0])
+  const ys = points.map((p) => p[1])
+  const xMin = Math.min(...xs)
+  const xSpan = Math.max(...xs) - xMin || 1
+  const yMax = Math.max(...ys) || 1
+  const path = points
+    .map(([x, y]) => `${(((x - xMin) / xSpan) * (width - 2) + 1).toFixed(1)},${(height - 2 - (y / yMax) * (height - 4)).toFixed(1)}`)
+    .join(' ')
+  return (
+    <svg viewBox={`0 0 ${width} ${height}`} width={width} height={height} className="shrink-0" aria-hidden>
+      <polyline fill="none" stroke={color} strokeWidth={1.5} strokeLinejoin="round" strokeLinecap="round" points={path} />
+    </svg>
+  )
+}
+
 /** Multi-series line chart (SVG) with crosshair + tooltip per the dataviz spec. */
 export function LineChart({
   series,
