@@ -28,14 +28,19 @@ export RCLONE_CONFIG_R2_ACCESS_KEY_ID="$R2_ACCESS_KEY_ID"
 export RCLONE_CONFIG_R2_SECRET_ACCESS_KEY="$R2_SECRET_ACCESS_KEY"
 export RCLONE_CONFIG_R2_ENDPOINT="https://${CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com"
 
+# Ordered --filter rules, NOT mixed --include/--exclude: rclone does not
+# apply mixed include/exclude flags in command-line order (excludes never
+# beat `--include '*.json'`); --filter rules ARE first-match-wins in the
+# order given.
 rclone copy . r2:moviewords-data/ --checksum --progress \
-  --include 'json/trend/**' --include 'all/json/trend/**' \
-  --include 'json/year-totals.json' --include 'all/json/year-totals.json' \
-  --header-upload "Cache-Control: public, max-age=3600"
+  --filter '+ json/trend/**' --filter '+ all/json/trend/**' \
+  --filter '+ json/year-totals.json' --filter '+ all/json/year-totals.json' \
+  --filter '- *' --header-upload "Cache-Control: public, max-age=3600"
 rclone copy . r2:moviewords-data/ --checksum --progress \
-  --exclude 'json/trend/**' --exclude 'all/json/trend/**' \
-  --exclude 'json/year-totals.json' --exclude 'all/json/year-totals.json' \
-  --include '*.json' --header-upload "Cache-Control: public, max-age=300"
+  --filter '- json/trend/**' --filter '- all/json/trend/**' \
+  --filter '- json/year-totals.json' --filter '- all/json/year-totals.json' \
+  --filter '+ *.json' --filter '- *' \
+  --header-upload "Cache-Control: public, max-age=300"
 rclone copy . r2:moviewords-data/ --checksum --progress \
   --exclude '*.json' --header-upload "Cache-Control: public, max-age=86400"
 echo "Uploaded $(du -sh . | cut -f1) from webdata/out to r2:moviewords-data"

@@ -12,7 +12,7 @@ raw subtitles. Regenerates:
 
 Usage:
   scripts/fetch_published.sh [en|all]   # once, mirrors inputs to webdata/in[/all]
-  uv run python scripts/rebuild_web_data.py [--corpus en|all] [--stage all|meta|movies|boards|signatures|featured]
+  uv run python scripts/rebuild_web_data.py [--corpus en|all] [--stage all|meta|movies|boards|signatures|featured|trends]
 
 Outputs land in webdata/out mirroring the R2 layout; publish with
 scripts/upload_r2.sh (additive copy + Cache-Control + edge purge), then
