@@ -82,12 +82,8 @@ uv run python -m moviewords_pipeline.cli derive
 cat ../data/out/report.md
 
 # Build the client-side search index (deploy artifact consumed by the app)
-uv run python - <<'EOF'
-import duckdb, json
-rows = duckdb.sql("SELECT imdb_id, title, year, rating, votes, total_words, unique_words, genres FROM '../data/out/movies.parquet' ORDER BY votes DESC").fetchall()
-out = [{'id':r[0],'title':r[1],'year':r[2],'rating':r[3],'votes':r[4],'total_words':r[5],'unique_words':r[6],'genres':r[7]} for r in rows]
-open('../data/out/json/movies-index.json','w').write(json.dumps(out))
-EOF
+uv run python scripts/build_movies_index.py --corpus en
+uv run python scripts/build_movies_index.py --corpus all
 
 # Fetch movie posters from TMDB into data/out/posters/ (self-hosted per site
 # policy). Resumable; ~40 min for ~19k films at 8 workers.
