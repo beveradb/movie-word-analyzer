@@ -4,25 +4,43 @@ import { getMovieIndex } from '../lib/data'
 import { navigate } from '../lib/route'
 import { MovieSearch, Poster } from '../components/ui'
 import { FeaturedChart } from '../components/FeaturedChart'
-import { FEATURED, dayIndex } from '../lib/featured'
+import { EraMotif } from '../components/motifs'
 
-/** Hero: a line of dialogue with live highlighter marks — the site's thesis. */
-function Hero() {
+const HOME_DECADES = ['1930', '1950', '1970', '1990', '2010']
+
+const heroLink = (href: string, label: string) => (
+  <a href={href} className="underline decoration-2 underline-offset-2 hover:bg-mark hover:text-ink">
+    {label}
+  </a>
+)
+
+/** Hero: the pitch on the left, the product on the right - a live featured
+ * trend chart doing the explaining for anyone who won't read or scroll. */
+function Hero({ count, words }: { count: number; words: number }) {
   return (
-    <div className="mt-10 sm:mt-16">
-      <p className="font-script text-sm uppercase tracking-widest text-ink-2">Fade in:</p>
-      <h1 className="mt-3 max-w-2xl font-script text-4xl font-bold leading-tight sm:text-5xl">
-        Every film has a<br />
-        <span className="hl">
-          <span className="hl-mark" style={{ width: 'calc(100% + 0.3em)' }} />
-          <span className="hl-word">vocabulary</span>
-        </span>
-        .
-      </h1>
-      <p className="mt-4 max-w-xl text-ink-2">
-        Movie Words counts every word of dialogue in film subtitles - so you can see what any movie actually says,
-        watch words rise and fall across decades, and compare scripts head to head.
-      </p>
+    <div className="mt-8 grid items-start gap-8 sm:mt-12 lg:grid-cols-2">
+      <div>
+        <p className="font-script text-sm uppercase tracking-widest text-ink-2">Fade in:</p>
+        <h1 className="mt-3 max-w-2xl font-script text-4xl font-bold leading-tight sm:text-5xl">
+          Every film has a<br />
+          <span className="hl">
+            <span className="hl-mark" style={{ width: 'calc(100% + 0.3em)' }} />
+            <span className="hl-word">vocabulary</span>
+          </span>
+          .
+        </h1>
+        <p className="mt-4 max-w-xl text-ink-2">
+          We counted every word spoken in {count ? count.toLocaleString() : '18,000+'} films -{' '}
+          {words ? Math.round(words / 1e6).toLocaleString() : '126'} million of them. Watch{' '}
+          {heroLink('#/trends?w=awesome,swell', "'awesome' overtake 'swell'")}, meet{' '}
+          {heroLink('#/leaderboard?b=films', 'the sweariest script ever made')}, and settle{' '}
+          {heroLink('#/compare?e=tt0078748,tt0090605', 'Alien vs Aliens')} word by word.
+        </p>
+        <div className="mt-6 max-w-md">
+          <MovieSearch onPick={(m) => navigate(`/movie/${m.id}`)} />
+        </div>
+      </div>
+      <FeaturedChart />
     </div>
   )
 }
@@ -30,11 +48,13 @@ function Hero() {
 export function HomeView() {
   const [featured, setFeatured] = useState<MovieIndexEntry[]>([])
   const [count, setCount] = useState(0)
+  const [words, setWords] = useState(0)
 
   useEffect(() => {
     getMovieIndex()
       .then((idx) => {
         setCount(idx.length)
+        setWords(idx.reduce((sum, m) => sum + m.total_words, 0))
         setFeatured(
           [...idx]
             .sort((a, b) => b.votes - a.votes)
@@ -46,14 +66,9 @@ export function HomeView() {
       .catch(() => {})
   }, [])
 
-  const today = FEATURED[dayIndex()]
-
   return (
     <div>
-      <Hero />
-      <div className="mt-8 max-w-md">
-        <MovieSearch onPick={(m) => navigate(`/movie/${m.id}`)} />
-      </div>
+      <Hero count={count} words={words} />
 
       {featured.length > 0 && (
         <section className="mt-10">
@@ -79,22 +94,23 @@ export function HomeView() {
       )}
 
       <section className="mt-10">
-        <h2 className="slug border-b-2 border-ink pb-1 text-sm">Or wander a decade</h2>
-        <div className="mt-3 flex flex-wrap gap-2 font-script text-sm font-bold">
-          {['1930', '1950', '1970', '1980', '1990', '2000', '2010'].map((d) => (
-            <a key={d} href={`#/decade/${d}`} className="border-2 border-ink bg-card px-3 py-1 hover:bg-mark">
-              {d}s
-            </a>
-          ))}
-        </div>
-      </section>
-
-      <section className="mt-10">
-        <h2 className="slug border-b-2 border-ink pb-1 text-sm">Watch a word move</h2>
-        <p className="mb-4 mt-2 text-sm text-ink-2">
-          A new shift every day - one word&apos;s rise or fall across the decades.
-        </p>
-        <FeaturedChart title={today.title} words={today.words} />
+        <a
+          href="#/decades"
+          className="flex flex-wrap items-center justify-between gap-4 border-2 border-ink bg-card p-4 transition-transform hover:-translate-y-0.5 hover:shadow-[4px_4px_0_0_var(--color-ink)]"
+        >
+          <div>
+            <h2 className="slug text-sm">Wander the decades</h2>
+            <p className="mt-1 text-sm text-ink-2">
+              From the talkies to the 2020s - how each era of cinema talked.
+            </p>
+          </div>
+          <div className="flex items-center gap-3 text-ink-3">
+            {HOME_DECADES.map((d, i) => (
+              <EraMotif key={d} decade={d} className={`h-11 w-11 ${i > 2 ? 'hidden sm:block' : ''}`} />
+            ))}
+            <span className="font-script text-sm font-bold text-ink">→</span>
+          </div>
+        </a>
       </section>
 
       <section className="mt-10 border-2 border-ink bg-paper-2 p-4 text-sm text-ink-2">

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { FilmsBoard, ShiftsBoard, UbiquityBoard, WondersBoard } from '../components/boards'
+import { FilmsBoard, OverviewBoard, ShiftsBoard, UbiquityBoard, WondersBoard } from '../components/boards'
 import { getLeaderboard, getMovieIndex, getWordlists } from '../lib/data'
 import { lit, pq, q } from '../lib/duck'
 import { navigate, useRoute } from '../lib/route'
@@ -19,6 +19,8 @@ interface Row {
 const YEAR_MIN = 1900
 const YEAR_MAX = 2025
 
+const DEFAULT_TAB = 'overview'
+
 /** Trail a fast-changing value; the year inputs fire per keystroke and each
  * filtered query is a full scan of the big parquet, so let typing settle. */
 function useDebounced<T>(value: T, ms: number): T {
@@ -31,6 +33,7 @@ function useDebounced<T>(value: T, ms: number): T {
 }
 
 const TABS: [string, string][] = [
+  [DEFAULT_TAB, 'Overview'],
   ['words', 'Top words'],
   ['shifts', 'Risers & fallers'],
   ['films', 'Film superlatives'],
@@ -40,14 +43,14 @@ const TABS: [string, string][] = [
 
 export function LeaderboardView() {
   const { params } = useRoute()
-  const tab = params.get('b') ?? 'words'
+  const tab = params.get('b') ?? DEFAULT_TAB
   return (
     <div>
       <div className="mt-3 flex flex-wrap gap-2 font-script text-xs">
         {TABS.map(([key, label]) => (
           <button
             key={key}
-            onClick={() => navigate(`/leaderboard${key === 'words' ? '' : `?b=${key}`}`)}
+            onClick={() => navigate(`/leaderboard${key === DEFAULT_TAB ? '' : `?b=${key}`}`)}
             aria-pressed={tab === key}
             className={`border-2 border-ink px-3 py-1 font-bold uppercase ${tab === key ? 'bg-ink text-paper' : 'hover:bg-mark'}`}
           >
@@ -55,16 +58,18 @@ export function LeaderboardView() {
           </button>
         ))}
       </div>
+      {tab === 'words' && <WordsBoard />}
       {tab === 'shifts' && <ShiftsBoard />}
       {tab === 'films' && <FilmsBoard />}
       {tab === 'wonders' && <WondersBoard />}
       {tab === 'everywhere' && <UbiquityBoard />}
-      {(tab === 'words' || !TABS.some(([k]) => k === tab)) && <WordsBoard />}
+      {(tab === DEFAULT_TAB || !TABS.some(([k]) => k === tab)) && <OverviewBoard />}
     </div>
   )
 }
 
 function WordsBoard() {
+  const { params } = useRoute()
   const [rows, setRows] = useState<Row[] | null>(null)
   // stopword rows from the pre-baked JSON; merged in for 'all words' mode
   // (the WASM path already includes them in `rows`)
@@ -73,7 +78,14 @@ function WordsBoard() {
   const [genres, setGenres] = useState<string[]>([])
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
-  const [wf, setWf] = useState(defaultFilter())
+  // ?pos=a preselects a part-of-speech filter, so overview cards can deep-link
+  // into their exact view (e.g. adjectives only)
+  const [wf, setWf] = useState(() => {
+    const f = defaultFilter()
+    const pos = params.get('pos')
+    if (pos) f.pos = new Set(pos.split(',').filter(Boolean))
+    return f
+  })
   const [sort, setSort] = useState<'spoken' | 'movieish'>('spoken')
   const [genre, setGenre] = useState('')
   const [from, setFrom] = useState(YEAR_MIN)

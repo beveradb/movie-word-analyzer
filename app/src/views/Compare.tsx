@@ -5,19 +5,11 @@ import { headToHead } from '../lib/compare'
 import { lit, pq, q } from '../lib/duck'
 import { navigate, useRoute } from '../lib/route'
 import { Sparkline } from '../components/LineChart'
-import { ErrorBox, MovieSearch, Slug, Spinner } from '../components/ui'
+import { ErrorBox, FeaturedNav, MovieSearch, Slug, Spinner } from '../components/ui'
+import { MATCHUPS, dayIndex, stepFeatured } from '../lib/featured'
 
 const COLORS = ['var(--color-s1)', 'var(--color-s2)', 'var(--color-s3)']
 const MAX = 3
-
-/** Landing matchups, rotated daily so the page never opens empty. */
-const MATCHUPS: [string, string][] = [
-  ['The 1950s vs the 2000s', 'd:1950,d:2000'],
-  ['Horror vs Comedy', 'g:Horror,g:Comedy'],
-  ['Western vs Sci-Fi vs Romance', 'g:Western,g:Sci-Fi,g:Romance'],
-]
-
-const dayIndex = () => Math.floor(Date.now() / 86_400_000) % MATCHUPS.length
 
 /** URL entity encoding: movie ids verbatim, decades as d:1980, genres as g:Crime. */
 interface EntityRef {
@@ -55,7 +47,7 @@ async function loadCard(ref: EntityRef): Promise<EntityCard | null> {
       for (const [w, c] of [...m.top_all, ...m.top]) words.set(w as string, c as number)
       return {
         ref,
-        label: `${m.title} — ${m.year}`,
+        label: `${m.title} - ${m.year}`,
         films: 1,
         totalWords: m.stats.total_words,
         signature: m.distinctive,
@@ -205,10 +197,12 @@ export function CompareView() {
         .slice(0, MAX),
     [params],
   )
-  // empty URL → today's featured matchup, so the page always shows a comparison
-  const featured = refs.length === 0 ? MATCHUPS[dayIndex()] : null
+  // empty URL → today's featured matchup, so the page always shows a comparison;
+  // starts on today's, steppable via the ◀/▶ buttons below
+  const [featuredIdx, setFeaturedIdx] = useState(() => dayIndex(MATCHUPS.length))
+  const featured = refs.length === 0 ? MATCHUPS[featuredIdx] : null
   const activeRefs = useMemo(
-    () => (featured ? featured[1].split(',').map(parseRef) : refs),
+    () => (featured ? featured.e.split(',').map(parseRef) : refs),
     [featured, refs],
   )
   const [cards, setCards] = useState<(EntityCard | null)[] | null>(null)
@@ -251,17 +245,15 @@ export function CompareView() {
       </p>
       {refs.length < MAX && <EntityPicker refs={refs} />}
       {featured && (
-        <div className="mt-5 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-          <h2 className="slug text-sm">Featured matchup: {featured[0]}</h2>
-          <span className="font-script text-xs text-ink-2">rotates daily - or build your own above</span>
-          <span className="font-script text-xs text-ink-2">
-            {MATCHUPS.filter((m) => m !== featured).map(([label, e]) => (
-              <button key={e} onClick={() => navigate(`/compare?e=${e}`)} className="mr-2 underline hover:bg-mark">
-                {label}
-              </button>
-            ))}
-          </span>
-        </div>
+        <FeaturedNav
+          className="mt-5"
+          title={`Featured matchup: ${featured.title}`}
+          idx={featuredIdx}
+          len={MATCHUPS.length}
+          noun="matchup"
+          suffix="rotates daily - or build your own above"
+          onStep={(dir) => setFeaturedIdx((i) => stepFeatured(i, dir, MATCHUPS.length))}
+        />
       )}
       {cards === null && <Spinner label="Loading…" />}
       {cards !== null && loaded.length === 0 && (

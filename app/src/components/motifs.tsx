@@ -100,6 +100,131 @@ export function GenreMotif({ genre, className }: { genre: string; className?: st
   )
 }
 
+/** Era motifs: one hand-drawn icon per decade, an object that says "this era". */
+const ERAS: Record<string, React.ReactNode> = {
+  // 1910s: hand-crank camera
+  '1910': (
+    <g {...P}>
+      <circle cx="26" cy="18" r="9" />
+      <circle cx="46" cy="18" r="9" />
+      <rect x="18" y="27" width="36" height="24" rx="3" />
+      <path d="M54 34 L66 28 L66 48 L54 42" />
+      <path d="M30 51 L26 64 M44 51 L48 64" />
+    </g>
+  ),
+  // 1920s: director's megaphone
+  '1920': (
+    <g {...P}>
+      <path d="M14 32 L46 18 L46 52 L14 42 Z" />
+      <path d="M46 18 C56 22 56 48 46 52" />
+      <path d="M20 44 L25 62 L33 60 L28 45" />
+    </g>
+  ),
+  // 1930s: on-air radio microphone
+  '1930': (
+    <g {...P}>
+      <rect x="30" y="10" width="20" height="30" rx="10" />
+      <path d="M34 18 L46 18 M34 26 L46 26 M34 34 L46 34" />
+      <path d="M24 30 C24 46 56 46 56 30" />
+      <path d="M40 46 L40 56 M30 62 L50 62 M40 56 L40 62" />
+    </g>
+  ),
+  // 1940s: propeller plane
+  '1940': (
+    <g {...P}>
+      <path d="M12 40 L52 40 C60 40 64 36 64 32 L20 32 Z" />
+      <path d="M34 32 L28 18 L36 18 L44 32" />
+      <path d="M16 40 L12 52 L20 52 L28 40" />
+      <circle cx="64" cy="36" r="3" />
+      <path d="M67 30 L67 42" />
+    </g>
+  ),
+  // 1950s: TV set with rabbit ears
+  '1950': (
+    <g {...P}>
+      <rect x="14" y="26" width="52" height="34" rx="5" />
+      <rect x="20" y="32" width="30" height="22" rx="2" />
+      <path d="M56 36 L60 36 M56 44 L60 44" />
+      <path d="M40 26 L28 10 M40 26 L54 12" />
+    </g>
+  ),
+  // 1960s: rocket
+  '1960': (
+    <g {...P}>
+      <path d="M40 8 C50 18 52 38 40 52 C28 38 30 18 40 8 Z" />
+      <circle cx="40" cy="26" r="5" />
+      <path d="M32 42 L22 52 L32 50 M48 42 L58 52 L48 50" />
+      <path d="M36 56 C38 62 42 62 44 56" />
+    </g>
+  ),
+  // 1970s: vinyl record
+  '1970': (
+    <g {...P}>
+      <circle cx="40" cy="38" r="26" />
+      <circle cx="40" cy="38" r="17" />
+      <circle cx="40" cy="38" r="8" />
+      <circle cx="40" cy="38" r="1.5" />
+    </g>
+  ),
+  // 1980s: boombox
+  '1980': (
+    <g {...P}>
+      <rect x="10" y="24" width="60" height="36" rx="4" />
+      <circle cx="25" cy="44" r="9" />
+      <circle cx="55" cy="44" r="9" />
+      <circle cx="25" cy="44" r="3" />
+      <circle cx="55" cy="44" r="3" />
+      <rect x="35" y="29" width="10" height="6" rx="1" />
+      <path d="M16 24 L22 12 M64 24 L58 12" />
+    </g>
+  ),
+  // 1990s: brick cell phone
+  '1990': (
+    <g {...P}>
+      <rect x="28" y="20" width="24" height="44" rx="4" />
+      <rect x="32" y="26" width="16" height="10" rx="1" />
+      <path d="M33 42 L37 42 M39 42 L43 42 M45 42 L47 42 M33 48 L37 48 M39 48 L43 48 M45 48 L47 48 M33 54 L37 54 M39 54 L43 54 M45 54 L47 54" />
+      <path d="M34 20 L34 8" />
+    </g>
+  ),
+  // 2000s: flip phone
+  '2000': (
+    <g {...P}>
+      <rect x="28" y="12" width="24" height="24" rx="4" />
+      <rect x="32" y="17" width="16" height="14" rx="1" />
+      <path d="M28 38 C28 36 52 36 52 38" />
+      <rect x="28" y="40" width="24" height="24" rx="4" />
+      <path d="M33 46 L47 46 M33 52 L47 52 M33 58 L47 58" />
+    </g>
+  ),
+  // 2010s: smartphone
+  '2010': (
+    <g {...P}>
+      <rect x="27" y="10" width="26" height="54" rx="5" />
+      <rect x="31" y="18" width="18" height="36" rx="1" />
+      <circle cx="40" cy="59" r="1.5" />
+      <path d="M36 14 L44 14" />
+    </g>
+  ),
+  // 2020s: streaming screen, mid-play
+  '2020': (
+    <g {...P}>
+      <rect x="12" y="18" width="56" height="36" rx="4" />
+      <path d="M35 27 L49 36 L35 45 Z" />
+      <path d="M18 60 L62 60" />
+      <path d="M18 48 L34 48" />
+    </g>
+  ),
+}
+
+export function EraMotif({ decade, className }: { decade: string; className?: string }) {
+  return (
+    <svg viewBox="0 0 80 76" className={className} aria-hidden="true">
+      {ERAS[decade] ?? DEFAULT_MOTIF}
+    </svg>
+  )
+}
+
 /** Decade motif: a strip of film with the decade's two digits punched in. */
 export function DecadeMotif({ decade, className }: { decade: string; className?: string }) {
   const two = decade.slice(2, 4)

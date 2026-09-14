@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Movie Words - logo candidates</title>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root { --ink:#201d1a; --paper:#faf9f5; --paper2:#f2f0e8; --mark:#ffd84d; }
+  * { box-sizing: border-box; }
+  body { font-family: Inter, system-ui, sans-serif; background: var(--paper); color: var(--ink); margin: 0; padding: 32px; }
+  h1, h2, .script { font-family: "Courier Prime", monospace; }
+  h1 { font-size: 28px; text-transform: uppercase; letter-spacing: .04em; }
+  .intro { max-width: 720px; color: #6e675e; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(560px, 1fr)); gap: 20px; margin-top: 28px; }
+  .card { border: 2px solid var(--ink); background: #fff; }
+  .card h2 { margin: 0; padding: 10px 14px; border-bottom: 2px solid var(--ink); font-size: 15px; text-transform: uppercase; display:flex; justify-content: space-between; align-items: baseline; }
+  .card h2 .num { background: var(--mark); padding: 0 6px; }
+  .concept { padding: 8px 14px 0; font-size: 13px; color: #6e675e; }
+  .row { display: flex; gap: 0; margin-top: 10px; border-top: 1px solid #e8e5dc; }
+  .cell { flex: 1; padding: 14px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .cell.dark { background: #191714; color: #a89f92; }
+  .cell .label { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: #a39b8f; }
+  .hero { display:flex; align-items:center; justify-content:center; min-height: 104px; }
+  .headermock { display: flex; align-items: center; gap: 8px; font-family: "Courier Prime", monospace; font-weight: 700; font-size: 19px; letter-spacing: -0.02em; }
+  .headermock .w { background: var(--mark); padding: 0 2px; }
+  .cell.dark .headermock { color: #ede9e1; }
+  .cell.dark .headermock .w { background: #d9b62e; color: #201d1a; }
+  .tabmock { display: flex; align-items: center; gap: 7px; background: #3a3a3e; color: #ddd; border-radius: 8px 8px 0 0; padding: 6px 12px; font-size: 11px; font-family: Inter, sans-serif; width: 210px; }
+  .tabmock span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sizes { display: flex; align-items: flex-end; gap: 14px; }
+</style>
+</head>
+<body>
+<h1>Movie Words - logo candidates</h1>
+<p class="intro">
+  Ten marks, each shown large (light + dark), in the header next to the wordmark, as a browser tab
+  favicon, and at raw 32/16 px. Reply with a number to pick one, or name a number plus what you'd
+  change. Palette is the site's: ink, paper, highlighter yellow.
+</p>
+<div class="grid" id="grid"></div>
+
+<script>
+const LIGHT = { ink: '#201d1a', paper: '#faf9f5', mark: '#ffd84d' }
+const DARK  = { ink: '#ede9e1', paper: '#191714', mark: '#d9b62e' }
+
+// Each candidate: (c = {ink, paper, mark}) => inner SVG for viewBox 0 0 64 64
+const CANDIDATES = [
+  {
+    name: 'Frame & line (current)',
+    concept: 'A film frame with sprocket holes; the middle line of dialogue swiped in highlighter.',
+    svg: c => `
+      <rect width="64" height="64" rx="12" fill="${c.ink}"/>
+      <g fill="${c.paper}">
+        <rect x="8" y="11" width="7" height="7" rx="2"/><rect x="8" y="28.5" width="7" height="7" rx="2"/><rect x="8" y="46" width="7" height="7" rx="2"/>
+        <rect x="49" y="11" width="7" height="7" rx="2"/><rect x="49" y="28.5" width="7" height="7" rx="2"/><rect x="49" y="46" width="7" height="7" rx="2"/>
+        <rect x="21" y="13" width="22" height="5" rx="2.5" opacity="0.85"/>
+        <rect x="21" y="46" width="15" height="5" rx="2.5" opacity="0.85"/>
+      </g>
+      <rect x="19" y="26" width="26" height="12" rx="3" fill="${c.mark}" transform="skewX(-4) translate(2 0)"/>`
+  },
+  {
+    name: 'Frame & line, sharp',
+    concept: 'Same idea, but square-cornered like every border on the site - no rounded tile.',
+    svg: c => `
+      <rect x="1.5" y="1.5" width="61" height="61" fill="${c.ink}"/>
+      <g fill="${c.paper}">
+        <rect x="8" y="11" width="7" height="7" rx="1"/><rect x="8" y="28.5" width="7" height="7" rx="1"/><rect x="8" y="46" width="7" height="7" rx="1"/>
+        <rect x="49" y="11" width="7" height="7" rx="1"/><rect x="49" y="28.5" width="7" height="7" rx="1"/><rect x="49" y="46" width="7" height="7" rx="1"/>
+        <rect x="21" y="13" width="22" height="5" rx="2.5" opacity="0.85"/>
+        <rect x="21" y="46" width="15" height="5" rx="2.5" opacity="0.85"/>
+      </g>
+      <rect x="19" y="26" width="26" height="12" rx="3" fill="${c.mark}" transform="skewX(-4) translate(2 0)"/>`
+  },
+  {
+    name: 'The reel',
+    concept: 'A circular film reel; the highlighter swipe runs straight through it like a line being marked.',
+    svg: c => `
+      <circle cx="32" cy="32" r="30" fill="${c.ink}"/>
+      <g fill="${c.paper}">
+        <circle cx="32" cy="14.5" r="6"/>
+        <circle cx="48.6" cy="26.6" r="6"/>
+        <circle cx="42.3" cy="46.1" r="6"/>
+        <circle cx="21.7" cy="46.1" r="6"/>
+        <circle cx="15.4" cy="26.6" r="6"/>
+        <circle cx="32" cy="32" r="4.5"/>
+      </g>
+      <rect x="6" y="52" width="52" height="9" rx="3" fill="${c.mark}" transform="skewX(-4) translate(2 0)"/>`
+  },
+  {
+    name: 'Reel bubble',
+    concept: 'A film reel that is also a speech bubble - the films are talking.',
+    svg: c => `
+      <path d="M32 3 A27 27 0 1 1 12 48 L7 60 L20 54 A27 27 0 0 1 32 3 Z" fill="${c.ink}"/>
+      <g fill="${c.paper}">
+        <circle cx="32" cy="16" r="5.5"/>
+        <circle cx="46.7" cy="26.7" r="5.5"/>
+        <circle cx="41.1" cy="44" r="5.5"/>
+        <circle cx="22.9" cy="44" r="5.5"/>
+        <circle cx="17.3" cy="26.7" r="5.5"/>
+        <circle cx="32" cy="30" r="4"/>
+      </g>`
+  },
+  {
+    name: 'Speech lines',
+    concept: 'A plain speech bubble holding three lines of script, one highlighted. Words first, film implied.',
+    svg: c => `
+      <path d="M6 8 h52 a0 0 0 0 1 0 0 v38 h-38 l-12 12 v-12 h-2 Z" fill="${c.ink}"/>
+      <g fill="${c.paper}">
+        <rect x="14" y="16" width="36" height="5" rx="2.5" opacity="0.85"/>
+        <rect x="14" y="36" width="24" height="5" rx="2.5" opacity="0.85"/>
+      </g>
+      <rect x="13" y="24" width="38" height="9" rx="3" fill="${c.mark}" transform="skewX(-4) translate(2 0)"/>`
+  },
+  {
+    name: 'Clapper word',
+    concept: 'A clapperboard whose slate reads as a highlighted line of dialogue.',
+    svg: c => `
+      <g transform="rotate(-4 32 32)">
+        <path d="M6 10 L58 10 L58 24 L6 24 Z" fill="${c.ink}"/>
+        <g fill="${c.paper}">
+          <path d="M12 10 L20 10 L14 24 L6 24 Z"/><path d="M28 10 L36 10 L30 24 L22 24 Z"/><path d="M44 10 L52 10 L46 24 L38 24 Z"/>
+        </g>
+        <rect x="6" y="26" width="52" height="30" fill="${c.ink}"/>
+        <rect x="12" y="32" width="32" height="8" rx="3" fill="${c.mark}" transform="skewX(-4) translate(1 0)"/>
+        <rect x="12" y="45" width="22" height="4.5" rx="2.25" fill="${c.paper}" opacity="0.85"/>
+      </g>`
+  },
+  {
+    name: 'Marked W',
+    concept: 'The wordmark move as a mark: a Courier W with the highlighter dragged through it.',
+    svg: c => `
+      <rect width="64" height="64" rx="12" fill="${c.ink}"/>
+      <rect x="8" y="26" width="46" height="15" rx="4" fill="${c.mark}" transform="skewX(-6) translate(4 0)"/>
+      <text x="32" y="47" text-anchor="middle" font-family="'Courier Prime', Courier, monospace" font-weight="700" font-size="42" fill="${c.paper}">W</text>`
+  },
+  {
+    name: 'The ticket',
+    concept: 'A cinema ticket stub; the tear line crosses a highlighted word.',
+    svg: c => `
+      <g transform="rotate(-8 32 32)">
+        <path d="M4 18 h56 v10 a5 5 0 0 0 0 10 v8 h-56 v-8 a5 5 0 0 0 0 -10 Z" fill="${c.ink}"/>
+        <rect x="10" y="26" width="26" height="9" rx="3" fill="${c.mark}" transform="skewX(-4)"/>
+        <rect x="12" y="39" width="18" height="4" rx="2" fill="${c.paper}" opacity="0.85"/>
+        <path d="M46 20 v26" stroke="${c.paper}" stroke-width="2.2" stroke-dasharray="3 4" stroke-linecap="round"/>
+      </g>`
+  },
+  {
+    name: 'Film quote',
+    concept: 'Two frames of film hanging like a double quotation mark - cinema, quoted.',
+    svg: c => `
+      <g fill="${c.ink}">
+        <path d="M10 8 h16 v30 a8 8 0 0 1 -16 6 Z"/>
+        <path d="M38 8 h16 v30 a8 8 0 0 1 -16 6 Z"/>
+      </g>
+      <g fill="${c.paper}">
+        <rect x="14" y="14" width="8" height="6" rx="1.5"/><rect x="14" y="26" width="8" height="6" rx="1.5"/>
+        <rect x="42" y="14" width="8" height="6" rx="1.5"/><rect x="42" y="26" width="8" height="6" rx="1.5"/>
+      </g>
+      <rect x="8" y="52" width="48" height="8" rx="3" fill="${c.mark}" transform="skewX(-4) translate(2 0)"/>`
+  },
+  {
+    name: 'Subtitle frame',
+    concept: 'A widescreen frame with subtitles at the bottom - the current line highlighted. The data source itself.',
+    svg: c => `
+      <rect x="2" y="10" width="60" height="44" rx="6" fill="${c.ink}"/>
+      <rect x="12" y="36" width="40" height="5" rx="2.5" fill="${c.paper}" opacity="0.85"/>
+      <rect x="15" y="43" width="34" height="7" rx="3" fill="${c.mark}" transform="skewX(-4) translate(2 0)"/>`
+  },
+]
+
+const svgTag = (inner, size) =>
+  `<svg viewBox="0 0 64 64" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">${inner}</svg>`
+
+const grid = document.getElementById('grid')
+CANDIDATES.forEach((cand, i) => {
+  const l = cand.svg(LIGHT)
+  const d = cand.svg(DARK)
+  const card = document.createElement('div')
+  card.className = 'card'
+  card.innerHTML = `
+    <h2><span>${cand.name}</span><span class="num">#${i + 1}</span></h2>
+    <p class="concept">${cand.concept}</p>
+    <div class="row">
+      <div class="cell"><span class="label">Light</span><div class="hero">${svgTag(l, 96)}</div></div>
+      <div class="cell dark"><span class="label">Dark</span><div class="hero">${svgTag(d, 96)}</div></div>
+    </div>
+    <div class="row">
+      <div class="cell"><span class="label">Header</span>
+        <div class="headermock">${svgTag(l, 26)}<span>MOVIE<span class="w">WORDS</span></span></div>
+      </div>
+      <div class="cell dark"><span class="label">Header dark</span>
+        <div class="headermock">${svgTag(d, 26)}<span>MOVIE<span class="w">WORDS</span></span></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="cell"><span class="label">Browser tab</span>
+        <div class="tabmock">${svgTag(l, 16)}<span>Movie Words — what films actu…</span></div>
+      </div>
+      <div class="cell"><span class="label">Raw 32 / 16 px</span>
+        <div class="sizes">${svgTag(l, 32)}${svgTag(l, 16)}</div>
+      </div>
+    </div>`
+  grid.appendChild(card)
+})
+</script>
+</body>
+</html>
