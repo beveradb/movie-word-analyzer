@@ -109,14 +109,15 @@ export async function loadTrends(words: string[], colors: string[]): Promise<Tre
     ])
     const rows = words.flatMap((w, i) => (files[i] ? trendYearRows(w, files[i] as TrendFile) : []))
     const wordSeries = toSeries(rows, totals, words, colors)
+    // every requested word gets a topFilms entry (empty for 404/no-data words)
+    // so `topFilms.get(word)` never returns undefined - a null there means the
+    // whole batch is still loading and would spin the table forever
     const topFilms = new Map<string, TopFilm[]>()
     const topMovies = new Map<string, Map<number, YearTopMovie>>()
     words.forEach((w, i) => {
       const f = files[i]
-      if (f) {
-        topFilms.set(w, trendTopFilms(f))
-        topMovies.set(w, trendByYear(f))
-      }
+      topFilms.set(w, f ? trendTopFilms(f) : [])
+      if (f) topMovies.set(w, trendByYear(f))
     })
     return { wordSeries, topFilms, topMovies, baked: true }
   } catch (e) {
@@ -149,11 +150,17 @@ async function loadTrendsEngine(words: string[], colors: string[]): Promise<Tren
        ) WHERE rn = 1`,
     ),
   ])
-  const topFilms = new Map<string, TopFilm[]>()
+  // seed every word with [] so a word with zero film rows renders nothing
+  // rather than a permanent spinner (matches the pre-refactor per-word query)
+  const topFilms = new Map<string, TopFilm[]>(words.map((w) => [w, []]))
   for (const r of filmRows) {
-    const list = topFilms.get(r.word) ?? []
-    list.push({ imdb_id: r.imdb_id, title: r.title, year: r.year, count: r.count, total_words: r.total_words })
-    topFilms.set(r.word, list)
+    topFilms.get(r.word)?.push({
+      imdb_id: r.imdb_id,
+      title: r.title,
+      year: r.year,
+      count: r.count,
+      total_words: r.total_words,
+    })
   }
   return { wordSeries, topFilms, topMovies: groupTopMovies(movieRows), baked: false }
 }
