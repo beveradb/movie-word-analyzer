@@ -1837,6 +1837,233 @@ and continue with Step 4 (derive).
 
 ---
 
+### Task 17: stage_trends - per-word Trends bake (no client SQL engine)
+
+(Added 2026-09-14 from the Trends mobile-perf handoff:
+`docs/superpowers/specs/2026-09-14-trends-static-bake-pipeline-handoff.md`.
+The frontend consuming this schema is built in a separate worktree; the
+schema below is a contract - do not drift.)
+
+**Files:**
+- Modify: `pipeline/scripts/rebuild_web_data.py` (add `_word_key`,
+  `stage_trends`, register in `STAGES`)
+- Modify: `pipeline/scripts/upload_r2.sh` (1h Cache-Control for the trend tree)
+- Test: `pipeline/tests/test_stage_trends.py`
+
+**Interfaces:**
+- Produces: `OUT/json/trend/<key>.json` per word in `word_year` -
+  `{"line": [[year, count]...] asc, "top": [[imdb_id, title, year, count,
+  total_words]...] count DESC/title ASC max 15, "byYear": [[year, imdb_id,
+  title, count]...] one top film per year asc}` - compact separators; and
+  `OUT/json/year-totals.json` `{ "<year>": total, ... }` for ALL years.
+  Key = `urllib.parse.quote(word, safe="")` (RFC3986 unreserved only -
+  `don't` → `don%27t.json`). Inherits corpus via module OUT (Task 6).
+- Consumes: `word_year`, `words_by_movie`, `movies` views from `connect()`.
+
+- [ ] **Step 1: Write the failing tests**
+
+Create `pipeline/tests/test_stage_trends.py`:
+
+```python
+import json
+
+import duckdb
+
+from scripts_path import add_scripts_to_path  # noqa: F401
+
+
+def test_word_key_is_rfc3986_unreserved_only():
+    from rebuild_web_data import _word_key
+    assert _word_key("ring") == "ring"
+    assert _word_key("don't") == "don%27t"
+    assert _word_key("café") == "caf%C3%A9"
+    assert _word_key("semi-pro") == "semi-pro"
+
+
+def test_stage_trends_bakes_line_top_byyear(tmp_path, monkeypatch):
+    import rebuild_web_data as rwd
+    monkeypatch.setattr(rwd, "OUT", tmp_path)
+    con = duckdb.connect()
+    con.sql("""
+        CREATE TABLE word_year (word VARCHAR, year INT, count BIGINT);
+        INSERT INTO word_year VALUES
+            ('ring', 2001, 104), ('ring', 1952, 40), ('don''t', 1999, 7);
+        CREATE TABLE movies (imdb_id VARCHAR, title VARCHAR, year INT,
+                             total_words BIGINT);
+        INSERT INTO movies VALUES
+            ('tt0120737', 'Fellowship', 2001, 11575),
+            ('tt0044672', 'Greatest Show', 1952, 9000),
+            ('tt1', 'Nineties Film', 1999, 5000);
+        CREATE TABLE words_by_movie (imdb_id VARCHAR, word VARCHAR, count BIGINT);
+        INSERT INTO words_by_movie VALUES
+            ('tt0120737', 'ring', 104), ('tt0044672', 'ring', 40),
+            ('tt1', 'don''t', 7),
+            ('tt1', 'subthreshold', 3);
+    """)
+    rwd.stage_trends(con)
+
+    totals = json.loads((tmp_path / "json" / "year-totals.json").read_text())
+    assert totals == {"1952": 40, "1999": 7, "2001": 104}
+
+    ring = json.loads((tmp_path / "json" / "trend" / "ring.json").read_text())
+    assert ring["line"] == [[1952, 40], [2001, 104]]
+    assert ring["top"][0] == ["tt0120737", "Fellowship", 2001, 104, 11575]
+    assert ring["byYear"] == [[1952, "tt0044672", "Greatest Show", 40],
+                              [2001, "tt0120737", "Fellowship", 104]]
+
+    apo = json.loads((tmp_path / "json" / "trend" / "don%27t.json").read_text())
+    assert apo["line"] == [[1999, 7]]
+
+    # words below the word_year threshold are NOT baked
+    assert not (tmp_path / "json" / "trend" / "subthreshold.json").exists()
+```
+
+- [ ] **Step 2: Run to verify failure**
+
+Run: `cd pipeline && uv run pytest tests/test_stage_trends.py -q`
+Expected: FAIL - `ImportError: cannot import name '_word_key'`.
+
+- [ ] **Step 3: Implement in rebuild_web_data.py**
+
+Add to the imports: `from urllib.parse import quote`.
+
+Add before `STAGES`:
+
+```python
+def _word_key(w: str) -> str:
+    # RFC3986 unreserved stays literal; everything else percent-encoded
+    # (UTF-8, uppercase hex). MUST match the frontend encoder exactly -
+    # see docs/superpowers/specs/2026-09-14-trends-static-bake-pipeline-handoff.md
+    return quote(w, safe="")
+
+
+def stage_trends(con):
+    """One small JSON per chartable word so the Trends page never boots the
+    35MB DuckDB-WASM engine (the Firefox-Android hang). word_year is the
+    source of truth for which words get a file; the window queries are
+    semijoined to it so sub-threshold words don't bloat the dicts."""
+    out = OUT / "json" / "trend"
+    out.mkdir(parents=True, exist_ok=True)
+
+    totals = con.sql(
+        "SELECT year, SUM(count)::BIGINT FROM word_year GROUP BY year").fetchall()
+    (OUT / "json" / "year-totals.json").write_text(
+        json.dumps({str(y): t for y, t in totals}))
+
+    line = {}
+    for w, y, c in con.execute(
+            "SELECT word, year, count::BIGINT FROM word_year ORDER BY word, year"
+    ).fetchall():
+        line.setdefault(w, []).append([y, c])
+
+    top = {}
+    for w, iid, title, yr, c, tw in con.execute("""
+        SELECT word, imdb_id, title, year, count, total_words FROM (
+          SELECT wm.word, wm.imdb_id, m.title, m.year,
+                 wm.count::BIGINT AS count, m.total_words::BIGINT AS total_words,
+                 ROW_NUMBER() OVER (PARTITION BY wm.word
+                                    ORDER BY wm.count DESC, m.title) AS rn
+          FROM words_by_movie wm
+          JOIN movies m USING (imdb_id)
+          JOIN (SELECT DISTINCT word FROM word_year) wy ON wy.word = wm.word
+        ) WHERE rn <= 15 ORDER BY word, count DESC, title
+    """).fetchall():
+        top.setdefault(w, []).append([iid, title, yr, c, tw])
+
+    by_year = {}
+    for w, yr, iid, title, c in con.execute("""
+        SELECT word, year, imdb_id, title, count FROM (
+          SELECT wm.word, m.year, wm.imdb_id, m.title, wm.count::BIGINT AS count,
+                 ROW_NUMBER() OVER (PARTITION BY wm.word, m.year
+                                    ORDER BY wm.count DESC, m.title) AS rn
+          FROM words_by_movie wm
+          JOIN movies m USING (imdb_id)
+          JOIN (SELECT DISTINCT word FROM word_year) wy ON wy.word = wm.word
+        ) WHERE rn = 1 ORDER BY word, year
+    """).fetchall():
+        by_year.setdefault(w, []).append([yr, iid, title, c])
+
+    n = 0
+    for w, ln in line.items():
+        payload = {"line": ln, "top": top.get(w, []), "byYear": by_year.get(w, [])}
+        (out / f"{_word_key(w)}.json").write_text(
+            json.dumps(payload, separators=(",", ":")))
+        n += 1
+    print(f"  wrote {n} trend JSONs")
+```
+
+Register it (order matters only for display; append at the end):
+
+```python
+STAGES = {"meta": stage_meta, "movies": stage_movies,
+          "boards": stage_boards, "signatures": stage_signatures,
+          "featured": stage_featured, "trends": stage_trends}
+```
+
+Also add a `trends` line to the module docstring's stage list.
+
+- [ ] **Step 4: upload_r2.sh - 1h TTL for the trend tree**
+
+In `pipeline/scripts/upload_r2.sh`, replace the first rclone copy (the
+`--include '*.json'` one) with:
+
+```bash
+rclone copy . r2:moviewords-data/ --checksum --progress \
+  --include 'json/trend/**' --include 'all/json/trend/**' \
+  --include 'json/year-totals.json' --include 'all/json/year-totals.json' \
+  --header-upload "Cache-Control: public, max-age=3600"
+rclone copy . r2:moviewords-data/ --checksum --progress \
+  --exclude 'json/trend/**' --exclude 'all/json/trend/**' \
+  --exclude 'json/year-totals.json' --exclude 'all/json/year-totals.json' \
+  --include '*.json' --header-upload "Cache-Control: public, max-age=300"
+```
+
+(rclone applies filter flags in command-line order, first match wins, and a
+lone set of includes implies a trailing exclude-everything-else. If
+`rclone check`/dry-run shows the wrong sets, fall back to `--filter` rules
+in the same order.) Verify with:
+`bash -n scripts/upload_r2.sh` and
+`cd webdata/out 2>/dev/null || true` (no live upload in this task).
+
+- [ ] **Step 5: Run tests, full suite, commit**
+
+Run: `uv run pytest tests/test_stage_trends.py -q` then `uv run pytest -q`
+Expected: PASS.
+
+```bash
+git add pipeline/scripts/rebuild_web_data.py pipeline/scripts/upload_r2.sh pipeline/tests/test_stage_trends.py
+git commit -m "feat(pipeline): stage_trends bakes per-word trend JSONs + year totals"
+```
+
+---
+
+### Task 12/13 runbook addendum (trends bake)
+
+- Task 12 Step 5: the rebuild loop becomes
+  `for s in boards signatures featured trends; do ...` (both corpora). The
+  trends stage is the slow one (~minutes; it writes ~58k files for en, more
+  for all).
+- Task 13 Step 2: before the generic `*.json` copies for BOTH trees, add the
+  1h-TTL trend copy mirroring the upload_r2.sh logic:
+
+```bash
+rclone copy . r2:moviewords-data/ --checksum --transfers 32 \
+  --include 'json/trend/**' --include 'all/json/trend/**' \
+  --include 'json/year-totals.json' --include 'all/json/year-totals.json' \
+  --header-upload "Cache-Control: public, max-age=3600"
+```
+
+  and add the matching four `--exclude`s to the generic `*.json` copies.
+  Expect ~140k+ small objects across both corpora - use `--transfers 32`.
+- Task 14 verification addendum: `curl -sI
+  https://data.moviewords.org/json/trend/ring.json` → 200 with
+  `cache-control: public, max-age=3600`; `json/trend/don%27t.json` → 200;
+  spot-check `ring.json` against the handoff's reference values (line has
+  102 entries; top[0] = tt0120737 Fellowship 2001 count 104; byYear 2001 →
+  same film; 1952 → tt0044672 count 40). year-totals.json contains all years.
+
+---
+
 ## Plan self-review notes
 
 - Spec coverage: corpus definitions (T2), threshold (T1), data layout (T2/T12/T13), word_year_lang + original_language (T2/T4), superlatives floor (T5), rebuild/fetch corpus args (T6), registry/state/toggle (T7-T9), badges + copy (T10-T11), execution/upload/deploy/verify (T12-T14). Gap check: movies-index heredoc replacement (T4) ✓; posters union (T12 step 6) ✓.
