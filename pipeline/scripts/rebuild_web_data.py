@@ -9,8 +9,8 @@ raw subtitles. Regenerates:
   featured    json/featured-series.json (homepage chart without the SQL engine)
 
 Usage:
-  scripts/fetch_published.sh   # once, mirrors inputs to webdata/in
-  uv run python scripts/rebuild_web_data.py [--stage all|meta|movies|boards|signatures|featured]
+  scripts/fetch_published.sh [en|all]   # once, mirrors inputs to webdata/in[/all]
+  uv run python scripts/rebuild_web_data.py [--corpus en|all] [--stage all|meta|movies|boards|signatures|featured]
 
 Outputs land in webdata/out mirroring the R2 layout; publish with
 scripts/upload_r2.sh (additive copy + Cache-Control + edge purge), then
@@ -31,6 +31,15 @@ from moviewords_pipeline.signatures_ext import extend_signatures
 
 ROOT = Path(__file__).resolve().parent.parent / "webdata"
 IN, OUT = ROOT / "in", ROOT / "out"
+
+
+def set_corpus(corpus):
+    """Point IN/OUT at the corpus subtree. 'en' keeps the historical flat
+    layout; 'all' nests under all/ mirroring the bucket prefix."""
+    global IN, OUT
+    sub = () if corpus == "en" else ("all",)
+    IN = ROOT.joinpath("in", *sub)
+    OUT = ROOT.joinpath("out", *sub)
 
 
 def connect() -> duckdb.DuckDBPyConnection:
@@ -185,11 +194,13 @@ STAGES = {"meta": stage_meta, "movies": stage_movies,
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--stage", default="all", choices=["all", *STAGES])
+    ap.add_argument("--corpus", default="en", choices=["en", "all"])
     args = ap.parse_args()
+    set_corpus(args.corpus)
     OUT.mkdir(parents=True, exist_ok=True)
     for name in STAGES if args.stage == "all" else [args.stage]:
         t0 = time.time()
-        print(f"stage {name}…", flush=True)
+        print(f"stage {name}… (corpus {args.corpus})", flush=True)
         STAGES[name](connect())
         print(f"stage {name} done in {time.time() - t0:.0f}s", flush=True)
 
