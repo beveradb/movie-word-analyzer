@@ -42,12 +42,23 @@ export function resolveCorpus(search: string, stored: string | null): Corpus {
 
 let active: Corpus | null = null
 
+/** localStorage can throw (SecurityError) when storage is fully blocked by
+ * the browser - treat that the same as "nothing stored" rather than
+ * white-screening the header render. */
+function readStoredCorpus(): string | null {
+  try {
+    return localStorage.getItem(STORAGE_KEY)
+  } catch {
+    return null
+  }
+}
+
 /** The corpus for this page load. Toggling reloads the page, so downstream
  * code treats this as a constant - no reactivity anywhere. Lazy so importing
  * this module in a node test environment never touches window. */
 export function activeCorpus(): Corpus {
   if (!active) {
-    active = resolveCorpus(window.location.search, localStorage.getItem(STORAGE_KEY))
+    active = resolveCorpus(window.location.search, readStoredCorpus())
   }
   return active
 }
@@ -56,7 +67,11 @@ export function activeCorpus(): Corpus {
  * choice (cleared for the default), so shared URLs reproduce the view. The
  * hash route survives the reload untouched. */
 export function switchCorpus(id: Corpus['id']): void {
-  localStorage.setItem(STORAGE_KEY, id)
+  try {
+    localStorage.setItem(STORAGE_KEY, id)
+  } catch {
+    // Storage blocked - the URL param still carries the choice.
+  }
   const url = new URL(window.location.href)
   if (id === 'en') url.searchParams.delete('c')
   else url.searchParams.set('c', id)

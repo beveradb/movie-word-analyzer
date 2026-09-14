@@ -54,6 +54,8 @@ def run(corpus="en"):
     original_language filter and writes to data/out/; corpus='all' skips it -
     translated subtitles included, labeled - and writes to data/out/all/,
     adding word_year_lang.parquet for per-original-language trends."""
+    if corpus not in ("en", "all"):
+        raise ValueError(f"unknown corpus {corpus!r} - expected 'en' or 'all'")
     out = config.OUT_DIR if corpus == "en" else config.OUT_DIR / "all"
     (out / "words_by_movie").mkdir(parents=True, exist_ok=True)
     (out / "words_by_word").mkdir(parents=True, exist_ok=True)
