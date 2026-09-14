@@ -125,7 +125,7 @@ export function HomeView() {
           text is redistributed. Methodology and caveats:{' '}
           <a
             className="underline"
-            href="https://github.com/beveradb/movie-word-analyzer/blob/main/docs/FAQ.md"
+            href="https://github.com/beveradb/moviewords/blob/main/docs/FAQ.md"
           >
             the FAQ
           </a>

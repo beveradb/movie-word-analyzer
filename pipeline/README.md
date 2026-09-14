@@ -1,4 +1,4 @@
-# movie-word-analyzer pipeline
+# moviewords pipeline
 
 End-to-end data pipeline: download OPUS subtitles, curate to top-voted films, parse
 words, count frequencies, enrich with TMDB metadata, and derive per-movie/cross-film
