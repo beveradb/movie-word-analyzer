@@ -64,6 +64,17 @@ plotted-year list, filling gaps with nulls) lives in `app/src/lib/trends.ts`
 as pure functions with vitest coverage — same duckdb-free split as the
 min-corpus threshold fix.
 
+## Addendum: click-to-pin tooltips (same session)
+
+Clicking the chart pins the crosshair + tooltip at the nearest year so it
+survives mouse-away for screenshots. Up to 3 pins at once; clicking a pinned
+year toggles it off; a 4th pin replaces the oldest (FIFO). A post-render
+layout pass shifts overlapping tooltip boxes downward so pinned + hover boxes
+never cover each other. Pinned boxes show a ✕ unpin button only while
+hovered, keeping screenshots clean. Pins clear automatically when the charted
+words change. Pure toggle logic (`togglePin`) lives in `lib/trends.ts` with
+tests; everything else is internal to `LineChart`.
+
 ## Alternatives rejected
 
 - Per-word queries fired from the tab component: N queries, and the tooltip
