@@ -1,5 +1,17 @@
 import { describe, expect, it } from 'vitest'
-import { MIN_YEAR_WORDS, formatYearRanges, groupTopMovies, togglePin, topMovieRows, toSeries } from './trends'
+import {
+  MIN_YEAR_WORDS,
+  type TrendFile,
+  formatYearRanges,
+  groupTopMovies,
+  togglePin,
+  topMovieRows,
+  toSeries,
+  trendByYear,
+  trendTopFilms,
+  trendYearRows,
+  wordKey,
+} from './trends'
 
 describe('formatYearRanges', () => {
   it('collapses consecutive years into en-dash ranges', () => {
@@ -129,5 +141,67 @@ describe('toSeries', () => {
 
   it('reports words with no kept data as missing', () => {
     expect(toSeries(rows, totals, ['love', 'ghost'], ['c1', 'c2']).missing).toEqual(['ghost'])
+  })
+})
+
+describe('wordKey', () => {
+  it('leaves RFC3986-unreserved characters literal', () => {
+    expect(wordKey('love')).toBe('love')
+    expect(wordKey('re-do_now.v2~')).toBe('re-do_now.v2~')
+  })
+
+  it("percent-encodes apostrophes so contractions do not 404 (must match Python quote)", () => {
+    // encodeURIComponent alone leaves ' literal; Python quote(safe='') encodes it
+    expect(wordKey("don't")).toBe('don%27t')
+  })
+
+  it('encodes the other sub-delims encodeURIComponent skips', () => {
+    expect(wordKey('a!b(c)*d')).toBe('a%21b%28c%29%2Ad')
+  })
+
+  it('percent-encodes spaces, slashes and non-ASCII as UTF-8 uppercase hex', () => {
+    expect(wordKey('rock and roll')).toBe('rock%20and%20roll')
+    expect(wordKey('a/b')).toBe('a%2Fb')
+    expect(wordKey('café')).toBe('caf%C3%A9')
+  })
+})
+
+describe('trend file transforms', () => {
+  const file: TrendFile = {
+    line: [
+      [1978, 78],
+      [2001, 104],
+    ],
+    top: [
+      ['tt0120737', 'The Fellowship of the Ring', 2001, 104, 20000],
+      ['tt0077869', 'The Lord of the Rings', 1978, 78, 15000],
+    ],
+    byYear: [
+      [1978, 'tt0077869', 'The Lord of the Rings', 78],
+      [2001, 'tt0120737', 'The Fellowship of the Ring', 104],
+    ],
+  }
+
+  it('trendYearRows tags line points with the word', () => {
+    expect(trendYearRows('ring', file)).toEqual([
+      { word: 'ring', year: 1978, count: 78 },
+      { word: 'ring', year: 2001, count: 104 },
+    ])
+  })
+
+  it('trendTopFilms expands the compact tuples into objects', () => {
+    expect(trendTopFilms(file)[0]).toEqual({
+      imdb_id: 'tt0120737',
+      title: 'The Fellowship of the Ring',
+      year: 2001,
+      count: 104,
+      total_words: 20000,
+    })
+  })
+
+  it('trendByYear keys the top movie by year', () => {
+    const m = trendByYear(file)
+    expect(m.get(2001)).toEqual({ imdb_id: 'tt0120737', title: 'The Fellowship of the Ring', count: 104 })
+    expect(m.get(1999)).toBeUndefined()
   })
 })
