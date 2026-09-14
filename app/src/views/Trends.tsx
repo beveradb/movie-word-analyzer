@@ -2,31 +2,14 @@ import { useEffect, useMemo, useState } from 'react'
 import { getShifts, type Shifts } from '../lib/data'
 import { lit, pq, q } from '../lib/duck'
 import { navigate, useRoute } from '../lib/route'
-import {
-  MIN_YEAR_WORDS,
-  type YearTopMovie,
-  formatYearRanges,
-  groupTopMovies,
-  topMovieRows,
-} from '../lib/trends'
+import { type YearTopMovie, groupTopMovies, topMovieRows } from '../lib/trends'
+import { FEATURED, dayIndex, stepFeatured } from '../lib/featured'
+import { loadWordSeries } from '../lib/series'
 import { LineChart, type Series } from '../components/LineChart'
 import { ErrorBox, Spinner } from '../components/ui'
 
 const COLORS = ['var(--color-s1)', 'var(--color-s2)', 'var(--color-s3)', 'var(--color-s4)']
 const MAX_WORDS = 4
-
-/** Landing charts, rotated daily so the page never opens empty. Every word is
- * a verified riser/faller from the shifts leaderboard. */
-const FEATURED: { title: string; words: string[] }[] = [
-  { title: 'The phone replaced the telegram', words: ['phone', 'telegram'] },
-  { title: "How movies stopped saying 'shall'", words: ['gonna', 'shall'] },
-  { title: 'Screens took over the script', words: ['computer', 'tv', 'radio'] },
-  { title: "From 'fellow' to 'dude'", words: ['dude', 'fellow'] },
-  { title: 'Cinema learned to swear', words: ['fucking', 'darling'] },
-  { title: 'Monsieur, madame — au revoir', words: ['monsieur', 'madame', 'okay'] },
-]
-
-const dayIndex = () => Math.floor(Date.now() / 86_400_000) % FEATURED.length
 
 /** Riser/faller chips under the featured chart — one tap to chart a mover. */
 function ShiftStrip() {
@@ -197,23 +180,6 @@ function WordDetails({
   )
 }
 
-interface YearRow {
-  word: string
-  year: number
-  count: number
-}
-
-let yearTotalsCache: Map<number, number> | null = null
-
-async function yearTotals(): Promise<Map<number, number>> {
-  if (yearTotalsCache) return yearTotalsCache
-  const rows = await q<{ year: number; total: number }>(
-    `SELECT year, SUM(count)::DOUBLE AS total FROM ${pq('word_year.parquet')} GROUP BY year`,
-  )
-  yearTotalsCache = new Map(rows.map((r) => [r.year, r.total]))
-  return yearTotalsCache
-}
-
 export function TrendsView() {
   const { params } = useRoute()
   const words = useMemo(
@@ -230,8 +196,10 @@ export function TrendsView() {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
 
-  // no words in the URL → chart today's featured shift instead of a blank page
-  const featured = words.length === 0 ? FEATURED[dayIndex()] : null
+  // no words in the URL → chart a featured shift instead of a blank page;
+  // starts on today's, steppable via the ◀/▶ buttons below
+  const [featuredIdx, setFeaturedIdx] = useState(dayIndex)
+  const featured = words.length === 0 ? FEATURED[featuredIdx] : null
   const chartWords = featured ? featured.words : words
 
   const wordsKey = chartWords.join(',')
@@ -240,45 +208,13 @@ export function TrendsView() {
     let cancelled = false
     setLoading(true)
     setError(null)
-    Promise.all([
-      q<YearRow>(
-        `SELECT word, year, count::DOUBLE AS count FROM ${pq('word_year.parquet')}
-         WHERE word IN (${chartWords.map(lit).join(',')}) ORDER BY word, year`,
-      ),
-      yearTotals(),
-    ])
-      .then(([rows, totals]) => {
+    loadWordSeries(chartWords, COLORS)
+      .then(({ series, plottedYears, trimmedYears, missing }) => {
         if (cancelled) return
-        const kept = rows.filter((r) => (totals.get(r.year) ?? 0) >= MIN_YEAR_WORDS)
-        const droppedYears = [...new Set(
-          rows.filter((r) => (totals.get(r.year) ?? 0) < MIN_YEAR_WORDS).map((r) => r.year),
-        )].sort((a, b) => a - b)
-        setTrimmedYears(droppedYears.length ? formatYearRanges(droppedYears) : null)
-        const byWord = new Map<string, YearRow[]>()
-        kept.forEach((r) => byWord.set(r.word, [...(byWord.get(r.word) ?? []), r]))
-        setMissing(chartWords.filter((w) => !byWord.has(w)))
-        // every corpus year with enough data inside the chart's x-range, so the
-        // by-year table lists the same years the chart plots, gaps included
-        const keptYears = kept.map((r) => r.year)
-        setPlottedYears(
-          keptYears.length
-            ? [...totals.entries()]
-                .filter(([y, t]) => t >= MIN_YEAR_WORDS && y >= Math.min(...keptYears) && y <= Math.max(...keptYears))
-                .map(([y]) => y)
-                .sort((a, b) => a - b)
-            : [],
-        )
-        setSeries(
-          chartWords
-            .filter((w) => byWord.has(w))
-            .map((w, i) => ({
-              name: w,
-              color: COLORS[i],
-              points: byWord
-                .get(w)!
-                .map((r) => ({ x: r.year, y: (r.count / (totals.get(r.year) ?? 1)) * 1_000_000 })),
-            })),
-        )
+        setSeries(series)
+        setPlottedYears(plottedYears)
+        setTrimmedYears(trimmedYears)
+        setMissing(missing)
       })
       .catch((e) => !cancelled && setError(String(e)))
       .finally(() => !cancelled && setLoading(false))
@@ -379,9 +315,27 @@ export function TrendsView() {
       {notedSeries && notedSeries.length > 0 && !loading && (
         <div className="mt-6 border-2 border-ink bg-card p-4">
           {featured && (
-            <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2 border-b-2 border-ink pb-2">
-              <h2 className="slug text-sm">Featured: {featured.title}</h2>
-              <span className="font-script text-xs text-ink-2">a new shift every day — or chart your own word above</span>
+            <div className="mb-3 flex flex-wrap items-center justify-between gap-2 border-b-2 border-ink pb-2">
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setFeaturedIdx((i) => stepFeatured(i, -1, FEATURED.length))}
+                  aria-label="Previous featured trend"
+                  className="border-2 border-ink px-2 font-script font-bold hover:bg-mark"
+                >
+                  ◀
+                </button>
+                <button
+                  onClick={() => setFeaturedIdx((i) => stepFeatured(i, 1, FEATURED.length))}
+                  aria-label="Next featured trend"
+                  className="border-2 border-ink px-2 font-script font-bold hover:bg-mark"
+                >
+                  ▶
+                </button>
+                <h2 className="slug text-sm">Featured: {featured.title}</h2>
+              </div>
+              <span className="font-script text-xs text-ink-2">
+                {featuredIdx + 1} of {FEATURED.length} - a new shift every day
+              </span>
             </div>
           )}
           {featured && (
