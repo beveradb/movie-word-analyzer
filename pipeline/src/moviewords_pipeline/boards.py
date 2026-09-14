@@ -52,10 +52,12 @@ def risers_fallers(con, min_total=5000, min_decades=6, top_n=50, quality=None):
     }
 
 
-def film_superlatives(con, profanity, min_words=5000, top_n=20):
+def film_superlatives(con, profanity, min_words=5000, top_n=20, min_votes=1000):
     """Chattiest (words/min), biggest vocabulary, sweariest (profanity/1k),
     most repetitive (lowest unique/total). Chattiest is guarded against bad
     runtime metadata (needs a feature-length runtime and a sane rate).
+    `min_votes` keeps one obscure film with a rough subtitle from topping a
+    corpus-wide board now that the corpus floor is 300 votes.
     """
     def films(sql, params=()):
         return [{"id": r[0], "title": r[1], "year": r[2], "value": r[3]}
@@ -67,14 +69,16 @@ def film_superlatives(con, profanity, min_words=5000, top_n=20):
             FROM movies
             WHERE words_per_minute IS NOT NULL AND runtime_minutes >= 60
               AND total_words >= {min_words} AND words_per_minute < 250
+              AND votes >= {min_votes}
             ORDER BY words_per_minute DESC LIMIT {top_n}"""),
         "vocabulary": films(f"""
             SELECT imdb_id, title, year, unique_words FROM movies
+            WHERE votes >= {min_votes}
             ORDER BY unique_words DESC LIMIT {top_n}"""),
         "repetitive": films(f"""
             SELECT imdb_id, title, year,
                    ROUND(unique_words / total_words::DOUBLE * 100, 1)
-            FROM movies WHERE total_words >= {min_words}
+            FROM movies WHERE total_words >= {min_words} AND votes >= {min_votes}
             ORDER BY unique_words / total_words::DOUBLE ASC LIMIT {top_n}"""),
     }
     if profanity:
@@ -84,6 +88,7 @@ def film_superlatives(con, profanity, min_words=5000, top_n=20):
                    ROUND(SUM(w.count) / m.total_words::DOUBLE * 1000, 1) AS per1k
             FROM words_by_movie w JOIN movies m USING (imdb_id)
             WHERE w.word IN ({placeholders}) AND m.total_words >= {min_words}
+              AND m.votes >= {min_votes}
             GROUP BY m.imdb_id, m.title, m.year, m.total_words
             ORDER BY per1k DESC LIMIT {top_n}""", sorted(profanity))
     else:

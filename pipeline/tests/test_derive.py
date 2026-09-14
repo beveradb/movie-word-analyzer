@@ -39,3 +39,11 @@ def test_log_odds_precomputed_n_corpus_matches():
     movie = {"cheese": 50, "the": 100}
     corpus = {"cheese": 60, "the": 100_000, "of": 50_000}
     assert log_odds(movie, corpus) == log_odds(movie, corpus, n_corpus=150_060)
+
+
+def test_run_rejects_unknown_corpus():
+    import pytest
+
+    from moviewords_pipeline import derive
+    with pytest.raises(ValueError, match="unknown corpus"):
+        derive.run(corpus="fr")

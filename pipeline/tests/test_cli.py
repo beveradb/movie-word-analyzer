@@ -17,3 +17,13 @@ def test_cli_lists_stages(capsys):
     out = capsys.readouterr().out
     for stage in ["download", "curate", "index", "count", "enrich", "derive"]:
         assert stage in out
+
+
+def test_derive_accepts_corpus_flag(monkeypatch):
+    calls = []
+    import moviewords_pipeline.derive as derive_mod
+    monkeypatch.setattr(derive_mod, "run",
+                        lambda corpus="en": calls.append(corpus))
+    main(["derive", "--corpus", "all"])
+    main(["derive"])
+    assert calls == ["all", "en"]

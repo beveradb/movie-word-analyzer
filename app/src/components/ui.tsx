@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { MovieIndexEntry } from '../lib/data'
 import { getMovieIndex } from '../lib/data'
+import { activeCorpus } from '../lib/corpus'
 import { navigate } from '../lib/route'
 import type { Series } from './LineChart'
 
@@ -108,6 +109,26 @@ export function HighlightWord({
         {display ?? count.toLocaleString()}
       </span>
     </button>
+  )
+}
+
+/** "translated" marker for non-English originals - only meaningful (and only
+ * shown) in the all-films corpus; the en corpus is English-only by cut. */
+export function LangBadge({ lang, className = '' }: { lang?: string; className?: string }) {
+  if (activeCorpus().id !== 'all' || !lang || lang === 'en') return null
+  let name = lang.toUpperCase()
+  try {
+    name = new Intl.DisplayNames(['en'], { type: 'language' }).of(lang) ?? name
+  } catch {
+    // unknown/invalid code: keep the raw code
+  }
+  return (
+    <span
+      className={`shrink-0 border border-ink-2 px-1 text-[10px] uppercase tracking-wide text-ink-2 ${className}`}
+      title={`Original language ${name} - counts come from the English translated subtitles`}
+    >
+      translated · {name}
+    </span>
   )
 }
 
@@ -221,7 +242,10 @@ export function MovieSearch({
                 }}
               >
                 <span className="truncate">{m.title}</span>
-                <span className="ml-3 shrink-0 text-sm text-ink-2">{m.year}</span>
+                <span className="ml-3 flex shrink-0 items-baseline gap-1.5">
+                  <LangBadge lang={m.lang} />
+                  <span className="text-sm text-ink-2">{m.year}</span>
+                </span>
               </button>
             </li>
           ))}

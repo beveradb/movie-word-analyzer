@@ -7,10 +7,12 @@ raw subtitles. Regenerates:
   boards      json/leaderboards/{shifts,films,wonders,everywhere}.json
   signatures  json/signature/{decades,genres}.json (adds stats + top500)
   featured    json/featured-series.json (homepage chart without the SQL engine)
+  trends      json/trend/<key>.json per word + json/year-totals.json (Trends
+              page bake, no client SQL engine)
 
 Usage:
-  scripts/fetch_published.sh   # once, mirrors inputs to webdata/in
-  uv run python scripts/rebuild_web_data.py [--stage all|meta|movies|boards|signatures|featured]
+  scripts/fetch_published.sh [en|all]   # once, mirrors inputs to webdata/in[/all]
+  uv run python scripts/rebuild_web_data.py [--corpus en|all] [--stage all|meta|movies|boards|signatures|featured|trends]
 
 Outputs land in webdata/out mirroring the R2 layout; publish with
 scripts/upload_r2.sh (additive copy + Cache-Control + edge purge), then
@@ -22,6 +24,7 @@ import json
 import re
 import time
 from pathlib import Path
+from urllib.parse import quote
 
 import duckdb
 
@@ -31,6 +34,15 @@ from moviewords_pipeline.signatures_ext import extend_signatures
 
 ROOT = Path(__file__).resolve().parent.parent / "webdata"
 IN, OUT = ROOT / "in", ROOT / "out"
+
+
+def set_corpus(corpus):
+    """Point IN/OUT at the corpus subtree. 'en' keeps the historical flat
+    layout; 'all' nests under all/ mirroring the bucket prefix."""
+    global IN, OUT
+    sub = () if corpus == "en" else ("all",)
+    IN = ROOT.joinpath("in", *sub)
+    OUT = ROOT.joinpath("out", *sub)
 
 
 def connect() -> duckdb.DuckDBPyConnection:
@@ -177,19 +189,83 @@ def stage_featured(con):
         {"totals": {str(y): t for y, t in totals}, "words": words}))
 
 
+def _word_key(w: str) -> str:
+    # RFC3986 unreserved stays literal; everything else percent-encoded
+    # (UTF-8, uppercase hex). MUST match the frontend encoder exactly -
+    # see docs/superpowers/specs/2026-09-14-trends-static-bake-pipeline-handoff.md
+    return quote(w, safe="")
+
+
+def stage_trends(con):
+    """One small JSON per chartable word so the Trends page never boots the
+    35MB DuckDB-WASM engine (the Firefox-Android hang). word_year is the
+    source of truth for which words get a file; the window queries are
+    semijoined to it so sub-threshold words don't bloat the dicts."""
+    out = OUT / "json" / "trend"
+    out.mkdir(parents=True, exist_ok=True)
+
+    totals = con.sql(
+        "SELECT year, SUM(count)::BIGINT FROM word_year GROUP BY year").fetchall()
+    (OUT / "json" / "year-totals.json").write_text(
+        json.dumps({str(y): t for y, t in totals}))
+
+    line = {}
+    for w, y, c in con.execute(
+            "SELECT word, year, count::BIGINT FROM word_year ORDER BY word, year"
+    ).fetchall():
+        line.setdefault(w, []).append([y, c])
+
+    top = {}
+    for w, iid, title, yr, c, tw in con.execute("""
+        SELECT word, imdb_id, title, year, count, total_words FROM (
+          SELECT wm.word, wm.imdb_id, m.title, m.year,
+                 wm.count::BIGINT AS count, m.total_words::BIGINT AS total_words,
+                 ROW_NUMBER() OVER (PARTITION BY wm.word
+                                    ORDER BY wm.count DESC, m.title) AS rn
+          FROM words_by_movie wm
+          JOIN movies m USING (imdb_id)
+          JOIN (SELECT DISTINCT word FROM word_year) wy ON wy.word = wm.word
+        ) WHERE rn <= 15 ORDER BY word, count DESC, title
+    """).fetchall():
+        top.setdefault(w, []).append([iid, title, yr, c, tw])
+
+    by_year = {}
+    for w, yr, iid, title, c in con.execute("""
+        SELECT word, year, imdb_id, title, count FROM (
+          SELECT wm.word, m.year, wm.imdb_id, m.title, wm.count::BIGINT AS count,
+                 ROW_NUMBER() OVER (PARTITION BY wm.word, m.year
+                                    ORDER BY wm.count DESC, m.title) AS rn
+          FROM words_by_movie wm
+          JOIN movies m USING (imdb_id)
+          JOIN (SELECT DISTINCT word FROM word_year) wy ON wy.word = wm.word
+        ) WHERE rn = 1 ORDER BY word, year
+    """).fetchall():
+        by_year.setdefault(w, []).append([yr, iid, title, c])
+
+    n = 0
+    for w, ln in line.items():
+        payload = {"line": ln, "top": top.get(w, []), "byYear": by_year.get(w, [])}
+        (out / f"{_word_key(w)}.json").write_text(
+            json.dumps(payload, separators=(",", ":")))
+        n += 1
+    print(f"  wrote {n} trend JSONs")
+
+
 STAGES = {"meta": stage_meta, "movies": stage_movies,
           "boards": stage_boards, "signatures": stage_signatures,
-          "featured": stage_featured}
+          "featured": stage_featured, "trends": stage_trends}
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--stage", default="all", choices=["all", *STAGES])
+    ap.add_argument("--corpus", default="en", choices=["en", "all"])
     args = ap.parse_args()
+    set_corpus(args.corpus)
     OUT.mkdir(parents=True, exist_ok=True)
     for name in STAGES if args.stage == "all" else [args.stage]:
         t0 = time.time()
-        print(f"stage {name}…", flush=True)
+        print(f"stage {name}… (corpus {args.corpus})", flush=True)
         STAGES[name](connect())
         print(f"stage {name} done in {time.time() - t0:.0f}s", flush=True)
 

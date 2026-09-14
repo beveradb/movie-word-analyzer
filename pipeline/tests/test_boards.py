@@ -15,11 +15,11 @@ def con():
     con.sql("""
         CREATE TABLE movies (imdb_id VARCHAR, title VARCHAR, year INT,
             runtime_minutes INT, total_words BIGINT, unique_words BIGINT,
-            words_per_minute DOUBLE);
+            words_per_minute DOUBLE, votes BIGINT);
         INSERT INTO movies VALUES
-            ('tt1', 'Fast Talker', 1994, 100, 12000, 3000, 120.0),
-            ('tt2', 'Slow Burn',   2001, 100,  6000, 2400,  60.0),
-            ('tt3', 'Sweary Song', 2010, 100,  8000,  800,  80.0);
+            ('tt1', 'Fast Talker', 1994, 100, 12000, 3000, 120.0, 50000),
+            ('tt2', 'Slow Burn',   2001, 100,  6000, 2400,  60.0, 50000),
+            ('tt3', 'Sweary Song', 2010, 100,  8000,  800,  80.0, 50000);
 
         CREATE TABLE words_by_movie (imdb_id VARCHAR, word VARCHAR, count BIGINT);
         INSERT INTO words_by_movie VALUES
@@ -63,6 +63,21 @@ def test_film_superlatives(con):
     assert out["sweariest"][0]["id"] == "tt3"
     assert out["sweariest"][0]["value"] == 50.0  # 400 swears / 8000 words * 1000
     assert out["repetitive"][0]["id"] == "tt3"  # 800/8000 = lowest uniqueness
+
+
+def test_film_superlatives_votes_floor(con):
+    # an obscure film that would otherwise sweep every superlative
+    con.sql("""
+        INSERT INTO movies VALUES
+            ('tt4', 'Obscure Sweep', 2015, 100, 30000, 20000, 240.0, 400);
+        INSERT INTO words_by_movie VALUES ('tt4', 'fuck', 5000);
+    """)
+    out = film_superlatives(con, profanity={"fuck"}, min_words=5000)
+    for board in ("chattiest", "vocabulary", "sweariest", "repetitive"):
+        assert all(r["id"] != "tt4" for r in out[board]), board
+    # explicit floor of 0 lets it through - the guard is the parameter
+    out = film_superlatives(con, profanity={"fuck"}, min_words=5000, min_votes=0)
+    assert out["vocabulary"][0]["id"] == "tt4"
 
 
 def test_one_film_wonders(con):

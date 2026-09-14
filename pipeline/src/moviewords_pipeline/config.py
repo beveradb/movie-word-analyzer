@@ -10,7 +10,7 @@ OPUS_URL = "https://object.pouta.csc.fi/OPUS-OpenSubtitles/v2024/raw/en.zip"
 IMDB_BASICS_URL = "https://datasets.imdbws.com/title.basics.tsv.gz"
 IMDB_RATINGS_URL = "https://datasets.imdbws.com/title.ratings.tsv.gz"
 
-MIN_VOTES = 1000
+MIN_VOTES = 300
 # plausible spoken-word rate band used to reject bad subtitle files
 MIN_TOKENS_PER_MIN = 20
 MAX_TOKENS_PER_MIN = 250

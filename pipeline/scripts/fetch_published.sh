@@ -2,8 +2,15 @@
 # Mirror the published datasets needed by rebuild_web_data.py into webdata/in.
 # words_by_word (the biggest parquet) is intentionally not needed.
 set -euo pipefail
+CORPUS="${1:-en}"
 BASE="${DATA_BASE:-https://data.moviewords.org}"
-DEST="$(dirname "$0")/../webdata/in"
+if [ "$CORPUS" = "all" ]; then
+  PREFIX="all/"
+  DEST="$(dirname "$0")/../webdata/in/all"
+else
+  PREFIX=""
+  DEST="$(dirname "$0")/../webdata/in"
+fi
 mkdir -p "$DEST/signature"
 
 fetch() { # $1 remote path, $2 local name
@@ -18,9 +25,9 @@ fetch() { # $1 remote path, $2 local name
   fi
 }
 
-fetch movies.parquet movies.parquet
-fetch word_year.parquet word_year.parquet
-fetch words_by_movie/data.parquet words_by_movie.parquet
-fetch json/signature/decades.json signature/decades.json
-fetch json/signature/genres.json signature/genres.json
+fetch "${PREFIX}movies.parquet" movies.parquet
+fetch "${PREFIX}word_year.parquet" word_year.parquet
+fetch "${PREFIX}words_by_movie/data.parquet" words_by_movie.parquet
+fetch "${PREFIX}json/signature/decades.json" signature/decades.json
+fetch "${PREFIX}json/signature/genres.json" signature/genres.json
 ls -lh "$DEST"

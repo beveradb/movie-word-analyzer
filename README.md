@@ -1,9 +1,10 @@
 # Movie Words - moviewords
 
 **Live: https://moviewords.org** — explore the words spoken in
-**18,761 English-original films**: what any movie actually says, how words rise
-and fall across decades, and what makes a film, a decade, or a genre sound like
-itself.
+**two corpora: ~27,000 English-original films (default) and ~50,000 films of
+every original language** (translated subtitles, clearly labeled): what any
+movie actually says, how words rise and fall across decades, and what makes a
+film, a decade, or a genre sound like itself.
 
 Every film's dialogue (from the [OPUS OpenSubtitles corpus](https://opus.nlpl.eu/datasets/OpenSubtitles),
 subtitles by [OpenSubtitles.org](http://www.opensubtitles.org/)) is reduced to a
@@ -49,9 +50,10 @@ Details, decisions, and performance lessons: [`docs/ARCHITECTURE.md`](docs/ARCHI
 
 ## Download the data
 
-The full published dataset is five Parquet files on a public bucket — download
-them, or point DuckDB straight at the URLs. Fuller guide with more example
-queries: [docs/DATA.md](docs/DATA.md).
+The full published dataset is five Parquet files per corpus on a public bucket
+(the all-films corpus under `all/` adds a sixth, `word_year_lang.parquet`) —
+download them, or point DuckDB straight at the URLs. Fuller guide with more
+example queries: [docs/DATA.md](docs/DATA.md).
 
 | File | Size | Contents |
 |---|---|---|
