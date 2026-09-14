@@ -4,8 +4,9 @@ import { togglePin } from '../lib/trends'
 export interface Series {
   name: string
   color: string
-  /** note: extra context rendered under the series row in the tooltip */
-  points: { x: number; y: number; note?: string }[]
+  /** note: extra context rendered under the series row in the tooltip;
+   * noteHref makes it a link */
+  points: { x: number; y: number; note?: string; noteHref?: string }[]
 }
 
 const M = { top: 12, right: 16, bottom: 26, left: 46 }
@@ -136,7 +137,9 @@ export function LineChart({
   })
 
   return (
-    <div ref={wrapRef} className="relative">
+    // hover clears on leaving the wrapper (not the svg) so the mouse can
+    // travel onto the tooltip box and click its movie link
+    <div ref={wrapRef} className="relative" onMouseLeave={() => setHoverX(null)}>
       <svg
         ref={svgRef}
         viewBox={`0 0 ${width} ${height}`}
@@ -144,7 +147,6 @@ export function LineChart({
         role="img"
         aria-label={`${yLabel} by year`}
         onMouseMove={(e) => setHoverX(nearestX(e.clientX))}
-        onMouseLeave={() => setHoverX(null)}
         onClick={(e) => {
           const x = nearestX(e.clientX)
           setPinned((p) => togglePin(p.filter((v) => xs.includes(v)), x))
@@ -206,7 +208,17 @@ export function LineChart({
                   <span>{s.name}</span>
                   <span className="ml-2 tabular-nums text-ink-2">{Math.round(p.y * 10) / 10}</span>
                 </div>
-                {p.note && <div className="ml-4 max-w-52 truncate text-ink-3">{p.note}</div>}
+                {p.note &&
+                  (p.noteHref ? (
+                    <a
+                      href={p.noteHref}
+                      className="pointer-events-auto ml-4 block max-w-52 truncate text-ink-3 underline hover:bg-mark"
+                    >
+                      {p.note}
+                    </a>
+                  ) : (
+                    <div className="ml-4 max-w-52 truncate text-ink-3">{p.note}</div>
+                  ))}
               </div>
             ))}
           </div>

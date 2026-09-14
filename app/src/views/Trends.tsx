@@ -278,11 +278,15 @@ export function TrendsView() {
             .map((w, i) => ({
               name: w,
               color: COLORS[i],
-              points: byWord.get(w)!.map((r) => ({
-                x: r.year,
-                y: (r.count / (totals.get(r.year) ?? 1)) * 1_000_000,
-                note: grouped.get(w)?.get(r.year)?.title,
-              })),
+              points: byWord.get(w)!.map((r) => {
+                const top = grouped.get(w)?.get(r.year)
+                return {
+                  x: r.year,
+                  y: (r.count / (totals.get(r.year) ?? 1)) * 1_000_000,
+                  note: top?.title,
+                  noteHref: top && `#/movie/${top.imdb_id}`,
+                }
+              }),
             })),
         )
       })
