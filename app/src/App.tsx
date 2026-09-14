@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useRoute } from './lib/route'
 import { trackPageview } from './lib/analytics'
+import { CORPORA, activeCorpus, switchCorpus } from './lib/corpus'
 import { HomeView } from './views/Home'
 import { GenresView } from './views/Genres'
 import { DecadesView } from './views/Decades'
@@ -62,6 +63,33 @@ function ThemeToggle() {
   )
 }
 
+/** Corpus switch: English originals (default) vs all films with translated
+ * subtitles. Switching persists + reloads - see lib/corpus.ts. */
+function CorpusToggle() {
+  const corpus = activeCorpus()
+  return (
+    <div
+      role="group"
+      aria-label="Film corpus"
+      className="flex items-center border-2 border-ink font-script text-sm font-bold"
+    >
+      {Object.values(CORPORA).map((c) => (
+        <button
+          key={c.id}
+          onClick={() => corpus.id !== c.id && switchCorpus(c.id)}
+          aria-pressed={corpus.id === c.id}
+          title={c.description}
+          className={`px-2.5 py-1 uppercase ${
+            corpus.id === c.id ? 'bg-ink text-paper' : 'hover:bg-mark'
+          }`}
+        >
+          {c.short}
+        </button>
+      ))}
+    </div>
+  )
+}
+
 const TABS = [
   { hash: '#/', label: 'Explore', match: '' },
   { hash: '#/genres', label: 'Genres', match: 'genres' },
@@ -114,6 +142,7 @@ export default function App() {
               </a>
             ))}
           </nav>
+          <CorpusToggle />
           <ThemeToggle />
         </div>
       </header>
