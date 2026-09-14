@@ -1,6 +1,6 @@
 # Homepage & site UX overhaul - 2026-09-14
 
-**Project:** movie-word-analyzer   **Branch:** feat/sess-20260914-1435-homepage-ux-overhaul   **Status:** PR open
+**Project:** movie-word-analyzer   **Branch/commit:** main @ c3e03ba (PR #8, squash-merged)   **Status:** done - SHIPPED, deployed and verified live on moviewords.org
 
 ## Summary
 
@@ -70,3 +70,30 @@ Another session shipped launch hardening mid-flight; merged `origin/main` in:
 - Clicked through home/decades/leaderboard/compare/trends at desktop + mobile
   widths, light + dark, via Playwright against `vite --port 5173`.
 - All 85 matchup movie JSONs curl-checked 200 on the live bucket.
+
+## Ship (same session, /shipit)
+
+- PR #8 squash-merged as c3e03ba, landing on top of the moviewords.org domain
+  migration (PR #7, e0c1d96) which another session shipped mid-flight. GitHub's
+  3-way merge kept #7's domain lines (my branch never touched them) - verified
+  the merged tree has data.moviewords.org + og moviewords.org URLs + all PR #8
+  features before deploying.
+- Built from merged main, deployed via `npx wrangler pages deploy dist
+  --project-name moviewords --branch=main`.
+- Featured bake: `fetch_published.sh` (inputs now cached in pipeline/webdata/in,
+  ~90MB) then `rebuild_web_data.py --stage featured` → 160 words / 169KB
+  (parser change verified: no more hand-sync). Uploaded with `rclone copyto`
+  and Cache-Control header - deliberately NOT `upload_r2.sh`, which cds to a
+  stale `data/out` path and uses `rclone sync` (would delete bucket objects).
+- Edge cache still served the old 14-word bake; both API tokens lack
+  Zone.Cache Purge. Purged successfully via the logged-in dash session in
+  playwright-chrome-3: POST dash.cloudflare.com/api/v4/zones/
+  cac867b68baf009c1913495f2012353b/purge_cache with credentials:include and
+  header `x-cross-site-security: dash`. Edge then served 160 words.
+- Prod verified: hero chart renders (initially via graceful DuckDB fallback
+  with ranged 206 reads while the bake was stale - ~15s cold; instant after),
+  clapperboard favicon + logo live, Leaderboard Overview cards populated.
+- `gh pr merge --delete-branch` fails local branch cleanup in a worktree setup
+  ("'main' is already used by worktree") - the remote merge still succeeds;
+  check `gh pr view` before assuming failure, then delete the remote branch
+  with `git push origin --delete <branch>`.
