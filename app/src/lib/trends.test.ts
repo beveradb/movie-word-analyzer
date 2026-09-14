@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { MIN_YEAR_WORDS, formatYearRanges } from './trends'
+import { MIN_YEAR_WORDS, formatYearRanges, groupTopMovies, topMovieRows } from './trends'
 
 describe('formatYearRanges', () => {
   it('collapses consecutive years into en-dash ranges', () => {
@@ -18,6 +18,50 @@ describe('formatYearRanges', () => {
 
   it('returns empty string for no years', () => {
     expect(formatYearRanges([])).toBe('')
+  })
+})
+
+describe('groupTopMovies', () => {
+  it('groups flat query rows by word, then year', () => {
+    const grouped = groupTopMovies([
+      { word: 'sword', year: 1935, imdb_id: 'tt1', title: 'Captain Blood', count: 23 },
+      { word: 'sword', year: 1938, imdb_id: 'tt2', title: 'Robin Hood', count: 30 },
+      { word: 'gun', year: 1935, imdb_id: 'tt3', title: 'G Men', count: 40 },
+    ])
+    expect([...grouped.keys()]).toEqual(['sword', 'gun'])
+    expect(grouped.get('sword')?.get(1935)).toEqual({ imdb_id: 'tt1', title: 'Captain Blood', count: 23 })
+    expect(grouped.get('sword')?.get(1938)?.title).toBe('Robin Hood')
+    expect(grouped.get('gun')?.get(1938)).toBeUndefined()
+  })
+
+  it('returns an empty map for no rows', () => {
+    expect(groupTopMovies([]).size).toBe(0)
+  })
+})
+
+describe('topMovieRows', () => {
+  const byYear = new Map([
+    [1935, { imdb_id: 'tt1', title: 'Captain Blood', count: 23 }],
+    [1937, { imdb_id: 'tt2', title: 'The Prisoner of Zenda', count: 12 }],
+  ])
+
+  it('emits one row per plotted year, ascending, with null gaps', () => {
+    expect(topMovieRows([1937, 1935, 1936], byYear)).toEqual([
+      { year: 1935, movie: { imdb_id: 'tt1', title: 'Captain Blood', count: 23 } },
+      { year: 1936, movie: null },
+      { year: 1937, movie: { imdb_id: 'tt2', title: 'The Prisoner of Zenda', count: 12 } },
+    ])
+  })
+
+  it('handles a word with no data at all', () => {
+    expect(topMovieRows([1935, 1936], undefined)).toEqual([
+      { year: 1935, movie: null },
+      { year: 1936, movie: null },
+    ])
+  })
+
+  it('returns no rows for no years', () => {
+    expect(topMovieRows([], byYear)).toEqual([])
   })
 })
 

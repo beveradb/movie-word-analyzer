@@ -3,7 +3,8 @@ import { useMemo, useRef, useState } from 'react'
 export interface Series {
   name: string
   color: string
-  points: { x: number; y: number }[]
+  /** note: extra context rendered under the series row in the tooltip */
+  points: { x: number; y: number; note?: string }[]
 }
 
 const M = { top: 12, right: 16, bottom: 26, left: 46 }
@@ -104,7 +105,7 @@ export function LineChart({
     hoverX !== null
       ? series
           .map((s) => ({ s, p: s.points.find((p) => p.x === hoverX) }))
-          .filter((e): e is { s: Series; p: { x: number; y: number } } => !!e.p)
+          .filter((e): e is { s: Series; p: Series['points'][number] } => !!e.p)
       : []
 
   return (
@@ -152,10 +153,13 @@ export function LineChart({
         >
           <div className="font-bold">{hoverX}</div>
           {tooltip.map(({ s, p }) => (
-            <div key={s.name} className="mt-0.5 flex items-center gap-1.5">
-              <span className="inline-block size-2.5 rounded-full" style={{ background: s.color }} />
-              <span>{s.name}</span>
-              <span className="ml-2 tabular-nums text-ink-2">{Math.round(p.y * 10) / 10}</span>
+            <div key={s.name} className="mt-0.5">
+              <div className="flex items-center gap-1.5">
+                <span className="inline-block size-2.5 rounded-full" style={{ background: s.color }} />
+                <span>{s.name}</span>
+                <span className="ml-2 tabular-nums text-ink-2">{Math.round(p.y * 10) / 10}</span>
+              </div>
+              {p.note && <div className="ml-4 max-w-52 truncate text-ink-3">{p.note}</div>}
             </div>
           ))}
         </div>

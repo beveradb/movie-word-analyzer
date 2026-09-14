@@ -2,7 +2,13 @@ import { useEffect, useMemo, useState } from 'react'
 import { getShifts, type Shifts } from '../lib/data'
 import { lit, pq, q } from '../lib/duck'
 import { navigate, useRoute } from '../lib/route'
-import { MIN_YEAR_WORDS, formatYearRanges } from '../lib/trends'
+import {
+  MIN_YEAR_WORDS,
+  type YearTopMovie,
+  formatYearRanges,
+  groupTopMovies,
+  topMovieRows,
+} from '../lib/trends'
 import { LineChart, type Series } from '../components/LineChart'
 import { ErrorBox, Spinner } from '../components/ui'
 
@@ -111,6 +117,82 @@ function TopFilms({ word }: { word: string }) {
   )
 }
 
+/** All plotted years for the active word, each with its top word-using film. */
+function TopFilmsByYear({
+  word,
+  years,
+  byYear,
+}: {
+  word: string
+  years: number[]
+  byYear: Map<number, YearTopMovie> | undefined
+}) {
+  const rows = topMovieRows(years, byYear)
+  if (rows.length === 0) return null
+  return (
+    <div className="mt-6 border-2 border-ink bg-card p-4">
+      <h2 className="slug text-sm">Top film for “{word}” by year</h2>
+      <div className="mt-3 grid grid-cols-1 gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
+        {rows.map(({ year, movie }) => (
+          <div key={year} className="flex items-baseline gap-2 py-0.5 font-script text-sm">
+            <span className="shrink-0 tabular-nums text-xs text-ink-2">{year}</span>
+            {movie ? (
+              <>
+                <a href={`#/movie/${movie.imdb_id}`} className="min-w-0 truncate hover:bg-mark">
+                  {movie.title}
+                </a>
+                <span className="ml-auto shrink-0 text-xs tabular-nums text-ink-3">
+                  {movie.count.toLocaleString()}×
+                </span>
+              </>
+            ) : (
+              <span className="text-ink-3">—</span>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+/** Tabbed per-word detail tables; tabs only appear with 2+ words. */
+function WordDetails({
+  words,
+  years,
+  topMovies,
+}: {
+  words: string[]
+  years: number[]
+  topMovies: Map<string, Map<number, YearTopMovie>>
+}) {
+  const [active, setActive] = useState(0)
+  const word = words[Math.min(active, words.length - 1)]
+  return (
+    <div>
+      {words.length > 1 && (
+        <div className="mt-6 flex flex-wrap gap-2" role="tablist" aria-label="Word details">
+          {words.map((w, i) => (
+            <button
+              key={w}
+              role="tab"
+              aria-selected={w === word}
+              onClick={() => setActive(i)}
+              className={`flex items-center gap-1.5 border-2 border-ink px-2.5 py-1 font-script text-sm ${
+                w === word ? 'bg-mark font-bold' : 'bg-card hover:bg-paper-2'
+              }`}
+            >
+              <span className="inline-block size-2.5 rounded-full" style={{ background: COLORS[i] }} />
+              {w}
+            </button>
+          ))}
+        </div>
+      )}
+      <TopFilms word={word} />
+      <TopFilmsByYear word={word} years={years} byYear={topMovies.get(word)} />
+    </div>
+  )
+}
+
 interface YearRow {
   word: string
   year: number
@@ -136,6 +218,8 @@ export function TrendsView() {
   )
   const [input, setInput] = useState('')
   const [series, setSeries] = useState<Series[] | null>(null)
+  const [topMovies, setTopMovies] = useState<Map<string, Map<number, YearTopMovie>>>(new Map())
+  const [plottedYears, setPlottedYears] = useState<number[]>([])
   const [missing, setMissing] = useState<string[]>([])
   const [trimmedYears, setTrimmedYears] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
@@ -155,8 +239,17 @@ export function TrendsView() {
          WHERE word IN (${chartWords.map(lit).join(',')}) ORDER BY word, year`,
       ),
       yearTotals(),
+      q<YearTopMovie & { word: string; year: number }>(
+        `SELECT word, year, imdb_id, title, count FROM (
+           SELECT w.word, m.year, w.imdb_id, m.title, w.count::DOUBLE AS count,
+                  ROW_NUMBER() OVER (PARTITION BY w.word, m.year ORDER BY w.count DESC, m.title) AS rn
+           FROM ${pq('words_by_word/data.parquet')} w
+           JOIN ${pq('movies.parquet')} m USING (imdb_id)
+           WHERE w.word IN (${chartWords.map(lit).join(',')})
+         ) WHERE rn = 1`,
+      ),
     ])
-      .then(([rows, totals]) => {
+      .then(([rows, totals, topRows]) => {
         if (cancelled) return
         const kept = rows.filter((r) => (totals.get(r.year) ?? 0) >= MIN_YEAR_WORDS)
         const droppedYears = [...new Set(
@@ -166,15 +259,30 @@ export function TrendsView() {
         const byWord = new Map<string, YearRow[]>()
         kept.forEach((r) => byWord.set(r.word, [...(byWord.get(r.word) ?? []), r]))
         setMissing(chartWords.filter((w) => !byWord.has(w)))
+        const grouped = groupTopMovies(topRows)
+        setTopMovies(grouped)
+        // every corpus year with enough data inside the chart's x-range, so the
+        // by-year table lists the same years the chart plots, gaps included
+        const keptYears = kept.map((r) => r.year)
+        setPlottedYears(
+          keptYears.length
+            ? [...totals.entries()]
+                .filter(([y, t]) => t >= MIN_YEAR_WORDS && y >= Math.min(...keptYears) && y <= Math.max(...keptYears))
+                .map(([y]) => y)
+                .sort((a, b) => a - b)
+            : [],
+        )
         setSeries(
           chartWords
             .filter((w) => byWord.has(w))
             .map((w, i) => ({
               name: w,
               color: COLORS[i],
-              points: byWord
-                .get(w)!
-                .map((r) => ({ x: r.year, y: (r.count / (totals.get(r.year) ?? 1)) * 1_000_000 })),
+              points: byWord.get(w)!.map((r) => ({
+                x: r.year,
+                y: (r.count / (totals.get(r.year) ?? 1)) * 1_000_000,
+                note: grouped.get(w)?.get(r.year)?.title,
+              })),
             })),
         )
       })
@@ -274,7 +382,10 @@ export function TrendsView() {
           )}
         </div>
       )}
-      {words.length === 1 && !loading && !error && <TopFilms word={words[0]} />}
+      {words.length > 0 && !loading && !error && (
+        // key resets the active tab whenever the word list changes
+        <WordDetails key={words.join(',')} words={words} years={plottedYears} topMovies={topMovies} />
+      )}
       {featured && !loading && <ShiftStrip />}
       {!words.length && (
         <div className="mt-8 font-script text-sm text-ink-2">
