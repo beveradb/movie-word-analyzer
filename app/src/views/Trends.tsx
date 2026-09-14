@@ -9,7 +9,6 @@ import { ErrorBox, Spinner } from '../components/ui'
 const COLORS = ['var(--color-s1)', 'var(--color-s2)', 'var(--color-s3)', 'var(--color-s4)']
 const MAX_WORDS = 4
 
-
 /** Landing charts, rotated daily so the page never opens empty. Every word is
  * a verified riser/faller from the shifts leaderboard. */
 const FEATURED: { title: string; words: string[] }[] = [
@@ -236,7 +235,7 @@ export function TrendsView() {
 
       {missing.length > 0 && !featured && (
         <p className="mt-3 font-script text-sm text-s2">
-          Not enough data for: {missing.join(', ')} (needs ≥20 uses across the corpus).
+          Not enough data for: {missing.join(', ')} (needs ≥20 uses across the corpus, in years with enough films).
         </p>
       )}
       {error && <ErrorBox message={error} />}
