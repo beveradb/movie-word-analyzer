@@ -94,9 +94,10 @@ sort orders trade storage (cheap) for fast HTTP-range access in both patterns.
 
 ## Deployment
 
-- **Pages:** `moviewords.beveradb.com`, deployed by GitHub Actions (wrangler)
-  on push to main. CF credentials from the beveradb `.envrc` locally; Actions
-  uses `CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID` repo secrets.
+- **Pages:** `moviewords.beveradb.com`, deployed manually with wrangler
+  (`wrangler pages deploy dist --project-name moviewords --branch=main`).
+  No CI/CD is set up - the original plan to use GitHub Actions was dropped;
+  credentials live only in a local direnv file outside the repo.
 - **R2:** public bucket behind `moviewords-data.beveradb.com`, CORS restricted
   to the app origin (plus localhost for dev). Pipeline uploads via wrangler or
   rclone, run manually after dataset builds.

@@ -359,7 +359,7 @@ export function TrendsView() {
           <p className="mt-2 text-right text-xs text-ink-2">uses per million words of dialogue</p>
           {trimmedYears !== null && (
             <p className="mt-1 text-right font-script text-xs text-ink-3">
-              {trimmedYears} hidden — too few films in the corpus for reliable rates
+              {trimmedYears} hidden - too few films in the corpus for reliable rates
             </p>
           )}
         </div>

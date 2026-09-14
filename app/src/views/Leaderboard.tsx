@@ -19,6 +19,17 @@ interface Row {
 const YEAR_MIN = 1900
 const YEAR_MAX = 2025
 
+/** Trail a fast-changing value; the year inputs fire per keystroke and each
+ * filtered query is a full scan of the big parquet, so let typing settle. */
+function useDebounced<T>(value: T, ms: number): T {
+  const [v, setV] = useState(value)
+  useEffect(() => {
+    const t = setTimeout(() => setV(value), ms)
+    return () => clearTimeout(t)
+  }, [value, ms])
+  return v
+}
+
 const TABS: [string, string][] = [
   ['words', 'Top words'],
   ['shifts', 'Risers & fallers'],
@@ -67,7 +78,10 @@ function WordsBoard() {
   const [genre, setGenre] = useState('')
   const [from, setFrom] = useState(YEAR_MIN)
   const [to, setTo] = useState(YEAR_MAX)
-  const filtered = genre !== '' || from !== YEAR_MIN || to !== YEAR_MAX
+  // query on settled values only - the inputs update per keystroke
+  const qFrom = Math.min(Math.max(useDebounced(from, 500), YEAR_MIN), YEAR_MAX)
+  const qTo = Math.min(Math.max(useDebounced(to, 500), YEAR_MIN), YEAR_MAX)
+  const filtered = genre !== '' || qFrom !== YEAR_MIN || qTo !== YEAR_MAX
 
   useEffect(() => {
     getWordlists().then((w) => setStop(new Set(w.stopwords))).catch(() => {})
@@ -97,7 +111,9 @@ function WordsBoard() {
           setStopRows(lb.stopwords.map(toRow))
         })
         .catch((e) => !cancelled && setError(String(e)))
-      return
+      return () => {
+        cancelled = true
+      }
     }
     setStopRows([])
     setLoading(true)
@@ -108,7 +124,7 @@ function WordsBoard() {
        FROM ${pq('words_by_word/data.parquet')} w
        JOIN ${pq('movies.parquet')} m USING (imdb_id)
        LEFT JOIN ${pq('word_meta.parquet')} wm ON wm.word = w.word
-       WHERE m.year BETWEEN ${from} AND ${to}
+       WHERE m.year BETWEEN ${qFrom} AND ${qTo}
          ${genre ? `AND list_contains(m.genres, ${lit(genre)})` : ''}
        GROUP BY w.word ORDER BY count DESC LIMIT 400`,
     )
@@ -118,7 +134,7 @@ function WordsBoard() {
     return () => {
       cancelled = true
     }
-  }, [filtered, from, to, genre])
+  }, [filtered, qFrom, qTo, genre])
 
   const visible = useMemo(
     () =>
@@ -218,7 +234,7 @@ function WordsBoard() {
         </ol>
       )}
       {!loading && rows && visible.length === 0 && (
-        <p className="mt-6 font-script text-sm text-ink-2">No words match these filters — try “all words” or “any kind”.</p>
+        <p className="mt-6 font-script text-sm text-ink-2">No words match these filters - try “all words” or “any kind”.</p>
       )}
     </div>
   )

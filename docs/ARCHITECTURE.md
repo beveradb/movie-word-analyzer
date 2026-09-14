@@ -55,6 +55,7 @@ Everything the frontend consumes, all under `data/out/` → R2 bucket root:
 | `json/signature/{decades,genres}.json` | per-entity: movie_count, total_words, top[100], signature[100] | entity pages, compare |
 | `json/wordlists.json` | stopword + profanity lists | stopword toggle, swear counts |
 | `json/movies-index.json` | slim all-movies list (search index) | client-side search |
+| `json/featured-series.json` | year totals + per-year counts for the featured words | homepage chart (no WASM needed) |
 | `posters/<id>.jpg` | TMDB w342 posters, self-hosted | `<img>` with fallback |
 
 **The two sort orders are load-bearing**: DuckDB prunes row groups using them,
@@ -132,6 +133,21 @@ languages) reprocesses only new items. Caches are written atomically
 
 ## Performance lessons (hard-won)
 
+- **duckdb-wasm ships with full HTTP reads forced on.** Out of the box (v1.33
+  dev builds), every `read_parquet('https://…')` plain-GETs the ENTIRE file -
+  93MB for one word's trend - because the runtime skips range detection
+  (`forceFullHTTPReads` effectively defaults on). The fix is one `db.open`
+  config (`filesystem: { forceFullHTTPReads: false, reliableHeadRequests:
+  true }`, see `app/src/lib/duck.ts`), after which the same query moves ~200KB
+  of ranged 206s. Verify with devtools: parquet requests must be 206s with
+  `Range:` headers, not one big 200. Browser-cache poisoning muddies testing -
+  a previously full-downloaded file makes Chrome answer range probes with the
+  cached 200, so always verify in a fresh profile/incognito.
+- **R2 objects need explicit Cache-Control metadata** (`upload_r2.sh` sets it
+  on upload) - without it Cloudflare serves every data request from origin
+  (`cf-cache-status: DYNAMIC`) and browsers only heuristically cache. Edge
+  caching for `.json`/`.parquet` additionally needs a zone Cache Rule (those
+  extensions aren't in Cloudflare's default cacheable list).
 - **Never loop per-movie queries over the big parquet.** Writing the per-movie
   JSONs as 33k individual `WHERE imdb_id = ?` queries ran at ~80 files/min
   (~6h); one streaming pass over the already-sorted parquet with a group-break

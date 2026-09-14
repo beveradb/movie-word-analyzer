@@ -1,3 +1,4 @@
+import { fetchJSON } from './data'
 import { lit, pq, q } from './duck'
 import { toSeries, type WordSeries, type YearRow } from './trends'
 
@@ -24,4 +25,28 @@ export async function loadWordSeries(words: string[], colors: string[]): Promise
     yearTotals(),
   ])
   return toSeries(rows, totals, words, colors)
+}
+
+interface FeaturedSeriesFile {
+  totals: Record<string, number>
+  words: Record<string, [number, number][]>
+}
+
+/** Featured-chart data from the pre-baked JSON (a few KB), so the homepage
+ * never pays for the SQL engine. Any word missing from the bake (stale file,
+ * fetch failure) falls back to the live DuckDB path. */
+export async function loadFeaturedSeries(words: string[], colors: string[]): Promise<WordSeries> {
+  try {
+    const baked = await fetchJSON<FeaturedSeriesFile>('json/featured-series.json')
+    if (words.every((w) => baked.words[w])) {
+      const totals = new Map(Object.entries(baked.totals).map(([y, t]) => [Number(y), t]))
+      const rows: YearRow[] = words.flatMap((w) =>
+        baked.words[w].map(([year, count]) => ({ word: w, year, count })),
+      )
+      return toSeries(rows, totals, words, colors)
+    }
+  } catch {
+    // fall through to the engine
+  }
+  return loadWordSeries(words, colors)
 }

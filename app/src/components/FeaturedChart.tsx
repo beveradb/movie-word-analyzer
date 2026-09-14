@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react'
 import type { Series } from './LineChart'
 import { LineChart } from './LineChart'
-import { loadWordSeries } from '../lib/series'
+import { loadFeaturedSeries } from '../lib/series'
 import { Spinner } from './ui'
 
 const COLORS = ['var(--color-s1)', 'var(--color-s2)', 'var(--color-s3)', 'var(--color-s4)']
 
 /** Lightweight featured-trend chart for the homepage: one featured shift charted
- * from word_year.parquet only (no top-movie hover notes), with a link into the
- * full Trends page. Deferred in an effect so it never blocks first paint;
- * renders nothing if the query fails, so a data hiccup can't break the page. */
+ * from the pre-baked featured-series JSON (no SQL engine, no top-movie hover
+ * notes), with a link into the full Trends page. Deferred in an effect so it
+ * never blocks first paint; renders nothing if the load fails, so a data
+ * hiccup can't break the page. */
 export function FeaturedChart({ title, words }: { title: string; words: string[] }) {
   const [series, setSeries] = useState<Series[] | null>(null)
   const [failed, setFailed] = useState(false)
@@ -18,7 +19,7 @@ export function FeaturedChart({ title, words }: { title: string; words: string[]
     let cancelled = false
     setSeries(null)
     setFailed(false)
-    loadWordSeries(words, COLORS)
+    loadFeaturedSeries(words, COLORS)
       .then(({ series }) => !cancelled && setSeries(series))
       .catch(() => !cancelled && setFailed(true))
     return () => {

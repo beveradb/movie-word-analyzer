@@ -13,12 +13,30 @@ async function init(): Promise<duckdb.AsyncDuckDBConnection> {
   const db = new duckdb.AsyncDuckDB(new duckdb.VoidLogger(), worker)
   await db.instantiate(bundle.mainModule, bundle.pthreadWorker)
   URL.revokeObjectURL(workerUrl)
+  // Without this, duckdb-wasm downloads entire parquets (93MB on Trends)
+  // instead of range-reading the row groups a query needs: this build ships
+  // with forceFullHTTPReads effectively ON, which skips range detection and
+  // plain-GETs the whole file. Turning it off + trusting the bucket's ranged
+  // HEAD makes reads ~KB instead of ~MB. allowFullHTTPReads stays default
+  // (true) so a proxy/cache that breaks range probes degrades to the old
+  // full-download behavior instead of erroring.
+  await db.open({
+    path: ':memory:',
+    filesystem: { forceFullHTTPReads: false, reliableHeadRequests: true },
+  })
   return db.connect()
 }
 
-/** Lazy singleton connection; first call pays the WASM startup cost. */
+/** Lazy singleton connection; first call pays the WASM startup cost.
+ * A failed init (CDN blocked, flaky network) is NOT memoized - the next
+ * call retries instead of leaving every SQL feature dead until reload. */
 export function getConn() {
-  dbPromise ??= init()
+  if (!dbPromise) {
+    dbPromise = init()
+    dbPromise.catch(() => {
+      dbPromise = null
+    })
+  }
   return dbPromise
 }
 

@@ -6,10 +6,11 @@ raw subtitles. Regenerates:
   movies      json/movie/*.json (word rows gain pos)
   boards      json/leaderboards/{shifts,films,wonders,everywhere}.json
   signatures  json/signature/{decades,genres}.json (adds stats + top500)
+  featured    json/featured-series.json (homepage chart without the SQL engine)
 
 Usage:
   scripts/fetch_published.sh   # once, mirrors inputs to webdata/in
-  uv run python scripts/rebuild_web_data.py [--stage all|meta|movies|boards|signatures]
+  uv run python scripts/rebuild_web_data.py [--stage all|meta|movies|boards|signatures|featured]
 
 Outputs land in webdata/out mirroring the R2 layout; sync that dir to the
 moviewords-data bucket, then deploy the app.
@@ -145,8 +146,26 @@ def stage_signatures(con):
             json.dumps(extend_signatures(con, sig, kind, profanity)))
 
 
+# Union of every word in app/src/lib/featured.ts FEATURED — keep in sync.
+# The app falls back to a live DuckDB query for any word missing here, so a
+# stale bake degrades gracefully instead of breaking the homepage chart.
+FEATURED_WORDS = ["phone", "telegram", "gonna", "shall", "computer", "tv", "radio",
+                  "dude", "fellow", "fucking", "darling", "monsieur", "madame", "okay"]
+
+
+def stage_featured(con):
+    totals = con.sql("SELECT year, SUM(count)::BIGINT FROM word_year GROUP BY year").fetchall()
+    words = {w: [[y, c] for y, c in con.execute(
+                "SELECT year, count::BIGINT FROM word_year WHERE word = ? ORDER BY year", [w]
+             ).fetchall()] for w in FEATURED_WORDS}
+    (OUT / "json").mkdir(parents=True, exist_ok=True)
+    (OUT / "json" / "featured-series.json").write_text(json.dumps(
+        {"totals": {str(y): t for y, t in totals}, "words": words}))
+
+
 STAGES = {"meta": stage_meta, "movies": stage_movies,
-          "boards": stage_boards, "signatures": stage_signatures}
+          "boards": stage_boards, "signatures": stage_signatures,
+          "featured": stage_featured}
 
 
 def main():
