@@ -1,6 +1,6 @@
 # Genre nav, homepage featured chart, Trends cycle buttons — 2026-09-14
 
-**Project:** movie-word-analyzer   **Branch/commit:** main @ d2dc6ff (PR #5, squash-merged)   **Status:** merged; prod deploy pending Andrew's Cloudflare creds
+**Project:** movie-word-analyzer   **Branch/commit:** main @ d2dc6ff (PR #5, squash-merged)   **Status:** done — merged and deployed live to prod
 
 ## Summary
 
@@ -65,14 +65,19 @@ Tests: 40 vitest pass (new `toSeries` + `stepFeatured` unit tests); `tsc -b` cle
 
 ## Learnings / gotchas
 
-- **Deploy needs Cloudflare creds this sandbox doesn't have.** `wrangler pages
-  deploy dist --project-name moviewords` fails with "set CLOUDFLARE_API_TOKEN" in
-  the non-interactive shell; `.envrc` only carries `TMDB_API_KEY`, and `wrangler
-  whoami` is unauthenticated. Andrew must run the deploy from his interactive
-  shell (or via `! …`). Build output was ready at `app/dist` on `main`.
+- **Deploy: the Cloudflare token is in the PARENT `.envrc`, not the repo root.**
+  I initially (wrongly) concluded the deploy was blocked because the repo-root
+  `.envrc` only has `TMDB_API_KEY` and `wrangler whoami` read unauthenticated.
+  The real source is `/Users/andrew/Projects/beveradb/.envrc` (parent dir), which
+  exports `CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID`. direnv loads it
+  interactively but NOT in Claude's one-shot non-interactive shells. Fix:
+  `source /Users/andrew/Projects/beveradb/.envrc` then run wrangler, with the Bash
+  sandbox disabled (needs network). There is NO CI/CD and NO Cloudflare Pages Git
+  integration — pushing `main` alone does not deploy; the wrangler push is required.
 - **Manual deploy command:** from `app/`, `npm run build` then
-  `npx wrangler pages deploy dist --project-name moviewords`. Prod is
-  `https://moviewords.beveradb.com` (see docs/ARCHITECTURE.md).
+  `source /Users/andrew/Projects/beveradb/.envrc && npx wrangler pages deploy dist
+  --project-name moviewords`. Prod is `https://moviewords.beveradb.com`; verify the
+  live JS bundle hash matches the local `app/dist` build.
 - **`type`-only circular import is fine.** `trends.ts` importing `type { Series }`
   from `LineChart.tsx` (which imports `togglePin` from trends) compiles cleanly
   because `import type` is erased - no runtime cycle.
@@ -85,8 +90,8 @@ Tests: 40 vitest pass (new `toSeries` + `stepFeatured` unit tests); `tsc -b` cle
 
 ## Open threads & next steps
 
-- **Deploy to prod** (`wrangler pages deploy`) and verify `https://moviewords.beveradb.com`
-  - the new code is merged to `main` but NOT yet live until Andrew runs it.
+- **Deployed and verified live** at `https://moviewords.beveradb.com` (bundle
+  `index-BnhV_YgM.js`, HTTP 200, all three features present). Nothing pending.
 - Optional: lift FeaturedChart's failure state into Home so the heading vanishes
   with the chart (the one Minor review finding).
 - Optional: a `toSeries` test for a non-last missing word (color-reindex edge);
