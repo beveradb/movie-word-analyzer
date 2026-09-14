@@ -5,6 +5,7 @@ import { navigate } from '../lib/route'
 import { MovieSearch, Poster } from '../components/ui'
 import { FeaturedChart } from '../components/FeaturedChart'
 import { EraMotif } from '../components/motifs'
+import { activeCorpus } from '../lib/corpus'
 
 const HOME_DECADES = ['1930', '1950', '1970', '1990', '2010']
 
@@ -116,12 +117,18 @@ export function HomeView() {
       <section className="mt-10 border-2 border-ink bg-paper-2 p-4 text-sm text-ink-2">
         <p className="font-script font-bold uppercase text-ink">About this dataset</p>
         <p className="mt-1">
-          Covering <strong>{count ? count.toLocaleString() : '18,000+'} English-original films</strong> - every word
-          of subtitle dialogue from the{' '}
+          Covering{' '}
+          <strong>
+            {count ? count.toLocaleString() : 'tens of thousands of'}{' '}
+            {activeCorpus().id === 'all'
+              ? 'films - translated subtitles included'
+              : 'English-original films'}
+          </strong>{' '}
+          - every word of subtitle dialogue from the{' '}
           <a className="underline" href="https://opus.nlpl.eu/datasets/OpenSubtitles">
             OPUS OpenSubtitles corpus
           </a>{' '}
-          for movies with at least 1,000 IMDb votes, counted per film. Only word counts are published; no subtitle
+          for movies with at least 300 IMDb votes, counted per film. Only word counts are published; no subtitle
           text is redistributed. Methodology and caveats:{' '}
           <a
             className="underline"

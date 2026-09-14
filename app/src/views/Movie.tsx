@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import type { MovieDetail, MovieIndexEntry } from '../lib/data'
 import { getMovie, getMovieIndex } from '../lib/data'
 import { navigate } from '../lib/route'
-import { ErrorBox, HighlightWord, Poster, Slug, Spinner } from '../components/ui'
+import { ErrorBox, HighlightWord, LangBadge, Poster, Slug, Spinner } from '../components/ui'
 import { WordFilterBar, defaultFilter, passesFilter, type WordRow } from '../components/WordFilter'
 
 function Stat({ label, value }: { label: string; value: string }) {
@@ -50,15 +50,18 @@ export function MovieView({ id }: { id: string }) {
       <Slug
         text={`${movie.title} - ${movie.year}`}
         right={
-          <span>
-            {[...new Set(meta?.genres ?? [])].slice(0, 3).map((g, i) => (
-              <span key={g}>
-                {i > 0 && ' / '}
-                <a href={`#/genre/${encodeURIComponent(g)}`} className="hover:bg-mark">
-                  {g}
-                </a>
-              </span>
-            ))}
+          <span className="inline-flex items-baseline gap-2">
+            <LangBadge lang={meta?.lang ?? movie.original_language} />
+            <span>
+              {[...new Set(meta?.genres ?? [])].slice(0, 3).map((g, i) => (
+                <span key={g}>
+                  {i > 0 && ' / '}
+                  <a href={`#/genre/${encodeURIComponent(g)}`} className="hover:bg-mark">
+                    {g}
+                  </a>
+                </span>
+              ))}
+            </span>
           </span>
         }
       />
