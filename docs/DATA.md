@@ -2,10 +2,10 @@
 
 Everything on [moviewords.beveradb.com](https://moviewords.beveradb.com) is powered
 by five Parquet files on a public bucket. They're free to use for non-commercial
-projects — download them, or point DuckDB straight at the URLs and skip the
+projects - download them, or point DuckDB straight at the URLs and skip the
 download entirely.
 
-Only derived word counts are published — no subtitle text is redistributed.
+Only derived word counts are published - no subtitle text is redistributed.
 
 ## The files
 
@@ -20,7 +20,7 @@ Base URL: `https://moviewords-data.beveradb.com`
 | [`word_meta.parquet`](https://moviewords-data.beveradb.com/word_meta.parquet) | 3.5 MB | per-word commonness (zipf), part of speech, distinctiveness |
 
 The two big files are sorted copies of the same rows: use `words_by_movie` when
-you're starting from a film, `words_by_word` when you're starting from a word —
+you're starting from a film, `words_by_word` when you're starting from a word -
 Parquet row-group pruning makes queries against the matching sort order fast
 enough to run from a browser.
 
@@ -54,7 +54,7 @@ R (`arrow::read_parquet`), or anything else that speaks Parquet + HTTP.
 
 ## License and attribution
 
-[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) —
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) -
 non-commercial, attribution, share-alike.
 
 Word counts are derived from the
@@ -67,5 +67,5 @@ Please credit those sources too if you republish anything built on this data.
 ## Built something?
 
 There must be cool analyses this data could power that we haven't thought of.
-If you build something — or want to see an analysis added to the site —
+If you build something - or want to see an analysis added to the site -
 [email andrew@beveridge.uk](mailto:andrew@beveridge.uk?subject=Movie%20Words%20idea).

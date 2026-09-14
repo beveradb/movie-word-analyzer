@@ -76,7 +76,7 @@ export default function App() {
       <footer className="mt-20 border-t-2 border-ink pt-4 text-xs leading-5 text-ink-2">
         <p className="font-script font-bold uppercase text-ink">Explore the data yourself.</p>
         <p className="mt-2">
-          The full dataset is five Parquet files on a public bucket — see{' '}
+          The full dataset is five Parquet files on a public bucket - see{' '}
           <a
             className="underline"
             href="https://github.com/beveradb/movie-word-analyzer/blob/main/docs/DATA.md"
@@ -92,12 +92,11 @@ export default function App() {
 
         <p className="mt-4 font-script font-bold uppercase text-ink">Got an idea?</p>
         <p className="mt-2">
-          There must be cool analyses this data could power that we haven&apos;t thought of. If
-          you&apos;d love to see one here — or you&apos;ve built something with the data —{' '}
+          There must be interesting analyses we haven&apos;t thought of! If you want to share an
+          idea or have built something cool with the data,{' '}
           <a className="underline" href="mailto:andrew@beveridge.uk?subject=Movie%20Words%20idea">
             email andrew@beveridge.uk
           </a>
-          .
         </p>
 
         <p className="mt-4 font-script font-bold uppercase text-ink">Credits.</p>
@@ -106,7 +105,7 @@ export default function App() {
           <a className="underline" href="https://github.com/beveradb/movie-word-analyzer">
             github.com/beveradb/movie-word-analyzer
           </a>
-          . Only derived word counts are published — no subtitle text is redistributed.
+          . Only derived word counts are published - no subtitle text is redistributed.
         </p>
         <p className="mt-1">
           Data: word counts derived from the{' '}
@@ -121,10 +120,10 @@ export default function App() {
           <a className="underline" href="https://www.themoviedb.org">
             TMDB
           </a>
-          . Non-commercial project.
+          .
         </p>
         <p className="mt-1">
-          Made by Andrew Beveridge —{' '}
+          Made by Andrew Beveridge -{' '}
           <a className="underline" href="https://github.com/beveradb/">
             GitHub
           </a>{' '}
@@ -136,11 +135,11 @@ export default function App() {
           <a className="underline" href="https://www.instagram.com/beveradb/">
             Instagram
           </a>{' '}
-          — with the original idea by my lovely wife{' '}
+          - with the original idea by my lovely wife{' '}
           <a className="underline" href="https://lindsaywright.design/">
             Lindsay Wright
           </a>{' '}
-          — check out her graphic design portfolio!
+          - check out her graphic design portfolio!
         </p>
       </footer>
     </div>
