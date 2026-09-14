@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { getShifts, type Shifts } from '../lib/data'
 import { lit, pq, q } from '../lib/duck'
 import { navigate, useRoute } from '../lib/route'
+import { MIN_YEAR_WORDS, formatYearRanges } from '../lib/trends'
 import { LineChart, type Series } from '../components/LineChart'
 import { ErrorBox, Spinner } from '../components/ui'
 
@@ -136,6 +137,7 @@ export function TrendsView() {
   const [input, setInput] = useState('')
   const [series, setSeries] = useState<Series[] | null>(null)
   const [missing, setMissing] = useState<string[]>([])
+  const [trimmedYears, setTrimmedYears] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
 
@@ -156,8 +158,13 @@ export function TrendsView() {
     ])
       .then(([rows, totals]) => {
         if (cancelled) return
+        const kept = rows.filter((r) => (totals.get(r.year) ?? 0) >= MIN_YEAR_WORDS)
+        const droppedYears = [...new Set(
+          rows.filter((r) => (totals.get(r.year) ?? 0) < MIN_YEAR_WORDS).map((r) => r.year),
+        )].sort((a, b) => a - b)
+        setTrimmedYears(droppedYears.length ? formatYearRanges(droppedYears) : null)
         const byWord = new Map<string, YearRow[]>()
-        rows.forEach((r) => byWord.set(r.word, [...(byWord.get(r.word) ?? []), r]))
+        kept.forEach((r) => byWord.set(r.word, [...(byWord.get(r.word) ?? []), r]))
         setMissing(chartWords.filter((w) => !byWord.has(w)))
         setSeries(
           chartWords
@@ -167,9 +174,6 @@ export function TrendsView() {
               color: COLORS[i],
               points: byWord
                 .get(w)!
-                // featured charts start at 1930: the pre-talkies corpus is a
-                // handful of films, so its rates are wild and wreck the y-scale
-                .filter((r) => !featured || r.year >= 1930)
                 .map((r) => ({ x: r.year, y: (r.count / (totals.get(r.year) ?? 1)) * 1_000_000 })),
             })),
         )
@@ -179,9 +183,7 @@ export function TrendsView() {
     return () => {
       cancelled = true
     }
-    // featured is in the deps: the same word set renders differently (1930
-    // trim) depending on whether it's the featured chart or a user chart
-  }, [chartWords.join(','), featured])
+  }, [chartWords.join(',')])
 
   const addWord = () => {
     const w = input.trim().toLowerCase()
@@ -233,7 +235,7 @@ export function TrendsView() {
 
       {missing.length > 0 && !featured && (
         <p className="mt-3 font-script text-sm text-s2">
-          Not enough data for: {missing.join(', ')} (needs ≥20 uses across the corpus).
+          Not enough data for: {missing.join(', ')} (needs ≥20 uses across the corpus, in years with enough films).
         </p>
       )}
       {error && <ErrorBox message={error} />}
@@ -265,6 +267,11 @@ export function TrendsView() {
           )}
           <LineChart series={series} yLabel="uses per million words" />
           <p className="mt-2 text-right text-xs text-ink-2">uses per million words of dialogue</p>
+          {trimmedYears !== null && (
+            <p className="mt-1 text-right font-script text-xs text-ink-3">
+              {trimmedYears} hidden — too few films in the corpus for reliable rates
+            </p>
+          )}
         </div>
       )}
       {words.length === 1 && !loading && !error && <TopFilms word={words[0]} />}
