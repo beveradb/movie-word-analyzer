@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import type { MovieIndexEntry } from '../lib/data'
 import { getMovieIndex } from '../lib/data'
 
-/** Screenplay slug-line header: INT. PULP FICTION — 1994 */
+/** Screenplay slug-line header: INT. PULP FICTION - 1994 */
 export function Slug({ prefix = 'INT.', text, right }: { prefix?: string; text: string; right?: React.ReactNode }) {
   return (
     <div className="slug flex items-baseline justify-between border-b-2 border-ink pb-1 text-sm sm:text-base">
@@ -34,7 +34,7 @@ export function HighlightWord({
     <button
       onClick={onClick}
       className="group flex w-full items-baseline gap-3 rounded px-1 py-0.5 text-left hover:bg-paper-2"
-      title={`“${word}” — ${display ?? `spoken ${count.toLocaleString()} times`}`}
+      title={`“${word}” - ${display ?? `spoken ${count.toLocaleString()} times`}`}
     >
       <span className="hl min-w-0 flex-1 font-script text-lg leading-6">
         <span className="hl-mark" style={{ width: `calc(${(frac * 100).toFixed(1)}% + 0.3em)` }} />

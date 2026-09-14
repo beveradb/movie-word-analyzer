@@ -11,7 +11,7 @@ import { ErrorBox, Spinner } from '../components/ui'
 const COLORS = ['var(--color-s1)', 'var(--color-s2)', 'var(--color-s3)', 'var(--color-s4)']
 const MAX_WORDS = 4
 
-/** Riser/faller chips under the featured chart — one tap to chart a mover. */
+/** Riser/faller chips under the featured chart - one tap to chart a mover. */
 function ShiftStrip() {
   const [shifts, setShifts] = useState<Shifts | null>(null)
   useEffect(() => {
@@ -359,7 +359,7 @@ export function TrendsView() {
           <p className="mt-2 text-right text-xs text-ink-2">uses per million words of dialogue</p>
           {trimmedYears !== null && (
             <p className="mt-1 text-right font-script text-xs text-ink-3">
-              {trimmedYears} hidden — too few films in the corpus for reliable rates
+              {trimmedYears} hidden - too few films in the corpus for reliable rates
             </p>
           )}
         </div>

@@ -220,7 +220,7 @@ function WordsBoard() {
         </ol>
       )}
       {!loading && rows && visible.length === 0 && (
-        <p className="mt-6 font-script text-sm text-ink-2">No words match these filters — try “all words” or “any kind”.</p>
+        <p className="mt-6 font-script text-sm text-ink-2">No words match these filters - try “all words” or “any kind”.</p>
       )}
     </div>
   )

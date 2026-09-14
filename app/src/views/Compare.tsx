@@ -47,7 +47,7 @@ async function loadCard(ref: EntityRef): Promise<EntityCard | null> {
       for (const [w, c] of [...m.top_all, ...m.top]) words.set(w as string, c as number)
       return {
         ref,
-        label: `${m.title} — ${m.year}`,
+        label: `${m.title} - ${m.year}`,
         films: 1,
         totalWords: m.stats.total_words,
         signature: m.distinctive,
@@ -241,7 +241,7 @@ export function CompareView() {
   return (
     <div>
       <p className="mt-1 text-sm text-ink-2">
-        Put films, decades, and genres side by side — up to three of any mix.
+        Put films, decades, and genres side by side - up to three of any mix.
       </p>
       {refs.length < MAX && <EntityPicker refs={refs} />}
       {featured && (
@@ -361,7 +361,7 @@ export function CompareView() {
         <div className="mt-8 border-2 border-ink bg-card p-4">
           <h2 className="slug text-sm">Head to head</h2>
           <p className="mt-1 text-xs text-ink-2">
-            What each one says far more than the other{loaded.length > 2 ? 's' : ''} — rate per million words of its
+            What each one says far more than the other{loaded.length > 2 ? 's' : ''} - rate per million words of its
             own dialogue.
           </p>
           <div className="mt-3 grid gap-6 md:grid-cols-2 lg:grid-cols-3">

@@ -38,7 +38,7 @@ export function MovieView({ id }: { id: string }) {
     ? [...new Map([...movie.top, ...movie.top_all].map((r) => [r[0], r])).values()].sort((a, b) => b[1] - a[1])
     : movie.top
   const words = allRows.filter((r) => passesFilter(r as WordRow, filter)).slice(0, 25)
-  // signature words are already statistically distinctive — only kind chips
+  // signature words are already statistically distinctive - only kind chips
   // apply, not the commonness toggle (log-odds may rightly pick zipf≥5 words)
   const distinctive = movie.distinctive
     .filter((r) => passesFilter(r as WordRow, { ...filter, common: 'all' }))
@@ -48,7 +48,7 @@ export function MovieView({ id }: { id: string }) {
   return (
     <div>
       <Slug
-        text={`${movie.title} — ${movie.year}`}
+        text={`${movie.title} - ${movie.year}`}
         right={
           <span>
             {[...new Set(meta?.genres ?? [])].slice(0, 3).map((g, i) => (
@@ -85,7 +85,7 @@ export function MovieView({ id }: { id: string }) {
       <WordFilterBar filter={filter} onChange={setFilter} />
 
       <div className="mt-8 grid gap-10 md:grid-cols-2">
-        {/* Signature words lead and get the highlighter — they're the story. */}
+        {/* Signature words lead and get the highlighter - they're the story. */}
         <section>
           <h2 className="slug text-sm">Signature words</h2>
           <p className="mt-1 text-xs text-ink-2">
