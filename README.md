@@ -1,6 +1,6 @@
 # Movie Words — movie-word-analyzer
 
-**Live: https://moviewords.beveradb.com** — explore the words spoken in
+**Live: https://moviewords.org** — explore the words spoken in
 **18,761 English-original films**: what any movie actually says, how words rise
 and fall across decades, and what makes a film, a decade, or a genre sound like
 itself.
@@ -55,14 +55,14 @@ queries: [docs/DATA.md](docs/DATA.md).
 
 | File | Size | Contents |
 |---|---|---|
-| [movies.parquet](https://moviewords-data.beveradb.com/movies.parquet) | 0.8 MB | one row per film: title, year, genres, rating, word totals |
-| [words_by_movie/data.parquet](https://moviewords-data.beveradb.com/words_by_movie/data.parquet) | 88 MB | (imdb_id, word, count), sorted by film |
-| [words_by_word/data.parquet](https://moviewords-data.beveradb.com/words_by_word/data.parquet) | 93 MB | same rows, sorted by word |
-| [word_year.parquet](https://moviewords-data.beveradb.com/word_year.parquet) | 6 MB | (word, year, count, movie_count) for trends |
-| [word_meta.parquet](https://moviewords-data.beveradb.com/word_meta.parquet) | 3.5 MB | per-word commonness (zipf), part of speech, distinctiveness |
+| [movies.parquet](https://data.moviewords.org/movies.parquet) | 0.8 MB | one row per film: title, year, genres, rating, word totals |
+| [words_by_movie/data.parquet](https://data.moviewords.org/words_by_movie/data.parquet) | 88 MB | (imdb_id, word, count), sorted by film |
+| [words_by_word/data.parquet](https://data.moviewords.org/words_by_word/data.parquet) | 93 MB | same rows, sorted by word |
+| [word_year.parquet](https://data.moviewords.org/word_year.parquet) | 6 MB | (word, year, count, movie_count) for trends |
+| [word_meta.parquet](https://data.moviewords.org/word_meta.parquet) | 3.5 MB | per-word commonness (zipf), part of speech, distinctiveness |
 
 ```sh
-duckdb -c "SELECT title, year, words_per_minute FROM 'https://moviewords-data.beveradb.com/movies.parquet' ORDER BY words_per_minute DESC LIMIT 10"
+duckdb -c "SELECT title, year, words_per_minute FROM 'https://data.moviewords.org/movies.parquet' ORDER BY words_per_minute DESC LIMIT 10"
 ```
 
 Full schema: [the dataset contract](docs/ARCHITECTURE.md#the-dataset-contract).

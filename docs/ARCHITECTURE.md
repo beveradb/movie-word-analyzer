@@ -1,6 +1,6 @@
 # Architecture & Methodology
 
-How https://moviewords.beveradb.com works, why it's built this way, and enough
+How https://moviewords.org works, why it's built this way, and enough
 detail to reproduce or extend it. See also the original design spec
 (`docs/superpowers/specs/2026-09-11-movie-word-analyzer-design.md`) and the
 session records under `docs/sessions/`.

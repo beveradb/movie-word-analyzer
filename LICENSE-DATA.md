@@ -3,7 +3,7 @@
 The **code** in this repository is MIT-licensed (see [LICENSE](LICENSE)).
 
 The **published dataset** (the Parquet and JSON files on
-https://moviewords-data.beveradb.com - per-film word counts, per-word yearly
+https://data.moviewords.org - per-film word counts, per-word yearly
 counts, word metadata, and film metadata) is licensed under
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
