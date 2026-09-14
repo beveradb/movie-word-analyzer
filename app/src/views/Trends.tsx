@@ -163,7 +163,7 @@ function WordDetails({
 }: {
   words: string[]
   years: number[]
-  topMovies: Map<string, Map<number, YearTopMovie>>
+  topMovies: Map<string, Map<number, YearTopMovie>> | null
 }) {
   const [active, setActive] = useState(0)
   const word = words[Math.min(active, words.length - 1)]
@@ -188,7 +188,11 @@ function WordDetails({
         </div>
       )}
       <TopFilms word={word} />
-      <TopFilmsByYear word={word} years={years} byYear={topMovies.get(word)} />
+      {topMovies === null ? (
+        <Spinner label={`Finding top “${word}” film per year…`} />
+      ) : (
+        <TopFilmsByYear word={word} years={years} byYear={topMovies.get(word)} />
+      )}
     </div>
   )
 }
@@ -218,7 +222,8 @@ export function TrendsView() {
   )
   const [input, setInput] = useState('')
   const [series, setSeries] = useState<Series[] | null>(null)
-  const [topMovies, setTopMovies] = useState<Map<string, Map<number, YearTopMovie>>>(new Map())
+  // null while the (heavier) top-movie query is in flight
+  const [topMovies, setTopMovies] = useState<Map<string, Map<number, YearTopMovie>> | null>(null)
   const [plottedYears, setPlottedYears] = useState<number[]>([])
   const [missing, setMissing] = useState<string[]>([])
   const [trimmedYears, setTrimmedYears] = useState<string | null>(null)
@@ -228,6 +233,8 @@ export function TrendsView() {
   // no words in the URL → chart today's featured shift instead of a blank page
   const featured = words.length === 0 ? FEATURED[dayIndex()] : null
   const chartWords = featured ? featured.words : words
+
+  const wordsKey = chartWords.join(',')
 
   useEffect(() => {
     let cancelled = false
@@ -239,17 +246,8 @@ export function TrendsView() {
          WHERE word IN (${chartWords.map(lit).join(',')}) ORDER BY word, year`,
       ),
       yearTotals(),
-      q<YearTopMovie & { word: string; year: number }>(
-        `SELECT word, year, imdb_id, title, count FROM (
-           SELECT w.word, m.year, w.imdb_id, m.title, w.count::DOUBLE AS count,
-                  ROW_NUMBER() OVER (PARTITION BY w.word, m.year ORDER BY w.count DESC, m.title) AS rn
-           FROM ${pq('words_by_word/data.parquet')} w
-           JOIN ${pq('movies.parquet')} m USING (imdb_id)
-           WHERE w.word IN (${chartWords.map(lit).join(',')})
-         ) WHERE rn = 1`,
-      ),
     ])
-      .then(([rows, totals, topRows]) => {
+      .then(([rows, totals]) => {
         if (cancelled) return
         const kept = rows.filter((r) => (totals.get(r.year) ?? 0) >= MIN_YEAR_WORDS)
         const droppedYears = [...new Set(
@@ -259,8 +257,6 @@ export function TrendsView() {
         const byWord = new Map<string, YearRow[]>()
         kept.forEach((r) => byWord.set(r.word, [...(byWord.get(r.word) ?? []), r]))
         setMissing(chartWords.filter((w) => !byWord.has(w)))
-        const grouped = groupTopMovies(topRows)
-        setTopMovies(grouped)
         // every corpus year with enough data inside the chart's x-range, so the
         // by-year table lists the same years the chart plots, gaps included
         const keptYears = kept.map((r) => r.year)
@@ -278,15 +274,9 @@ export function TrendsView() {
             .map((w, i) => ({
               name: w,
               color: COLORS[i],
-              points: byWord.get(w)!.map((r) => {
-                const top = grouped.get(w)?.get(r.year)
-                return {
-                  x: r.year,
-                  y: (r.count / (totals.get(r.year) ?? 1)) * 1_000_000,
-                  note: top?.title,
-                  noteHref: top && `#/movie/${top.imdb_id}`,
-                }
-              }),
+              points: byWord
+                .get(w)!
+                .map((r) => ({ x: r.year, y: (r.count / (totals.get(r.year) ?? 1)) * 1_000_000 })),
             })),
         )
       })
@@ -295,7 +285,41 @@ export function TrendsView() {
     return () => {
       cancelled = true
     }
-  }, [chartWords.join(',')])
+  }, [wordsKey])
+
+  // top movie per word per year, from the big words_by_word file - fetched
+  // separately so the chart never waits on it, and a failure here only costs
+  // the tooltip notes and by-year table, not the chart itself
+  useEffect(() => {
+    let cancelled = false
+    setTopMovies(null)
+    q<YearTopMovie & { word: string; year: number }>(
+      `SELECT word, year, imdb_id, title, count FROM (
+         SELECT w.word, m.year, w.imdb_id, m.title, w.count::DOUBLE AS count,
+                ROW_NUMBER() OVER (PARTITION BY w.word, m.year ORDER BY w.count DESC, m.title) AS rn
+         FROM ${pq('words_by_word/data.parquet')} w
+         JOIN ${pq('movies.parquet')} m USING (imdb_id)
+         WHERE w.word IN (${chartWords.map(lit).join(',')})
+       ) WHERE rn = 1`,
+    )
+      .then((rows) => !cancelled && setTopMovies(groupTopMovies(rows)))
+      .catch(() => !cancelled && setTopMovies(new Map()))
+    return () => {
+      cancelled = true
+    }
+  }, [wordsKey])
+
+  // graft top-movie notes onto the chart series once (if) they arrive
+  const notedSeries = useMemo(() => {
+    if (!series || !topMovies) return series
+    return series.map((s) => ({
+      ...s,
+      points: s.points.map((p) => {
+        const top = topMovies.get(s.name)?.get(p.x)
+        return top ? { ...p, note: top.title, noteHref: `#/movie/${top.imdb_id}` } : p
+      }),
+    }))
+  }, [series, topMovies])
 
   const addWord = () => {
     const w = input.trim().toLowerCase()
@@ -352,7 +376,7 @@ export function TrendsView() {
       )}
       {error && <ErrorBox message={error} />}
       {loading && <Spinner label="Querying corpus…" />}
-      {series && series.length > 0 && !loading && (
+      {notedSeries && notedSeries.length > 0 && !loading && (
         <div className="mt-6 border-2 border-ink bg-card p-4">
           {featured && (
             <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2 border-b-2 border-ink pb-2">
@@ -364,7 +388,7 @@ export function TrendsView() {
             <div className="mb-3 flex flex-wrap gap-2 font-script text-sm">
               {/* legend built from the drawn series so colors always match,
                   even if a featured word is missing from the dataset */}
-              {series.map((s) => (
+              {notedSeries.map((s) => (
                 <button
                   key={s.name}
                   onClick={() => navigate(`/trends?w=${encodeURIComponent(s.name)}`)}
@@ -377,7 +401,7 @@ export function TrendsView() {
               ))}
             </div>
           )}
-          <LineChart series={series} yLabel="uses per million words" />
+          <LineChart series={notedSeries} yLabel="uses per million words" />
           <p className="mt-2 text-right text-xs text-ink-2">uses per million words of dialogue</p>
           {trimmedYears !== null && (
             <p className="mt-1 text-right font-script text-xs text-ink-3">
