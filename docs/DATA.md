@@ -1,9 +1,10 @@
 # Explore the data yourself
 
 Everything on [moviewords.org](https://moviewords.org) is powered
-by five Parquet files on a public bucket. They're free to use for non-commercial
-projects - download them, or point DuckDB straight at the URLs and skip the
-download entirely.
+by five Parquet files per corpus on a public bucket - six for the all-films
+corpus, which adds `all/word_year_lang.parquet`. They're free to use for
+non-commercial projects - download them, or point DuckDB straight at the URLs
+and skip the download entirely.
 
 Only derived word counts are published - no subtitle text is redistributed.
 

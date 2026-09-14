@@ -46,7 +46,7 @@ Everything the frontend consumes, published to the R2 bucket root from
 
 | Artifact | Contents | Access pattern |
 |---|---|---|
-| `movies.parquet` | one row/film: imdb_id, title, year, countries, genres, runtime_minutes, rating, votes, total_words, unique_words, words_per_minute | SQL joins |
+| `movies.parquet` | one row/film: imdb_id, title, year, countries, genres, runtime_minutes, rating, votes, total_words, unique_words, words_per_minute, original_language | SQL joins |
 | `words_by_movie/data.parquet` | (imdb_id, word, count) **sorted (imdb_id, count DESC)** | per-movie scans (swear counts) |
 | `words_by_word/data.parquet` | same rows **sorted (word, imdb_id)** | per-word scans (top films for a word) |
 | `word_year.parquet` | (word, year, count, movie_count), corpus-total ≥ 20 | trends |

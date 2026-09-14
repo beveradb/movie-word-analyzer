@@ -50,9 +50,10 @@ Details, decisions, and performance lessons: [`docs/ARCHITECTURE.md`](docs/ARCHI
 
 ## Download the data
 
-The full published dataset is five Parquet files on a public bucket — download
-them, or point DuckDB straight at the URLs. Fuller guide with more example
-queries: [docs/DATA.md](docs/DATA.md).
+The full published dataset is five Parquet files per corpus on a public bucket
+(the all-films corpus under `all/` adds a sixth, `word_year_lang.parquet`) —
+download them, or point DuckDB straight at the URLs. Fuller guide with more
+example queries: [docs/DATA.md](docs/DATA.md).
 
 | File | Size | Contents |
 |---|---|---|
