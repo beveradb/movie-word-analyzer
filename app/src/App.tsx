@@ -214,9 +214,9 @@ export default function App() {
           </a>{' '}
           - with the original idea by my lovely wife{' '}
           <a className="underline" href="https://lindsaywright.design/">
-            Lindsay Wright
+            Lindsay Wright Graphic Design
           </a>{' '}
-          - check out her graphic design portfolio!
+          - check out her portfolio!
         </p>
       </footer>
     </div>
