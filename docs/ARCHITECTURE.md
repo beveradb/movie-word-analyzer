@@ -17,7 +17,7 @@ session records under `docs/sessions/`.
  │        ▼  pipeline/ (Python 3.12 · uv · duckdb · pyarrow)    │
  │ download → curate → index → count → enrich → derive          │
  └───────────────┬──────────────────────────────────────────────┘
-                 ▼  rclone sync (S3 API)
+                 ▼  rclone copy (S3 API, additive)
  ┌──────────────────────────────────────────────────────────────┐
  │ Cloudflare R2 (public bucket, custom domain, CORS)           │
  │   parquet: movies · words_by_movie · words_by_word ·         │
@@ -41,7 +41,8 @@ costs nothing and hits nobody else's infrastructure.
 
 ## The dataset contract
 
-Everything the frontend consumes, all under `data/out/` → R2 bucket root:
+Everything the frontend consumes, published to the R2 bucket root from
+`pipeline/webdata/out/` via `pipeline/scripts/upload_r2.sh`:
 
 | Artifact | Contents | Access pattern |
 |---|---|---|
@@ -144,10 +145,20 @@ languages) reprocesses only new items. Caches are written atomically
   a previously full-downloaded file makes Chrome answer range probes with the
   cached 200, so always verify in a fresh profile/incognito.
 - **R2 objects need explicit Cache-Control metadata** (`upload_r2.sh` sets it
-  on upload) - without it Cloudflare serves every data request from origin
-  (`cf-cache-status: DYNAMIC`) and browsers only heuristically cache. Edge
-  caching for `.json`/`.parquet` additionally needs a zone Cache Rule (those
-  extensions aren't in Cloudflare's default cacheable list).
+  on upload: 5 min for json, 24h for everything else) - without it Cloudflare
+  serves every data request from origin (`cf-cache-status: DYNAMIC`) and
+  browsers only heuristically cache. Edge caching for `.json`/`.parquet`
+  additionally needs a zone Cache Rule (those extensions aren't in
+  Cloudflare's default cacheable list).
+- **Re-uploads need an edge purge, and per-URL purges miss Vary variants.**
+  Data objects serve with `Vary: Origin`, so purging
+  `{"files": ["<url>"]}` leaves the per-Origin cached copies alive - name the
+  variant (`{"files": [{"url": "<url>", "headers": {"Origin":
+  "https://moviewords.org"}}]}`) or purge the whole zone, which is what
+  `upload_r2.sh` does after every upload. A stale edge copy of
+  `featured-series.json` once silently pushed the homepage onto the full
+  ~9MB SQL-engine download; the 5-min json TTL and `loadFeaturedSeries`'s
+  console.warn are the backstops against a repeat.
 - **Never loop per-movie queries over the big parquet.** Writing the per-movie
   JSONs as 33k individual `WHERE imdb_id = ?` queries ran at ~80 files/min
   (~6h); one streaming pass over the already-sorted parquet with a group-break

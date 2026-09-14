@@ -48,5 +48,8 @@ export async function loadFeaturedSeries(words: string[], colors: string[]): Pro
   } catch {
     // fall through to the engine
   }
+  // visible breadcrumb: this fallback quietly costs the visitor the whole
+  // engine download, so a stale/missing bake should never go unnoticed
+  console.warn(`featured-series.json bake missing [${words.join(', ')}] - falling back to the SQL engine`)
   return loadWordSeries(words, colors)
 }

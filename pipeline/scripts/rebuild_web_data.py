@@ -12,8 +12,9 @@ Usage:
   scripts/fetch_published.sh   # once, mirrors inputs to webdata/in
   uv run python scripts/rebuild_web_data.py [--stage all|meta|movies|boards|signatures|featured]
 
-Outputs land in webdata/out mirroring the R2 layout; sync that dir to the
-moviewords-data bucket, then deploy the app.
+Outputs land in webdata/out mirroring the R2 layout; publish with
+scripts/upload_r2.sh (additive copy + Cache-Control + edge purge), then
+deploy the app.
 """
 
 import argparse
