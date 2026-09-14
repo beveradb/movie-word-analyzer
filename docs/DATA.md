@@ -1,6 +1,6 @@
 # Explore the data yourself
 
-Everything on [moviewords.beveradb.com](https://moviewords.beveradb.com) is powered
+Everything on [moviewords.org](https://moviewords.org) is powered
 by five Parquet files on a public bucket. They're free to use for non-commercial
 projects - download them, or point DuckDB straight at the URLs and skip the
 download entirely.
@@ -9,15 +9,15 @@ Only derived word counts are published - no subtitle text is redistributed.
 
 ## The files
 
-Base URL: `https://moviewords-data.beveradb.com`
+Base URL: `https://data.moviewords.org`
 
 | File | Size | What's in it |
 |------|------|--------------|
-| [`movies.parquet`](https://moviewords-data.beveradb.com/movies.parquet) | 0.8 MB | one row per film: title, year, genres, rating, word totals |
-| [`words_by_movie/data.parquet`](https://moviewords-data.beveradb.com/words_by_movie/data.parquet) | 88 MB | `(imdb_id, word, count)`, sorted by film |
-| [`words_by_word/data.parquet`](https://moviewords-data.beveradb.com/words_by_word/data.parquet) | 93 MB | same rows, sorted by word |
-| [`word_year.parquet`](https://moviewords-data.beveradb.com/word_year.parquet) | 6 MB | `(word, year, count, movie_count)` for trends |
-| [`word_meta.parquet`](https://moviewords-data.beveradb.com/word_meta.parquet) | 3.5 MB | per-word commonness (zipf), part of speech, distinctiveness |
+| [`movies.parquet`](https://data.moviewords.org/movies.parquet) | 0.8 MB | one row per film: title, year, genres, rating, word totals |
+| [`words_by_movie/data.parquet`](https://data.moviewords.org/words_by_movie/data.parquet) | 88 MB | `(imdb_id, word, count)`, sorted by film |
+| [`words_by_word/data.parquet`](https://data.moviewords.org/words_by_word/data.parquet) | 93 MB | same rows, sorted by word |
+| [`word_year.parquet`](https://data.moviewords.org/word_year.parquet) | 6 MB | `(word, year, count, movie_count)` for trends |
+| [`word_meta.parquet`](https://data.moviewords.org/word_meta.parquet) | 3.5 MB | per-word commonness (zipf), part of speech, distinctiveness |
 
 The two big files are sorted copies of the same rows: use `words_by_movie` when
 you're starting from a film, `words_by_word` when you're starting from a word -
@@ -34,18 +34,18 @@ DuckDB reads Parquet over HTTP and only fetches the row groups it needs:
 ```bash
 # chattiest films
 duckdb -c "SELECT title, year, words_per_minute
-           FROM 'https://moviewords-data.beveradb.com/movies.parquet'
+           FROM 'https://data.moviewords.org/movies.parquet'
            ORDER BY words_per_minute DESC LIMIT 10"
 
 # which films say a word the most
 duckdb -c "SELECT m.title, m.year, w.count
-           FROM 'https://moviewords-data.beveradb.com/words_by_word/data.parquet' w
-           JOIN 'https://moviewords-data.beveradb.com/movies.parquet' m USING (imdb_id)
+           FROM 'https://data.moviewords.org/words_by_word/data.parquet' w
+           JOIN 'https://data.moviewords.org/movies.parquet' m USING (imdb_id)
            WHERE w.word = 'sword' ORDER BY w.count DESC LIMIT 15"
 
 # a word's usage over time
 duckdb -c "SELECT year, count, movie_count
-           FROM 'https://moviewords-data.beveradb.com/word_year.parquet'
+           FROM 'https://data.moviewords.org/word_year.parquet'
            WHERE word = 'phone' ORDER BY year"
 ```
 

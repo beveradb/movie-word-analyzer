@@ -47,7 +47,7 @@ export function HighlightWord({
   )
 }
 
-const POSTER_BASE = 'https://moviewords-data.beveradb.com/posters'
+const POSTER_BASE = 'https://data.moviewords.org/posters'
 
 /** Movie poster from our R2 bucket, falling back to a script-cover placeholder. */
 export function Poster({ id, title, className }: { id: string; title: string; className?: string }) {

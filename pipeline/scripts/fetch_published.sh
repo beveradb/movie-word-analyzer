@@ -2,7 +2,7 @@
 # Mirror the published datasets needed by rebuild_web_data.py into webdata/in.
 # words_by_word (the biggest parquet) is intentionally not needed.
 set -euo pipefail
-BASE="${DATA_BASE:-https://moviewords-data.beveradb.com}"
+BASE="${DATA_BASE:-https://data.moviewords.org}"
 DEST="$(dirname "$0")/../webdata/in"
 mkdir -p "$DEST/signature"
 

@@ -1,5 +1,5 @@
 export const DATA_BASE =
-  import.meta.env.VITE_DATA_BASE ?? 'https://moviewords-data.beveradb.com'
+  import.meta.env.VITE_DATA_BASE ?? 'https://data.moviewords.org'
 
 export interface MovieIndexEntry {
   id: string
