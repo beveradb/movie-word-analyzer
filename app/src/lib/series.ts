@@ -1,4 +1,4 @@
-import { DATA_BASE, fetchJSON } from './data'
+import { dataUrl, fetchJSON } from './data'
 import { lit, pq, q } from './duck'
 import {
   groupTopMovies,
@@ -91,7 +91,7 @@ async function bakedYearTotals(): Promise<Map<number, number>> {
  * baked corpus, i.e. below the eligibility threshold = "not enough data"). Any
  * other failure throws so `loadTrends` can fall back to the live engine. */
 async function fetchTrendFile(word: string): Promise<TrendFile | null> {
-  const res = await fetch(`${DATA_BASE}/json/trend/${wordKey(word)}.json`)
+  const res = await fetch(dataUrl(`json/trend/${wordKey(word)}.json`))
   if (res.status === 404) return null
   if (!res.ok) throw new Error(`${res.status} fetching trend/${word}`)
   return res.json() as Promise<TrendFile>
