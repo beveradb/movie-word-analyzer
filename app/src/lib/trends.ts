@@ -32,6 +32,12 @@ export const groupTopMovies = (
 export const topMovieRows = (years: number[], byYear: Map<number, YearTopMovie> | undefined) =>
   [...years].sort((a, b) => a - b).map((year) => ({ year, movie: byYear?.get(year) ?? null }))
 
+/** Click-to-pin on the trend chart: toggle a year in the pinned list,
+ * dropping the oldest pin beyond `max` so exploring never needs a manual
+ * unpin first. */
+export const togglePin = (pins: number[], x: number, max = 3) =>
+  pins.includes(x) ? pins.filter((v) => v !== x) : [...pins, x].slice(-max)
+
 /** "1916–1929, 2024" from a sorted list of years */
 export const formatYearRanges = (years: number[]) =>
   years

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { MIN_YEAR_WORDS, formatYearRanges, groupTopMovies, topMovieRows } from './trends'
+import { MIN_YEAR_WORDS, formatYearRanges, groupTopMovies, togglePin, topMovieRows } from './trends'
 
 describe('formatYearRanges', () => {
   it('collapses consecutive years into en-dash ranges', () => {
@@ -62,6 +62,24 @@ describe('topMovieRows', () => {
 
   it('returns no rows for no years', () => {
     expect(topMovieRows([], byYear)).toEqual([])
+  })
+})
+
+describe('togglePin', () => {
+  it('adds an unpinned year', () => {
+    expect(togglePin([1935], 1985)).toEqual([1935, 1985])
+  })
+
+  it('removes an already-pinned year', () => {
+    expect(togglePin([1935, 1985], 1935)).toEqual([1985])
+  })
+
+  it('drops the oldest pin when a 4th is added', () => {
+    expect(togglePin([1935, 1960, 1985], 2001)).toEqual([1960, 1985, 2001])
+  })
+
+  it('pins the first year on an empty list', () => {
+    expect(togglePin([], 1935)).toEqual([1935])
   })
 })
 
