@@ -16,7 +16,7 @@ const heroLink = (href: string, label: string) => (
 
 /** Hero: the pitch on the left, the product on the right - a live featured
  * trend chart doing the explaining for anyone who won't read or scroll. */
-function Hero({ count }: { count: number }) {
+function Hero({ count, words }: { count: number; words: number }) {
   return (
     <div className="mt-8 grid items-start gap-8 sm:mt-12 lg:grid-cols-2">
       <div>
@@ -30,8 +30,9 @@ function Hero({ count }: { count: number }) {
           .
         </h1>
         <p className="mt-4 max-w-xl text-ink-2">
-          We counted every word spoken in {count ? count.toLocaleString() : '18,000+'} films - 126 million of
-          them. Watch {heroLink('#/trends?w=awesome,swell', "'awesome' overtake 'swell'")}, meet{' '}
+          We counted every word spoken in {count ? count.toLocaleString() : '18,000+'} films -{' '}
+          {words ? Math.round(words / 1e6).toLocaleString() : '126'} million of them. Watch{' '}
+          {heroLink('#/trends?w=awesome,swell', "'awesome' overtake 'swell'")}, meet{' '}
           {heroLink('#/leaderboard?b=films', 'the sweariest script ever made')}, and settle{' '}
           {heroLink('#/compare?e=tt0078748,tt0090605', 'Alien vs Aliens')} word by word.
         </p>
@@ -47,11 +48,13 @@ function Hero({ count }: { count: number }) {
 export function HomeView() {
   const [featured, setFeatured] = useState<MovieIndexEntry[]>([])
   const [count, setCount] = useState(0)
+  const [words, setWords] = useState(0)
 
   useEffect(() => {
     getMovieIndex()
       .then((idx) => {
         setCount(idx.length)
+        setWords(idx.reduce((sum, m) => sum + m.total_words, 0))
         setFeatured(
           [...idx]
             .sort((a, b) => b.votes - a.votes)
@@ -65,7 +68,7 @@ export function HomeView() {
 
   return (
     <div>
-      <Hero count={count} />
+      <Hero count={count} words={words} />
 
       {featured.length > 0 && (
         <section className="mt-10">
@@ -113,7 +116,7 @@ export function HomeView() {
       <section className="mt-10 border-2 border-ink bg-paper-2 p-4 text-sm text-ink-2">
         <p className="font-script font-bold uppercase text-ink">About this dataset</p>
         <p className="mt-1">
-          Covering <strong>{count ? count.toLocaleString() : '30,000+'} English-language films</strong> - every word
+          Covering <strong>{count ? count.toLocaleString() : '18,000+'} English-language films</strong> - every word
           of dialogue from the{' '}
           <a className="underline" href="https://opus.nlpl.eu/datasets/OpenSubtitles">
             OPUS OpenSubtitles corpus

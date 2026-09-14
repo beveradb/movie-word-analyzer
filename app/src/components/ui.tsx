@@ -1,6 +1,70 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { MovieIndexEntry } from '../lib/data'
 import { getMovieIndex } from '../lib/data'
+import { navigate } from '../lib/route'
+import type { Series } from './LineChart'
+
+/** ◀/▶ header row for a day-rotated featured pool (trends, matchups). */
+export function FeaturedNav({
+  title,
+  idx,
+  len,
+  onStep,
+  noun,
+  suffix,
+  className = '',
+}: {
+  title: string
+  idx: number
+  len: number
+  onStep: (dir: 1 | -1) => void
+  /** What one item is called in the aria labels, e.g. "trend" or "matchup". */
+  noun: string
+  suffix?: string
+  className?: string
+}) {
+  const btn = (dir: 1 | -1, glyph: string) => (
+    <button
+      onClick={() => onStep(dir)}
+      aria-label={`${dir === 1 ? 'Next' : 'Previous'} featured ${noun}`}
+      className="border-2 border-ink px-2 font-script font-bold hover:bg-mark"
+    >
+      {glyph}
+    </button>
+  )
+  return (
+    <div className={`flex flex-wrap items-center justify-between gap-2 ${className}`}>
+      <div className="flex items-center gap-2">
+        {btn(-1, '◀')}
+        {btn(1, '▶')}
+        <h2 className="slug text-sm">{title}</h2>
+      </div>
+      <span className="font-script text-xs text-ink-2">
+        {idx + 1} of {len}
+        {suffix ? ` - ${suffix}` : ''}
+      </span>
+    </div>
+  )
+}
+
+/** Clickable chart legend - one chip per drawn series, linking into Trends. */
+export function SeriesLegend({ series }: { series: Series[] }) {
+  return (
+    <div className="mb-3 flex flex-wrap gap-2 font-script text-sm">
+      {series.map((s) => (
+        <button
+          key={s.name}
+          onClick={() => navigate(`/trends?w=${encodeURIComponent(s.name)}`)}
+          className="flex items-center gap-1.5 border-2 border-ink bg-paper px-2.5 py-0.5 hover:bg-mark"
+          title={`Explore “${s.name}”`}
+        >
+          <span className="inline-block size-2.5 rounded-full" style={{ background: s.color }} />
+          {s.name}
+        </button>
+      ))}
+    </div>
+  )
+}
 
 /** Screenplay slug-line header: INT. PULP FICTION - 1994 */
 export function Slug({ prefix = 'INT.', text, right }: { prefix?: string; text: string; right?: React.ReactNode }) {

@@ -6,7 +6,7 @@ import { type YearTopMovie, groupTopMovies, topMovieRows } from '../lib/trends'
 import { FEATURED, dayIndex, stepFeatured } from '../lib/featured'
 import { loadWordSeries } from '../lib/series'
 import { LineChart, type Series } from '../components/LineChart'
-import { ErrorBox, Spinner } from '../components/ui'
+import { ErrorBox, FeaturedNav, SeriesLegend, Spinner } from '../components/ui'
 
 const COLORS = ['var(--color-s1)', 'var(--color-s2)', 'var(--color-s3)', 'var(--color-s4)']
 const MAX_WORDS = 4
@@ -315,46 +315,19 @@ export function TrendsView() {
       {notedSeries && notedSeries.length > 0 && !loading && (
         <div className="mt-6 border-2 border-ink bg-card p-4">
           {featured && (
-            <div className="mb-3 flex flex-wrap items-center justify-between gap-2 border-b-2 border-ink pb-2">
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => setFeaturedIdx((i) => stepFeatured(i, -1, FEATURED.length))}
-                  aria-label="Previous featured trend"
-                  className="border-2 border-ink px-2 font-script font-bold hover:bg-mark"
-                >
-                  ◀
-                </button>
-                <button
-                  onClick={() => setFeaturedIdx((i) => stepFeatured(i, 1, FEATURED.length))}
-                  aria-label="Next featured trend"
-                  className="border-2 border-ink px-2 font-script font-bold hover:bg-mark"
-                >
-                  ▶
-                </button>
-                <h2 className="slug text-sm">Featured: {featured.title}</h2>
-              </div>
-              <span className="font-script text-xs text-ink-2">
-                {featuredIdx + 1} of {FEATURED.length} - a new shift every day
-              </span>
-            </div>
+            <FeaturedNav
+              className="mb-3 border-b-2 border-ink pb-2"
+              title={`Featured: ${featured.title}`}
+              idx={featuredIdx}
+              len={FEATURED.length}
+              noun="trend"
+              suffix="a new shift every day"
+              onStep={(dir) => setFeaturedIdx((i) => stepFeatured(i, dir, FEATURED.length))}
+            />
           )}
-          {featured && (
-            <div className="mb-3 flex flex-wrap gap-2 font-script text-sm">
-              {/* legend built from the drawn series so colors always match,
-                  even if a featured word is missing from the dataset */}
-              {notedSeries.map((s) => (
-                <button
-                  key={s.name}
-                  onClick={() => navigate(`/trends?w=${encodeURIComponent(s.name)}`)}
-                  className="flex items-center gap-1.5 border-2 border-ink bg-paper px-2.5 py-0.5 hover:bg-mark"
-                  title={`Explore “${s.name}”`}
-                >
-                  <span className="inline-block size-2.5 rounded-full" style={{ background: s.color }} />
-                  {s.name}
-                </button>
-              ))}
-            </div>
-          )}
+          {/* legend built from the drawn series so colors always match,
+              even if a featured word is missing from the dataset */}
+          {featured && <SeriesLegend series={notedSeries} />}
           <LineChart series={notedSeries} yLabel="uses per million words" />
           <p className="mt-2 text-right text-xs text-ink-2">uses per million words of dialogue</p>
           {trimmedYears !== null && (

@@ -5,7 +5,7 @@ import { headToHead } from '../lib/compare'
 import { lit, pq, q } from '../lib/duck'
 import { navigate, useRoute } from '../lib/route'
 import { Sparkline } from '../components/LineChart'
-import { ErrorBox, MovieSearch, Slug, Spinner } from '../components/ui'
+import { ErrorBox, FeaturedNav, MovieSearch, Slug, Spinner } from '../components/ui'
 import { MATCHUPS, dayIndex, stepFeatured } from '../lib/featured'
 
 const COLORS = ['var(--color-s1)', 'var(--color-s2)', 'var(--color-s3)']
@@ -245,28 +245,15 @@ export function CompareView() {
       </p>
       {refs.length < MAX && <EntityPicker refs={refs} />}
       {featured && (
-        <div className="mt-5 flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setFeaturedIdx((i) => stepFeatured(i, -1, MATCHUPS.length))}
-              aria-label="Previous featured matchup"
-              className="border-2 border-ink px-2 font-script font-bold hover:bg-mark"
-            >
-              ◀
-            </button>
-            <button
-              onClick={() => setFeaturedIdx((i) => stepFeatured(i, 1, MATCHUPS.length))}
-              aria-label="Next featured matchup"
-              className="border-2 border-ink px-2 font-script font-bold hover:bg-mark"
-            >
-              ▶
-            </button>
-            <h2 className="slug text-sm">Featured matchup: {featured.title}</h2>
-          </div>
-          <span className="font-script text-xs text-ink-2">
-            {featuredIdx + 1} of {MATCHUPS.length} - rotates daily - or build your own above
-          </span>
-        </div>
+        <FeaturedNav
+          className="mt-5"
+          title={`Featured matchup: ${featured.title}`}
+          idx={featuredIdx}
+          len={MATCHUPS.length}
+          noun="matchup"
+          suffix="rotates daily - or build your own above"
+          onStep={(dir) => setFeaturedIdx((i) => stepFeatured(i, dir, MATCHUPS.length))}
+        />
       )}
       {cards === null && <Spinner label="Loading…" />}
       {cards !== null && loaded.length === 0 && (

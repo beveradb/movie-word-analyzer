@@ -177,12 +177,12 @@ export function UbiquityBoard() {
 }
 
 /** One overview card: a top-5 taster with a link to its full board. */
-function TasterCard({ title, blurb, tab, children }: { title: string; blurb?: string; tab: string; children: React.ReactNode }) {
+function TasterCard({ title, blurb, href, children }: { title: string; blurb?: string; href: string; children: React.ReactNode }) {
   return (
     <section className="border-2 border-ink bg-card p-4">
       <div className="flex items-baseline justify-between gap-2 border-b-2 border-ink pb-1">
         <h2 className="slug text-sm">{title}</h2>
-        <a href={`#/leaderboard?b=${tab}`} className="shrink-0 font-script text-xs underline hover:bg-mark">
+        <a href={href} className="shrink-0 font-script text-xs underline hover:bg-mark">
           see all →
         </a>
       </div>
@@ -261,19 +261,19 @@ export function OverviewBoard() {
         list, filters, and more.
       </p>
       <div className="mt-5 grid gap-4 md:grid-cols-2">
-        <TasterCard title="On the rise" blurb="said far more now than in early cinema" tab="shifts">
+        <TasterCard title="On the rise" blurb="said far more now than in early cinema" href="#/leaderboard?b=shifts">
           {shiftList(shifts.data.risers, 'var(--color-s1)')}
         </TasterCard>
-        <TasterCard title="Fading out" blurb="said far less now than in early cinema" tab="shifts">
+        <TasterCard title="Fading out" blurb="said far less now than in early cinema" href="#/leaderboard?b=shifts">
           {shiftList(shifts.data.fallers, 'var(--color-s2)')}
         </TasterCard>
         {SUPERLATIVE_SECTIONS.map(([key, title, blurb, fmt]) => (
-          <TasterCard key={key} title={title} blurb={blurb} tab="films">
+          <TasterCard key={key} title={title} blurb={blurb} href="#/leaderboard?b=films">
             {filmList(films.data?.[key] ?? [], fmt)}
           </TasterCard>
         ))}
         {adjectives && adjectives.length > 0 && (
-          <TasterCard title="Adjectives of cinema" blurb="the most spoken interesting adjectives" tab="words">
+          <TasterCard title="Adjectives of cinema" blurb="the most spoken interesting adjectives" href="#/leaderboard?b=words&pos=a">
             <ol className="mt-2">
               {adjectives.map(([w, count], i) => (
                 <li key={w} className="flex items-center gap-2 border-b border-paper-2 py-1">
@@ -289,7 +289,7 @@ export function OverviewBoard() {
           </TasterCard>
         )}
         {wonders.data && (
-          <TasterCard title="One-film wonders" blurb="words one film owns" tab="wonders">
+          <TasterCard title="One-film wonders" blurb="words one film owns" href="#/leaderboard?b=wonders">
             <ol className="mt-2">
               {wonders.data.slice(0, 5).map((r, i) => (
                 <li key={r.word} className="flex items-baseline gap-2 border-b border-paper-2 py-1 font-script text-sm">
@@ -304,7 +304,7 @@ export function OverviewBoard() {
           </TasterCard>
         )}
         {ubiquity.data && ubiquity.data.length > 0 && (
-          <TasterCard title="Said by every film" blurb="words almost no script skips" tab="everywhere">
+          <TasterCard title="Said by every film" blurb="words almost no script skips" href="#/leaderboard?b=everywhere">
             <ol className="mt-2">
               {ubiquity.data.slice(0, 5).map((r, i) => (
                 <li key={r.word} className="flex items-baseline gap-2 border-b border-paper-2 py-1 font-script text-sm">
