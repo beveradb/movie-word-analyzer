@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useRoute } from './lib/route'
 import { HomeView } from './views/Home'
+import { GenresView } from './views/Genres'
 import { MovieView } from './views/Movie'
 import { TrendsView } from './views/Trends'
 import { LeaderboardView } from './views/Leaderboard'
@@ -29,6 +30,7 @@ function ThemeToggle() {
 
 const TABS = [
   { hash: '#/', label: 'Explore', match: '' },
+  { hash: '#/genres', label: 'Genres', match: 'genres' },
   { hash: '#/trends', label: 'Trends', match: 'trends' },
   { hash: '#/leaderboard', label: 'Leaderboard', match: 'leaderboard' },
   { hash: '#/compare', label: 'Compare', match: 'compare' },
@@ -37,6 +39,10 @@ const TABS = [
 export default function App() {
   const route = useRoute()
   const section = route.path[0] ?? ''
+
+  // the Genres tab stays lit on a specific genre study (#/genre/:id) too
+  const isActive = (t: (typeof TABS)[number]) =>
+    section === t.match || (t.match === 'genres' && section === 'genre')
 
   return (
     <div className="mx-auto min-h-screen max-w-5xl px-4 pb-24 sm:px-6">
@@ -50,9 +56,9 @@ export default function App() {
               <a
                 key={t.label}
                 href={t.hash}
-                aria-current={section === t.match ? 'page' : undefined}
+                aria-current={isActive(t) ? 'page' : undefined}
                 className={`px-3 py-1.5 ${
-                  section === t.match ? 'bg-ink text-paper' : 'hover:bg-mark'
+                  isActive(t) ? 'bg-ink text-paper' : 'hover:bg-mark'
                 }`}
               >
                 {t.label}
@@ -67,6 +73,7 @@ export default function App() {
         {section === '' && <HomeView />}
         {section === 'movie' && route.path[1] && <MovieView id={route.path[1]} />}
         {section === 'trends' && <TrendsView />}
+        {section === 'genres' && <GenresView />}
         {section === 'leaderboard' && <LeaderboardView />}
         {section === 'compare' && <CompareView />}
         {section === 'decade' && route.path[1] && <EntityView kind="decade" id={route.path[1]} />}
