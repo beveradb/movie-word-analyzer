@@ -3,6 +3,8 @@ import type { MovieIndexEntry } from '../lib/data'
 import { getMovieIndex } from '../lib/data'
 import { navigate } from '../lib/route'
 import { MovieSearch, Poster } from '../components/ui'
+import { FeaturedChart } from '../components/FeaturedChart'
+import { FEATURED, dayIndex } from '../lib/featured'
 
 /** Hero: a line of dialogue with live highlighter marks — the site's thesis. */
 function Hero() {
@@ -44,6 +46,8 @@ export function HomeView() {
       .catch(() => {})
   }, [])
 
+  const today = FEATURED[dayIndex()]
+
   return (
     <div>
       <Hero />
@@ -83,6 +87,14 @@ export function HomeView() {
             </a>
           ))}
         </div>
+      </section>
+
+      <section className="mt-10">
+        <h2 className="slug border-b-2 border-ink pb-1 text-sm">Watch a word move</h2>
+        <p className="mb-4 mt-2 text-sm text-ink-2">
+          A new shift every day - one word&apos;s rise or fall across the decades.
+        </p>
+        <FeaturedChart title={today.title} words={today.words} />
       </section>
 
       <section className="mt-10 border-2 border-ink bg-paper-2 p-4 text-sm text-ink-2">
