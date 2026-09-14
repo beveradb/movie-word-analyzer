@@ -104,8 +104,9 @@ export default function App() {
           Open source:{' '}
           <a className="underline" href="https://github.com/beveradb/movie-word-analyzer">
             github.com/beveradb/movie-word-analyzer
-          </a>
-          . Only derived word counts are published - no subtitle text is redistributed.
+          </a>{' '}
+          and non-commercial. Only derived word counts are published - no subtitle text is
+          redistributed.
         </p>
         <p className="mt-1">
           Data: word counts from the{' '}
