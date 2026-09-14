@@ -49,8 +49,16 @@ retention, no clean export). GoatCounter is free for non-commercial use,
 cookieless, gives full referrer/path detail, exports raw data, and has an
 optionally-public dashboard (an on-brand touch for a data-transparency site).
 
-- **Endpoint:** `https://moviewords.goatcounter.com/count` (site already
-  created; site code is `moviewords`).
+- **Endpoint:** `https://goat.moviewords.org/count` — a vanity domain. A
+  **DNS-only** (unproxied) CNAME `goat.moviewords.org → moviewords.goatcounter.com`
+  is created in Cloudflare (done 2026-09-14); DNS-only is required so GoatCounter
+  provisions its own TLS cert. The vanity endpoint only responds once
+  `goat.moviewords.org` is saved under GoatCounter → Settings → Domain settings →
+  Custom domain (owner step). Until then, fall back to
+  `https://moviewords.goatcounter.com/count`.
+  - ⚠️ The vanity domain is **cosmetic, not adblocker evasion** - GoatCounter's
+    own docs say so, because `count.js` still loads from `gc.zgo.at`. Cloudflare
+    Web Analytics remains the adblocker-resilient source.
 - Script tag added to `app/index.html`, configured with **`no-onload`** so the
   app controls counting rather than GoatCounter's default auto-count-on-load.
   This is required to make hash navigation countable (see below).
