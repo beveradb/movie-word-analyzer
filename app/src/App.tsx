@@ -165,6 +165,13 @@ export default function App() {
             Instagram
           </a>
         </p>
+        <p className="mt-2">
+          Original idea by my lovely wife{' '}
+          <a className="underline" href="https://lindsaywright.design/">
+            Lindsay Wright
+          </a>{' '}
+          — go see her graphic design portfolio.
+        </p>
       </footer>
     </div>
   )
