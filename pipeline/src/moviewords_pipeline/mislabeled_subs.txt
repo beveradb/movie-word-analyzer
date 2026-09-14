@@ -1,0 +1,6 @@
+# Subtitle files mislabeled at OpenSubtitles upload time - see
+# docs/sessions/2026-Q3/2026-09-14-mislabeled-subtitle-tt0149624.md and the
+# dual-corpus spec addendum. Format: imdb_id [zip_name] [comment...]
+# A bare imdb_id drops the film entirely; with a zip_name only that file is
+# banned and select_best picks the next candidate.
+tt0149624 OpenSubtitles/raw/en/2000/149624/267165.xml LOTR:FotR sub filed under All the Pretty Horses
