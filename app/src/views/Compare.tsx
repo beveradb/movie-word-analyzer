@@ -6,18 +6,10 @@ import { lit, pq, q } from '../lib/duck'
 import { navigate, useRoute } from '../lib/route'
 import { Sparkline } from '../components/LineChart'
 import { ErrorBox, MovieSearch, Slug, Spinner } from '../components/ui'
+import { MATCHUPS, dayIndex, stepFeatured } from '../lib/featured'
 
 const COLORS = ['var(--color-s1)', 'var(--color-s2)', 'var(--color-s3)']
 const MAX = 3
-
-/** Landing matchups, rotated daily so the page never opens empty. */
-const MATCHUPS: [string, string][] = [
-  ['The 1950s vs the 2000s', 'd:1950,d:2000'],
-  ['Horror vs Comedy', 'g:Horror,g:Comedy'],
-  ['Western vs Sci-Fi vs Romance', 'g:Western,g:Sci-Fi,g:Romance'],
-]
-
-const dayIndex = () => Math.floor(Date.now() / 86_400_000) % MATCHUPS.length
 
 /** URL entity encoding: movie ids verbatim, decades as d:1980, genres as g:Crime. */
 interface EntityRef {
@@ -205,10 +197,12 @@ export function CompareView() {
         .slice(0, MAX),
     [params],
   )
-  // empty URL → today's featured matchup, so the page always shows a comparison
-  const featured = refs.length === 0 ? MATCHUPS[dayIndex()] : null
+  // empty URL → today's featured matchup, so the page always shows a comparison;
+  // starts on today's, steppable via the ◀/▶ buttons below
+  const [featuredIdx, setFeaturedIdx] = useState(() => dayIndex(MATCHUPS.length))
+  const featured = refs.length === 0 ? MATCHUPS[featuredIdx] : null
   const activeRefs = useMemo(
-    () => (featured ? featured[1].split(',').map(parseRef) : refs),
+    () => (featured ? featured.e.split(',').map(parseRef) : refs),
     [featured, refs],
   )
   const [cards, setCards] = useState<(EntityCard | null)[] | null>(null)
@@ -251,15 +245,26 @@ export function CompareView() {
       </p>
       {refs.length < MAX && <EntityPicker refs={refs} />}
       {featured && (
-        <div className="mt-5 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-          <h2 className="slug text-sm">Featured matchup: {featured[0]}</h2>
-          <span className="font-script text-xs text-ink-2">rotates daily — or build your own above</span>
+        <div className="mt-5 flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setFeaturedIdx((i) => stepFeatured(i, -1, MATCHUPS.length))}
+              aria-label="Previous featured matchup"
+              className="border-2 border-ink px-2 font-script font-bold hover:bg-mark"
+            >
+              ◀
+            </button>
+            <button
+              onClick={() => setFeaturedIdx((i) => stepFeatured(i, 1, MATCHUPS.length))}
+              aria-label="Next featured matchup"
+              className="border-2 border-ink px-2 font-script font-bold hover:bg-mark"
+            >
+              ▶
+            </button>
+            <h2 className="slug text-sm">Featured matchup: {featured.title}</h2>
+          </div>
           <span className="font-script text-xs text-ink-2">
-            {MATCHUPS.filter((m) => m !== featured).map(([label, e]) => (
-              <button key={e} onClick={() => navigate(`/compare?e=${e}`)} className="mr-2 underline hover:bg-mark">
-                {label}
-              </button>
-            ))}
+            {featuredIdx + 1} of {MATCHUPS.length} - rotates daily - or build your own above
           </span>
         </div>
       )}

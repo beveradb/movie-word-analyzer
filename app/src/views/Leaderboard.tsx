@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { FilmsBoard, ShiftsBoard, UbiquityBoard, WondersBoard } from '../components/boards'
+import { FilmsBoard, OverviewBoard, ShiftsBoard, UbiquityBoard, WondersBoard } from '../components/boards'
 import { getLeaderboard, getMovieIndex, getWordlists } from '../lib/data'
 import { lit, pq, q } from '../lib/duck'
 import { navigate, useRoute } from '../lib/route'
@@ -20,6 +20,7 @@ const YEAR_MIN = 1900
 const YEAR_MAX = 2025
 
 const TABS: [string, string][] = [
+  ['overview', 'Overview'],
   ['words', 'Top words'],
   ['shifts', 'Risers & fallers'],
   ['films', 'Film superlatives'],
@@ -29,14 +30,14 @@ const TABS: [string, string][] = [
 
 export function LeaderboardView() {
   const { params } = useRoute()
-  const tab = params.get('b') ?? 'words'
+  const tab = params.get('b') ?? 'overview'
   return (
     <div>
       <div className="mt-3 flex flex-wrap gap-2 font-script text-xs">
         {TABS.map(([key, label]) => (
           <button
             key={key}
-            onClick={() => navigate(`/leaderboard${key === 'words' ? '' : `?b=${key}`}`)}
+            onClick={() => navigate(`/leaderboard${key === 'overview' ? '' : `?b=${key}`}`)}
             aria-pressed={tab === key}
             className={`border-2 border-ink px-3 py-1 font-bold uppercase ${tab === key ? 'bg-ink text-paper' : 'hover:bg-mark'}`}
           >
@@ -44,11 +45,12 @@ export function LeaderboardView() {
           </button>
         ))}
       </div>
+      {tab === 'words' && <WordsBoard />}
       {tab === 'shifts' && <ShiftsBoard />}
       {tab === 'films' && <FilmsBoard />}
       {tab === 'wonders' && <WondersBoard />}
       {tab === 'everywhere' && <UbiquityBoard />}
-      {(tab === 'words' || !TABS.some(([k]) => k === tab)) && <WordsBoard />}
+      {(tab === 'overview' || !TABS.some(([k]) => k === tab)) && <OverviewBoard />}
     </div>
   )
 }

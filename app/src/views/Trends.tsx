@@ -198,7 +198,7 @@ export function TrendsView() {
 
   // no words in the URL → chart a featured shift instead of a blank page;
   // starts on today's, steppable via the ◀/▶ buttons below
-  const [featuredIdx, setFeaturedIdx] = useState(dayIndex)
+  const [featuredIdx, setFeaturedIdx] = useState(() => dayIndex(FEATURED.length))
   const featured = words.length === 0 ? FEATURED[featuredIdx] : null
   const chartWords = featured ? featured.words : words
 
