@@ -149,6 +149,34 @@ SQL query, complicate trends, and still require dual pre-baked JSONs.
   ranged 206 responses on `all/` parquets, badge rendering, shared-link
   corpus fidelity, homepage still 2 data requests in default mode.
 
+## Addendum (2026-09-14): mislabeled-subtitle detection + blocklist
+
+Prompted by tt0149624 ("All the Pretty Horses") publishing LOTR:FotR words -
+see `docs/sessions/2026-Q3/2026-09-14-mislabeled-subtitle-tt0149624.md`. OPUS
+files are user-uploaded and sometimes filed under the wrong IMDb id; the
+pipeline had no content-vs-metadata check. Evidence from the current corpus
+(measured on the VM): a two-stage scan (films sharing >= 8 of their top-30
+rare words, confirmed by cosine similarity on full count vectors) found 6
+confirmed duplicate-subtitle pairs (cosine >= 0.98, including Ikiru/To Live
+and both Talaash films) and a handful of 0.77-0.93 gray-zone pairs. OPUS dir
+149624 holds 9 candidates; only the largest (the one select_best picked) is
+the mislabeled LOTR file, so banning that one file keeps the film in the
+corpus with correct data.
+
+Design:
+- **Blocklist** `pipeline/src/moviewords_pipeline/mislabeled_subs.txt`
+  (`imdb_id [zip_name]` lines; bare id drops the film) enforced in
+  `corpus_index` so `select_best` picks the next-best candidate.
+- **Detector** `pipeline/scripts/scan_mislabels.py`: stage 1 rare-word
+  overlap candidates, stage 2 cosine confirm (>= 0.95 = duplicate,
+  0.75-0.95 = review), stage 3 `--adjudicate` directory-consensus check -
+  the pair member whose own directory siblings disagree with its chosen
+  file is the victim; the unanimous directory is the owner.
+- **Ops**: run the scan after the count stage on the VM (covers the new
+  >= 300-vote films), adjudicate, commit the populated blocklist, re-run
+  index -> count -> derive. Known limitation (v1): only catches duplicates
+  where both ids are in the corpus.
+
 ## Risks / notes
 
 - The default site changes too: more films + refreshed IMDb ratings shift

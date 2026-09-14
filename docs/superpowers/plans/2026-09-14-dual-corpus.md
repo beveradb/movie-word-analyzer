@@ -1403,6 +1403,440 @@ Write the session record via `/wrap`; update the moviewords-status memory (corpu
 
 ---
 
+### Task 15: Mislabeled-subtitle blocklist in corpus_index
+
+(Added 2026-09-14 after the tt0149624 investigation - see the spec addendum.)
+
+**Files:**
+- Create: `pipeline/src/moviewords_pipeline/mislabeled_subs.txt`
+- Modify: `pipeline/src/moviewords_pipeline/corpus_index.py`
+- Test: `pipeline/tests/test_corpus_index.py`
+
+**Interfaces:**
+- Produces: `load_blocklist() -> tuple[set[str], set[tuple[str, str]]]`
+  (blocked imdb_ids, blocked (imdb_id, zip_name) pairs), applied inside
+  `corpus_index.run()` before `select_best`. Data file format: full-line
+  `#` comments; otherwise whitespace-separated `imdb_id [zip_name]`
+  (anything after the second field is a comment); a bare `imdb_id` drops
+  the whole film.
+
+- [ ] **Step 1: Write the failing tests**
+
+Append to `pipeline/tests/test_corpus_index.py`:
+
+```python
+def test_load_blocklist_parses_ids_and_pairs(tmp_path, monkeypatch):
+    from moviewords_pipeline import corpus_index
+    bl = tmp_path / "mislabeled_subs.txt"
+    bl.write_text(
+        "# comment line\n"
+        "\n"
+        "tt0000001\n"
+        "tt0149624 OpenSubtitles/raw/en/2000/149624/267165.xml LOTR sub\n"
+    )
+    monkeypatch.setattr(corpus_index, "BLOCKLIST_PATH", bl)
+    ids, pairs = corpus_index.load_blocklist()
+    assert ids == {"tt0000001"}
+    assert pairs == {("tt0149624", "OpenSubtitles/raw/en/2000/149624/267165.xml")}
+
+
+def test_blocklist_skips_file_and_film(tmp_path, monkeypatch):
+    """A blocked zip_name falls through to the next-best candidate; a blocked
+    imdb_id drops the film from the index entirely."""
+    import duckdb
+    import pyarrow as pa
+    import pyarrow.parquet as pq
+    import zipfile
+
+    from moviewords_pipeline import config, corpus_index
+
+    raw = tmp_path / "raw"; raw.mkdir()
+    work = tmp_path / "work"; work.mkdir()
+    monkeypatch.setattr(config, "RAW_DIR", raw)
+    monkeypatch.setattr(config, "WORK_DIR", work)
+
+    body = b'<?xml version="1.0" encoding="utf-8"?><document id="1">' \
+           + b'<s id="1">hello there general kenobi today</s>' * 800 \
+           + b"</document>"
+    small = b'<?xml version="1.0" encoding="utf-8"?><document id="1">' \
+            + b'<s id="1">hello there general kenobi today</s>' * 600 \
+            + b"</document>"
+    with zipfile.ZipFile(raw / "opus_en.zip", "w") as z:
+        z.writestr("OpenSubtitles/raw/en/2000/1000001/9.xml", body)   # best
+        z.writestr("OpenSubtitles/raw/en/2000/1000001/8.xml", small)  # runner-up
+        z.writestr("OpenSubtitles/raw/en/2001/1000002/7.xml", body)
+
+    table = pa.table({"imdb_id": pa.array(["tt1000001", "tt1000002"]),
+                      "runtime_minutes": pa.array([90, 90])})
+    con = duckdb.connect()
+    con.sql("CREATE TABLE curated AS SELECT imdb_id, runtime_minutes FROM table")
+    pq.write_table(
+        pa.table({"imdb_id": ["tt1000001", "tt1000002"],
+                  "runtime_minutes": [90, 90]}),
+        str(work / "curated.parquet"))
+
+    bl = tmp_path / "bl.txt"
+    bl.write_text("tt1000002\n"
+                  "tt1000001 OpenSubtitles/raw/en/2000/1000001/9.xml\n")
+    monkeypatch.setattr(corpus_index, "BLOCKLIST_PATH", bl)
+
+    corpus_index.run()
+    rows = dict(duckdb.sql(
+        f"SELECT imdb_id, zip_name FROM '{work / 'corpus_index.parquet'}'"
+    ).fetchall())
+    assert rows == {"tt1000001": "OpenSubtitles/raw/en/2000/1000001/8.xml"}
+```
+
+Note: the curated parquet only needs `imdb_id` and `runtime_minutes` (that's
+all `corpus_index.run()` reads). Delete the stray `con`/`table` duckdb lines
+above if pyarrow's `pq.write_table` alone suffices - it does; keep the test
+minimal (the duckdb import is only for reading the output parquet).
+
+- [ ] **Step 2: Run to verify failure**
+
+Run: `cd pipeline && uv run pytest tests/test_corpus_index.py -q`
+Expected: FAIL - `AttributeError: ... no attribute 'BLOCKLIST_PATH'`.
+
+- [ ] **Step 3: Create the seed blocklist file**
+
+Create `pipeline/src/moviewords_pipeline/mislabeled_subs.txt`:
+
+```
+# Subtitle files mislabeled at OpenSubtitles upload time - see
+# docs/sessions/2026-Q3/2026-09-14-mislabeled-subtitle-tt0149624.md and the
+# dual-corpus spec addendum. Format: imdb_id [zip_name] [comment...]
+# A bare imdb_id drops the film entirely; with a zip_name only that file is
+# banned and select_best picks the next candidate.
+tt0149624 OpenSubtitles/raw/en/2000/149624/267165.xml LOTR:FotR sub filed under All the Pretty Horses
+```
+
+- [ ] **Step 4: Implement in corpus_index.py**
+
+Add after the `PATH_RE` definition:
+
+```python
+BLOCKLIST_PATH = Path(__file__).with_name("mislabeled_subs.txt")
+
+
+def load_blocklist():
+    """(blocked imdb_ids, blocked (imdb_id, zip_name) pairs) from the
+    mislabeled-subtitles data file. Lines: imdb_id [zip_name] [comment]."""
+    ids, pairs = set(), set()
+    if not BLOCKLIST_PATH.exists():
+        return ids, pairs
+    for line in BLOCKLIST_PATH.read_text().splitlines():
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+        parts = line.split()
+        if len(parts) == 1:
+            ids.add(parts[0])
+        else:
+            pairs.add((parts[0], parts[1]))
+    return ids, pairs
+```
+
+(add `from pathlib import Path` to the imports.)
+
+In `run()`, apply it - change the zip scan loop to:
+
+```python
+    blocked_ids, blocked_files = load_blocklist()
+    by_movie = defaultdict(list)
+    with zipfile.ZipFile(config.RAW_DIR / "opus_en.zip") as z:
+        for info in z.infolist():
+            imdb_id = imdb_id_from_path(info.filename)
+            if imdb_id in blocked_ids:
+                continue
+            if imdb_id in runtimes:
+                if (imdb_id, info.filename) in blocked_files:
+                    continue
+                by_movie[imdb_id].append((info.filename, info.file_size // 8))
+```
+
+- [ ] **Step 5: Run tests, full suite, commit**
+
+Run: `uv run pytest tests/test_corpus_index.py -q` then `uv run pytest -q`
+Expected: PASS (the seed blocklist entry changes nothing for the fixture corpus).
+
+```bash
+git add pipeline/src/moviewords_pipeline/mislabeled_subs.txt pipeline/src/moviewords_pipeline/corpus_index.py pipeline/tests/test_corpus_index.py
+git commit -m "feat(pipeline): mislabeled-subtitle blocklist enforced at index time"
+```
+
+---
+
+### Task 16: scan_mislabels.py detector
+
+**Files:**
+- Create: `pipeline/scripts/scan_mislabels.py`
+- Test: `pipeline/tests/test_scan_mislabels.py`
+
+**Interfaces:**
+- Consumes: `work/word_counts.parquet`, `work/corpus_index.parquet`,
+  `work/curated.parquet`, `raw/opus_en.zip`; `subtitle_parser.extract_text`,
+  `wordcount.count_words`, `corpus_index.imdb_id_from_path`.
+- Produces (importable): `cosine(a: dict, b: dict) -> float`;
+  `find_suspect_pairs(con, min_shared=8) -> list[(id_a, id_b, shared)]`;
+  `pick_victim(consensus_a: float, consensus_b: float) -> int | None`
+  (0 or 1 = index of the mislabeled member, None = can't auto-decide).
+  CLI: `uv run python scripts/scan_mislabels.py [--adjudicate] [--min-cosine 0.95]`.
+
+- [ ] **Step 1: Write the failing tests**
+
+Create `pipeline/tests/test_scan_mislabels.py`:
+
+```python
+import duckdb
+
+from scripts_path import add_scripts_to_path  # noqa: F401
+
+
+def test_cosine_identical_and_disjoint():
+    from scan_mislabels import cosine
+    a = {"frodo": 10, "ring": 5}
+    assert abs(cosine(a, a) - 1.0) < 1e-9
+    assert cosine(a, {"horse": 3}) == 0.0
+    assert cosine({}, a) == 0.0
+
+
+def test_find_suspect_pairs_flags_shared_rare_words():
+    from scan_mislabels import find_suspect_pairs
+    con = duckdb.connect()
+    con.sql("CREATE TABLE wc (imdb_id VARCHAR, word VARCHAR, count INT)")
+    # tt1/tt2 share 10 rare words; tt3 is unrelated; 'the' is common to all
+    rows = []
+    for i, mid in enumerate(["tt1", "tt2", "tt3"]):
+        rows.append((mid, "the", 1000))
+        for j in range(10):
+            word = f"rare{j}" if mid in ("tt1", "tt2") else f"other{j}"
+            rows.append((mid, word, 50))
+    con.executemany("INSERT INTO wc VALUES (?, ?, ?)", rows)
+    pairs = find_suspect_pairs(con, min_shared=8)
+    assert [(a, b) for a, b, _ in pairs] == [("tt1", "tt2")]
+
+
+def test_pick_victim_prefers_low_directory_consensus():
+    from scan_mislabels import pick_victim
+    assert pick_victim(0.95, 0.10) == 1   # member B's dir disagrees with its chosen file
+    assert pick_victim(0.10, 0.95) == 0
+    assert pick_victim(0.95, 0.90) is None  # both self-consistent - manual review
+    assert pick_victim(0.2, 0.3) is None    # both messy - manual review
+```
+
+- [ ] **Step 2: Run to verify failure**
+
+Run: `cd pipeline && uv run pytest tests/test_scan_mislabels.py -q`
+Expected: FAIL - `ModuleNotFoundError: No module named 'scan_mislabels'`.
+
+- [ ] **Step 3: Implement**
+
+Create `pipeline/scripts/scan_mislabels.py`:
+
+```python
+"""Detect subtitle files published under the wrong IMDb id.
+
+Stage 1: candidate pairs - films sharing >= min_shared of their top-30 RARE
+words (document frequency 2-20). Character names and invented words are
+rare; two films sharing many of them almost always share subtitle content.
+Stage 2: cosine similarity on the full count vectors. >= 0.95 means the two
+films published the same underlying subtitle - one id is wrong.
+Stage 3 (--adjudicate): directory consensus. For each member of a duplicate
+pair, count every OPUS candidate in its directory and measure how many agree
+(cosine >= 0.8) with the file the pipeline chose. The mislabeled member is
+the one whose own directory disagrees with its chosen file; the unanimous
+directory is the true owner. Suggests blocklist lines for
+moviewords_pipeline/mislabeled_subs.txt.
+
+Run after the count stage:
+  uv run python scripts/scan_mislabels.py [--adjudicate] [--min-cosine 0.95]
+Known limitation: only catches duplicates where BOTH ids are in the corpus.
+"""
+import argparse
+import math
+import sys
+import zipfile
+from collections import defaultdict
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+
+import duckdb  # noqa: E402
+
+from moviewords_pipeline import config  # noqa: E402
+from moviewords_pipeline.corpus_index import imdb_id_from_path  # noqa: E402
+from moviewords_pipeline.subtitle_parser import extract_text  # noqa: E402
+from moviewords_pipeline.wordcount import count_words  # noqa: E402
+
+
+def cosine(a, b):
+    if not a or not b:
+        return 0.0
+    dot = sum(c * b.get(w, 0) for w, c in a.items())
+    na = math.sqrt(sum(c * c for c in a.values()))
+    nb = math.sqrt(sum(c * c for c in b.values()))
+    return dot / (na * nb) if na and nb else 0.0
+
+
+def find_suspect_pairs(con, min_shared=8):
+    """Pairs of films sharing >= min_shared of their top-30 rare words.
+    Expects a view/table `wc` with (imdb_id, word, count)."""
+    con.sql("""
+        CREATE OR REPLACE TEMP TABLE _top_rare AS
+        SELECT imdb_id, word FROM (
+            SELECT wc.imdb_id, wc.word,
+                   ROW_NUMBER() OVER (PARTITION BY wc.imdb_id
+                                      ORDER BY wc.count DESC) AS rn
+            FROM wc
+            JOIN (SELECT word, COUNT(DISTINCT imdb_id) AS films
+                  FROM wc GROUP BY word) df USING (word)
+            WHERE df.films BETWEEN 2 AND 20 AND wc.count >= 10
+        ) WHERE rn <= 30
+    """)
+    return con.sql(f"""
+        SELECT a.imdb_id, b.imdb_id, COUNT(*) AS shared
+        FROM _top_rare a JOIN _top_rare b
+          ON a.word = b.word AND a.imdb_id < b.imdb_id
+        GROUP BY 1, 2 HAVING COUNT(*) >= {int(min_shared)}
+        ORDER BY shared DESC
+    """).fetchall()
+
+
+def pick_victim(consensus_a, consensus_b):
+    """Index (0/1) of the mislabeled pair member, or None if ambiguous.
+    The victim's own directory disagrees with its chosen file (low
+    consensus); the owner's directory is self-consistent (high)."""
+    if consensus_a >= 0.8 and consensus_b < 0.5:
+        return 1
+    if consensus_b >= 0.8 and consensus_a < 0.5:
+        return 0
+    return None
+
+
+def _vectors(con, ids):
+    ph = ", ".join(f"'{i}'" for i in ids)
+    vecs = defaultdict(dict)
+    for imdb_id, word, count in con.sql(
+            f"SELECT imdb_id, word, count FROM wc WHERE imdb_id IN ({ph})").fetchall():
+        vecs[imdb_id][word] = count
+    return vecs
+
+
+def _directory_consensus(z, imdb_id, chosen_name, chosen_counts):
+    """[(zip_name, tokens, cos_vs_chosen)] for every candidate in the film's
+    OPUS dir, plus the fraction of OTHER candidates agreeing with the chosen
+    file (empty dir of siblings -> 1.0, can't convict)."""
+    rows, agree, others = [], 0, 0
+    for info in z.infolist():
+        if imdb_id_from_path(info.filename) != imdb_id:
+            continue
+        counts = count_words(extract_text(z.read(info.filename)))
+        cos = cosine(counts, chosen_counts)
+        rows.append((info.filename, sum(counts.values()), cos))
+        if info.filename != chosen_name:
+            others += 1
+            agree += cos >= 0.8
+    return rows, (agree / others if others else 1.0)
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--adjudicate", action="store_true")
+    ap.add_argument("--min-cosine", type=float, default=0.95)
+    ap.add_argument("--min-shared", type=int, default=8)
+    args = ap.parse_args()
+
+    w = config.WORK_DIR
+    con = duckdb.connect()
+    con.sql(f"CREATE VIEW wc AS SELECT * FROM '{w / 'word_counts.parquet'}'")
+    titles = dict((r[0], f"{r[1]} ({r[2]})") for r in con.sql(
+        f"SELECT imdb_id, title, year FROM '{w / 'curated.parquet'}'").fetchall())
+    chosen = dict(con.sql(
+        f"SELECT imdb_id, zip_name FROM '{w / 'corpus_index.parquet'}'").fetchall())
+
+    pairs = find_suspect_pairs(con, args.min_shared)
+    print(f"stage 1: {len(pairs)} candidate pairs (>= {args.min_shared} shared rare words)")
+    ids = sorted({i for a, b, _ in pairs for i in (a, b)})
+    vecs = _vectors(con, ids) if ids else {}
+
+    duplicates, review = [], []
+    for a, b, shared in pairs:
+        cos = cosine(vecs[a], vecs[b])
+        (duplicates if cos >= args.min_cosine else review).append((cos, shared, a, b))
+    for label, bucket in (("DUPLICATE", duplicates), ("review", review)):
+        for cos, shared, a, b in sorted(bucket, reverse=True):
+            print(f"  {label:9s} cos={cos:.3f} shared={shared:2d} "
+                  f"{a} {titles.get(a, '?')} | {b} {titles.get(b, '?')}")
+
+    if not args.adjudicate or not duplicates:
+        return
+    print("\nstage 3: directory consensus for DUPLICATE pairs")
+    with zipfile.ZipFile(config.RAW_DIR / "opus_en.zip") as z:
+        for cos, shared, a, b in sorted(duplicates, reverse=True):
+            cons = {}
+            for m in (a, b):
+                rows, consensus = _directory_consensus(z, m, chosen[m], vecs[m])
+                cons[m] = consensus
+                print(f"\n  {m} {titles.get(m, '?')} chosen={chosen[m]} "
+                      f"sibling-consensus={consensus:.2f}")
+                for name, tokens, c in sorted(rows, key=lambda r: -r[2]):
+                    marker = "*" if name == chosen[m] else " "
+                    print(f"   {marker} cos={c:.3f} {tokens:6d}t {name}")
+            victim = pick_victim(cons[a], cons[b])
+            if victim is None:
+                print(f"  VERDICT: manual review - consensus {cons[a]:.2f} vs {cons[b]:.2f}")
+            else:
+                vid = (a, b)[victim]
+                print(f"  VERDICT: {vid} is mislabeled - suggested blocklist line:")
+                print(f"    {vid} {chosen[vid]} content matches {(a, b)[1 - victim]}")
+
+
+if __name__ == "__main__":
+    main()
+```
+
+- [ ] **Step 4: Run tests, full suite, commit**
+
+Run: `uv run pytest tests/test_scan_mislabels.py -q` then `uv run pytest -q`
+Expected: PASS.
+
+```bash
+git add pipeline/scripts/scan_mislabels.py pipeline/tests/test_scan_mislabels.py
+git commit -m "feat(pipeline): two-stage mislabeled-subtitle scanner with directory-consensus adjudication"
+```
+
+---
+
+### Task 12 runbook addendum (mislabel scan)
+
+Between Task 12 Step 3 (enrich) and Step 4 (derive), insert:
+
+- [ ] **Step 3b: scan for mislabeled subtitles and populate the blocklist**
+
+```bash
+gcloud compute ssh moviewords-pipeline-tmp --project=nomadkaraoke --zone=us-central1-a --command='sudo bash -c "
+  cd /opt/movie-word-analyzer/pipeline &&
+  /root/.local/bin/uv run python scripts/scan_mislabels.py --adjudicate
+"' | tee /tmp/mislabel-report.txt
+```
+
+Adjudicate: for each DUPLICATE verdict, add the suggested line to
+`pipeline/src/moviewords_pipeline/mislabeled_subs.txt` on the branch (the
+tt0149624 LOTR file is pre-seeded); `manual review` verdicts get a human
+decision using the printed per-file tables + film knowledge. Gray-zone
+`review` pairs (cosine 0.75-0.95) are only blocked if their tables show a
+clear foreign match. Commit the blocklist update, push, `git pull` on the VM,
+then re-run:
+
+```bash
+uv run python -m moviewords_pipeline.cli index
+uv run python -m moviewords_pipeline.cli count   # re-counts only re-selected films
+```
+
+and continue with Step 4 (derive).
+
+---
+
 ## Plan self-review notes
 
 - Spec coverage: corpus definitions (T2), threshold (T1), data layout (T2/T12/T13), word_year_lang + original_language (T2/T4), superlatives floor (T5), rebuild/fetch corpus args (T6), registry/state/toggle (T7-T9), badges + copy (T10-T11), execution/upload/deploy/verify (T12-T14). Gap check: movies-index heredoc replacement (T4) ✓; posters union (T12 step 6) ✓.
