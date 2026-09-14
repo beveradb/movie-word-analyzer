@@ -81,3 +81,40 @@ def test_signature_artifacts(data_tree, monkeypatch):
     genres = json.loads((config.OUT_DIR / "json" / "signature" / "genres.json").read_text())
     assert {"Crime", "Drama"} <= set(genres)
     assert all(len(v["top"]) > 0 for v in genres.values())
+
+
+def test_all_corpus_includes_non_english(data_tree, monkeypatch):
+    build_zip(config.RAW_DIR / "opus_en.zip")
+    (config.RAW_DIR / "title.basics.tsv.gz").write_bytes(
+        (FIX / "mini.basics.tsv.gz").read_bytes())
+    (config.RAW_DIR / "title.ratings.tsv.gz").write_bytes(
+        (FIX / "mini.ratings.tsv.gz").read_bytes())
+    tmdb_dir = config.WORK_DIR / "tmdb"
+    tmdb_dir.mkdir(parents=True)
+    (tmdb_dir / "tt0110912.json").write_text(json.dumps(
+        {"imdb_id": "tt0110912", "countries": ["US"], "original_language": "en"}))
+    (tmdb_dir / "tt9999999.json").write_text(json.dumps(
+        {"imdb_id": "tt9999999", "countries": ["FR"], "original_language": "fr"}))
+
+    curate.run(); corpus_index.run(); counts.run()
+    derive.run(corpus="all")
+    derive.run()  # en, default
+
+    out_all = config.OUT_DIR / "all"
+    movies = duckdb.sql(f"SELECT * FROM '{out_all / 'movies.parquet'}'").df()
+    assert sorted(movies.imdb_id) == ["tt0110912", "tt9999999"]
+    assert set(movies.original_language) == {"en", "fr"}
+
+    wyl = duckdb.sql(f"SELECT * FROM '{out_all / 'word_year_lang.parquet'}'").df()
+    assert set(wyl.columns) == {"word", "year", "lang", "count", "movie_count"}
+    assert "fr" in set(wyl.lang)
+
+    hot = json.loads((out_all / "json" / "movie" / "tt9999999.json").read_text())
+    assert hot["original_language"] == "fr"
+
+    # the en corpus coexists in the parent dir and still excludes the French film
+    en_movies = duckdb.sql(f"SELECT * FROM '{config.OUT_DIR / 'movies.parquet'}'").df()
+    assert list(en_movies.imdb_id) == ["tt0110912"]
+    assert list(en_movies.original_language) == ["en"]
+    assert not (config.OUT_DIR / "json" / "movie" / "tt9999999.json").exists()
+    assert not (config.OUT_DIR / "word_year_lang.parquet").exists()

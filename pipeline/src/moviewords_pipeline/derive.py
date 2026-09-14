@@ -49,8 +49,12 @@ def log_odds(movie_counts: dict[str, int], corpus_counts: dict[str, int],
     return sorted(out, key=lambda t: -t[1])
 
 
-def run():
-    out = config.OUT_DIR
+def run(corpus="en"):
+    """Derive all published artifacts. corpus='en' (default) keeps the
+    original_language filter and writes to data/out/; corpus='all' skips it -
+    translated subtitles included, labeled - and writes to data/out/all/,
+    adding word_year_lang.parquet for per-original-language trends."""
+    out = config.OUT_DIR if corpus == "en" else config.OUT_DIR / "all"
     (out / "words_by_movie").mkdir(parents=True, exist_ok=True)
     (out / "words_by_word").mkdir(parents=True, exist_ok=True)
     (out / "json" / "movie").mkdir(parents=True, exist_ok=True)
@@ -68,15 +72,18 @@ def run():
                       'original_language': 'VARCHAR'}}
         );
     """)
+    lang_filter = (f"WHERE t.original_language = '{config.LANG}'"
+                   if corpus == "en" else "")
     con.sql(f"""
         CREATE TABLE movies AS
         SELECT c.imdb_id, c.title, c.year, t.countries, c.genres,
                c.runtime_minutes, c.rating, c.votes,
-               s.total_words, s.unique_words, s.words_per_minute
+               s.total_words, s.unique_words, s.words_per_minute,
+               t.original_language
         FROM curated c
         JOIN stats s USING (imdb_id)
         JOIN tmdb t USING (imdb_id)
-        WHERE t.original_language = '{config.LANG}';
+        {lang_filter};
     """)
     con.sql(f"COPY movies TO '{out / 'movies.parquet'}' (FORMAT parquet)")
 
@@ -102,11 +109,26 @@ def run():
             ORDER BY word, year
         ) TO '{out / "word_year.parquet"}' (FORMAT parquet);
     """)
+    if corpus == "all":
+        # per-original-language trends: keep a (word, lang) pair only when its
+        # corpus-wide total clears the same floor word_year uses per word
+        con.sql(f"""
+            COPY (
+                SELECT wc.word, m.year, m.original_language AS lang,
+                       SUM(wc.count)::BIGINT AS count,
+                       COUNT(DISTINCT wc.imdb_id) AS movie_count
+                FROM wc JOIN movies m USING (imdb_id)
+                GROUP BY wc.word, m.year, m.original_language
+                QUALIFY SUM(SUM(wc.count))
+                    OVER (PARTITION BY wc.word, m.original_language) >= 20
+                ORDER BY wc.word, lang, m.year
+            ) TO '{out / "word_year_lang.parquet"}' (FORMAT parquet);
+        """)
 
     _write_json_hot_paths(con, out)
     _write_signatures(con, out)
     _write_wordlists(out)
-    _write_report(con, out)
+    _write_report(con, out, corpus)
 
 
 def _write_signatures(con, out):
@@ -209,7 +231,7 @@ def _write_json_hot_paths(con, out):
         return [word, value, z, c, p]
 
     movie_cols = ["imdb_id", "title", "year", "total_words", "unique_words",
-                  "words_per_minute"]
+                  "words_per_minute", "original_language"]
     meta = {row[0]: dict(zip(movie_cols, row)) for row in
             con.sql(f"SELECT {', '.join(movie_cols)} FROM movies").fetchall()}
 
@@ -222,6 +244,7 @@ def _write_json_hot_paths(con, out):
             "imdb_id": m["imdb_id"],
             "title": m["title"],
             "year": m["year"],
+            "original_language": m["original_language"],
             "stats": {
                 "total_words": m["total_words"],
                 "unique_words": m["unique_words"],
@@ -276,20 +299,22 @@ def _write_wordlists(out):
     }))
 
 
-def _write_report(con, out):
+def _write_report(con, out, corpus):
     n = lambda q: con.sql(q).fetchone()[0]
     curated_n = n("SELECT COUNT(*) FROM curated")
     matched_n = n("SELECT COUNT(*) FROM matched")
     counted_n = n("SELECT COUNT(*) FROM stats")
     enriched_n = n("SELECT COUNT(*) FROM tmdb WHERE imdb_id IS NOT NULL")
     final_n = n("SELECT COUNT(*) FROM movies")
+    kind = ("English-original movies" if corpus == "en"
+            else "movies, all original languages")
     report = (
-        "# Pipeline report\n\n"
+        f"# Pipeline report - corpus '{corpus}'\n\n"
         f"- curated (IMDb movies meeting the vote threshold): {curated_n}\n"
         f"- matched (subtitle file found in OpenSubtitles corpus): {matched_n}\n"
         f"- counted (word counts + stats computed): {counted_n}\n"
         f"- enriched (TMDB metadata found): {enriched_n}\n"
-        f"- final (English-original movies published): {final_n}\n\n"
+        f"- final ({kind} published): {final_n}\n\n"
         "## Drop reasons\n\n"
         f"- curated → matched ({curated_n - matched_n} dropped): no usable "
         "subtitle file found in the OpenSubtitles corpus\n"
@@ -297,7 +322,7 @@ def _write_report(con, out):
         "file failed word counting (unparseable)\n"
         f"- counted → enriched ({counted_n - enriched_n} dropped): no TMDB "
         "match found for the IMDb id\n"
-        f"- enriched → final ({enriched_n - final_n} dropped): TMDB "
-        f"original_language was not '{config.LANG}'\n"
+        + (f"- enriched → final ({enriched_n - final_n} dropped): TMDB "
+           f"original_language was not '{config.LANG}'\n" if corpus == "en" else "")
     )
     (out / "report.md").write_text(report)
