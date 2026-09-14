@@ -27,7 +27,7 @@ derived from the OPUS OpenSubtitles v2024 corpus on a temporary GCP VM.
   decades/genres mixed), decade/genre entity pages with SVG motifs, auto dark
   mode with toggle, word filters (Zipf commonness + WordNet POS classes),
   self-hosted posters.
-- **Full dataset run on GCP** VM `moviewords-pipeline-tmp` (nomadkaraoke
+- **Full dataset run on GCP** VM `moviewords-pipeline-tmp` (a personal GCP
   project, e2e-highmem-4, 200GB): 34GB corpus download, 33,380 films counted,
   TMDB-enriched, 18,761 English-original films published; 18,758 posters
   fetched from TMDB into R2. Iterative data-quality re-runs (see decisions).
@@ -76,7 +76,7 @@ derived from the OPUS OpenSubtitles v2024 corpus on a temporary GCP VM.
 - OPUS v2024 en.zip ≈ 34GB; count of 33k films takes ~15 min on 4 weak cores;
   TMDB enrich ~83 min at ~7 req/s with per-movie JSON cache.
 - gcloud default project ≠ the project you want (`api-project-*` had no
-  Compute API); the real project id was literally `nomadkaraoke`.
+  Compute API); the real project id was a different, pre-existing personal project.
 - GCP startup-script + systemd-run transient units + marker files
   (`/opt/*_DONE`) make multi-stage unattended chains resumable and observable
   from a laptop with short-lived SSH polls.
@@ -85,7 +85,7 @@ derived from the OPUS OpenSubtitles v2024 corpus on a temporary GCP VM.
 
 - **GCP VM `moviewords-pipeline-tmp` is still RUNNING** (Andrew reviewing;
   credits expire ~2026-09-19). Delete when done:
-  `gcloud compute instances delete moviewords-pipeline-tmp --project=nomadkaraoke --zone=us-central1-a`
+  `gcloud compute instances delete moviewords-pipeline-tmp --project=<project> --zone=<zone>`
 - Possible expansions (cheap; caches on VM): include translated-sub films as a
   labeled toggle, more languages, TV, votes ≥100, Hugging Face dataset mirror.
 - CI: no GitHub Actions yet — deploys are manual `wrangler pages deploy`.

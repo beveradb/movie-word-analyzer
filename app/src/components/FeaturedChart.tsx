@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react'
 import type { Series } from './LineChart'
 import { LineChart } from './LineChart'
-import { loadWordSeries } from '../lib/series'
+import { loadFeaturedSeries } from '../lib/series'
 import { FEATURED, dayIndex, stepFeatured } from '../lib/featured'
 import { FeaturedNav, SeriesLegend, Spinner } from './ui'
 
 const COLORS = ['var(--color-s1)', 'var(--color-s2)', 'var(--color-s3)', 'var(--color-s4)']
 
 /** Self-contained featured-trend chart for the homepage hero: starts on
- * today's featured shift, steppable with ◀/▶ like the Trends page, charted
- * from word_year.parquet only (no top-movie hover notes). Data loads in an
- * effect so it never blocks first paint; if a query fails the stepper stays
- * so the visitor can move on to a trend that works. */
+ * today's featured shift, steppable with ◀/▶ like the Trends page. Charts
+ * from the pre-baked featured-series JSON when the words are in the bake
+ * (no SQL engine), falling back to a live word_year.parquet query. Data
+ * loads in an effect so it never blocks first paint; if a query fails the
+ * stepper stays so the visitor can move on to a trend that works. */
 export function FeaturedChart() {
   const [idx, setIdx] = useState(() => dayIndex(FEATURED.length))
   const [series, setSeries] = useState<Series[] | null>(null)
@@ -22,7 +23,7 @@ export function FeaturedChart() {
     let cancelled = false
     setSeries(null)
     setFailed(false)
-    loadWordSeries(featured.words, COLORS)
+    loadFeaturedSeries(featured.words, COLORS)
       .then(({ series }) => !cancelled && setSeries(series))
       .catch(() => !cancelled && setFailed(true))
     return () => {

@@ -1,7 +1,7 @@
 # Movie Words — movie-word-analyzer
 
 **Live: https://moviewords.beveradb.com** — explore the words spoken in
-**18,761 English-language films**: what any movie actually says, how words rise
+**18,761 English-original films**: what any movie actually says, how words rise
 and fall across decades, and what makes a film, a decade, or a genre sound like
 itself.
 
@@ -21,6 +21,7 @@ that says "dude" the most is, of course, *The Big Lebowski* (120×).
 | `pipeline/` | Python batch pipeline: OPUS + IMDb + TMDB → the published dataset. Runbook in [`pipeline/README.md`](pipeline/README.md) |
 | `app/` | The website: Vite + React + Tailwind + DuckDB-WASM, hosted on Cloudflare Pages. Dev guide in [`app/README.md`](app/README.md) |
 | `docs/ARCHITECTURE.md` | **Start here to understand or reproduce the system** — architecture, methodology, dataset contract, decisions, toolchain |
+| `docs/FAQ.md` | **Methodology, limitations, and licensing questions** — subtitles vs scripts, corpus bias, copyright position, poster policy |
 | `docs/superpowers/` | Original design spec and implementation plan |
 | `docs/sessions/` | Session records (how this was actually built, with gotchas) |
 
@@ -70,9 +71,14 @@ Got an analysis idea we haven't thought of? Email
 
 ## Data & licensing
 
-Code: MIT. Published dataset: derived word counts, CC BY-NC-SA 4.0
-(respecting IMDb's non-commercial dataset terms). Built from: OPUS
-OpenSubtitles v2024 (Lison & Tiedemann, 2016) with subtitles from
-OpenSubtitles.org; IMDb non-commercial datasets; TMDB (metadata & posters —
-this product uses the TMDB API but is not endorsed or certified by TMDB).
-Non-commercial project.
+Code: MIT ([LICENSE](LICENSE)). Published dataset: derived word counts,
+CC BY-NC-SA 4.0 ([LICENSE-DATA.md](LICENSE-DATA.md) explains why - IMDb's
+non-commercial dataset terms set the floor). Built from: OPUS OpenSubtitles
+v2024 (Lison & Tiedemann, 2016) with subtitles from OpenSubtitles.org;
+IMDb non-commercial datasets (information courtesy of IMDb, used with
+permission); TMDB (metadata & posters — this product uses the TMDB API but
+is not endorsed or certified by TMDB). Non-commercial project.
+
+Questions about copyright, methodology, or bias - see the
+[FAQ](docs/FAQ.md). Rights holders: takedown requests to
+[andrew@beveridge.uk](mailto:andrew@beveridge.uk) are honored promptly.

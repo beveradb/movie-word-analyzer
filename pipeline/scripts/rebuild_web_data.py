@@ -6,10 +6,11 @@ raw subtitles. Regenerates:
   movies      json/movie/*.json (word rows gain pos)
   boards      json/leaderboards/{shifts,films,wonders,everywhere}.json
   signatures  json/signature/{decades,genres}.json (adds stats + top500)
+  featured    json/featured-series.json (homepage chart without the SQL engine)
 
 Usage:
   scripts/fetch_published.sh   # once, mirrors inputs to webdata/in
-  uv run python scripts/rebuild_web_data.py [--stage all|meta|movies|boards|signatures]
+  uv run python scripts/rebuild_web_data.py [--stage all|meta|movies|boards|signatures|featured]
 
 Outputs land in webdata/out mirroring the R2 layout; sync that dir to the
 moviewords-data bucket, then deploy the app.
@@ -17,6 +18,7 @@ moviewords-data bucket, then deploy the app.
 
 import argparse
 import json
+import re
 import time
 from pathlib import Path
 
@@ -145,8 +147,38 @@ def stage_signatures(con):
             json.dumps(extend_signatures(con, sig, kind, profanity)))
 
 
+FEATURED_TS = Path(__file__).resolve().parents[2] / "app" / "src" / "lib" / "featured.ts"
+
+
+def featured_words():
+    """Union of every word in app/src/lib/featured.ts FEATURED, parsed from the
+    source so the bake can't drift from the app. The app falls back to a live
+    DuckDB query for any word missing from the bake, so a stale file degrades
+    gracefully instead of breaking the homepage chart."""
+    src = FEATURED_TS.read_text()
+    block = src.split("export const FEATURED")[1].split("export const MATCHUPS")[0]
+    words = []
+    for arr in re.findall(r"words:\s*\[(.*?)\]", block, re.S):
+        words += [a or b for a, b in re.findall(r"'([^']*)'|\"([^\"]*)\"", arr)]
+    seen = list(dict.fromkeys(words))
+    if not seen:
+        raise RuntimeError(f"no FEATURED words parsed from {FEATURED_TS}")
+    return seen
+
+
+def stage_featured(con):
+    totals = con.sql("SELECT year, SUM(count)::BIGINT FROM word_year GROUP BY year").fetchall()
+    words = {w: [[y, c] for y, c in con.execute(
+                "SELECT year, count::BIGINT FROM word_year WHERE word = ? ORDER BY year", [w]
+             ).fetchall()] for w in featured_words()}
+    (OUT / "json").mkdir(parents=True, exist_ok=True)
+    (OUT / "json" / "featured-series.json").write_text(json.dumps(
+        {"totals": {str(y): t for y, t in totals}, "words": words}))
+
+
 STAGES = {"meta": stage_meta, "movies": stage_movies,
-          "boards": stage_boards, "signatures": stage_signatures}
+          "boards": stage_boards, "signatures": stage_signatures,
+          "featured": stage_featured}
 
 
 def main():

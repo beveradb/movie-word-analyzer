@@ -143,7 +143,14 @@ export default function App() {
           <a className="underline" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
             CC BY-NC-SA 4.0
           </a>
-          ).
+          ). Wondering about methodology, bias, or copyright? Read the{' '}
+          <a
+            className="underline"
+            href="https://github.com/beveradb/movie-word-analyzer/blob/main/docs/FAQ.md"
+          >
+            FAQ
+          </a>
+          .
         </p>
 
         <p className="mt-4 font-script font-bold uppercase text-ink">Credits.</p>
@@ -172,7 +179,25 @@ export default function App() {
           <a className="underline" href="https://www.themoviedb.org">
             TMDB
           </a>
-          .
+          . Information courtesy of IMDb (
+          <a className="underline" href="https://www.imdb.com">
+            https://www.imdb.com
+          </a>
+          ). Used with permission.
+        </p>
+        <p className="mt-1 flex flex-wrap items-center gap-x-1.5 gap-y-1">
+          <a href="https://www.themoviedb.org" aria-label="TMDB">
+            <img src="/tmdb.svg" alt="TMDB logo" className="inline h-2.5 w-auto align-baseline" />
+          </a>{' '}
+          This product uses the TMDB API but is not endorsed or certified by TMDB.
+        </p>
+        <p className="mt-1">
+          Posters via TMDB - copyright their respective studios, shown to identify the films
+          discussed. Rights holder?{' '}
+          <a className="underline" href="mailto:andrew@beveridge.uk?subject=Movie%20Words%20takedown">
+            Email a takedown
+          </a>{' '}
+          and it comes down promptly.
         </p>
         <p className="mt-1">
           Made by Andrew Beveridge -{' '}

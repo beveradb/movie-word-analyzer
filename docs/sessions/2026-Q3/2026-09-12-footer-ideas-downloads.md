@@ -25,9 +25,9 @@ GitHub/LinkedIn/Instagram profile links. Shipped to prod and verified live.
 
 ## Gotchas / lessons
 
-- **Git pushes from this repo hit the wrong GitHub account** (`abeveridge_life360`
-  from the macOS keychain credential helper). Fix: `eval "$(grep '^export
-  GH_TOKEN' ~/Projects/beveradb/.envrc)"` then push with
+- **Git pushes from this repo hit the wrong GitHub account** (a work account
+  from the macOS keychain credential helper). Fix: eval the `GH_TOKEN` export
+  from a local direnv file outside the repo, then push with
   `git -c 'credential.helper=!f() { echo username=x-access-token; echo password=$GH_TOKEN; }; f' push …`.
   `gh` CLI works with the same eval'd `GH_TOKEN`.
 - **Don't pipe `npm run build` through `tail` in a `&&` chain before deploying**

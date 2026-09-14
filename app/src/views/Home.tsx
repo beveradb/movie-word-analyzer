@@ -116,13 +116,20 @@ export function HomeView() {
       <section className="mt-10 border-2 border-ink bg-paper-2 p-4 text-sm text-ink-2">
         <p className="font-script font-bold uppercase text-ink">About this dataset</p>
         <p className="mt-1">
-          Covering <strong>{count ? count.toLocaleString() : '18,000+'} English-language films</strong> - every word
-          of dialogue from the{' '}
+          Covering <strong>{count ? count.toLocaleString() : '18,000+'} English-original films</strong> - every word
+          of subtitle dialogue from the{' '}
           <a className="underline" href="https://opus.nlpl.eu/datasets/OpenSubtitles">
             OPUS OpenSubtitles corpus
           </a>{' '}
           for movies with at least 1,000 IMDb votes, counted per film. Only word counts are published; no subtitle
-          text is redistributed.
+          text is redistributed. Methodology and caveats:{' '}
+          <a
+            className="underline"
+            href="https://github.com/beveradb/movie-word-analyzer/blob/main/docs/FAQ.md"
+          >
+            the FAQ
+          </a>
+          .
         </p>
       </section>
     </div>

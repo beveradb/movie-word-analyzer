@@ -31,7 +31,7 @@ https://lindsaywright.design/. Both shipped to prod and verified live.
   Lindsay Wright — go see her graphic design portfolio."
 - **Deployed**: pulled merged main into main clone, `npm install && npm run
   build` (unpiped), `npx wrangler pages deploy dist --project-name moviewords`
-  (env from `~/Projects/beveradb/.envrc`). Verified prod serves the new bundle
+  (env from a local direnv file outside the repo). Verified prod serves the new bundle
   and drove the trends page + footer in a real browser.
 
 ## Decisions & rationale
@@ -56,7 +56,7 @@ https://lindsaywright.design/. Both shipped to prod and verified live.
   Local dev/verification MUST use vite's default port 5173 or duckdb-wasm
   XHRs fail with NetworkError.
 - **CodeRabbit CLI is now unusable here** — authenticated as the
-  `abeveridge_life360` account and dies with "A workspace SSO session is
+  work-SSO account and dies with "A workspace SSO session is
   required" (v0.7.6; also note `--plain`/`--type` flags are gone, it's
   `coderabbit review --committed --base main`). Fallback: Superpowers
   code-review subagent (verdict: ready to merge; 2 minor nits fixed).
