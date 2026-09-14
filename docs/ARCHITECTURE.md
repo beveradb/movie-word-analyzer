@@ -58,6 +58,8 @@ Everything the frontend consumes, published to the R2 bucket root from
 | `json/movies-index.json` | slim all-movies list (search index) | client-side search |
 | `json/featured-series.json` | year totals + per-year counts for the featured words | homepage chart (no WASM needed) |
 | `posters/<id>.jpg` | TMDB w342 posters, self-hosted | `<img>` with fallback |
+| `all/*` | mirror of every artifact above for the all-films corpus (translated subtitles included) | same access patterns, `all/` prefix |
+| `all/word_year_lang.parquet` | (word, year, lang, count, movie_count), corpus-total ≥ 20 per (word, lang) | per-language trends, all-films corpus only |
 
 **The two sort orders are load-bearing**: DuckDB prunes row groups using them,
 which is what makes browser-side SQL over a ~45M-row table feel instant. The
@@ -76,12 +78,11 @@ single-letter noise dropped except a/i; hyphenated words split. **Only bags of
 words are ever persisted or published — word order is destroyed at count time
 and no subtitle text is redistributed.**
 
-**Corpus cut.** IMDb `titleType=movie`, `numVotes ≥ 1000`, matched to OPUS by
+**Corpus cut.** IMDb `titleType=movie`, `numVotes ≥ 300`, matched to OPUS by
 IMDb id; one subtitle file chosen per film (largest within a plausibility band
 of 20–250 tokens/min of runtime); TMDB `original_language == en` (translated
-subtitles measure translators, not screenwriters — the 14.6k non-English
-originals are counted and cached but not published; that's a one-flag change
-in `derive.py` to revisit).
+subtitles measure translators, not screenwriters - both corpora are
+published, and the toggle to switch between them ships in the app).
 
 **Signature words** (the product's core idea): log-odds ratio with informative
 Dirichlet prior (Monroe, Colaresi & Quinn 2008), the corpus as prior
@@ -126,7 +127,9 @@ languages) reprocesses only new items. Caches are written atomically
    highlighter-mark word bars (the signature element; mark width encodes the
    value). Chart palettes machine-validated for CVD on both surfaces:
    light `#3E6FA8/#CC5A2E/#6B5AA8/#128A5E`, dark `#5B8BC4/#D9744C/#8A77C0/#2FA477`.
-6. **English-original-only v1** — see methodology; revisitable.
+6. **English-original-only v1** — see methodology; revisitable - superseded
+   2026-09-14: the all-films corpus now ships as a labeled toggle (see the
+   dual-corpus spec).
 7. **Licensing** — code MIT; published dataset is derived word counts under
    CC BY-NC-SA 4.0 (IMDb non-commercial terms). Attribution required on site:
    OPUS (Lison & Tiedemann 2016), OpenSubtitles.org (corpus condition), IMDb,

@@ -171,7 +171,8 @@ export default function App() {
 
         <p className="mt-4 font-script font-bold uppercase text-ink">Grab the data.</p>
         <p className="mt-2">
-          The full dataset is five Parquet files on a public bucket - see{' '}
+          The full dataset is two corpora of Parquet files (English originals, plus
+          all films under all/) on a public bucket - see{' '}
           <a
             className="underline"
             href="https://github.com/beveradb/moviewords/blob/main/docs/DATA.md"

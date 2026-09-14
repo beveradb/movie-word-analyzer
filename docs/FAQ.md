@@ -31,14 +31,14 @@ plausibility band of 20-250 tokens per minute of the film's runtime. That
 rejects wrong-cut, partial, and junk files. Films with no in-band file are
 dropped from the corpus.
 
-### Why English-original films only?
+### What about non-English films?
 
-The filter is TMDB `original_language == en` - English-*original*, not merely
-English-subtitled. Translated subtitles measure translators, not
-screenwriters. The cost is an Anglosphere/Hollywood skew, which we accept and
-label rather than hide. The 14.6k non-English-original films are already
-counted and cached; publishing them as a labeled toggle is a planned
-extension.
+They're in - as a second, clearly labeled corpus. The default view covers
+films originally written in English, because a translated subtitle measures
+the translator as much as the screenwriter. The header toggle switches the
+whole site to "All films", which adds every non-English-original film in the
+cut (badged with its original language). Same methodology, two honest
+datasets - pick the one that matches your question.
 
 ### What's the "signature words" math?
 
@@ -82,7 +82,7 @@ measurement.
 ### Is this corpus representative of cinema?
 
 No - it's representative of *popular, subtitled* cinema. OpenSubtitles covers
-what people watch and subtitle, and we additionally require >= 1000 IMDb
+what people watch and subtitle, and we additionally require >= 300 IMDb
 votes. That's a deliberate floor (it also keeps metadata quality up), and it
 means the dataset is a corpus of widely-seen film, not a census of everything
 ever made.
@@ -112,7 +112,7 @@ only. The strictest upstream term wins, so the whole published bundle is
 non-commercial. The word counts alone could arguably be freer - the bundle
 can't. See [LICENSE-DATA.md](../LICENSE-DATA.md).
 
-### You're rehosting ~18,758 movie posters.
+### You're rehosting ~50,000 movie posters.
 
 Posters are studio promotional artwork, sourced via the TMDB API and
 self-hosted so that a traffic spike hits our bucket rather than TMDB's CDN.

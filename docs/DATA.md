@@ -13,7 +13,7 @@ Base URL: `https://data.moviewords.org`
 
 | File | Size | What's in it |
 |------|------|--------------|
-| [`movies.parquet`](https://data.moviewords.org/movies.parquet) | 0.8 MB | one row per film: title, year, genres, rating, word totals |
+| [`movies.parquet`](https://data.moviewords.org/movies.parquet) | 0.8 MB | one row per film: title, year, original_language, genres, rating, word totals |
 | [`words_by_movie/data.parquet`](https://data.moviewords.org/words_by_movie/data.parquet) | 88 MB | `(imdb_id, word, count)`, sorted by film |
 | [`words_by_word/data.parquet`](https://data.moviewords.org/words_by_word/data.parquet) | 93 MB | same rows, sorted by word |
 | [`word_year.parquet`](https://data.moviewords.org/word_year.parquet) | 6 MB | `(word, year, count, movie_count)` for trends |
@@ -26,6 +26,19 @@ enough to run from a browser.
 
 Full column-by-column schema:
 [the dataset contract](ARCHITECTURE.md#the-dataset-contract).
+
+## Two corpora
+
+Every artifact exists twice: at the bucket root for the default corpus
+(English-original films) and under the `all/` prefix for the all-films
+corpus (translated subtitles included), e.g.
+`https://data.moviewords.org/all/movies.parquet`. Both use `numVotes >= 300`.
+`movies.parquet` carries `original_language` (ISO 639-1) in both corpora.
+
+The all-films corpus adds `all/word_year_lang.parquet`
+`(word, year, lang, count, movie_count)` - per-original-language trend
+counts, keeping a (word, lang) pair when its corpus-wide total is >= 20.
+Posters are shared at `posters/<imdb_id>.jpg` regardless of corpus.
 
 ## Query it without downloading
 
