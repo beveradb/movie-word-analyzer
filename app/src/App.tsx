@@ -171,15 +171,14 @@ export default function App() {
 
         <p className="mt-4 font-script font-bold uppercase text-ink">Grab the data.</p>
         <p className="mt-2">
-          The full dataset is two corpora of Parquet files (English originals, plus
-          all films under all/) on a public bucket - see{' '}
+          The full dataset is available to download - see{' '}
           <a
             className="underline"
             href="https://github.com/beveradb/moviewords/blob/main/docs/DATA.md"
           >
             the data guide
           </a>{' '}
-          for download links, schema, and ready-to-run DuckDB queries (
+          for links &amp; info (
           <a className="underline" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
             CC BY-NC-SA 4.0
           </a>
@@ -225,15 +224,10 @@ export default function App() {
           </a>
           ). Used with permission.
         </p>
-        <p className="mt-1 flex flex-wrap items-center gap-x-1.5 gap-y-1">
-          <a href="https://www.themoviedb.org" aria-label="TMDB">
-            <img src="/tmdb.svg" alt="TMDB logo" className="inline h-2.5 w-auto align-baseline" />
-          </a>{' '}
-          This product uses the TMDB API but is not endorsed or certified by TMDB.
-        </p>
         <p className="mt-1">
-          Posters via TMDB - copyright their respective studios, shown to identify the films
-          discussed. Rights holder?{' '}
+          This product uses the TMDB API but is not endorsed or certified by TMDB. Posters via
+          TMDB - copyright their respective studios, shown to identify the films discussed. Rights
+          holder?{' '}
           <a className="underline" href="mailto:andrew@beveridge.uk?subject=Movie%20Words%20takedown">
             Email a takedown
           </a>{' '}
