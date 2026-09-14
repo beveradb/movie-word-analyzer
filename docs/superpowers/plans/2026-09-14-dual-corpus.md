@@ -2044,17 +2044,24 @@ git commit -m "feat(pipeline): stage_trends bakes per-word trend JSONs + year to
   trends stage is the slow one (~minutes; it writes ~58k files for en, more
   for all).
 - Task 13 Step 2: before the generic `*.json` copies for BOTH trees, add the
-  1h-TTL trend copy mirroring the upload_r2.sh logic:
+  1h-TTL trend copy. IMPORTANT: rclone does NOT apply mixed
+  `--include`/`--exclude` in command-line order (empirically verified,
+  v1.72.0) - use ordered `--filter` rules:
 
 ```bash
 rclone copy . r2:moviewords-data/ --checksum --transfers 32 \
-  --include 'json/trend/**' --include 'all/json/trend/**' \
-  --include 'json/year-totals.json' --include 'all/json/year-totals.json' \
+  --filter '+ json/trend/**' --filter '+ all/json/trend/**' \
+  --filter '+ json/year-totals.json' --filter '+ all/json/year-totals.json' \
+  --filter '- *' \
   --header-upload "Cache-Control: public, max-age=3600"
 ```
 
-  and add the matching four `--exclude`s to the generic `*.json` copies.
-  Expect ~140k+ small objects across both corpora - use `--transfers 32`.
+  and the generic 5-min json copies become
+  `--filter '- json/trend/**' --filter '- all/json/trend/**'
+  --filter '- json/year-totals.json' --filter '- all/json/year-totals.json'
+  --filter '+ *.json' --filter '- *'` (excludes first, then the json
+  include, then drop-everything-else). Expect ~140k+ small objects across
+  both corpora - use `--transfers 32`.
 - Task 14 verification addendum: `curl -sI
   https://data.moviewords.org/json/trend/ring.json` → 200 with
   `cache-control: public, max-age=3600`; `json/trend/don%27t.json` → 200;
