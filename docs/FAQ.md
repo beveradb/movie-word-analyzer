@@ -130,6 +130,6 @@ data; we don't curate words out of it.
 ### Something looks wrong / I found a bug in the data.
 
 Email [andrew@beveridge.uk](mailto:andrew@beveridge.uk) or open an issue on
-[GitHub](https://github.com/beveradb/movie-word-analyzer). Corrections to the
+[GitHub](https://github.com/beveradb/moviewords). Corrections to the
 pipeline are welcome - every derivation step is open source and reproducible
 from the runbook in `pipeline/README.md`.

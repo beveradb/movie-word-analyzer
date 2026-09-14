@@ -1,4 +1,4 @@
-# Movie Words — movie-word-analyzer
+# Movie Words - moviewords
 
 **Live: https://moviewords.org** — explore the words spoken in
 **18,761 English-original films**: what any movie actually says, how words rise

@@ -1,7 +1,7 @@
 [project]
 name = "moviewords-pipeline"
 version = "0.1.0"
-description = "Data pipeline that downloads OPUS OpenSubtitles, curates by IMDb votes, tokenizes and counts words per film, enriches with TMDB metadata, and derives per-movie/cross-film word statistics for movie-word-analyzer."
+description = "Data pipeline that downloads OPUS OpenSubtitles, curates by IMDb votes, tokenizes and counts words per film, enriches with TMDB metadata, and derives per-movie/cross-film word statistics for moviewords."
 readme = "README.md"
 license = "MIT"
 authors = [

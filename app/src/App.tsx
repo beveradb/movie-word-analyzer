@@ -135,7 +135,7 @@ export default function App() {
           The full dataset is five Parquet files on a public bucket - see{' '}
           <a
             className="underline"
-            href="https://github.com/beveradb/movie-word-analyzer/blob/main/docs/DATA.md"
+            href="https://github.com/beveradb/moviewords/blob/main/docs/DATA.md"
           >
             the data guide
           </a>{' '}
@@ -146,7 +146,7 @@ export default function App() {
           ). Wondering about methodology, bias, or copyright? Read the{' '}
           <a
             className="underline"
-            href="https://github.com/beveradb/movie-word-analyzer/blob/main/docs/FAQ.md"
+            href="https://github.com/beveradb/moviewords/blob/main/docs/FAQ.md"
           >
             FAQ
           </a>
@@ -156,8 +156,8 @@ export default function App() {
         <p className="mt-4 font-script font-bold uppercase text-ink">Credits.</p>
         <p className="mt-2">
           Open source:{' '}
-          <a className="underline" href="https://github.com/beveradb/movie-word-analyzer">
-            github.com/beveradb/movie-word-analyzer
+          <a className="underline" href="https://github.com/beveradb/moviewords">
+            github.com/beveradb/moviewords
           </a>{' '}
           and non-commercial. Only derived word counts are published - no subtitle text is
           redistributed.
