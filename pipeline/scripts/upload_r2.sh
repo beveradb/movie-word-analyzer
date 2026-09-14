@@ -8,8 +8,10 @@
 #
 # Cache-Control: json gets a 5-minute TTL (rebuilt often; a stale edge copy
 # of featured-series.json once silently pushed the homepage onto the full SQL
-# engine). Parquets/posters keep 24h - the post-upload purge swaps versions,
-# and parquet range reads revalidate via If-Range/ETag.
+# engine), except the Trends bake (json/trend/** + year-totals.json), which
+# is one file per word and safe to cache for 1h. Parquets/posters keep 24h -
+# the post-upload purge swaps versions, and parquet range reads revalidate
+# via If-Range/ETag.
 #
 # Requires: CLOUDFLARE_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY
 # Optional: MOVIEWORDS_CF_TOKEN (needs Zone Read + Cache Purge on the
@@ -27,6 +29,12 @@ export RCLONE_CONFIG_R2_SECRET_ACCESS_KEY="$R2_SECRET_ACCESS_KEY"
 export RCLONE_CONFIG_R2_ENDPOINT="https://${CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com"
 
 rclone copy . r2:moviewords-data/ --checksum --progress \
+  --include 'json/trend/**' --include 'all/json/trend/**' \
+  --include 'json/year-totals.json' --include 'all/json/year-totals.json' \
+  --header-upload "Cache-Control: public, max-age=3600"
+rclone copy . r2:moviewords-data/ --checksum --progress \
+  --exclude 'json/trend/**' --exclude 'all/json/trend/**' \
+  --exclude 'json/year-totals.json' --exclude 'all/json/year-totals.json' \
   --include '*.json' --header-upload "Cache-Control: public, max-age=300"
 rclone copy . r2:moviewords-data/ --checksum --progress \
   --exclude '*.json' --header-upload "Cache-Control: public, max-age=86400"
