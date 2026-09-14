@@ -133,3 +133,13 @@ Email [andrew@beveridge.uk](mailto:andrew@beveridge.uk) or open an issue on
 [GitHub](https://github.com/beveradb/moviewords). Corrections to the
 pipeline are welcome - every derivation step is open source and reproducible
 from the runbook in `pipeline/README.md`.
+
+## Privacy
+
+### Do you track me? What analytics do you use?
+
+No cookies, no personal data, no cross-site tracking - so there's no consent
+banner to click. We use Cloudflare Web Analytics and GoatCounter, both
+cookieless: they record aggregate hits (which page, roughly where in the world,
+what referred you) with no identifiers that follow you around. That's enough to
+see how the site is doing after launch, and nothing more.
