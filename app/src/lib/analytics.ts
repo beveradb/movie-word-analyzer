@@ -28,17 +28,23 @@ export function pathFromHash(hash: string): string {
 
 let lastPath: string | null = null
 
-/** Fire a GoatCounter pageview for the current hash. Dedupes consecutive
- * identical paths, and retries (bounded) while the async count.js loads. */
-export function trackPageview(attempt = 0): void {
-  const path = pathFromHash(window.location.hash)
-  if (path === lastPath) return
+/** Retry loop for the async count.js load. Carries the path snapshotted at
+ * the original trackPageview() call so a late navigation can't hijack it. */
+function report(path: string, attempt: number): void {
   const count = window.goatcounter?.count
   if (typeof count !== 'function') {
     // count.js is async; retry for ~3s so the landing pageview isn't lost.
-    if (attempt < 20) window.setTimeout(() => trackPageview(attempt + 1), 150)
+    if (attempt < 20) window.setTimeout(() => report(path, attempt + 1), 150)
     return
   }
   lastPath = path
   count({ path, title: document.title })
+}
+
+/** Fire a GoatCounter pageview for the current hash. Dedupes consecutive
+ * identical paths, and retries (bounded) while the async count.js loads. */
+export function trackPageview(): void {
+  const path = pathFromHash(window.location.hash)
+  if (path === lastPath) return
+  report(path, 0)
 }
