@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRoute } from './lib/route'
+import { trackPageview } from './lib/analytics'
 import { HomeView } from './views/Home'
 import { GenresView } from './views/Genres'
 import { DecadesView } from './views/Decades'
@@ -73,6 +74,15 @@ const TABS = [
 export default function App() {
   const route = useRoute()
   const section = route.path[0] ?? ''
+
+  // Fire a GoatCounter pageview on first load and on every hash navigation.
+  // Wrapped so the hashchange Event isn't passed as the retry counter.
+  useEffect(() => {
+    const track = () => trackPageview()
+    track()
+    window.addEventListener('hashchange', track)
+    return () => window.removeEventListener('hashchange', track)
+  }, [])
 
   // the Genres/Decades tabs stay lit on a specific study (#/genre/:id, #/decade/:id) too
   const isActive = (t: (typeof TABS)[number]) =>
