@@ -1,3 +1,5 @@
+import type { Series } from '../components/LineChart'
+
 /** Pure logic for the trends view, split out so it's testable without
  * dragging in duckdb-wasm. */
 
@@ -49,3 +51,55 @@ export const formatYearRanges = (years: number[]) =>
     }, [])
     .map(([a, b]) => (a === b ? `${a}` : `${a}–${b}`))
     .join(', ')
+
+export interface YearRow {
+  word: string
+  year: number
+  count: number
+}
+
+export interface WordSeries {
+  series: Series[]
+  plottedYears: number[]
+  trimmedYears: string | null
+  missing: string[]
+}
+
+/** Shape raw word_year rows into chart series (uses per million words of
+ * dialogue), plus the plotted-year list, trimmed-year note, and missing words.
+ * Years whose whole-corpus word total is below MIN_YEAR_WORDS are dropped as
+ * too sparse for a reliable rate. Colors are assigned by drawn-series order. */
+export function toSeries(
+  rows: YearRow[],
+  totals: Map<number, number>,
+  words: string[],
+  colors: string[],
+): WordSeries {
+  const kept = rows.filter((r) => (totals.get(r.year) ?? 0) >= MIN_YEAR_WORDS)
+  const droppedYears = [
+    ...new Set(rows.filter((r) => (totals.get(r.year) ?? 0) < MIN_YEAR_WORDS).map((r) => r.year)),
+  ].sort((a, b) => a - b)
+  const trimmedYears = droppedYears.length ? formatYearRanges(droppedYears) : null
+
+  const byWord = new Map<string, YearRow[]>()
+  kept.forEach((r) => byWord.set(r.word, [...(byWord.get(r.word) ?? []), r]))
+  const missing = words.filter((w) => !byWord.has(w))
+
+  const keptYears = kept.map((r) => r.year)
+  const plottedYears = keptYears.length
+    ? [...totals.entries()]
+        .filter(([y, t]) => t >= MIN_YEAR_WORDS && y >= Math.min(...keptYears) && y <= Math.max(...keptYears))
+        .map(([y]) => y)
+        .sort((a, b) => a - b)
+    : []
+
+  const series = words
+    .filter((w) => byWord.has(w))
+    .map((w, i) => ({
+      name: w,
+      color: colors[i],
+      points: byWord.get(w)!.map((r) => ({ x: r.year, y: (r.count / (totals.get(r.year) ?? 1)) * 1_000_000 })),
+    }))
+
+  return { series, plottedYears, trimmedYears, missing }
+}

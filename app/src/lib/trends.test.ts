@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { MIN_YEAR_WORDS, formatYearRanges, groupTopMovies, togglePin, topMovieRows } from './trends'
+import { MIN_YEAR_WORDS, formatYearRanges, groupTopMovies, togglePin, topMovieRows, toSeries } from './trends'
 
 describe('formatYearRanges', () => {
   it('collapses consecutive years into en-dash ranges', () => {
@@ -89,5 +89,45 @@ describe('MIN_YEAR_WORDS', () => {
     // the floor must separate them or the trim stops doing its job
     expect(MIN_YEAR_WORDS).toBeGreaterThan(66_000)
     expect(MIN_YEAR_WORDS).toBeLessThanOrEqual(126_000)
+  })
+})
+
+describe('toSeries', () => {
+  const totals = new Map([
+    [1980, 200_000],
+    [1981, 50_000], // below MIN_YEAR_WORDS floor
+    [1982, 300_000],
+  ])
+  const rows = [
+    { word: 'love', year: 1980, count: 100 },
+    { word: 'love', year: 1981, count: 999 }, // dropped: year below floor
+    { word: 'love', year: 1982, count: 300 },
+    { word: 'war', year: 1980, count: 50 },
+  ]
+
+  it('reports years dropped for being below the corpus-size floor', () => {
+    expect(toSeries(rows, totals, ['love', 'war'], ['c1', 'c2']).trimmedYears).toBe('1981')
+  })
+
+  it('builds per-million-words series with post-filter colors', () => {
+    expect(toSeries(rows, totals, ['love', 'war'], ['c1', 'c2']).series).toEqual([
+      {
+        name: 'love',
+        color: 'c1',
+        points: [
+          { x: 1980, y: (100 / 200_000) * 1_000_000 },
+          { x: 1982, y: (300 / 300_000) * 1_000_000 },
+        ],
+      },
+      { name: 'war', color: 'c2', points: [{ x: 1980, y: (50 / 200_000) * 1_000_000 }] },
+    ])
+  })
+
+  it('lists plotted years across the kept range, floor gaps excluded', () => {
+    expect(toSeries(rows, totals, ['love'], ['c1']).plottedYears).toEqual([1980, 1982])
+  })
+
+  it('reports words with no kept data as missing', () => {
+    expect(toSeries(rows, totals, ['love', 'ghost'], ['c1', 'c2']).missing).toEqual(['ghost'])
   })
 })
