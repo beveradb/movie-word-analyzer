@@ -9,23 +9,22 @@ import { LeaderboardView } from './views/Leaderboard'
 import { CompareView } from './views/Compare'
 import { EntityView } from './views/Entity'
 
-/** The site mark: a film frame whose dialogue line is highlighted.
- * Same geometry as public/favicon.svg, drawn with theme colors. */
+/** The site mark: a clapperboard whose slate reads as a highlighted line of
+ * dialogue. Same geometry as public/favicon.svg, drawn with theme colors. */
 function Logo({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 64 64" className={className} aria-hidden="true">
-      <rect width="64" height="64" rx="12" fill="var(--color-ink)" />
-      <g fill="var(--color-paper)">
-        <rect x="8" y="11" width="7" height="7" rx="2" />
-        <rect x="8" y="28.5" width="7" height="7" rx="2" />
-        <rect x="8" y="46" width="7" height="7" rx="2" />
-        <rect x="49" y="11" width="7" height="7" rx="2" />
-        <rect x="49" y="28.5" width="7" height="7" rx="2" />
-        <rect x="49" y="46" width="7" height="7" rx="2" />
-        <rect x="21" y="13" width="22" height="5" rx="2.5" opacity="0.85" />
-        <rect x="21" y="46" width="15" height="5" rx="2.5" opacity="0.85" />
+      <g transform="rotate(-4 32 32)">
+        <path d="M6 10 L58 10 L58 24 L6 24 Z" fill="var(--color-ink)" />
+        <g fill="var(--color-paper)">
+          <path d="M12 10 L20 10 L14 24 L6 24 Z" />
+          <path d="M28 10 L36 10 L30 24 L22 24 Z" />
+          <path d="M44 10 L52 10 L46 24 L38 24 Z" />
+        </g>
+        <rect x="6" y="26" width="52" height="30" fill="var(--color-ink)" />
+        <rect x="12" y="32" width="32" height="8" rx="3" fill="var(--color-mark)" transform="skewX(-4) translate(1 0)" />
+        <rect x="12" y="45" width="22" height="4.5" rx="2.25" fill="var(--color-paper)" opacity="0.85" />
       </g>
-      <rect x="19" y="26" width="26" height="12" rx="3" fill="var(--color-mark)" transform="skewX(-4) translate(2 0)" />
     </svg>
   )
 }

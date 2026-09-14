@@ -112,13 +112,12 @@ const ERAS: Record<string, React.ReactNode> = {
       <path d="M30 51 L26 64 M44 51 L48 64" />
     </g>
   ),
-  // 1920s: gramophone horn
+  // 1920s: director's megaphone
   '1920': (
     <g {...P}>
-      <path d="M28 46 C20 38 22 20 40 14 C46 26 46 40 40 48" />
-      <circle cx="24" cy="52" r="7" />
-      <path d="M31 52 L40 48" />
-      <path d="M14 62 L58 62" />
+      <path d="M14 32 L46 18 L46 52 L14 42 Z" />
+      <path d="M46 18 C56 22 56 48 46 52" />
+      <path d="M20 44 L25 62 L33 60 L28 45" />
     </g>
   ),
   // 1930s: on-air radio microphone
@@ -170,11 +169,13 @@ const ERAS: Record<string, React.ReactNode> = {
   // 1980s: boombox
   '1980': (
     <g {...P}>
-      <rect x="12" y="26" width="56" height="32" rx="4" />
-      <circle cx="26" cy="42" r="8" />
-      <circle cx="54" cy="42" r="8" />
-      <rect x="36" y="38" width="8" height="8" rx="1" />
-      <path d="M18 26 L24 14 M62 26 L56 14" />
+      <rect x="10" y="24" width="60" height="36" rx="4" />
+      <circle cx="25" cy="44" r="9" />
+      <circle cx="55" cy="44" r="9" />
+      <circle cx="25" cy="44" r="3" />
+      <circle cx="55" cy="44" r="3" />
+      <rect x="35" y="29" width="10" height="6" rx="1" />
+      <path d="M16 24 L22 12 M64 24 L58 12" />
     </g>
   ),
   // 1990s: brick cell phone

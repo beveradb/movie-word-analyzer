@@ -4,13 +4,19 @@ import { getMovieIndex } from '../lib/data'
 import { navigate } from '../lib/route'
 import { MovieSearch, Poster } from '../components/ui'
 import { FeaturedChart } from '../components/FeaturedChart'
-import { DecadeMotif } from '../components/motifs'
+import { EraMotif } from '../components/motifs'
 
 const HOME_DECADES = ['1930', '1950', '1970', '1990', '2010']
 
+const heroLink = (href: string, label: string) => (
+  <a href={href} className="underline decoration-2 underline-offset-2 hover:bg-mark hover:text-ink">
+    {label}
+  </a>
+)
+
 /** Hero: the pitch on the left, the product on the right - a live featured
  * trend chart doing the explaining for anyone who won't read or scroll. */
-function Hero() {
+function Hero({ count }: { count: number }) {
   return (
     <div className="mt-8 grid items-start gap-8 sm:mt-12 lg:grid-cols-2">
       <div>
@@ -24,8 +30,10 @@ function Hero() {
           .
         </h1>
         <p className="mt-4 max-w-xl text-ink-2">
-          Movie Words counts every word of dialogue in film subtitles - so you can see what any movie actually says,
-          watch words rise and fall across decades, and compare scripts head to head.
+          We counted every word spoken in {count ? count.toLocaleString() : '18,000+'} films - 126 million of
+          them. Watch {heroLink('#/trends?w=awesome,swell', "'awesome' overtake 'swell'")}, meet{' '}
+          {heroLink('#/leaderboard?b=films', 'the sweariest script ever made')}, and settle{' '}
+          {heroLink('#/compare?e=tt0078748,tt0090605', 'Alien vs Aliens')} word by word.
         </p>
         <div className="mt-6 max-w-md">
           <MovieSearch onPick={(m) => navigate(`/movie/${m.id}`)} />
@@ -57,7 +65,7 @@ export function HomeView() {
 
   return (
     <div>
-      <Hero />
+      <Hero count={count} />
 
       {featured.length > 0 && (
         <section className="mt-10">
@@ -93,9 +101,9 @@ export function HomeView() {
               From the talkies to the 2020s - how each era of cinema talked.
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-2 text-ink-3">
-            {HOME_DECADES.map((d) => (
-              <DecadeMotif key={d} decade={d} className="h-9 w-14" />
+          <div className="flex items-center gap-3 text-ink-3">
+            {HOME_DECADES.map((d, i) => (
+              <EraMotif key={d} decade={d} className={`h-11 w-11 ${i > 2 ? 'hidden sm:block' : ''}`} />
             ))}
             <span className="font-script text-sm font-bold text-ink">→</span>
           </div>
