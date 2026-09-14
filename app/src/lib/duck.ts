@@ -1,5 +1,5 @@
 import * as duckdb from '@duckdb/duckdb-wasm'
-import { DATA_BASE } from './data'
+import { dataUrl } from './data'
 
 let dbPromise: Promise<duckdb.AsyncDuckDBConnection> | null = null
 
@@ -53,7 +53,7 @@ export async function q<T = Record<string, unknown>>(sql: string): Promise<T[]> 
   })
 }
 
-export const pq = (name: string) => `read_parquet('${DATA_BASE}/${name}')`
+export const pq = (name: string) => `read_parquet('${dataUrl(name)}')`
 
 /** SQL string literal escape. */
 export const lit = (s: string) => `'${s.replaceAll("'", "''")}'`

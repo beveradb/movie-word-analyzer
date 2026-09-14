@@ -1,5 +1,11 @@
+import { activeCorpus } from './corpus'
+
 export const DATA_BASE =
   import.meta.env.VITE_DATA_BASE ?? 'https://data.moviewords.org'
+
+/** Corpus-scoped data URL. Posters are corpus-independent and keep using
+ * DATA_BASE directly - everything else lives under the corpus prefix. */
+export const dataUrl = (path: string) => `${DATA_BASE}/${activeCorpus().prefix}${path}`
 
 export interface MovieIndexEntry {
   id: string
@@ -10,12 +16,15 @@ export interface MovieIndexEntry {
   total_words: number
   unique_words: number
   genres: string[]
+  /** ISO 639-1 original language - present in indexes built after 2026-09-14 */
+  lang?: string
 }
 
 export interface MovieDetail {
   imdb_id: string
   title: string
   year: number
+  original_language?: string
   stats: { total_words: number; unique_words: number; words_per_minute: number | null }
   top: [string, number][]
   top_all: [string, number][]
@@ -38,7 +47,7 @@ const cache = new Map<string, Promise<unknown>>()
 
 export function fetchJSON<T>(path: string): Promise<T> {
   if (!cache.has(path)) {
-    const p = fetch(`${DATA_BASE}/${path}`).then((res) => {
+    const p = fetch(dataUrl(path)).then((res) => {
       if (!res.ok) throw new Error(`${res.status} fetching ${path}`)
       return res.json()
     })
