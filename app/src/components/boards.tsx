@@ -119,7 +119,7 @@ export function WondersBoard() {
   return (
     <div>
       <p className="mt-1 text-sm text-ink-2">
-        Words one film says more than the rest of cinema combined — character names, invented words, obsessions.
+        Words one film says more than the rest of cinema combined - character names, invented words, obsessions.
       </p>
       <ol className="mt-5">
         {data.map((r: WonderRow, i: number) => (
@@ -131,7 +131,7 @@ export function WondersBoard() {
               <a href={`#/movie/${r.id}`} className="underline hover:bg-mark">
                 {r.title}
               </a>{' '}
-              ({r.year}) — {Math.round(r.share * 100)}% of every time cinema says it
+              ({r.year}) - {Math.round(r.share * 100)}% of every time cinema says it
             </span>
           </li>
         ))}

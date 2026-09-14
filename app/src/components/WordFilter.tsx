@@ -101,7 +101,7 @@ export function WordFilterBar({
       </div>
       <p className="mt-1 text-ink-3">
         {filter.common === 'interesting'
-          ? 'hiding everyday English — the ~2,000 most common words (the, know, get…)'
+          ? 'hiding everyday English - the ~2,000 most common words (the, know, get…)'
           : 'showing every word, including everyday English'}
         {filter.pos.size > 0 &&
           ` · only ${POS_CHIPS.filter(([c]) => filter.pos.has(c))

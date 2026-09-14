@@ -247,13 +247,13 @@ export function CompareView() {
   return (
     <div>
       <p className="mt-1 text-sm text-ink-2">
-        Put films, decades, and genres side by side — up to three of any mix.
+        Put films, decades, and genres side by side - up to three of any mix.
       </p>
       {refs.length < MAX && <EntityPicker refs={refs} />}
       {featured && (
         <div className="mt-5 flex flex-wrap items-baseline gap-x-3 gap-y-1">
           <h2 className="slug text-sm">Featured matchup: {featured[0]}</h2>
-          <span className="font-script text-xs text-ink-2">rotates daily — or build your own above</span>
+          <span className="font-script text-xs text-ink-2">rotates daily - or build your own above</span>
           <span className="font-script text-xs text-ink-2">
             {MATCHUPS.filter((m) => m !== featured).map(([label, e]) => (
               <button key={e} onClick={() => navigate(`/compare?e=${e}`)} className="mr-2 underline hover:bg-mark">
@@ -356,7 +356,7 @@ export function CompareView() {
         <div className="mt-8 border-2 border-ink bg-card p-4">
           <h2 className="slug text-sm">Head to head</h2>
           <p className="mt-1 text-xs text-ink-2">
-            What each one says far more than the other{loaded.length > 2 ? 's' : ''} — rate per million words of its
+            What each one says far more than the other{loaded.length > 2 ? 's' : ''} - rate per million words of its
             own dialogue.
           </p>
           <div className="mt-3 grid gap-6 md:grid-cols-2 lg:grid-cols-3">

@@ -55,7 +55,7 @@ verified in a Playwright browser at desktop + mobile sizes.
   merges the pre-baked stopword rows so the toggle's promise is true on the
   hot path too.
 - **R2 uploads via rclone with derived S3 creds** — CLOUDFLARE_API_TOKEN
-  from `~/Projects/beveradb/.envrc` (access_key=token id from
+  from a local direnv file outside the repo (access_key=token id from
   /user/tokens/verify, secret=sha256(token)); wrangler alone is too slow for
   18k objects.
 - **Data before app** — all new fields additive; old clients ignore them.

@@ -65,17 +65,17 @@ Tests: 40 vitest pass (new `toSeries` + `stepFeatured` unit tests); `tsc -b` cle
 
 ## Learnings / gotchas
 
-- **Deploy: the Cloudflare token is in the PARENT `.envrc`, not the repo root.**
+- **Deploy: the Cloudflare token comes from a direnv file OUTSIDE the repo.**
   I initially (wrongly) concluded the deploy was blocked because the repo-root
-  `.envrc` only has `TMDB_API_KEY` and `wrangler whoami` read unauthenticated.
-  The real source is `/Users/andrew/Projects/beveradb/.envrc` (parent dir), which
-  exports `CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID`. direnv loads it
+  env only has the TMDB key and `wrangler whoami` read unauthenticated.
+  The real source is a direnv file in the parent directory (outside the repo),
+  which exports the Cloudflare deploy credentials. direnv loads it
   interactively but NOT in Claude's one-shot non-interactive shells. Fix:
-  `source /Users/andrew/Projects/beveradb/.envrc` then run wrangler, with the Bash
+  source that file then run wrangler, with the Bash
   sandbox disabled (needs network). There is NO CI/CD and NO Cloudflare Pages Git
   integration — pushing `main` alone does not deploy; the wrangler push is required.
-- **Manual deploy command:** from `app/`, `npm run build` then
-  `source /Users/andrew/Projects/beveradb/.envrc && npx wrangler pages deploy dist
+- **Manual deploy command:** from `app/`, `npm run build` then source the
+  parent-dir direnv file and `npx wrangler pages deploy dist
   --project-name moviewords`. Prod is `https://moviewords.beveradb.com`; verify the
   live JS bundle hash matches the local `app/dist` build.
 - **`type`-only circular import is fine.** `trends.ts` importing `type { Series }`
