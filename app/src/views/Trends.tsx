@@ -4,7 +4,7 @@ import { lit, pq, q } from '../lib/duck'
 import { navigate, useRoute } from '../lib/route'
 import { type YearTopMovie, groupTopMovies, topMovieRows } from '../lib/trends'
 import { FEATURED, dayIndex, stepFeatured } from '../lib/featured'
-import { loadWordSeries } from '../lib/series'
+import { loadFeaturedSeries, loadWordSeries } from '../lib/series'
 import { LineChart, type Series } from '../components/LineChart'
 import { ErrorBox, FeaturedNav, SeriesLegend, Spinner } from '../components/ui'
 
@@ -208,7 +208,10 @@ export function TrendsView() {
     let cancelled = false
     setLoading(true)
     setError(null)
-    loadWordSeries(chartWords, COLORS)
+    // featured trends chart from the pre-baked JSON so the landing view never
+    // waits on the SQL engine; user-typed words need the live query path
+    const load = featured ? loadFeaturedSeries : loadWordSeries
+    load(chartWords, COLORS)
       .then(({ series, plottedYears, trimmedYears, missing }) => {
         if (cancelled) return
         setSeries(series)

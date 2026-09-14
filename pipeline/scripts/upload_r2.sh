@@ -1,16 +1,52 @@
 #!/usr/bin/env bash
-# Sync data/out/ to the moviewords-data R2 bucket via rclone's S3 backend.
+# Upload pipeline/webdata/out/ to the moviewords-data R2 bucket, then purge
+# the Cloudflare edge cache so fresh data serves immediately.
+#
+# webdata/out normally holds a PARTIAL rebuild (only the stages you re-ran),
+# so this copies additively - NEVER `rclone sync`, which would delete every
+# bucket object missing locally.
+#
+# Cache-Control: json gets a 5-minute TTL (rebuilt often; a stale edge copy
+# of featured-series.json once silently pushed the homepage onto the full SQL
+# engine). Parquets/posters keep 24h - the post-upload purge swaps versions,
+# and parquet range reads revalidate via If-Range/ETag.
+#
 # Requires: CLOUDFLARE_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY
+# Optional: MOVIEWORDS_CF_TOKEN (needs Zone Read + Cache Purge on the
+#           moviewords.org zone) - skips the edge purge with a warning if
+#           unset. Purging the whole zone (not per-URL) is deliberate: data
+#           objects serve with `Vary: Origin`, and a single-URL purge misses
+#           the per-Origin variants unless each is named explicitly.
 set -euo pipefail
-cd "$(dirname "$0")/../.."
+cd "$(dirname "$0")/../webdata/out"
 : "${CLOUDFLARE_ACCOUNT_ID:?}" "${R2_ACCESS_KEY_ID:?}" "${R2_SECRET_ACCESS_KEY:?}"
 export RCLONE_CONFIG_R2_TYPE=s3
 export RCLONE_CONFIG_R2_PROVIDER=Cloudflare
 export RCLONE_CONFIG_R2_ACCESS_KEY_ID="$R2_ACCESS_KEY_ID"
 export RCLONE_CONFIG_R2_SECRET_ACCESS_KEY="$R2_SECRET_ACCESS_KEY"
 export RCLONE_CONFIG_R2_ENDPOINT="https://${CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com"
-# Cache-Control matters: without it Cloudflare serves every data request from
-# origin (cf-cache-status DYNAMIC) and browsers only heuristically cache.
-rclone sync data/out/ r2:moviewords-data/ --progress --checksum \
-  --header-upload "Cache-Control: public, max-age=86400"
-echo "Synced $(du -sh data/out | cut -f1) to r2:moviewords-data"
+
+rclone copy . r2:moviewords-data/ --checksum --progress \
+  --include '*.json' --header-upload "Cache-Control: public, max-age=300"
+rclone copy . r2:moviewords-data/ --checksum --progress \
+  --exclude '*.json' --header-upload "Cache-Control: public, max-age=86400"
+echo "Uploaded $(du -sh . | cut -f1) from webdata/out to r2:moviewords-data"
+
+if [[ -n "${MOVIEWORDS_CF_TOKEN:-}" ]]; then
+  # the upload already succeeded, so purge problems only warn - never fail
+  zone=$(curl -fsS -H "Authorization: Bearer $MOVIEWORDS_CF_TOKEN" \
+    "https://api.cloudflare.com/client/v4/zones?name=moviewords.org" |
+    python3 -c 'import json,sys; print(json.load(sys.stdin)["result"][0]["id"])' \
+    2>/dev/null) || zone=""
+  if [[ -n "$zone" ]] && curl -fsS -X POST \
+    -H "Authorization: Bearer $MOVIEWORDS_CF_TOKEN" \
+    -H "Content-Type: application/json" -d '{"purge_everything":true}' \
+    "https://api.cloudflare.com/client/v4/zones/${zone}/purge_cache" |
+    grep -q '"success": *true'; then
+    echo "Purged moviewords.org edge cache"
+  else
+    echo "WARNING: edge purge failed - stale data may serve up to the object TTL" >&2
+  fi
+else
+  echo "WARNING: MOVIEWORDS_CF_TOKEN unset - skipped edge purge (json stale up to 5 min, parquet up to 24h)" >&2
+fi
