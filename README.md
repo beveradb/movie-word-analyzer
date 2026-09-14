@@ -49,7 +49,8 @@ Details, decisions, and performance lessons: [`docs/ARCHITECTURE.md`](docs/ARCHI
 ## Download the data
 
 The full published dataset is five Parquet files on a public bucket — download
-them, or point DuckDB straight at the URLs:
+them, or point DuckDB straight at the URLs. Fuller guide with more example
+queries: [docs/DATA.md](docs/DATA.md).
 
 | File | Size | Contents |
 |---|---|---|

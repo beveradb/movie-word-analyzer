@@ -1,9 +1,12 @@
-import { useMemo, useRef, useState } from 'react'
+import { useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { togglePin } from '../lib/trends'
 
 export interface Series {
   name: string
   color: string
-  points: { x: number; y: number }[]
+  /** note: extra context rendered under the series row in the tooltip;
+   * noteHref makes it a link */
+  points: { x: number; y: number; note?: string; noteHref?: string }[]
 }
 
 const M = { top: 12, right: 16, bottom: 26, left: 46 }
@@ -49,7 +52,9 @@ export function LineChart({
   yLabel: string
 }) {
   const svgRef = useRef<SVGSVGElement>(null)
+  const wrapRef = useRef<HTMLDivElement>(null)
   const [hoverX, setHoverX] = useState<number | null>(null)
+  const [pinned, setPinned] = useState<number[]>([])
 
   const { xs, xMin, xMax, yMax } = useMemo(() => {
     const xs = [...new Set(series.flatMap((s) => s.points.map((p) => p.x)))].sort((a, b) => a - b)
@@ -88,35 +93,64 @@ export function LineChart({
     return best
   }
 
-  const hover = hoverX !== null && (
-    <g>
-      <line x1={sx(hoverX)} x2={sx(hoverX)} y1={M.top} y2={M.top + ih} stroke="var(--color-ink-3)" strokeDasharray="3 3" />
-      {series.map((s) => {
-        const p = s.points.find((p) => p.x === hoverX)
-        return p ? (
-          <circle key={s.name} cx={sx(p.x)} cy={sy(p.y)} r={4.5} fill={s.color} stroke="var(--color-paper)" strokeWidth={2} />
-        ) : null
-      })}
+  // pins survive re-renders but not a change of charted words: filter to
+  // years that still exist on the x axis
+  const pins = pinned.filter((x) => xs.includes(x))
+
+  const entriesAt = (x: number) =>
+    series
+      .map((s) => ({ s, p: s.points.find((p) => p.x === x) }))
+      .filter((e): e is { s: Series; p: Series['points'][number] } => !!e.p)
+
+  const crosshair = (x: number) => (
+    <g key={x}>
+      <line x1={sx(x)} x2={sx(x)} y1={M.top} y2={M.top + ih} stroke="var(--color-ink-3)" strokeDasharray="3 3" />
+      {entriesAt(x).map(({ s, p }) => (
+        <circle key={s.name} cx={sx(p.x)} cy={sy(p.y)} r={4.5} fill={s.color} stroke="var(--color-paper)" strokeWidth={2} />
+      ))}
     </g>
   )
 
-  const tooltip =
-    hoverX !== null
-      ? series
-          .map((s) => ({ s, p: s.points.find((p) => p.x === hoverX) }))
-          .filter((e): e is { s: Series; p: { x: number; y: number } } => !!e.p)
-      : []
+  // pinned tooltips first (in pin order), live hover box last
+  const boxes = [
+    ...pins.map((x) => ({ x, isPin: true })),
+    ...(hoverX !== null && !pins.includes(hoverX) ? [{ x: hoverX, isPin: false }] : []),
+  ]
+
+  // after each render, nudge any tooltip box that overlaps an earlier one
+  // downward, so multiple pins (plus the live hover) all stay readable
+  useLayoutEffect(() => {
+    const els = [...(wrapRef.current?.querySelectorAll<HTMLElement>('[data-tip]') ?? [])]
+    const placed: DOMRect[] = []
+    for (const el of els) {
+      el.style.top = '8px'
+      for (let guard = 0; guard < els.length; guard++) {
+        const r = el.getBoundingClientRect()
+        const hit = placed.find(
+          (p) => r.left < p.right + 6 && p.left < r.right + 6 && r.top < p.bottom + 6 && p.top < r.bottom,
+        )
+        if (!hit) break
+        el.style.top = `${parseFloat(el.style.top) + (hit.bottom - r.top) + 6}px`
+      }
+      placed.push(el.getBoundingClientRect())
+    }
+  })
 
   return (
-    <div className="relative">
+    // hover clears on leaving the wrapper (not the svg) so the mouse can
+    // travel onto the tooltip box and click its movie link
+    <div ref={wrapRef} className="relative" onMouseLeave={() => setHoverX(null)}>
       <svg
         ref={svgRef}
         viewBox={`0 0 ${width} ${height}`}
-        className="w-full select-none"
+        className="w-full cursor-crosshair select-none"
         role="img"
         aria-label={`${yLabel} by year`}
         onMouseMove={(e) => setHoverX(nearestX(e.clientX))}
-        onMouseLeave={() => setHoverX(null)}
+        onClick={(e) => {
+          const x = nearestX(e.clientX)
+          setPinned((p) => togglePin(p.filter((v) => xs.includes(v)), x))
+        }}
       >
         {yTicks.map((t) => (
           <g key={t}>
@@ -143,23 +177,53 @@ export function LineChart({
             points={s.points.map((p) => `${sx(p.x)},${sy(p.y)}`).join(' ')}
           />
         ))}
-        {hover}
+        {[...pins, ...(hoverX !== null && !pins.includes(hoverX) ? [hoverX] : [])].map(crosshair)}
       </svg>
-      {tooltip.length > 0 && (
-        <div
-          className="pointer-events-none absolute top-2 border-2 border-ink bg-card px-3 py-2 font-script text-xs shadow-[3px_3px_0_0_var(--color-ink)]"
-          style={{ left: `${Math.min((sx(hoverX!) / width) * 100, 70)}%` }}
-        >
-          <div className="font-bold">{hoverX}</div>
-          {tooltip.map(({ s, p }) => (
-            <div key={s.name} className="mt-0.5 flex items-center gap-1.5">
-              <span className="inline-block size-2.5 rounded-full" style={{ background: s.color }} />
-              <span>{s.name}</span>
-              <span className="ml-2 tabular-nums text-ink-2">{Math.round(p.y * 10) / 10}</span>
-            </div>
-          ))}
-        </div>
-      )}
+      {boxes.map(({ x, isPin }) => {
+        const entries = entriesAt(x)
+        if (entries.length === 0) return null
+        return (
+          <div
+            key={isPin ? `pin-${x}` : 'hover'}
+            data-tip
+            className={`absolute border-2 border-ink bg-card px-3 py-2 font-script text-xs shadow-[3px_3px_0_0_var(--color-ink)] ${
+              isPin ? 'group pointer-events-auto' : 'pointer-events-none'
+            }`}
+            style={{ left: `${Math.min((sx(x) / width) * 100, 70)}%`, top: 8 }}
+          >
+            {isPin && (
+              <button
+                onClick={() => setPinned((p) => p.filter((v) => v !== x))}
+                aria-label={`Unpin ${x}`}
+                className="absolute -right-2 -top-2 hidden size-5 border-2 border-ink bg-card leading-none group-hover:block"
+              >
+                ✕
+              </button>
+            )}
+            <div className="font-bold">{x}</div>
+            {entries.map(({ s, p }) => (
+              <div key={s.name} className="mt-0.5">
+                <div className="flex items-center gap-1.5">
+                  <span className="inline-block size-2.5 rounded-full" style={{ background: s.color }} />
+                  <span>{s.name}</span>
+                  <span className="ml-2 tabular-nums text-ink-2">{Math.round(p.y * 10) / 10}</span>
+                </div>
+                {p.note &&
+                  (p.noteHref ? (
+                    <a
+                      href={p.noteHref}
+                      className="pointer-events-auto ml-4 block max-w-52 truncate text-ink-3 underline hover:bg-mark"
+                    >
+                      {p.note}
+                    </a>
+                  ) : (
+                    <div className="ml-4 max-w-52 truncate text-ink-3">{p.note}</div>
+                  ))}
+              </div>
+            ))}
+          </div>
+        )
+      })}
     </div>
   )
 }

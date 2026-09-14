@@ -9,6 +9,35 @@
  * each). Every kept year has 18+ films. */
 export const MIN_YEAR_WORDS = 100_000
 
+export interface YearTopMovie {
+  imdb_id: string
+  title: string
+  count: number
+}
+
+/** Flat top-movie-per-year query rows → word → year → that year's top movie. */
+export const groupTopMovies = (
+  rows: (YearTopMovie & { word: string; year: number })[],
+): Map<string, Map<number, YearTopMovie>> => {
+  const byWord = new Map<string, Map<number, YearTopMovie>>()
+  for (const { word, year, imdb_id, title, count } of rows) {
+    if (!byWord.has(word)) byWord.set(word, new Map())
+    byWord.get(word)!.set(year, { imdb_id, title, count })
+  }
+  return byWord
+}
+
+/** One row per plotted year, ascending; movie is null where the word never
+ * occurs so the year sequence stays unbroken. */
+export const topMovieRows = (years: number[], byYear: Map<number, YearTopMovie> | undefined) =>
+  [...years].sort((a, b) => a - b).map((year) => ({ year, movie: byYear?.get(year) ?? null }))
+
+/** Click-to-pin on the trend chart: toggle a year in the pinned list,
+ * dropping the oldest pin beyond `max` so exploring never needs a manual
+ * unpin first. */
+export const togglePin = (pins: number[], x: number, max = 3) =>
+  pins.includes(x) ? pins.filter((v) => v !== x) : [...pins, x].slice(-max)
+
 /** "1916–1929, 2024" from a sorted list of years */
 export const formatYearRanges = (years: number[]) =>
   years

@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useRoute } from './lib/route'
-import { DATA_BASE } from './lib/data'
 import { HomeView } from './views/Home'
 import { MovieView } from './views/Movie'
 import { TrendsView } from './views/Trends'
@@ -27,14 +26,6 @@ function ThemeToggle() {
     </button>
   )
 }
-
-const DATASET_FILES = [
-  { path: 'movies.parquet', size: '0.8 MB', what: 'one row per film: title, year, genres, rating, word totals' },
-  { path: 'words_by_movie/data.parquet', size: '88 MB', what: '(imdb_id, word, count), sorted by film' },
-  { path: 'words_by_word/data.parquet', size: '93 MB', what: 'same rows, sorted by word' },
-  { path: 'word_year.parquet', size: '6 MB', what: '(word, year, count, movie_count) for trends' },
-  { path: 'word_meta.parquet', size: '3.5 MB', what: 'per-word commonness (zipf), part of speech, distinctiveness' },
-]
 
 const TABS = [
   { hash: '#/', label: 'Explore', match: '' },
@@ -83,76 +74,61 @@ export default function App() {
       </main>
 
       <footer className="mt-20 border-t-2 border-ink pt-4 text-xs leading-5 text-ink-2">
-        <p className="font-script font-bold uppercase text-ink">Fade out.</p>
+        <p className="font-script font-bold uppercase text-ink">Explore the data yourself.</p>
         <p className="mt-2">
-          Open source:{' '}
-          <a className="underline" href="https://github.com/beveradb/movie-word-analyzer">
-            github.com/beveradb/movie-word-analyzer
-          </a>
-          . Only derived word counts are published — no subtitle text is redistributed.
-        </p>
-        <p className="mt-1">
-          Data: word counts derived from the{' '}
-          <a className="underline" href="https://opus.nlpl.eu/datasets/OpenSubtitles">
-            OPUS OpenSubtitles corpus
-          </a>{' '}
-          (Lison &amp; Tiedemann, 2016), built from subtitles by{' '}
-          <a className="underline" href="http://www.opensubtitles.org/">
-            OpenSubtitles.org
-          </a>
-          ; IMDb non-commercial datasets; and{' '}
-          <a className="underline" href="https://www.themoviedb.org">
-            TMDB
-          </a>
-          . Non-commercial project.
-        </p>
-
-        <p className="mt-4 font-script font-bold uppercase text-ink">Take the data.</p>
-        <p className="mt-2">
-          The full dataset is five Parquet files on a public bucket — download them, or point
-          DuckDB straight at the URLs and skip the download entirely:
-        </p>
-        <ul className="mt-1 list-inside list-disc">
-          {DATASET_FILES.map((f) => (
-            <li key={f.path}>
-              <a className="underline" href={`${DATA_BASE}/${f.path}`} download>
-                {f.path}
-              </a>{' '}
-              ({f.size}) — {f.what}
-            </li>
-          ))}
-        </ul>
-        <pre className="mt-2 overflow-x-auto border-2 border-ink-2 p-2">
-          {`duckdb -c "SELECT title, year, words_per_minute FROM '${DATA_BASE}/movies.parquet' ORDER BY words_per_minute DESC LIMIT 10"`}
-        </pre>
-        <p className="mt-1">
-          Full schema in{' '}
+          The full dataset is five Parquet files on a public bucket - see{' '}
           <a
             className="underline"
-            href="https://github.com/beveradb/movie-word-analyzer/blob/main/docs/ARCHITECTURE.md#the-dataset-contract"
+            href="https://github.com/beveradb/movie-word-analyzer/blob/main/docs/DATA.md"
           >
-            the dataset contract
-          </a>
-          . License:{' '}
+            the data guide
+          </a>{' '}
+          for download links, schema, and ready-to-run DuckDB queries (
           <a className="underline" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
             CC BY-NC-SA 4.0
-          </a>{' '}
-          (non-commercial, attribution, share-alike).
+          </a>
+          ).
         </p>
 
         <p className="mt-4 font-script font-bold uppercase text-ink">Got an idea?</p>
         <p className="mt-2">
-          There must be cool analyses this data could power that we haven&apos;t thought of. If
-          you&apos;d love to see one here — or you&apos;ve built something with the data —{' '}
+          There must be interesting analyses we haven&apos;t thought of! If you want to share an
+          idea or have built something cool with the data,{' '}
           <a className="underline" href="mailto:andrew@beveridge.uk?subject=Movie%20Words%20idea">
             email andrew@beveridge.uk
           </a>
-          .
         </p>
 
         <p className="mt-4 font-script font-bold uppercase text-ink">Credits.</p>
         <p className="mt-2">
-          Made by Andrew Beveridge —{' '}
+          Open source:{' '}
+          <a className="underline" href="https://github.com/beveradb/movie-word-analyzer">
+            github.com/beveradb/movie-word-analyzer
+          </a>{' '}
+          and non-commercial. Only derived word counts are published - no subtitle text is
+          redistributed.
+        </p>
+        <p className="mt-1">
+          Data: word counts from the{' '}
+          <a className="underline" href="https://opus.nlpl.eu/datasets/OpenSubtitles">
+            OPUS OpenSubtitles corpus
+          </a>{' '}
+          (Lison &amp; Tiedemann, 2016), via{' '}
+          <a className="underline" href="http://www.opensubtitles.org/">
+            OpenSubtitles.org
+          </a>
+          ; film metadata from{' '}
+          <a className="underline" href="https://developer.imdb.com/non-commercial-datasets/">
+            IMDb
+          </a>{' '}
+          and{' '}
+          <a className="underline" href="https://www.themoviedb.org">
+            TMDB
+          </a>
+          .
+        </p>
+        <p className="mt-1">
+          Made by Andrew Beveridge -{' '}
           <a className="underline" href="https://github.com/beveradb/">
             GitHub
           </a>{' '}
@@ -163,14 +139,12 @@ export default function App() {
           ·{' '}
           <a className="underline" href="https://www.instagram.com/beveradb/">
             Instagram
-          </a>
-        </p>
-        <p className="mt-2">
-          Original idea by my lovely wife{' '}
+          </a>{' '}
+          - with the original idea by my lovely wife{' '}
           <a className="underline" href="https://lindsaywright.design/">
             Lindsay Wright
           </a>{' '}
-          — go see her graphic design portfolio.
+          - check out her graphic design portfolio!
         </p>
       </footer>
     </div>
