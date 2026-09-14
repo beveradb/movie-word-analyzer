@@ -1,10 +1,9 @@
 import { useEffect, useMemo, useState } from 'react'
 import { getShifts, type Shifts } from '../lib/data'
-import { lit, pq, q } from '../lib/duck'
 import { navigate, useRoute } from '../lib/route'
-import { type YearTopMovie, groupTopMovies, topMovieRows } from '../lib/trends'
+import { type TopFilm, type YearTopMovie, topMovieRows } from '../lib/trends'
 import { FEATURED, dayIndex, stepFeatured } from '../lib/featured'
-import { loadFeaturedSeries, loadWordSeries } from '../lib/series'
+import { loadFeaturedSeries, loadTrends } from '../lib/series'
 import { LineChart, type Series } from '../components/LineChart'
 import { ErrorBox, FeaturedNav, SeriesLegend, Spinner } from '../components/ui'
 
@@ -41,34 +40,9 @@ function ShiftStrip() {
   )
 }
 
-interface TopFilmRow {
-  imdb_id: string
-  title: string
-  year: number
-  count: number
-  total_words: number
-}
-
-/** Answers "which movie says this word the most?" */
-function TopFilms({ word }: { word: string }) {
-  const [rows, setRows] = useState<TopFilmRow[] | null>(null)
-
-  useEffect(() => {
-    let cancelled = false
-    setRows(null)
-    q<TopFilmRow>(
-      `SELECT w.imdb_id, m.title, m.year, w.count::DOUBLE AS count, m.total_words::DOUBLE AS total_words
-       FROM ${pq('words_by_word/data.parquet')} w
-       JOIN ${pq('movies.parquet')} m USING (imdb_id)
-       WHERE w.word = ${lit(word)} ORDER BY w.count DESC LIMIT 15`,
-    )
-      .then((r) => !cancelled && setRows(r))
-      .catch(() => !cancelled && setRows([]))
-    return () => {
-      cancelled = true
-    }
-  }, [word])
-
+/** Answers "which movie says this word the most?" - fed by the pre-baked
+ * per-word data (null while the trend fetch is still in flight). */
+function TopFilms({ word, rows }: { word: string; rows: TopFilm[] | null }) {
   if (rows === null) return <Spinner label={`Finding films that say “${word}” most…`} />
   if (rows.length === 0) return null
   const max = rows[0].count
@@ -143,10 +117,12 @@ function WordDetails({
   words,
   years,
   topMovies,
+  topFilms,
 }: {
   words: string[]
   years: number[]
   topMovies: Map<string, Map<number, YearTopMovie>> | null
+  topFilms: Map<string, TopFilm[]> | null
 }) {
   const [active, setActive] = useState(0)
   const word = words[Math.min(active, words.length - 1)]
@@ -170,7 +146,7 @@ function WordDetails({
           ))}
         </div>
       )}
-      <TopFilms word={word} />
+      <TopFilms word={word} rows={topFilms?.get(word) ?? null} />
       {topMovies === null ? (
         <Spinner label={`Finding top “${word}” film per year…`} />
       ) : (
@@ -188,8 +164,9 @@ export function TrendsView() {
   )
   const [input, setInput] = useState('')
   const [series, setSeries] = useState<Series[] | null>(null)
-  // null while the (heavier) top-movie query is in flight
+  // per-word top-movie notes + films tables; null while the trend fetch runs
   const [topMovies, setTopMovies] = useState<Map<string, Map<number, YearTopMovie>> | null>(null)
+  const [topFilms, setTopFilms] = useState<Map<string, TopFilm[]> | null>(null)
   const [plottedYears, setPlottedYears] = useState<number[]>([])
   const [missing, setMissing] = useState<string[]>([])
   const [trimmedYears, setTrimmedYears] = useState<string | null>(null)
@@ -208,41 +185,36 @@ export function TrendsView() {
     let cancelled = false
     setLoading(true)
     setError(null)
-    // featured trends chart from the pre-baked JSON so the landing view never
-    // waits on the SQL engine; user-typed words need the live query path
-    const load = featured ? loadFeaturedSeries : loadWordSeries
-    load(chartWords, COLORS)
-      .then(({ series, plottedYears, trimmedYears, missing }) => {
-        if (cancelled) return
-        setSeries(series)
-        setPlottedYears(plottedYears)
-        setTrimmedYears(trimmedYears)
-        setMissing(missing)
-      })
-      .catch((e) => !cancelled && setError(String(e)))
-      .finally(() => !cancelled && setLoading(false))
-    return () => {
-      cancelled = true
-    }
-  }, [wordsKey])
-
-  // top movie per word per year, from the big words_by_word file - fetched
-  // separately so the chart never waits on it, and a failure here only costs
-  // the tooltip notes and by-year table, not the chart itself
-  useEffect(() => {
-    let cancelled = false
     setTopMovies(null)
-    q<YearTopMovie & { word: string; year: number }>(
-      `SELECT word, year, imdb_id, title, count FROM (
-         SELECT w.word, m.year, w.imdb_id, m.title, w.count::DOUBLE AS count,
-                ROW_NUMBER() OVER (PARTITION BY w.word, m.year ORDER BY w.count DESC, m.title) AS rn
-         FROM ${pq('words_by_word/data.parquet')} w
-         JOIN ${pq('movies.parquet')} m USING (imdb_id)
-         WHERE w.word IN (${chartWords.map(lit).join(',')})
-       ) WHERE rn = 1`,
-    )
-      .then((rows) => !cancelled && setTopMovies(groupTopMovies(rows)))
-      .catch(() => !cancelled && setTopMovies(new Map()))
+    setTopFilms(null)
+    // featured trends chart reads its own pre-baked JSON (no tables); user words
+    // read the per-word bake - chart + both tables in a few KB, no SQL engine
+    // (a stale/missing bake degrades to the live engine inside loadTrends)
+    if (featured) {
+      loadFeaturedSeries(chartWords, COLORS)
+        .then(({ series, plottedYears, trimmedYears, missing }) => {
+          if (cancelled) return
+          setSeries(series)
+          setPlottedYears(plottedYears)
+          setTrimmedYears(trimmedYears)
+          setMissing(missing)
+        })
+        .catch((e) => !cancelled && setError(String(e)))
+        .finally(() => !cancelled && setLoading(false))
+    } else {
+      loadTrends(chartWords, COLORS)
+        .then(({ wordSeries, topMovies, topFilms }) => {
+          if (cancelled) return
+          setSeries(wordSeries.series)
+          setPlottedYears(wordSeries.plottedYears)
+          setTrimmedYears(wordSeries.trimmedYears)
+          setMissing(wordSeries.missing)
+          setTopMovies(topMovies)
+          setTopFilms(topFilms)
+        })
+        .catch((e) => !cancelled && setError(String(e)))
+        .finally(() => !cancelled && setLoading(false))
+    }
     return () => {
       cancelled = true
     }
@@ -342,7 +314,13 @@ export function TrendsView() {
       )}
       {words.length > 0 && !loading && !error && (
         // key resets the active tab whenever the word list changes
-        <WordDetails key={words.join(',')} words={words} years={plottedYears} topMovies={topMovies} />
+        <WordDetails
+          key={words.join(',')}
+          words={words}
+          years={plottedYears}
+          topMovies={topMovies}
+          topFilms={topFilms}
+        />
       )}
       {featured && !loading && <ShiftStrip />}
       {!words.length && (

@@ -58,6 +58,45 @@ export interface YearRow {
   count: number
 }
 
+/** A word → filename/URL key for the pre-baked `json/trend/<key>.json` files.
+ * MUST stay byte-for-byte identical to the pipeline's Python `quote(w, safe="")`
+ * (RFC3986: only `A-Z a-z 0-9 - _ . ~` stay literal). `encodeURIComponent`
+ * leaves `! ' ( ) *` unescaped, so we percent-encode those too - otherwise
+ * words like `don't` would resolve to the wrong key and 404. */
+export const wordKey = (word: string): string =>
+  encodeURIComponent(word).replace(/[!'()*]/g, (c) => `%${c.charCodeAt(0).toString(16).toUpperCase()}`)
+
+/** Shape of a pre-baked per-word trend file. Compact arrays keep files tiny;
+ * field order is a contract with the pipeline bake (see the handoff spec). */
+export interface TrendFile {
+  /** [year, count] for this word, ascending by year. */
+  line: [number, number][]
+  /** up to 15 [imdb_id, title, year, count, total_words], count DESC. */
+  top: [string, string, number, number, number][]
+  /** [year, imdb_id, title, count] - the single top film per year. */
+  byYear: [number, string, string, number][]
+}
+
+export interface TopFilm {
+  imdb_id: string
+  title: string
+  year: number
+  count: number
+  total_words: number
+}
+
+/** Baked line → the flat YearRow shape `toSeries` consumes. */
+export const trendYearRows = (word: string, file: TrendFile): YearRow[] =>
+  file.line.map(([year, count]) => ({ word, year, count }))
+
+/** Baked top array → the objects the Films-that-say-it-most table renders. */
+export const trendTopFilms = (file: TrendFile): TopFilm[] =>
+  file.top.map(([imdb_id, title, year, count, total_words]) => ({ imdb_id, title, year, count, total_words }))
+
+/** Baked byYear array → the year→top-movie map the by-year table renders. */
+export const trendByYear = (file: TrendFile): Map<number, YearTopMovie> =>
+  new Map(file.byYear.map(([year, imdb_id, title, count]) => [year, { imdb_id, title, count }]))
+
 export interface WordSeries {
   series: Series[]
   plottedYears: number[]
