@@ -71,3 +71,22 @@ def test_chinese_merges_two_codes(tmp_path):
     assert n == 2
     wy = duckdb.sql(f"SELECT word, SUM(count) FROM '{tmp_path}/lang/zh/word_year.parquet' GROUP BY word").fetchall()
     assert wy == [("fight", 42)]
+
+
+def test_slice_then_rebuild_stage_trends(tmp_path, monkeypatch):
+    import rebuild_web_data as rwd
+    from build_lang_slice import build_slice
+    all_in = tmp_path / "in" / "all"
+    _make_all_inputs(all_in)
+    build_slice(all_in, all_in / "lang" / "es", ["es"])
+
+    monkeypatch.setattr(rwd, "ROOT", tmp_path)
+    rwd.set_corpus("all", lang="es")
+    rwd.OUT.mkdir(parents=True, exist_ok=True)
+    rwd.stage_trends(rwd.connect())
+
+    import json
+    amor = json.loads((rwd.OUT / "json" / "trend" / "amor.json").read_text())
+    assert amor["line"] == [[2000, 40], [2004, 60]]
+    # the en-only 'gun' word is absent from the es slice
+    assert not (rwd.OUT / "json" / "trend" / "gun.json").exists()
