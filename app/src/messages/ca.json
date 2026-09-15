@@ -1,0 +1,403 @@
+{
+  "compare": {
+    "orLabel": "o",
+    "addDecadeAriaLabel": "Afegeix una dècada",
+    "addDecadeOption": "Afegeix una dècada…",
+    "addFilmPlaceholder": "Afegeix una pel·lícula…",
+    "addGenreAriaLabel": "Afegeix un gènere",
+    "addGenreOption": "Afegeix un gènere…",
+    "decadeLabel": "ELS ANYS {decade}",
+    "decadeOptionLabel": "Anys {decade}",
+    "distinctWordsLabel": "Paraules diferents",
+    "featuredMatchupPrefix": "Enfrontament destacat: {title}",
+    "filmsLabel": "Pel·lícules",
+    "filmsPerYearLabel": "pel·lícules / any",
+    "filmsPerYearTitle": "Pel·lícules per any d'estrena en aquesta part del corpus",
+    "fullBreakdownLink": "desglossament complet →",
+    "headToHeadHeading": "Cara a cara",
+    "introBody": "Posa pel·lícules, dècades i gèneres de costat - fins a tres de qualsevol combinació.",
+    "loadingLabel": "Carregant…",
+    "movieLabel": "{title} - {year}",
+    "navNoun": "enfrontament",
+    "navSuffix": "canvia cada dia - o crea el teu a dalt",
+    "noStandoutWords": "cap paraula destacada",
+    "nothingFoundMessage": "No s'ha trobat res per a aquesta selecció.",
+    "pickFilmPlaceholder": "Tria una pel·lícula…",
+    "ratioMoreLabel": "{ratio}× més",
+    "removeButton": "elimina",
+    "sharedSignatureWordsHeading": "Paraules característiques que comparteixen",
+    "signatureWordsHeading": "Paraules característiques {note}",
+    "signatureWordsHighlightedNote": "(ressaltat = compartit)",
+    "swearsPer1kLabel": "Renecs / 1k paraules",
+    "wordsPerFilmLabel": "Paraules / pel·lícula",
+    "wordsSpokenLabel": "Paraules pronunciades",
+    "headToHeadIntroMany": "El que cadascun diu molt més que els altres - freqüència per milió de paraules del seu propi diàleg.",
+    "headToHeadIntroPair": "El que cadascun diu molt més que l'altre - freqüència per milió de paraules del seu propi diàleg."
+  },
+  "languageSwitcher": {
+    "current": "Idioma",
+    "label": "Tria l'idioma"
+  },
+  "nav": {
+    "sectionsLabel": "Seccions",
+    "compare": "Compara",
+    "decades": "Dècades",
+    "explore": "Explora",
+    "genres": "Gèneres",
+    "leaderboard": "Classificació",
+    "trends": "Tendències"
+  },
+  "pos": {
+    "other": "altres",
+    "a": "adjectius",
+    "adjective": "adjectiu",
+    "adverb": "adverbi",
+    "n": "substantius",
+    "noun": "substantiu",
+    "r": "adverbis",
+    "v": "verbs",
+    "verb": "verb",
+    "x": "noms i altres"
+  },
+  "ui": {
+    "errorBox": {
+      "retryButton": "Reintenta",
+      "heading": "Escena perduda"
+    },
+    "featuredNav": {
+      "nextAriaLabel": "Següent {noun} destacat",
+      "position": "{idx} de {len}",
+      "prevAriaLabel": "{noun} destacat anterior"
+    },
+    "highlightWord": {
+      "spokenTimes": "pronunciada {count} vegades",
+      "title": "“{word}” - {display}"
+    },
+    "movieSearch": {
+      "ariaLabel": "Cerca pel·lícules",
+      "placeholder": "Cerca un títol de pel·lícula…"
+    },
+    "poster": {
+      "alt": "Pòster de {title}"
+    },
+    "seriesLegend": {
+      "exploreTitle": "Explora “{word}”"
+    },
+    "slug": {
+      "defaultPrefix": "INT."
+    },
+    "wordFilterBar": {
+      "allButton": "totes les paraules",
+      "anyKindButton": "qualsevol tipus",
+      "commonnessAriaLabel": "Freqüència de la paraula",
+      "hidingDescription": "ocultant l'idioma quotidià - les ~2.000 paraules més comunes (el, saber, aconseguir…)",
+      "interestingButton": "paraules interessants",
+      "onlyKindsSuffix": " · només {kinds}",
+      "showingDescription": "mostrant totes les paraules, inclòs l'idioma quotidià"
+    }
+  },
+  "boards": {
+    "films": {
+      "chattiestBlurb": "més paraules per minut de metratge",
+      "chattiestFmt": "{v} p/min",
+      "chattiestTitle": "Els més xerraires",
+      "intro": "Els que baten rècords del corpus, quatre categories de guions extrems.",
+      "loadingSpinner": "Carregant els superlatius de les pel·lícules…",
+      "repetitiveBlurb": "menor proporció de paraules diferents",
+      "repetitiveFmt": "{v}% úniques",
+      "repetitiveTitle": "Guions més repetitius",
+      "sweariestBlurb": "renecs per cada 1.000 paraules",
+      "sweariestFmt": "{v}/1k",
+      "sweariestTitle": "Guions amb més renecs",
+      "vocabularyBlurb": "més paraules diferents en un guió",
+      "vocabularyFmt": "{v} paraules",
+      "vocabularyTitle": "Vocabularis més amplis"
+    },
+    "overview": {
+      "adjectivesBlurb": "els adjectius interessants més pronunciats",
+      "adjectivesTitle": "Adjectius del cinema",
+      "fallingBlurb": "es diuen molt menys ara que als inicis del cinema",
+      "intro": "Els titulars del corpus - els cinc primers de cada tauler. Segueix qualsevol targeta per veure la llista completa, filtres i més.",
+      "loadingSpinner": "Carregant els titulars…",
+      "risingBlurb": "es diuen molt més ara que als inicis del cinema",
+      "ubiquityBlurb": "paraules que gairebé cap guió omet",
+      "wondersBlurb": "paraules que pertanyen a una sola pel·lícula"
+    },
+    "ratio": {
+      "down": "{label}× menys",
+      "up": "{label}× més"
+    },
+    "shifts": {
+      "fallingTitle": "Desapareixent",
+      "intro": "Com ha canviat el diàleg: paraules que es diuen molt més (o molt menys) per milió de paraules ara (anys 2010-20) que als inicis del cinema (anys 1930-40). Les línies tracen cada dècada; fes clic a una paraula per veure el gràfic complet.",
+      "loadingSpinner": "Carregant canvis…",
+      "risingTitle": "A l'alça"
+    },
+    "taster": {
+      "seeAllLink": "veure-ho tot →"
+    },
+    "ubiquity": {
+      "intro": "Més enllà dels connectors purs, aquestes paraules apareixen en gairebé cadascuna de les {nFilms} pel·lícules.",
+      "loadingSpinner": "Carregant…",
+      "shareOfFilms": "{share}% de les pel·lícules"
+    },
+    "wonders": {
+      "intro": "Paraules que una pel·lícula diu més que la resta del cinema combinat - noms de personatges, paraules inventades, obsessions.",
+      "item": "dita {count} vegades a {movieLink} ({year}) - el {share}% de totes les vegades que el cinema la diu",
+      "loadingSpinner": "Carregant meravelles d'una sola pel·lícula…"
+    }
+  },
+  "chart": {
+    "axisAriaLabel": "{yLabel} per any",
+    "chartingSpinner": "Traçant un canvi destacat…",
+    "loadFailedMessage": "No s'ha pogut traçar aquest - prova el següent ▶",
+    "moreTrendsLink": "més tendències →",
+    "trendNoun": "tendència",
+    "unpinAriaLabel": "Desfixa {year}",
+    "usesPerMillionCaption": "usos per milió de paraules de diàleg",
+    "yAxisLabel": "usos per milió de paraules"
+  },
+  "decadesView": {
+    "decadeLabel": "Anys {decade}",
+    "eyebrow": "Navega per",
+    "filmsCount": "{count} pel·lícules",
+    "loadError": "No s'han pogut carregar les dècades.",
+    "loadingSpinner": "Carregant dècades…",
+    "subtitle": "Com parlava cada època del cinema - {count} estudis.",
+    "title": "DÈCADES",
+    "notEnoughFilms": "No hi ha prou pel·lícules en {langs} per a això - afegeix idiomes o canvia a Totes les pel·lícules."
+  },
+  "entity": {
+    "compareButton": "Compara {label} amb…",
+    "decadeEyebrow": "Est. {decade}",
+    "decadeLabel": "ELS ANYS {decade}",
+    "decadeSubject": "els anys {decade}",
+    "genreEyebrow": "Estudi de gènere",
+    "kindDecade": "dècada",
+    "kindGenre": "gènere",
+    "loadingSpinner": "Carregant…",
+    "mostSpokenBody": "Recomptes simples, paraules buides excloses.",
+    "mostSpokenHeading": "Paraules més pronunciades",
+    "notFound": "Cap {kind} “{id}” al conjunt de dades.",
+    "notableScriptsHeading": "Guions destacats",
+    "signatureWordsBody": "Del que {subject} parla molt més que les pel·lícules en general.",
+    "signatureWordsHeading": "Paraules característiques",
+    "statsLine": "{films} pel·lícules · {words} paraules de diàleg",
+    "notEnoughFilms": "No hi ha prou pel·lícules en {langs} per a {subject} - afegeix idiomes o canvia a Totes les pel·lícules."
+  },
+  "eras": {
+    "1910": "les primeres bobines",
+    "1920": "arriba el cinema sonor",
+    "1930": "l'edat d'or",
+    "1940": "guerra i cinema negre",
+    "1950": "l'era atòmica",
+    "1960": "la nouvelle vague",
+    "1970": "el Nou Hollywood",
+    "1980": "l'era dels blockbusters",
+    "1990": "el boom indie",
+    "2000": "els anys dels multiplex",
+    "2010": "l'alba de l'streaming",
+    "2020": "el cinema d'ara"
+  },
+  "errors": {
+    "body": "Ho sentim - una {reload} normalment ho soluciona. Encara no funciona? Envia un correu a {email}.",
+    "eyebrow": "Tall brusc a:",
+    "reload": "recàrrega",
+    "title": "Alguna cosa s'ha trencat."
+  },
+  "footer": {
+    "creditsBody": "Codi obert: {github} i no comercial. Només es publiquen recomptes de paraules derivats - no es redistribueix text de subtítols.",
+    "creditsHeading": "Crèdits.",
+    "dataBody": "El conjunt de dades complet està disponible per descarregar - consulta {dataGuide} per a enllaços i informació ({license}). Et preguntes sobre la metodologia, els biaixos o els drets d'autor? Llegeix les {faq}.",
+    "dataGuideLink": "la guia de dades",
+    "dataHeading": "Aconsegueix les dades.",
+    "dataSourcesBody": "Dades: recomptes de paraules de l'{opus} (Lison & Tiedemann, 2016), via {openSubtitles}; metadades de pel·lícules de {imdbData} i {tmdb}. Informació cortesia d'IMDb ({imdbUrl}). Usat amb permís.",
+    "faqLink": "FAQ",
+    "githubLink": "github.com/beveradb/moviewords",
+    "githubProfileLink": "GitHub",
+    "ideaBody": "Deu haver-hi anàlisis interessants en què no hem pensat! Si vols compartir una idea o has creat alguna cosa xula amb les dades, {email}",
+    "ideaEmailLink": "envia un correu a andrew@beveridge.uk",
+    "ideaHeading": "Tens alguna idea?",
+    "imdbDataLink": "IMDb",
+    "imdbUrlLink": "https://www.imdb.com",
+    "instagramLink": "Instagram",
+    "licenseLink": "CC BY-NC-SA 4.0",
+    "lindsayLink": "Lindsay Wright Graphic Design",
+    "linkedinLink": "LinkedIn",
+    "madeByBody": "Creat per Andrew Beveridge - {github} · {linkedin} · {instagram} - amb la idea original de la meva encantadora dona {lindsay} - fes un cop d'ull al seu portafoli!",
+    "openSubtitlesLink": "OpenSubtitles.org",
+    "opusLink": "Corpus OPUS OpenSubtitles",
+    "takedownEmailLink": "Envia un correu de retirada",
+    "tmdbDisclaimerBody": "Aquest producte utilitza l'API de TMDB però no està avalat ni certificat per TMDB. Pòsters via TMDB - drets d'autor dels seus respectius estudis, mostrats per identificar les pel·lícules tractades. Ets el titular dels drets? {takedown} i es retirarà ràpidament.",
+    "tmdbLink": "TMDB"
+  },
+  "genres": {
+    "Action": "Acció",
+    "Adult": "Adults",
+    "Adventure": "Aventura",
+    "Animation": "Animació",
+    "Biography": "Biografia",
+    "Comedy": "Comèdia",
+    "Crime": "Crim",
+    "Documentary": "Documental",
+    "Drama": "Drama",
+    "Family": "Família",
+    "Fantasy": "Fantasia",
+    "Film-Noir": "Cinema negre",
+    "History": "Història",
+    "Horror": "Terror",
+    "Music": "Música",
+    "Musical": "Musical",
+    "Mystery": "Misteri",
+    "News": "Notícies",
+    "Reality-TV": "Reality-TV",
+    "Romance": "Romanç",
+    "Sci-Fi": "Ciència-ficció",
+    "Sport": "Esport",
+    "Thriller": "Suspens",
+    "War": "Bèl·lic",
+    "Western": "Western"
+  },
+  "genresView": {
+    "eyebrow": "Navega per",
+    "filmsCount": "{count} pel·lícules",
+    "loadError": "No s'han pogut carregar els gèneres.",
+    "loadingSpinner": "Carregant gèneres…",
+    "subtitle": "De què parla cada gènere - {count} estudis.",
+    "title": "GÈNERES",
+    "notEnoughFilms": "No hi ha prou pel·lícules en {langs} per a això - afegeix idiomes o canvia a Totes les pel·lícules."
+  },
+  "home": {
+    "aboutHeading": "Sobre aquest conjunt de dades",
+    "decadesBody": "Des del cinema sonor fins als anys 2020 - com parlava cada època del cinema.",
+    "decadesHeading": "Passeja per les dècades",
+    "fadeIn": "Fos d'obertura:",
+    "faqLink": "les FAQ",
+    "heroBody": "Hem comptat cada paraula pronunciada en {count} pel·lícules - {millions} milions d'elles. Observa {trends}, coneix {sweariest} i resol {versus} paraula per paraula.",
+    "heroSweariest": "el guió amb més renecs mai fet",
+    "heroTitle": "Cada pel·lícula té un {vocabulary}.",
+    "heroTrends": "com 'awesome' supera 'swell'",
+    "heroVersus": "Alien vs Aliens",
+    "heroVocabulary": "vocabulari",
+    "movieMeta": "{year} · {words} paraules",
+    "opusLink": "Corpus OPUS OpenSubtitles",
+    "shelfHeading": "Agafa un guió de la prestatgeria",
+    "aboutBody": "Cobreix {count} - cada paraula de diàleg de subtítols de l'{opus} per a pel·lícules amb almenys 300 vots a IMDb, comptades per pel·lícula. Només es publiquen recomptes de paraules; no es redistribueix text de subtítols. Metodologia i advertències: {faq}.",
+    "aboutCountAllFilms": "pel·lícules - subtítols traduïts inclosos",
+    "aboutCountLangFilms": "pel·lícules en {langs}",
+    "aboutCountTemplate": "{count} {kind}",
+    "aboutCountUnknown": "desenes de milers de",
+    "aboutSubtitleHint": "Aquests recomptes provenen dels subtítols en anglès de les pel·lícules, no del seu diàleg original."
+  },
+  "leaderboard": {
+    "tabs": {
+      "everywhere": "Dit per totes les pel·lícules",
+      "films": "Superlatius de pel·lícules",
+      "overview": "Visió general",
+      "shifts": "A l'alça i a la baixa",
+      "wonders": "Meravelles d'una sola pel·lícula",
+      "words": "Paraules principals"
+    },
+    "words": {
+      "allGenresOption": "Tots els gèneres",
+      "filmsCount": " · {count} pel·lícules",
+      "filteringSpinner": "Filtrant el corpus… (la primera consulta filtrada carrega el motor d'anàlisi)",
+      "fromLabel": "De",
+      "genreLabel": "Gènere",
+      "intro": "Les paraules més pronunciades en totes les pel·lícules del corpus.",
+      "noMatches": "Cap paraula coincideix amb aquests filtres - prova amb “totes les paraules” o “qualsevol tipus”.",
+      "rankByLabel": "Ordena per",
+      "sortMovieishButton": "més de pel·lícula",
+      "sortMovieishTitle": "Pondera cada paraula segons quant més es diu a les pel·lícules que a l'idioma quotidià",
+      "sortSpokenButton": "més pronunciades",
+      "toLabel": "A"
+    },
+    "languageNote": "Basat en {count} pel·lícules en {langs}, mesurat a partir dels seus subtítols en anglès."
+  },
+  "movie": {
+    "compareButton": "Compara amb una altra pel·lícula",
+    "decadeLinkTitle": "Més dels anys {decade}",
+    "distinctWordsLabel": "Paraules diferents",
+    "genreSeparator": " / ",
+    "imdbRatingLabel": "Puntuació IMDb",
+    "loadingScript": "Carregant guió…",
+    "mostSpokenHeading": "Paraules més pronunciades",
+    "notFound": "Cap pel·lícula amb l'id “{id}” al conjunt de dades.",
+    "signatureWordsBody": "Paraules que aquesta pel·lícula utilitza molt més que les pel·lícules en general (log-odds vs tot el corpus).",
+    "signatureWordsHeading": "Paraules característiques",
+    "slugTitle": "{title} - {year}",
+    "vocabRichnessLabel": "Riquesa de vocabulari",
+    "wordsSpokenLabel": "Paraules pronunciades"
+  },
+  "themeToggle": {
+    "day": "DIA",
+    "dayShoot": "Rodatge diürn",
+    "night": "NIT",
+    "nightShoot": "Rodatge nocturn",
+    "switchToDay": "Canvia al mode dia",
+    "switchToNight": "Canvia al mode nit"
+  },
+  "trends": {
+    "addAnotherWordPlaceholder": "Afegeix una altra paraula…",
+    "bigMovers": "Grans canvis des dels anys 1930",
+    "chartItButton": "Traça-ho",
+    "chartedWordsAriaLabel": "Paraules traçades",
+    "featuredPrefix": "Destacat: {title}",
+    "firstWordPlaceholder": "Escriu una paraula, p. ex. amor",
+    "fullList": "llista completa →",
+    "intro": "Amb quina freqüència es pronuncia una paraula en totes les pel·lícules del corpus, per milió de paraules de diàleg, per any d'estrena.",
+    "navNoun": "tendència",
+    "navSuffix": "un nou canvi cada dia",
+    "notEnoughData": "No hi ha prou dades per a: {words} (necessita ≥20 usos en tot el corpus, en anys amb prou pel·lícules).",
+    "perThousandWords": " · {rate}/1k paraules",
+    "queryingCorpus": "Consultant el corpus…",
+    "removeWordTitle": "Elimina “{word}”",
+    "topFilmByYearHeading": "Pel·lícula principal per a “{word}” per any",
+    "topFilmByYearLoading": "Buscant la pel·lícula principal de “{word}” per any…",
+    "topFilmsHeading": "Pel·lícules que més diuen “{word}”",
+    "topFilmsLoading": "Buscant les pel·lícules que més diuen “{word}”…",
+    "trimmedYearsNote": "{years} ocults - massa poques pel·lícules al corpus per a taxes fiables",
+    "tryClassic": "O prova un clàssic:",
+    "usesPerMillionWords": "usos per milió de paraules de diàleg",
+    "wordDetailsTablist": "Detalls de la paraula",
+    "wordInputAriaLabel": "Paraula a traçar",
+    "yAxisLabel": "usos per milió de paraules",
+    "languageNote": "Basat en {count} pel·lícules en {langs}, mesurat a partir dels seus subtítols en anglès.",
+    "notEnoughFilms": "No hi ha prou pel·lícules en {langs} per a aquesta tendència - afegeix idiomes o canvia a Totes les pel·lícules."
+  },
+  "languageFilter": {
+    "allFilms": "Totes les pel·lícules",
+    "apply": "Aplica",
+    "ariaLabel": "Filtra les pel·lícules per idioma original",
+    "countLabel": "{count} idiomes",
+    "hint": "Filtra per l'idioma original d'una pel·lícula; els recomptes de paraules provenen dels subtítols en anglès.",
+    "menuAriaLabel": "Idioma original",
+    "searchAriaLabel": "Cerca idiomes",
+    "searchPlaceholder": "Cerca idiomes…"
+  },
+  "localeFilterHint": {
+    "dismissAriaLabel": "Descarta",
+    "filterButton": "Filtra",
+    "message": "Ho veus en {lang}? Filtra a pel·lícules en {lang}."
+  },
+  "modal": {
+    "closeAriaLabel": "Tanca"
+  },
+  "filterExplainer": {
+    "badgeLabel": "traduït · {lang}",
+    "badgeTitle": "Idioma original {lang} - els recomptes provenen dels subtítols traduïts a l'anglès. Com funciona això?",
+    "dialogueNote": "El diàleg en l'idioma original no és al conjunt de dades - només la traducció a l'anglès.",
+    "englishSubtitles": "subtítols en anglès",
+    "englishTranslation": "traducció a l'anglès",
+    "filteringBody": "{whatFiltering} l'{originalLanguage} d'una pel·lícula - on es va fer, a partir de les metadades de TMDB - no l'idioma de les paraules de sota.",
+    "linkText": "Com funciona això?",
+    "modalTitle": "Com funciona",
+    "origin": "origen",
+    "originalLanguage": "idioma original",
+    "soSpanishMeans": "Així que \"espanyol\" vol dir",
+    "spanishBody": "{soSpanishMeans} el vocabulari dels subtítols en anglès del cinema d'{origin} espanyol - com paraules com \"solidarity\" o \"dictatorship\" apareixen als subtítols en anglès de les pel·lícules espanyoles - no paraules en espanyol.",
+    "whatFiltering": "El que estàs filtrant:",
+    "whatWords": "Quines són les paraules:",
+    "wordsBody": "{whatWords} cada recompte a Movie Words prové dels {englishSubtitles} de la pel·lícula. Només tenim la pista en anglès d'OpenSubtitles, així que per a una pel·lícula que no és en anglès, aquestes són les paraules de la seva {englishTranslation}, no el diàleg original. És per això que de vegades s'escola alguna paraula sense traduir - \"panna\", \"cotta\", \"samurai\"."
+  }
+}

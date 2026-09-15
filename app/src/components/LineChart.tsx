@@ -1,5 +1,6 @@
 import { useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { togglePin } from '../lib/trends'
+import { useI18n } from '../i18n'
 
 export interface Series {
   name: string
@@ -51,6 +52,7 @@ export function LineChart({
   height?: number
   yLabel: string
 }) {
+  const { t } = useI18n()
   const svgRef = useRef<SVGSVGElement>(null)
   const wrapRef = useRef<HTMLDivElement>(null)
   const [hoverX, setHoverX] = useState<number | null>(null)
@@ -145,24 +147,24 @@ export function LineChart({
         viewBox={`0 0 ${width} ${height}`}
         className="w-full cursor-crosshair select-none"
         role="img"
-        aria-label={`${yLabel} by year`}
+        aria-label={t('chart.axisAriaLabel', { yLabel })}
         onMouseMove={(e) => setHoverX(nearestX(e.clientX))}
         onClick={(e) => {
           const x = nearestX(e.clientX)
           setPinned((p) => togglePin(p.filter((v) => xs.includes(v)), x))
         }}
       >
-        {yTicks.map((t) => (
-          <g key={t}>
-            <line x1={M.left} x2={width - M.right} y1={sy(t)} y2={sy(t)} stroke="var(--color-grid)" />
-            <text x={M.left - 6} y={sy(t) + 4} textAnchor="end" fontSize="11" fill="var(--color-ink-2)">
-              {t >= 1000 ? `${t / 1000}k` : Math.round(t * 10) / 10}
+        {yTicks.map((tick) => (
+          <g key={tick}>
+            <line x1={M.left} x2={width - M.right} y1={sy(tick)} y2={sy(tick)} stroke="var(--color-grid)" />
+            <text x={M.left - 6} y={sy(tick) + 4} textAnchor="end" fontSize="11" fill="var(--color-ink-2)">
+              {tick >= 1000 ? `${tick / 1000}k` : Math.round(tick * 10) / 10}
             </text>
           </g>
         ))}
-        {xTicks.map((t) => (
-          <text key={t} x={sx(t)} y={height - 6} textAnchor="middle" fontSize="11" fill="var(--color-ink-2)">
-            {t}
+        {xTicks.map((tick) => (
+          <text key={tick} x={sx(tick)} y={height - 6} textAnchor="middle" fontSize="11" fill="var(--color-ink-2)">
+            {tick}
           </text>
         ))}
         <line x1={M.left} x2={width - M.right} y1={M.top + ih} y2={M.top + ih} stroke="var(--color-ink)" strokeWidth={1.5} />
@@ -194,8 +196,8 @@ export function LineChart({
             {isPin && (
               <button
                 onClick={() => setPinned((p) => p.filter((v) => v !== x))}
-                aria-label={`Unpin ${x}`}
-                className="absolute -right-2 -top-2 hidden size-5 border-2 border-ink bg-card leading-none group-hover:block"
+                aria-label={t('chart.unpinAriaLabel', { year: x })}
+                className="absolute -end-2 -top-2 hidden size-5 border-2 border-ink bg-card leading-none group-hover:block"
               >
                 ✕
               </button>
@@ -206,18 +208,18 @@ export function LineChart({
                 <div className="flex items-center gap-1.5">
                   <span className="inline-block size-2.5 rounded-full" style={{ background: s.color }} />
                   <span>{s.name}</span>
-                  <span className="ml-2 tabular-nums text-ink-2">{Math.round(p.y * 10) / 10}</span>
+                  <span className="ms-2 tabular-nums text-ink-2">{Math.round(p.y * 10) / 10}</span>
                 </div>
                 {p.note &&
                   (p.noteHref ? (
                     <a
                       href={p.noteHref}
-                      className="pointer-events-auto ml-4 block max-w-52 truncate text-ink-3 underline hover:bg-mark"
+                      className="pointer-events-auto ms-4 block max-w-52 truncate text-ink-3 underline hover:bg-mark"
                     >
                       {p.note}
                     </a>
                   ) : (
-                    <div className="ml-4 max-w-52 truncate text-ink-3">{p.note}</div>
+                    <div className="ms-4 max-w-52 truncate text-ink-3">{p.note}</div>
                   ))}
               </div>
             ))}

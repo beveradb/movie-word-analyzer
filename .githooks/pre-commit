@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -eu
+STAGED_EN=$(git diff --cached --name-only --diff-filter=ACM | grep -E 'app/src/messages/en\.json$' || true)
+[ -z "$STAGED_EN" ] && exit 0
+echo "i18n: en.json changed - running translation pipeline (skip-review)..."
+log=$(mktemp)
+if ( cd pipeline && uv run --group i18n python scripts/i18n/translate.py \
+      --messages-dir ../app/src/messages --target all --skip-review ) >"$log" 2>&1; then
+  tail -5 "$log"
+  git add app/src/messages/*.json
+  echo "i18n: translations regenerated and staged."
+else
+  tail -5 "$log" >&2
+  echo "i18n: translation failed (GCP auth?). Committing anyway; CI will validate." >&2
+fi
+rm -f "$log"

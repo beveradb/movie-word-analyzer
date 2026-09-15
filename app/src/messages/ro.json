@@ -1,0 +1,403 @@
+{
+  "compare": {
+    "orLabel": "sau",
+    "addDecadeAriaLabel": "Adaugă un deceniu",
+    "addDecadeOption": "Adaugă un deceniu…",
+    "addFilmPlaceholder": "Adaugă un film…",
+    "addGenreAriaLabel": "Adaugă un gen",
+    "addGenreOption": "Adaugă un gen…",
+    "decadeLabel": "ANII {decade}",
+    "decadeOptionLabel": "Anii {decade}",
+    "distinctWordsLabel": "Cuvinte distincte",
+    "featuredMatchupPrefix": "Confruntare recomandată: {title}",
+    "filmsLabel": "Filme",
+    "filmsPerYearLabel": "filme / an",
+    "filmsPerYearTitle": "Filme pe an de lansare în această secțiune a corpusului",
+    "fullBreakdownLink": "analiză completă →",
+    "headToHeadHeading": "Față în față",
+    "introBody": "Pune filme, decenii și genuri alături - până la trei din orice combinație.",
+    "loadingLabel": "Se încarcă…",
+    "movieLabel": "{title} - {year}",
+    "navNoun": "confruntare",
+    "navSuffix": "se rotește zilnic - sau construiește-o pe a ta mai sus",
+    "noStandoutWords": "fără cuvinte care ies în evidență",
+    "nothingFoundMessage": "Nu s-a găsit nimic pentru această selecție.",
+    "pickFilmPlaceholder": "Alege un film…",
+    "ratioMoreLabel": "de {ratio}× mai mult",
+    "removeButton": "elimină",
+    "sharedSignatureWordsHeading": "Cuvinte distinctive pe care le împart",
+    "signatureWordsHeading": "Cuvinte distinctive {note}",
+    "signatureWordsHighlightedNote": "(evidențiat = comun)",
+    "swearsPer1kLabel": "Înjurături / 1k cuvinte",
+    "wordsPerFilmLabel": "Cuvinte / film",
+    "wordsSpokenLabel": "Cuvinte rostite",
+    "headToHeadIntroMany": "Ce spune fiecare mult mai des decât celelalte - rata la un milion de cuvinte din propriul dialog.",
+    "headToHeadIntroPair": "Ce spune fiecare mult mai des decât celălalt - rata la un milion de cuvinte din propriul dialog."
+  },
+  "languageSwitcher": {
+    "current": "Limbă",
+    "label": "Alege limba"
+  },
+  "nav": {
+    "sectionsLabel": "Secțiuni",
+    "compare": "Compară",
+    "decades": "Decenii",
+    "explore": "Explorează",
+    "genres": "Genuri",
+    "leaderboard": "Clasament",
+    "trends": "Tendințe"
+  },
+  "pos": {
+    "other": "altele",
+    "a": "adjective",
+    "adjective": "adjectiv",
+    "adverb": "adverb",
+    "n": "substantive",
+    "noun": "substantiv",
+    "r": "adverbe",
+    "v": "verbe",
+    "verb": "verb",
+    "x": "nume și altele"
+  },
+  "ui": {
+    "errorBox": {
+      "retryButton": "Încearcă din nou",
+      "heading": "Scenă lipsă"
+    },
+    "featuredNav": {
+      "nextAriaLabel": "Următorul {noun} recomandat",
+      "position": "{idx} din {len}",
+      "prevAriaLabel": "Precedentul {noun} recomandat"
+    },
+    "highlightWord": {
+      "spokenTimes": "rostit de {count} ori",
+      "title": "„{word}” - {display}"
+    },
+    "movieSearch": {
+      "ariaLabel": "Caută filme",
+      "placeholder": "Caută un titlu de film…"
+    },
+    "poster": {
+      "alt": "Poster {title}"
+    },
+    "seriesLegend": {
+      "exploreTitle": "Explorează „{word}”"
+    },
+    "slug": {
+      "defaultPrefix": "INT."
+    },
+    "wordFilterBar": {
+      "allButton": "toate cuvintele",
+      "anyKindButton": "orice fel",
+      "commonnessAriaLabel": "Frecvența cuvintelor",
+      "hidingDescription": "ascunde engleza de zi cu zi - cele mai comune ~2.000 de cuvinte (the, know, get…)",
+      "interestingButton": "cuvinte interesante",
+      "onlyKindsSuffix": " · doar {kinds}",
+      "showingDescription": "arată fiecare cuvânt, inclusiv engleza de zi cu zi"
+    }
+  },
+  "boards": {
+    "films": {
+      "chattiestBlurb": "cele mai multe cuvinte pe minut de rulare",
+      "chattiestFmt": "{v} cuv/min",
+      "chattiestTitle": "Cei mai rapizi vorbitori",
+      "intro": "Deținătorii de recorduri ai corpusului, patru categorii de scenarii extreme.",
+      "loadingSpinner": "Se încarcă superlativele filmelor…",
+      "repetitiveBlurb": "cea mai mică pondere de cuvinte distincte",
+      "repetitiveFmt": "{v}% unice",
+      "repetitiveTitle": "Cele mai repetitive scenarii",
+      "sweariestBlurb": "înjurături la 1.000 de cuvinte",
+      "sweariestFmt": "{v}/1k",
+      "sweariestTitle": "Cele mai vulgare scenarii",
+      "vocabularyBlurb": "cele mai multe cuvinte distincte într-un scenariu",
+      "vocabularyFmt": "{v} cuvinte",
+      "vocabularyTitle": "Cele mai mari vocabulare"
+    },
+    "overview": {
+      "adjectivesBlurb": "cele mai rostite adjective interesante",
+      "adjectivesTitle": "Adjectivele cinematografiei",
+      "fallingBlurb": "spuse mult mai rar acum decât la începuturile cinematografiei",
+      "intro": "Titlurile principale ale corpusului - primele cinci din fiecare panou. Urmărește orice card pentru lista completă, filtre și multe altele.",
+      "loadingSpinner": "Se încarcă titlurile principale…",
+      "risingBlurb": "spuse mult mai des acum decât la începuturile cinematografiei",
+      "ubiquityBlurb": "cuvinte pe care aproape niciun scenariu nu le omite",
+      "wondersBlurb": "cuvinte pe care un singur film le deține"
+    },
+    "ratio": {
+      "down": "{label}× în jos",
+      "up": "{label}× în sus"
+    },
+    "shifts": {
+      "fallingTitle": "Se estompează",
+      "intro": "Cum s-a schimbat dialogul: cuvinte spuse mult mai des (sau mult mai rar) la un milion de cuvinte acum (anii 2010–20) decât la începuturile cinematografiei (anii 1930–40). Liniile urmăresc fiecare deceniu; dă click pe un cuvânt pentru graficul complet.",
+      "loadingSpinner": "Se încarcă schimbările…",
+      "risingTitle": "În creștere"
+    },
+    "taster": {
+      "seeAllLink": "vezi tot →"
+    },
+    "ubiquity": {
+      "intro": "Dincolo de simplele cuvinte de legătură, aceste cuvinte apar în aproape fiecare dintre cele {nFilms} filme.",
+      "loadingSpinner": "Se încarcă…",
+      "shareOfFilms": "{share}% din filme"
+    },
+    "wonders": {
+      "intro": "Cuvinte pe care un film le spune mai mult decât restul cinematografiei la un loc - nume de personaje, cuvinte inventate, obsesii.",
+      "item": "spus de {count}× în {movieLink} ({year}) - {share}% din toate dățile când cinematografia îl rostește",
+      "loadingSpinner": "Se încarcă minunile de un singur film…"
+    }
+  },
+  "chart": {
+    "axisAriaLabel": "{yLabel} pe an",
+    "chartingSpinner": "Se trasează o schimbare recomandată…",
+    "loadFailedMessage": "Nu am putut trasa acest grafic - încearcă-l pe următorul ▶",
+    "moreTrendsLink": "mai multe tendințe →",
+    "trendNoun": "tendință",
+    "unpinAriaLabel": "Anulează fixarea {year}",
+    "usesPerMillionCaption": "utilizări la un milion de cuvinte de dialog",
+    "yAxisLabel": "utilizări la un milion de cuvinte"
+  },
+  "decadesView": {
+    "decadeLabel": "Anii {decade}",
+    "eyebrow": "Răsfoiește după",
+    "filmsCount": "{count} filme",
+    "loadError": "Nu s-au putut încărca deceniile.",
+    "loadingSpinner": "Se încarcă deceniile…",
+    "subtitle": "Cum a vorbit fiecare eră a cinematografiei - {count} studii.",
+    "title": "DECENII",
+    "notEnoughFilms": "Nu sunt destule filme în {langs} pentru asta - adaugă limbi sau schimbă la Toate filmele."
+  },
+  "entity": {
+    "compareButton": "Compară {label} cu…",
+    "decadeEyebrow": "Est. {decade}",
+    "decadeLabel": "ANII {decade}",
+    "decadeSubject": "anii {decade}",
+    "genreEyebrow": "Studiu de gen",
+    "kindDecade": "deceniu",
+    "kindGenre": "gen",
+    "loadingSpinner": "Se încarcă…",
+    "mostSpokenBody": "Numărători simple, cuvintele de legătură excluse.",
+    "mostSpokenHeading": "Cele mai rostite cuvinte",
+    "notFound": "Niciun {kind} „{id}” în setul de date.",
+    "notableScriptsHeading": "Scenarii notabile",
+    "signatureWordsBody": "Despre ce vorbește {subject} mult mai mult decât filmele în general.",
+    "signatureWordsHeading": "Cuvinte distinctive",
+    "statsLine": "{films} filme · {words} cuvinte de dialog",
+    "notEnoughFilms": "Nu sunt destule filme în {langs} pentru {subject} - adaugă limbi sau schimbă la Toate filmele."
+  },
+  "eras": {
+    "1910": "primele role",
+    "1920": "sosesc filmele sonore",
+    "1930": "epoca de aur",
+    "1940": "războiul și filmul noir",
+    "1950": "era atomică",
+    "1960": "noul val",
+    "1970": "Noul Hollywood",
+    "1980": "era blockbuster-urilor",
+    "1990": "boom-ul indie",
+    "2000": "anii multiplexurilor",
+    "2010": "zorii streaming-ului",
+    "2020": "cinematografia acum"
+  },
+  "errors": {
+    "body": "Ne pare rău pentru asta - un {reload} rezolvă de obicei problema. Tot nu merge? Trimite un email la {email}.",
+    "eyebrow": "Tăietură bruscă la:",
+    "reload": "reîncarcă",
+    "title": "Ceva s-a stricat."
+  },
+  "footer": {
+    "creditsBody": "Sursă deschisă: {github} și necomercial. Sunt publicate doar numărătorile derivate de cuvinte - niciun text de subtitrare nu este redistribuit.",
+    "creditsHeading": "Credite.",
+    "dataBody": "Setul complet de date este disponibil pentru descărcare - vezi {dataGuide} pentru linkuri și informații ({license}). Te întrebi despre metodologie, prejudecăți sau drepturi de autor? Citește {faq}.",
+    "dataGuideLink": "ghidul datelor",
+    "dataHeading": "Ia datele.",
+    "dataSourcesBody": "Date: numărători de cuvinte din {opus} (Lison & Tiedemann, 2016), prin {openSubtitles}; metadate despre filme din {imdbData} și {tmdb}. Informații oferite de IMDb ({imdbUrl}). Folosite cu permisiune.",
+    "faqLink": "FAQ",
+    "githubLink": "github.com/beveradb/moviewords",
+    "githubProfileLink": "GitHub",
+    "ideaBody": "Trebuie să existe analize interesante la care nu ne-am gândit! Dacă vrei să împărtășești o idee sau ai construit ceva tare cu datele, {email}",
+    "ideaEmailLink": "trimite un email la andrew@beveridge.uk",
+    "ideaHeading": "Ai o idee?",
+    "imdbDataLink": "IMDb",
+    "imdbUrlLink": "https://www.imdb.com",
+    "instagramLink": "Instagram",
+    "licenseLink": "CC BY-NC-SA 4.0",
+    "lindsayLink": "Lindsay Wright Graphic Design",
+    "linkedinLink": "LinkedIn",
+    "madeByBody": "Creat de Andrew Beveridge - {github} · {linkedin} · {instagram} - cu ideea originală a minunatei mele soții {lindsay} - aruncă o privire pe portofoliul ei!",
+    "openSubtitlesLink": "OpenSubtitles.org",
+    "opusLink": "Corpusul OPUS OpenSubtitles",
+    "takedownEmailLink": "Trimite un email pentru eliminare",
+    "tmdbDisclaimerBody": "Acest produs folosește API-ul TMDB, dar nu este aprobat sau certificat de TMDB. Postere prin TMDB - drepturile de autor aparțin studiourilor respective, afișate pentru a identifica filmele discutate. Ești deținătorul drepturilor? {takedown} și va fi eliminat prompt.",
+    "tmdbLink": "TMDB"
+  },
+  "genres": {
+    "Action": "Acțiune",
+    "Adult": "Adulți",
+    "Adventure": "Aventură",
+    "Animation": "Animație",
+    "Biography": "Biografie",
+    "Comedy": "Comedie",
+    "Crime": "Crimă",
+    "Documentary": "Documentar",
+    "Drama": "Dramă",
+    "Family": "Familie",
+    "Fantasy": "Fantezie",
+    "Film-Noir": "Film-Noir",
+    "History": "Istorie",
+    "Horror": "Groază",
+    "Music": "Muzică",
+    "Musical": "Muzical",
+    "Mystery": "Mister",
+    "News": "Știri",
+    "Reality-TV": "Reality-TV",
+    "Romance": "Romantic",
+    "Sci-Fi": "Sci-Fi",
+    "Sport": "Sport",
+    "Thriller": "Thriller",
+    "War": "Război",
+    "Western": "Western"
+  },
+  "genresView": {
+    "eyebrow": "Răsfoiește după",
+    "filmsCount": "{count} filme",
+    "loadError": "Nu s-au putut încărca genurile.",
+    "loadingSpinner": "Se încarcă genurile…",
+    "subtitle": "Despre ce vorbește fiecare gen - {count} studii.",
+    "title": "GENURI",
+    "notEnoughFilms": "Nu sunt destule filme în {langs} pentru asta - adaugă limbi sau schimbă la Toate filmele."
+  },
+  "home": {
+    "aboutHeading": "Despre acest set de date",
+    "decadesBody": "De la filmele sonore până în anii 2020 - cum a vorbit fiecare eră a cinematografiei.",
+    "decadesHeading": "Cutreieră deceniile",
+    "fadeIn": "Fade in:",
+    "faqLink": "FAQ",
+    "heroBody": "Am numărat fiecare cuvânt rostit în {count} filme - {millions} de milioane dintre ele. Urmărește {trends}, cunoaște {sweariest} și rezolvă {versus} cuvânt cu cuvânt.",
+    "heroSweariest": "cel mai vulgar scenariu făcut vreodată",
+    "heroTitle": "Fiecare film are un {vocabulary}.",
+    "heroTrends": "„awesome” depășește „swell”",
+    "heroVersus": "Alien vs Aliens",
+    "heroVocabulary": "vocabular",
+    "movieMeta": "{year} · {words} cuvinte",
+    "opusLink": "Corpusul OPUS OpenSubtitles",
+    "shelfHeading": "Trage un scenariu de pe raft",
+    "aboutBody": "Acoperind {count} - fiecare cuvânt din dialogul subtitrărilor din {opus} pentru filme cu cel puțin 300 de voturi pe IMDb, numărate per film. Sunt publicate doar numărătorile de cuvinte; niciun text de subtitrare nu este redistribuit. Metodologie și avertismente: {faq}.",
+    "aboutCountAllFilms": "filme - subtitrări traduse incluse",
+    "aboutCountLangFilms": "filme în limba {langs}",
+    "aboutCountTemplate": "{count} {kind}",
+    "aboutCountUnknown": "zeci de mii de",
+    "aboutSubtitleHint": "Aceste numărători provin din subtitrările în engleză ale filmelor, nu din dialogul lor original."
+  },
+  "leaderboard": {
+    "tabs": {
+      "everywhere": "Spus de fiecare film",
+      "films": "Superlativele filmelor",
+      "overview": "Prezentare generală",
+      "shifts": "În creștere și în scădere",
+      "wonders": "Minuni de un singur film",
+      "words": "Cuvinte de top"
+    },
+    "words": {
+      "allGenresOption": "Toate genurile",
+      "filmsCount": " · {count} filme",
+      "filteringSpinner": "Se filtrează corpusul… (prima interogare filtrată încarcă motorul de analiză)",
+      "fromLabel": "De la",
+      "genreLabel": "Gen",
+      "intro": "Cele mai rostite cuvinte din fiecare film din corpus.",
+      "noMatches": "Niciun cuvânt nu se potrivește cu aceste filtre - încearcă „toate cuvintele” sau „orice fel”.",
+      "rankByLabel": "Clasează după",
+      "sortMovieishButton": "cel mai cinematografic",
+      "sortMovieishTitle": "Ponderează fiecare cuvânt în funcție de cât de mult îl spun filmele în comparație cu engleza de zi cu zi",
+      "sortSpokenButton": "cel mai rostit",
+      "toLabel": "Până la"
+    },
+    "languageNote": "Bazat pe {count} filme în limba {langs}, măsurate din subtitrările lor în engleză."
+  },
+  "movie": {
+    "compareButton": "Compară cu alt film",
+    "decadeLinkTitle": "Mai multe din anii {decade}",
+    "distinctWordsLabel": "Cuvinte distincte",
+    "genreSeparator": " / ",
+    "imdbRatingLabel": "Nota IMDb",
+    "loadingScript": "Se încarcă scenariul…",
+    "mostSpokenHeading": "Cele mai rostite cuvinte",
+    "notFound": "Niciun film cu id-ul „{id}” în setul de date.",
+    "signatureWordsBody": "Cuvinte pe care acest film le folosește mult mai mult decât filmele în general (șanse logaritmice vs întregul corpus).",
+    "signatureWordsHeading": "Cuvinte distinctive",
+    "slugTitle": "{title} - {year}",
+    "vocabRichnessLabel": "Bogăția vocabularului",
+    "wordsSpokenLabel": "Cuvinte rostite"
+  },
+  "themeToggle": {
+    "day": "ZI",
+    "dayShoot": "Filmare de zi",
+    "night": "NOAPTE",
+    "nightShoot": "Filmare de noapte",
+    "switchToDay": "Treci la modul de zi",
+    "switchToNight": "Treci la modul de noapte"
+  },
+  "trends": {
+    "addAnotherWordPlaceholder": "Adaugă alt cuvânt…",
+    "bigMovers": "Mari schimbări din anii 1930",
+    "chartItButton": "Trasează-l",
+    "chartedWordsAriaLabel": "Cuvinte trasate",
+    "featuredPrefix": "Recomandat: {title}",
+    "firstWordPlaceholder": "Tastează un cuvânt, ex. dragoste",
+    "fullList": "lista completă →",
+    "intro": "Cât de des este rostit un cuvânt în toate filmele din corpus, la un milion de cuvinte de dialog, după anul lansării.",
+    "navNoun": "tendință",
+    "navSuffix": "o nouă schimbare în fiecare zi",
+    "notEnoughData": "Nu sunt suficiente date pentru: {words} (necesită ≥20 de utilizări în tot corpusul, în ani cu suficiente filme).",
+    "perThousandWords": " · {rate}/1k cuvinte",
+    "queryingCorpus": "Se interoghează corpusul…",
+    "removeWordTitle": "Elimină „{word}”",
+    "topFilmByYearHeading": "Filmul de top pentru „{word}” pe an",
+    "topFilmByYearLoading": "Se caută filmul de top pentru „{word}” pe an…",
+    "topFilmsHeading": "Filmele care spun „{word}” cel mai mult",
+    "topFilmsLoading": "Se caută filmele care spun „{word}” cel mai mult…",
+    "trimmedYearsNote": "{years} ascunși - prea puține filme în corpus pentru rate de încredere",
+    "tryClassic": "Sau încearcă un clasic:",
+    "usesPerMillionWords": "utilizări la un milion de cuvinte de dialog",
+    "wordDetailsTablist": "Detalii cuvânt",
+    "wordInputAriaLabel": "Cuvânt de trasat",
+    "yAxisLabel": "utilizări la un milion de cuvinte",
+    "languageNote": "Bazat pe {count} filme în limba {langs}, măsurate din subtitrările lor în engleză.",
+    "notEnoughFilms": "Nu sunt destule filme în {langs} pentru această tendință - adaugă limbi sau schimbă la Toate filmele."
+  },
+  "languageFilter": {
+    "allFilms": "Toate filmele",
+    "apply": "Aplică",
+    "ariaLabel": "Filtrează filmele după limba originală",
+    "countLabel": "{count} limbi",
+    "hint": "Filtrează după limba originală a unui film; numărătorile de cuvinte provin din subtitrările în engleză.",
+    "menuAriaLabel": "Limba originală",
+    "searchAriaLabel": "Caută limbi",
+    "searchPlaceholder": "Caută limbi…"
+  },
+  "localeFilterHint": {
+    "dismissAriaLabel": "Închide",
+    "filterButton": "Filtrează",
+    "message": "Vizionezi în {lang}? Filtrează la filme în limba {lang}."
+  },
+  "modal": {
+    "closeAriaLabel": "Închide"
+  },
+  "filterExplainer": {
+    "badgeLabel": "tradus · {lang}",
+    "badgeTitle": "Limba originală {lang} - numărătorile provin din subtitrările traduse în engleză. Cum funcționează asta?",
+    "dialogueNote": "Dialogul în limba originală nu este în setul de date - doar traducerea în engleză.",
+    "englishSubtitles": "subtitrările în engleză",
+    "englishTranslation": "traducerea în engleză",
+    "filteringBody": "{whatFiltering} {originalLanguage} a unui film - unde a fost făcut, din metadatele TMDB - nu limba cuvintelor de mai jos.",
+    "linkText": "Cum funcționează asta?",
+    "modalTitle": "Cum funcționează",
+    "origin": "origine",
+    "originalLanguage": "limba originală",
+    "soSpanishMeans": "Deci „Spaniolă” înseamnă",
+    "spanishBody": "{soSpanishMeans} vocabularul din subtitrările în engleză al cinematografiei de {origin} spaniolă - cum apar cuvinte precum „solidarity” sau „dictatorship” în subtitrările în engleză ale filmelor spaniole - nu cuvinte în spaniolă.",
+    "whatFiltering": "Ce filtrezi:",
+    "whatWords": "Care sunt cuvintele:",
+    "wordsBody": "{whatWords} fiecare numărătoare de pe Movie Words provine din {englishSubtitles} ale filmului. Avem doar pista în engleză de la OpenSubtitles, așa că pentru un film care nu este în engleză, acestea sunt cuvintele din {englishTranslation} a sa, nu dialogul original. De aceea, un cuvânt netradus se mai strecoară uneori - „panna”, „cotta”, „samurai”."
+  }
+}

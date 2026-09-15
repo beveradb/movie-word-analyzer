@@ -9,7 +9,9 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "test": "vitest run"
+    "test": "vitest run",
+    "translate": "cd ../pipeline && uv run --group i18n python scripts/i18n/translate.py --messages-dir ../app/src/messages --target all",
+    "translate:validate": "cd ../pipeline && uv run python scripts/i18n/validate-translations.py --messages-dir ../app/src/messages"
   },
   "dependencies": {
     "@duckdb/duckdb-wasm": "^1.33.1-dev57.0",
@@ -19,6 +21,8 @@
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/react": "^16.3.3",
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",

@@ -4,6 +4,7 @@ import { LineChart } from './LineChart'
 import { loadFeaturedSeries } from '../lib/series'
 import { FEATURED, dayIndex, stepFeatured } from '../lib/featured'
 import { FeaturedNav, SeriesLegend, Spinner } from './ui'
+import { useI18n } from '../i18n'
 
 const COLORS = ['var(--color-s1)', 'var(--color-s2)', 'var(--color-s3)', 'var(--color-s4)']
 
@@ -14,6 +15,7 @@ const COLORS = ['var(--color-s1)', 'var(--color-s2)', 'var(--color-s3)', 'var(--
  * loads in an effect so it never blocks first paint; if a query fails the
  * stepper stays so the visitor can move on to a trend that works. */
 export function FeaturedChart() {
+  const { t } = useI18n()
   const [idx, setIdx] = useState(() => dayIndex(FEATURED.length))
   const [series, setSeries] = useState<Series[] | null>(null)
   const [failed, setFailed] = useState(false)
@@ -38,24 +40,24 @@ export function FeaturedChart() {
         title={featured.title}
         idx={idx}
         len={FEATURED.length}
-        noun="trend"
+        noun={t('chart.trendNoun')}
         onStep={(dir) => setIdx((i) => stepFeatured(i, dir, FEATURED.length))}
       />
       {failed ? (
         <p className="py-8 text-center font-script text-sm text-ink-2">
-          Couldn&apos;t chart this one - try the next ▶
+          {t('chart.loadFailedMessage')}
         </p>
       ) : series === null ? (
-        <Spinner label="Charting a featured shift…" />
+        <Spinner label={t('chart.chartingSpinner')} />
       ) : (
         <>
           <SeriesLegend series={series} />
-          <LineChart series={series} yLabel="uses per million words" />
+          <LineChart series={series} yLabel={t('chart.yAxisLabel')} />
           <p className="mt-1 flex items-baseline justify-between gap-2 text-xs text-ink-2">
             <a href="#/trends" className="font-script underline hover:bg-mark">
-              more trends →
+              {t('chart.moreTrendsLink')}
             </a>
-            <span>uses per million words of dialogue</span>
+            <span>{t('chart.usesPerMillionCaption')}</span>
           </p>
         </>
       )}

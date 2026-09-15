@@ -25,6 +25,10 @@ dev = [
     "pandas>=3.0.5",
     "pytest>=9.1.1",
 ]
+i18n = [
+    "google-genai>=1.70.0",
+    "google-cloud-storage>=2.18.0",
+]
 
 [tool.pytest.ini_options]
 addopts = "--import-mode=importlib"

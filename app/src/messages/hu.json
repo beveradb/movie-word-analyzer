@@ -1,0 +1,403 @@
+{
+  "compare": {
+    "orLabel": "vagy",
+    "addDecadeAriaLabel": "Évtized hozzáadása",
+    "addDecadeOption": "Évtized hozzáadása…",
+    "addFilmPlaceholder": "Film hozzáadása…",
+    "addGenreAriaLabel": "Műfaj hozzáadása",
+    "addGenreOption": "Műfaj hozzáadása…",
+    "decadeLabel": "A(z) {decade}-AS ÉVEK",
+    "decadeOptionLabel": "{decade}-as évek",
+    "distinctWordsLabel": "Különböző szavak",
+    "featuredMatchupPrefix": "Kiemelt párbaj: {title}",
+    "filmsLabel": "Filmek",
+    "filmsPerYearLabel": "film / év",
+    "filmsPerYearTitle": "Filmek megjelenési évenként a korpusz ezen szeletében",
+    "fullBreakdownLink": "teljes lebontás →",
+    "headToHeadHeading": "Fej fej mellett",
+    "introBody": "Tegyél filmeket, évtizedeket és műfajokat egymás mellé - legfeljebb hármat bármilyen kombinációban.",
+    "loadingLabel": "Betöltés…",
+    "movieLabel": "{title} - {year}",
+    "navNoun": "párbaj",
+    "navSuffix": "naponta változik - vagy állítsd össze a sajátod fent",
+    "noStandoutWords": "nincsenek kiemelkedő szavak",
+    "nothingFoundMessage": "Nincs találat erre a kiválasztásra.",
+    "pickFilmPlaceholder": "Válassz egy filmet…",
+    "ratioMoreLabel": "{ratio}× több",
+    "removeButton": "eltávolítás",
+    "sharedSignatureWordsHeading": "Közös jellegzetes szavaik",
+    "signatureWordsHeading": "Jellegzetes szavak {note}",
+    "signatureWordsHighlightedNote": "(kiemelve = közös)",
+    "swearsPer1kLabel": "Káromkodás / 1k szó",
+    "wordsPerFilmLabel": "Szó / film",
+    "wordsSpokenLabel": "Kimondott szavak",
+    "headToHeadIntroMany": "Amit mindegyik sokkal gyakrabban mond a többinél - arány a saját párbeszéd egymillió szavára vetítve.",
+    "headToHeadIntroPair": "Amit mindegyik sokkal gyakrabban mond a másiknál - arány a saját párbeszéd egymillió szavára vetítve."
+  },
+  "languageSwitcher": {
+    "current": "Nyelv",
+    "label": "Nyelv kiválasztása"
+  },
+  "nav": {
+    "sectionsLabel": "Szakaszok",
+    "compare": "Összehasonlítás",
+    "decades": "Évtizedek",
+    "explore": "Felfedezés",
+    "genres": "Műfajok",
+    "leaderboard": "Ranglista",
+    "trends": "Trendek"
+  },
+  "pos": {
+    "other": "egyéb",
+    "a": "melléknevek",
+    "adjective": "melléknév",
+    "adverb": "határozószó",
+    "n": "főnevek",
+    "noun": "főnév",
+    "r": "határozószók",
+    "v": "igék",
+    "verb": "ige",
+    "x": "nevek és egyebek"
+  },
+  "ui": {
+    "errorBox": {
+      "retryButton": "Újrapróbálkozás",
+      "heading": "Hiányzó jelenet"
+    },
+    "featuredNav": {
+      "nextAriaLabel": "Következő kiemelt {noun}",
+      "position": "{idx} / {len}",
+      "prevAriaLabel": "Előző kiemelt {noun}"
+    },
+    "highlightWord": {
+      "spokenTimes": "{count} alkalommal kimondva",
+      "title": "“{word}” - {display}"
+    },
+    "movieSearch": {
+      "ariaLabel": "Filmek keresése",
+      "placeholder": "Film címének keresése…"
+    },
+    "poster": {
+      "alt": "{title} plakát"
+    },
+    "seriesLegend": {
+      "exploreTitle": "“{word}” felfedezése"
+    },
+    "slug": {
+      "defaultPrefix": "BELSŐ."
+    },
+    "wordFilterBar": {
+      "allButton": "minden szó",
+      "anyKindButton": "bármilyen típus",
+      "commonnessAriaLabel": "Szó gyakorisága",
+      "hidingDescription": "mindennapi angol elrejtése - a ~2000 leggyakoribb szó (the, know, get…)",
+      "interestingButton": "érdekes szavak",
+      "onlyKindsSuffix": " · csak {kinds}",
+      "showingDescription": "minden szó megjelenítése, beleértve a mindennapi angolt is"
+    }
+  },
+  "boards": {
+    "films": {
+      "chattiestBlurb": "legtöbb szó percenként",
+      "chattiestFmt": "{v} szó/perc",
+      "chattiestTitle": "Leggyorsabb beszélők",
+      "intro": "A korpusz rekorderei, az extrém forgatókönyvek négy kategóriája.",
+      "loadingSpinner": "Filmes szuperlatívuszok betöltése…",
+      "repetitiveBlurb": "különböző szavak legalacsonyabb aránya",
+      "repetitiveFmt": "{v}% egyedi",
+      "repetitiveTitle": "Legismétlődőbb forgatókönyvek",
+      "sweariestBlurb": "káromkodás 1000 szavanként",
+      "sweariestFmt": "{v}/1k",
+      "sweariestTitle": "Legkáromkodósabb forgatókönyvek",
+      "vocabularyBlurb": "legtöbb különböző szó egy forgatókönyvben",
+      "vocabularyFmt": "{v} szó",
+      "vocabularyTitle": "Legnagyobb szókincsek"
+    },
+    "overview": {
+      "adjectivesBlurb": "a legtöbbet mondott érdekes melléknevek",
+      "adjectivesTitle": "A mozi melléknevei",
+      "fallingBlurb": "ma sokkal ritkábban mondják, mint a korai moziban",
+      "intro": "A korpusz főcímei - a legjobb öt minden tábláról. Kattints bármelyik kártyára a teljes listáért, szűrőkért és egyebekért.",
+      "loadingSpinner": "Főcímek betöltése…",
+      "risingBlurb": "ma sokkal többször mondják, mint a korai moziban",
+      "ubiquityBlurb": "szavak, amiket szinte egyetlen forgatókönyv sem hagy ki",
+      "wondersBlurb": "szavak, amiket egyetlen film birtokol"
+    },
+    "ratio": {
+      "down": "{label}× kevesebb",
+      "up": "{label}× több"
+    },
+    "shifts": {
+      "fallingTitle": "Kihalóban",
+      "intro": "Hogyan változott a párbeszéd: szavak, amiket sokkal többször (vagy kevesebbszer) mondanak egymillió szóra vetítve most (2010-es–20-as évek), mint a korai moziban (1930-as–40-es évek). A vonalak minden évtizedet követnek; kattints egy szóra a teljes grafikonhoz.",
+      "loadingSpinner": "Változások betöltése…",
+      "risingTitle": "Feltörekvőben"
+    },
+    "taster": {
+      "seeAllLink": "összes megtekintése →"
+    },
+    "ubiquity": {
+      "intro": "A puszta kötőszavakon túl ezek a szavak a(z) {nFilms} film szinte mindegyikében szerepelnek.",
+      "loadingSpinner": "Betöltés…",
+      "shareOfFilms": "a filmek {share}%-a"
+    },
+    "wonders": {
+      "intro": "Szavak, amiket egy film többször mond, mint a mozi többi része összesen - karakternevek, kitalált szavak, rögeszmék.",
+      "item": "{count} alkalommal hangzik el a(z) {movieLink} ({year}) filmben - az összes filmes elhangzás {share}%-a",
+      "loadingSpinner": "Egyfilmes csodák betöltése…"
+    }
+  },
+  "chart": {
+    "axisAriaLabel": "{yLabel} évenként",
+    "chartingSpinner": "Kiemelt változás ábrázolása…",
+    "loadFailedMessage": "Ezt nem sikerült ábrázolni - próbáld a következőt ▶",
+    "moreTrendsLink": "további trendek →",
+    "trendNoun": "trend",
+    "unpinAriaLabel": "{year} levétele",
+    "usesPerMillionCaption": "használat egymillió párbeszédszóra vetítve",
+    "yAxisLabel": "használat egymillió szóra vetítve"
+  },
+  "decadesView": {
+    "decadeLabel": "{decade}-as évek",
+    "eyebrow": "Böngészés e szerint:",
+    "filmsCount": "{count} film",
+    "loadError": "Nem sikerült betölteni az évtizedeket.",
+    "loadingSpinner": "Évtizedek betöltése…",
+    "subtitle": "Hogyan beszélt a mozi egyes korszakai - {count} tanulmány.",
+    "title": "ÉVTIZEDEK",
+    "notEnoughFilms": "Nincs elég film {langs} nyelven ehhez - adj hozzá nyelveket, vagy válts az Összes filmre."
+  },
+  "entity": {
+    "compareButton": "{label} összehasonlítása ezzel…",
+    "decadeEyebrow": "Évtized: {decade}",
+    "decadeLabel": "A(z) {decade}-AS ÉVEK",
+    "decadeSubject": "a(z) {decade}-as évek",
+    "genreEyebrow": "Műfaj tanulmány",
+    "kindDecade": "évtized",
+    "kindGenre": "műfaj",
+    "loadingSpinner": "Betöltés…",
+    "mostSpokenBody": "Egyszerű számok, kötőszavak kizárva.",
+    "mostSpokenHeading": "Legtöbbet mondott szavak",
+    "notFound": "Nincs “{id}” {kind} az adatkészletben.",
+    "notableScriptsHeading": "Figyelemre méltó forgatókönyvek",
+    "signatureWordsBody": "Amiről a(z) {subject} sokkal többet beszél, mint a filmek általában.",
+    "signatureWordsHeading": "Jellegzetes szavak",
+    "statsLine": "{films} film · {words} párbeszédszó",
+    "notEnoughFilms": "Nincs elég film {langs} nyelven a következőhöz: {subject} - adj hozzá nyelveket, vagy válts az Összes filmre."
+  },
+  "eras": {
+    "1910": "az első tekercsek",
+    "1920": "megérkeznek a hangosfilmek",
+    "1930": "az aranykor",
+    "1940": "háború és film noir",
+    "1950": "az atomkorszak",
+    "1960": "az új hullám",
+    "1970": "Új Hollywood",
+    "1980": "a kasszasikerek korszaka",
+    "1990": "az indie bumm",
+    "2000": "a multiplex évek",
+    "2010": "a streaming hajnala",
+    "2020": "a mozi ma"
+  },
+  "errors": {
+    "body": "Sajnáljuk - egy {reload} általában megoldja. Még mindig rossz? Írj ide: {email}.",
+    "eyebrow": "Éles vágás:",
+    "reload": "újratöltés",
+    "title": "Valami elromlott."
+  },
+  "footer": {
+    "creditsBody": "Nyílt forráskódú: {github} és nem kereskedelmi. Csak a származtatott szószámok vannak közzétéve - feliratszöveget nem terjesztünk.",
+    "creditsHeading": "Készítők.",
+    "dataBody": "A teljes adatkészlet letölthető - lásd a(z) {dataGuide} részt a linkekért és infókért ({license}). Kíváncsi vagy a módszertanra, torzításokra vagy a szerzői jogokra? Olvasd el a {faq} részt.",
+    "dataGuideLink": "adat útmutató",
+    "dataHeading": "Szerezd meg az adatokat.",
+    "dataSourcesBody": "Adatok: szószámok a(z) {opus} korpuszból (Lison & Tiedemann, 2016), a(z) {openSubtitles} révén; filmes metaadatok a(z) {imdbData} és {tmdb} oldalról. Az információkat az IMDb ({imdbUrl}) bocsátotta rendelkezésre. Engedéllyel használva.",
+    "faqLink": "GYIK",
+    "githubLink": "github.com/beveradb/moviewords",
+    "githubProfileLink": "GitHub",
+    "ideaBody": "Biztosan vannak olyan érdekes elemzések, amikre nem is gondoltunk! Ha megosztanál egy ötletet, vagy építettél valami menőt az adatokból, {email}",
+    "ideaEmailLink": "írj az andrew@beveridge.uk címre",
+    "ideaHeading": "Van egy ötleted?",
+    "imdbDataLink": "IMDb",
+    "imdbUrlLink": "https://www.imdb.com",
+    "instagramLink": "Instagram",
+    "licenseLink": "CC BY-NC-SA 4.0",
+    "lindsayLink": "Lindsay Wright Graphic Design",
+    "linkedinLink": "LinkedIn",
+    "madeByBody": "Készítette Andrew Beveridge - {github} · {linkedin} · {instagram} - az eredeti ötletet kedves feleségem, {lindsay} adta - nézd meg a portfólióját!",
+    "openSubtitlesLink": "OpenSubtitles.org",
+    "opusLink": "OPUS OpenSubtitles korpusz",
+    "takedownEmailLink": "Eltávolítási kérelem küldése",
+    "tmdbDisclaimerBody": "Ez a termék a TMDB API-t használja, de a TMDB nem támogatja és nem hagyta jóvá. Plakátok a TMDB-n keresztül - a szerzői jogok a megfelelő stúdiókat illetik, a tárgyalt filmek azonosítására szolgálnak. Jogtulajdonos vagy? {takedown} és azonnal lekerül.",
+    "tmdbLink": "TMDB"
+  },
+  "genres": {
+    "Action": "Akció",
+    "Adult": "Felnőtt",
+    "Adventure": "Kaland",
+    "Animation": "Animáció",
+    "Biography": "Életrajz",
+    "Comedy": "Vígjáték",
+    "Crime": "Krimi",
+    "Documentary": "Dokumentumfilm",
+    "Drama": "Dráma",
+    "Family": "Családi",
+    "Fantasy": "Fantasy",
+    "Film-Noir": "Film-Noir",
+    "History": "Történelem",
+    "Horror": "Horror",
+    "Music": "Zene",
+    "Musical": "Musical",
+    "Mystery": "Rejtély",
+    "News": "Hírek",
+    "Reality-TV": "Valóságshow",
+    "Romance": "Romantikus",
+    "Sci-Fi": "Sci-Fi",
+    "Sport": "Sport",
+    "Thriller": "Thriller",
+    "War": "Háborús",
+    "Western": "Western"
+  },
+  "genresView": {
+    "eyebrow": "Böngészés e szerint:",
+    "filmsCount": "{count} film",
+    "loadError": "Nem sikerült betölteni a műfajokat.",
+    "loadingSpinner": "Műfajok betöltése…",
+    "subtitle": "Miről beszélnek az egyes műfajok - {count} tanulmány.",
+    "title": "MŰFAJOK",
+    "notEnoughFilms": "Nincs elég film {langs} nyelven ehhez - adj hozzá nyelveket, vagy válts az Összes filmre."
+  },
+  "home": {
+    "aboutHeading": "Erről az adatkészletről",
+    "decadesBody": "A hangosfilmektől a 2020-as évekig - hogyan beszélt a mozi egyes korszakai.",
+    "decadesHeading": "Barangolj az évtizedekben",
+    "fadeIn": "Képbe úszás:",
+    "faqLink": "a GYIK",
+    "heroBody": "Megszámoltunk minden kimondott szót {count} filmben - összesen {millions} milliót. Kövesd nyomon, {trends}, ismerd meg {sweariest}, és döntsd el az {versus} szóról szóra.",
+    "heroSweariest": "minden idők legkáromkodósabb forgatókönyvét",
+    "heroTitle": "Minden filmnek van egy {vocabulary}.",
+    "heroTrends": "hogyan veszi át az 'awesome' a 'swell' helyét",
+    "heroVersus": "Alien vs Aliens vitát",
+    "heroVocabulary": "szókincse",
+    "movieMeta": "{year} · {words} szó",
+    "opusLink": "OPUS OpenSubtitles korpusz",
+    "shelfHeading": "Vegyél le egy forgatókönyvet a polcról",
+    "aboutBody": "Feldolgozva {count} - a(z) {opus} minden felirat-párbeszéd szava a legalább 300 IMDb szavazattal rendelkező filmekhez, filmenként számolva. Csak a szószámok vannak közzétéve; feliratszöveget nem terjesztünk. Módszertan és fenntartások: {faq}.",
+    "aboutCountAllFilms": "film - a lefordított feliratokat is beleértve",
+    "aboutCountLangFilms": "{langs} nyelvű film",
+    "aboutCountTemplate": "{count} {kind}",
+    "aboutCountUnknown": "több tízezer",
+    "aboutSubtitleHint": "Ezek a számok a filmek angol felirataiból származnak, nem az eredeti párbeszédekből."
+  },
+  "leaderboard": {
+    "tabs": {
+      "everywhere": "Minden filmben elhangzik",
+      "films": "Filmes szuperlatívuszok",
+      "overview": "Áttekintés",
+      "shifts": "Feltörekvők és lemaradók",
+      "wonders": "Egyfilmes csodák",
+      "words": "Legjobb szavak"
+    },
+    "words": {
+      "allGenresOption": "Minden műfaj",
+      "filmsCount": " · {count} film",
+      "filteringSpinner": "Korpusz szűrése… (az első szűrt lekérdezés betölti az elemző motort)",
+      "fromLabel": "Tól",
+      "genreLabel": "Műfaj",
+      "intro": "A legtöbbet mondott szavak a korpusz összes filmjében.",
+      "noMatches": "Nincsenek ezeknek a szűrőknek megfelelő szavak - próbáld meg a “minden szó” vagy “bármilyen típus” lehetőséget.",
+      "rankByLabel": "Rangsorolás alapja",
+      "sortMovieishButton": "legfilmesebb",
+      "sortMovieishTitle": "Minden szót aszerint súlyoz, hogy a filmekben mennyivel többször hangzik el, mint a mindennapi angolban",
+      "sortSpokenButton": "legtöbbet mondott",
+      "toLabel": "Ig"
+    },
+    "languageNote": "{count} {langs} nyelvű film alapján, az angol felirataikból mérve."
+  },
+  "movie": {
+    "compareButton": "Összehasonlítás egy másik filmmel",
+    "decadeLinkTitle": "Több a(z) {decade}-as évekből",
+    "distinctWordsLabel": "Különböző szavak",
+    "genreSeparator": " / ",
+    "imdbRatingLabel": "IMDb értékelés",
+    "loadingScript": "Forgatókönyv betöltése…",
+    "mostSpokenHeading": "Legtöbbet mondott szavak",
+    "notFound": "Nincs “{id}” azonosítójú film az adatkészletben.",
+    "signatureWordsBody": "Szavak, amiket ez a film sokkal többször használ, mint a filmek általában (log-esély a teljes korpuszhoz képest).",
+    "signatureWordsHeading": "Jellegzetes szavak",
+    "slugTitle": "{title} - {year}",
+    "vocabRichnessLabel": "Szókincs gazdagsága",
+    "wordsSpokenLabel": "Kimondott szavak"
+  },
+  "themeToggle": {
+    "day": "NAPPAL",
+    "dayShoot": "Nappali forgatás",
+    "night": "ÉJSZAKA",
+    "nightShoot": "Éjszakai forgatás",
+    "switchToDay": "Váltás nappali módra",
+    "switchToNight": "Váltás éjszakai módra"
+  },
+  "trends": {
+    "addAnotherWordPlaceholder": "Újabb szó hozzáadása…",
+    "bigMovers": "Nagy mozgók az 1930-as évek óta",
+    "chartItButton": "Ábrázold",
+    "chartedWordsAriaLabel": "Ábrázolt szavak",
+    "featuredPrefix": "Kiemelt: {title}",
+    "firstWordPlaceholder": "Írj be egy szót, pl. szerelem",
+    "fullList": "teljes lista →",
+    "intro": "Milyen gyakran hangzik el egy szó a korpusz összes filmjében, a párbeszéd egymillió szavára vetítve, megjelenési év szerint.",
+    "navNoun": "trend",
+    "navSuffix": "minden nap új változás",
+    "notEnoughData": "Nincs elég adat ehhez: {words} (legalább 20 használat szükséges a korpuszban, olyan években, ahol elég film van).",
+    "perThousandWords": " · {rate}/1k szó",
+    "queryingCorpus": "Korpusz lekérdezése…",
+    "removeWordTitle": "“{word}” eltávolítása",
+    "topFilmByYearHeading": "Legjobb film a(z) “{word}” szóhoz évenként",
+    "topFilmByYearLoading": "Legjobb “{word}” film keresése évenként…",
+    "topFilmsHeading": "Filmek, amik a legtöbbször mondják, hogy “{word}”",
+    "topFilmsLoading": "Filmek keresése, amik a legtöbbször mondják, hogy “{word}”…",
+    "trimmedYearsNote": "{years} elrejtve - túl kevés film a korpuszban a megbízható arányokhoz",
+    "tryClassic": "Vagy próbálj ki egy klasszikust:",
+    "usesPerMillionWords": "használat egymillió párbeszédszóra vetítve",
+    "wordDetailsTablist": "Szó részletei",
+    "wordInputAriaLabel": "Ábrázolandó szó",
+    "yAxisLabel": "használat egymillió szóra vetítve",
+    "languageNote": "{count} {langs} nyelvű film alapján, az angol felirataikból mérve.",
+    "notEnoughFilms": "Nincs elég film {langs} nyelven ehhez a trendhez - adj hozzá nyelveket, vagy válts az Összes filmre."
+  },
+  "languageFilter": {
+    "allFilms": "Összes film",
+    "apply": "Alkalmaz",
+    "ariaLabel": "Filmek szűrése eredeti nyelv alapján",
+    "countLabel": "{count} nyelv",
+    "hint": "Szűrés a film eredeti nyelve alapján; a szavak száma az angol feliratokból származik.",
+    "menuAriaLabel": "Eredeti nyelv",
+    "searchAriaLabel": "Nyelvek keresése",
+    "searchPlaceholder": "Nyelvek keresése…"
+  },
+  "localeFilterHint": {
+    "dismissAriaLabel": "Elvetés",
+    "filterButton": "Szűrés",
+    "message": "{lang} nyelven nézed? Szűrj a {lang} nyelvű filmekre."
+  },
+  "modal": {
+    "closeAriaLabel": "Bezárás"
+  },
+  "filterExplainer": {
+    "badgeLabel": "lefordítva · {lang}",
+    "badgeTitle": "Eredeti nyelv: {lang} - a számok az angolra fordított feliratokból származnak. Hogyan működik ez?",
+    "dialogueNote": "Az eredeti nyelvű párbeszéd nincs az adatkészletben - csak az angol fordítás.",
+    "englishSubtitles": "angol feliratai",
+    "englishTranslation": "angol fordítás",
+    "filteringBody": "{whatFiltering} a film {originalLanguage} - hol készült, a TMDB metaadatai alapján - nem pedig az alábbi szavak nyelve.",
+    "linkText": "Hogyan működik ez?",
+    "modalTitle": "Hogyan működik",
+    "origin": "eredetű",
+    "originalLanguage": "eredeti nyelve",
+    "soSpanishMeans": "Tehát a \"spanyol\" a következőt jelenti:",
+    "spanishBody": "{soSpanishMeans} a spanyol {origin} mozi angol feliratos szókincse - hogyan jelennek meg olyan szavak, mint a \"solidarity\" vagy a \"dictatorship\" a spanyol filmek angol felirataiban - nem pedig spanyol szavak.",
+    "whatFiltering": "Amit szűrsz:",
+    "whatWords": "Ami a szavakat illeti:",
+    "wordsBody": "{whatWords} a Movie Words oldalán minden számadat a film {englishSubtitles} alapján készül. Csak az angol OpenSubtitles sávval rendelkezünk, így egy nem angol nyelvű film esetében ezek az {englishTranslation} szavai, nem pedig az eredeti párbeszéd. Ezért csúszik át néha egy-egy lefordítatlan szó - \"panna\", \"cotta\", \"samurai\"."
+  }
+}

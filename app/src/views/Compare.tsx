@@ -7,6 +7,7 @@ import { navigate, useRoute } from '../lib/route'
 import { Sparkline } from '../components/LineChart'
 import { ErrorBox, FeaturedNav, MovieSearch, Slug, Spinner } from '../components/ui'
 import { MATCHUPS, dayIndex, stepFeatured } from '../lib/featured'
+import { useI18n } from '../i18n'
 
 const COLORS = ['var(--color-s1)', 'var(--color-s2)', 'var(--color-s3)']
 const MAX = 3
@@ -19,7 +20,11 @@ interface EntityRef {
 
 interface EntityCard {
   ref: EntityRef
-  label: string
+  /** Movie title/year - only set for kind: 'movie' cards; decade/genre cards
+   * derive their label from ref.id at render time so it re-localizes without
+   * a refetch. */
+  title?: string
+  year?: number
   films: number
   totalWords: number
   signature: [string, number][]
@@ -47,7 +52,8 @@ async function loadCard(ref: EntityRef): Promise<EntityCard | null> {
       for (const [w, c] of [...m.top_all, ...m.top]) words.set(w as string, c as number)
       return {
         ref,
-        label: `${m.title} - ${m.year}`,
+        title: m.title,
+        year: m.year,
         films: 1,
         totalWords: m.stats.total_words,
         signature: m.distinctive,
@@ -61,7 +67,6 @@ async function loadCard(ref: EntityRef): Promise<EntityCard | null> {
     if (!sig) return null
     return {
       ref,
-      label: ref.kind === 'decade' ? `THE ${ref.id}S` : ref.id.toUpperCase(),
       films: sig.movie_count,
       totalWords: sig.total_words,
       signature: sig.signature,
@@ -105,6 +110,7 @@ function useSwears(movieIds: string[]) {
 
 /** Films-per-year mini trend for decade/genre cards, from the client-side index. */
 function FilmsPerYear({ entityRef, color }: { entityRef: EntityRef; color: string }) {
+  const { t } = useI18n()
   const [index, setIndex] = useState<MovieIndexEntry[] | null>(null)
   useEffect(() => {
     getMovieIndex().then(setIndex).catch(() => {})
@@ -122,14 +128,15 @@ function FilmsPerYear({ entityRef, color }: { entityRef: EntityRef; color: strin
   }, [index, entityRef.kind, entityRef.id])
   if (points.length < 2) return null
   return (
-    <div className="flex items-center gap-2" title="Films per release year in this slice of the corpus">
+    <div className="flex items-center gap-2" title={t('compare.filmsPerYearTitle')}>
       <Sparkline points={points} color={color} width={130} height={22} />
-      <span className="text-[10px] uppercase text-ink-3">films / year</span>
+      <span className="text-[10px] uppercase text-ink-3">{t('compare.filmsPerYearLabel')}</span>
     </div>
   )
 }
 
 function EntityPicker({ refs }: { refs: EntityRef[] }) {
+  const { t } = useI18n()
   const [decades, setDecades] = useState<string[]>([])
   const [genres, setGenres] = useState<string[]>([])
   useEffect(() => {
@@ -143,33 +150,35 @@ function EntityPicker({ refs }: { refs: EntityRef[] }) {
     <div className="mt-4 flex flex-wrap items-center gap-3">
       <div className="w-64">
         <MovieSearch
-          placeholder={refs.length ? 'Add a film…' : 'Pick a film…'}
+          placeholder={refs.length ? t('compare.addFilmPlaceholder') : t('compare.pickFilmPlaceholder')}
           onPick={(m) => add({ kind: 'movie', id: m.id })}
         />
       </div>
-      <span className="font-script text-xs uppercase text-ink-2">or</span>
+      <span className="font-script text-xs uppercase text-ink-2">{t('compare.orLabel')}</span>
       <select
         className={selectCls}
         value=""
-        aria-label="Add a decade"
+        aria-label={t('compare.addDecadeAriaLabel')}
         onChange={(e) => e.target.value && add({ kind: 'decade', id: e.target.value })}
       >
-        <option value="">Add a decade…</option>
+        <option value="">{t('compare.addDecadeOption')}</option>
         {decades.map((d) => (
           <option key={d} value={d}>
-            {d}s
+            {t('compare.decadeOptionLabel', { decade: d })}
           </option>
         ))}
       </select>
       <select
         className={selectCls}
         value=""
-        aria-label="Add a genre"
+        aria-label={t('compare.addGenreAriaLabel')}
         onChange={(e) => e.target.value && add({ kind: 'genre', id: e.target.value })}
       >
-        <option value="">Add a genre…</option>
+        <option value="">{t('compare.addGenreOption')}</option>
         {genres.map((g) => (
-          <option key={g}>{g}</option>
+          <option key={g} value={g}>
+            {t('genres.' + g)}
+          </option>
         ))}
       </select>
     </div>
@@ -180,13 +189,14 @@ const wordChip = (w: string, extra = '') => (
   <button
     key={w}
     onClick={() => navigate(`/trends?w=${encodeURIComponent(w)}`)}
-    className={`mr-2 text-left font-script hover:bg-mark ${extra}`}
+    className={`me-2 text-start font-script hover:bg-mark ${extra}`}
   >
     {w}
   </button>
 )
 
 export function CompareView() {
+  const { t, tn, n } = useI18n()
   const { params } = useRoute()
   const refs = useMemo(
     () =>
@@ -238,28 +248,36 @@ export function CompareView() {
   }, [loaded])
   const sharedSet = useMemo(() => new Set(shared), [shared])
 
+  // decade/genre cards derive their label from ref.id at render time (rather
+  // than a value baked in by loadCard) so it re-localizes on locale switch
+  // without a refetch.
+  const cardLabel = (c: EntityCard) =>
+    c.ref.kind === 'movie'
+      ? t('compare.movieLabel', { title: c.title ?? '', year: c.year ?? '' })
+      : c.ref.kind === 'decade'
+        ? t('compare.decadeLabel', { decade: c.ref.id })
+        : t('genres.' + c.ref.id)
+
   return (
     <div>
-      <p className="mt-1 text-sm text-ink-2">
-        Put films, decades, and genres side by side - up to three of any mix.
-      </p>
+      <p className="mt-1 text-sm text-ink-2">{t('compare.introBody')}</p>
       {refs.length < MAX && <EntityPicker refs={refs} />}
       {featured && (
         <FeaturedNav
           className="mt-5"
-          title={`Featured matchup: ${featured.title}`}
+          title={t('compare.featuredMatchupPrefix', { title: featured.title })}
           idx={featuredIdx}
           len={MATCHUPS.length}
-          noun="matchup"
-          suffix="rotates daily - or build your own above"
+          noun={t('compare.navNoun')}
+          suffix={t('compare.navSuffix')}
           onStep={(dir) => setFeaturedIdx((i) => stepFeatured(i, dir, MATCHUPS.length))}
         />
       )}
-      {cards === null && <Spinner label="Loading…" />}
+      {cards === null && <Spinner label={t('compare.loadingLabel')} />}
       {cards !== null && loaded.length === 0 && (
         // reload rather than navigate: on the featured (empty-URL) state the
         // hash wouldn't change, so navigating re-fetches nothing
-        <ErrorBox message="Nothing found for that selection." retry={() => window.location.reload()} />
+        <ErrorBox message={t('compare.nothingFoundMessage')} retry={() => window.location.reload()} />
       )}
 
       <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -276,7 +294,7 @@ export function CompareView() {
                 className="border-b-2 border-ink px-4 py-2"
                 style={{ background: `color-mix(in srgb, ${COLORS[i]} 14%, transparent)` }}
               >
-                <Slug prefix={`${i + 1}.`} text={c.label} />
+                <Slug prefix={`${i + 1}.`} text={cardLabel(c)} />
                 <div className="mt-1 flex items-center justify-between gap-2">
                   {refs.length > 0 ? (
                     <button
@@ -290,7 +308,7 @@ export function CompareView() {
                       }
                       className="text-xs text-ink-2 underline hover:text-ink"
                     >
-                      remove
+                      {t('compare.removeButton')}
                     </button>
                   ) : (
                     <span />
@@ -299,34 +317,38 @@ export function CompareView() {
                 </div>
               </div>
               <dl className="grid grid-cols-2 gap-x-4 gap-y-2 px-4 py-3 font-script text-sm">
-                <dt className="text-ink-2">Films</dt>
-                <dd className="text-right tabular-nums">{c.films.toLocaleString()}</dd>
-                <dt className="text-ink-2">Words spoken</dt>
-                <dd className="text-right tabular-nums">{c.totalWords.toLocaleString()}</dd>
+                <dt className="text-ink-2">{t('compare.filmsLabel')}</dt>
+                <dd className="text-end tabular-nums">{n(c.films)}</dd>
+                <dt className="text-ink-2">{t('compare.wordsSpokenLabel')}</dt>
+                <dd className="text-end tabular-nums">{n(c.totalWords)}</dd>
                 {c.ref.kind !== 'movie' && (
                   <>
-                    <dt className="text-ink-2">Words / film</dt>
-                    <dd className="text-right tabular-nums">
-                      {Math.round(c.totalWords / Math.max(c.films, 1)).toLocaleString()}
+                    <dt className="text-ink-2">{t('compare.wordsPerFilmLabel')}</dt>
+                    <dd className="text-end tabular-nums">
+                      {n(Math.round(c.totalWords / Math.max(c.films, 1)))}
                     </dd>
                   </>
                 )}
                 {c.uniqueWords !== undefined && (
                   <>
-                    <dt className="text-ink-2">Distinct words</dt>
-                    <dd className="text-right tabular-nums">{c.uniqueWords.toLocaleString()}</dd>
+                    <dt className="text-ink-2">{t('compare.distinctWordsLabel')}</dt>
+                    <dd className="text-end tabular-nums">{n(c.uniqueWords)}</dd>
                   </>
                 )}
                 {per1k !== null && (
                   <>
-                    <dt className="text-ink-2">Swears / 1k words</dt>
-                    <dd className="text-right tabular-nums">{per1k.toFixed(1)}</dd>
+                    <dt className="text-ink-2">{t('compare.swearsPer1kLabel')}</dt>
+                    <dd className="text-end tabular-nums">
+                      {n(per1k, { minimumFractionDigits: 1, maximumFractionDigits: 1 })}
+                    </dd>
                   </>
                 )}
               </dl>
               <div className="border-t-2 border-paper-2 px-4 py-3">
                 <h3 className="text-xs uppercase tracking-wide text-ink-2">
-                  Signature words <span className="normal-case">(highlighted = shared)</span>
+                  {tn('compare.signatureWordsHeading', {
+                    note: <span className="normal-case">{t('compare.signatureWordsHighlightedNote')}</span>,
+                  })}
                 </h3>
                 <p className="mt-1.5 font-script text-sm leading-6">
                   {c.signature.slice(0, 16).map(([w]) => wordChip(w, sharedSet.has(w) ? 'bg-mark px-0.5' : ''))}
@@ -335,7 +357,7 @@ export function CompareView() {
               {c.ref.kind === 'movie' && (
                 <div className="px-4 pb-3">
                   <a href={`#/movie/${c.ref.id}`} className="font-script text-xs underline">
-                    full breakdown →
+                    {t('compare.fullBreakdownLink')}
                   </a>
                 </div>
               )}
@@ -346,26 +368,34 @@ export function CompareView() {
 
       {h2h && (
         <div className="mt-8 border-2 border-ink bg-card p-4">
-          <h2 className="slug text-sm">Head to head</h2>
+          <h2 className="slug text-sm">{t('compare.headToHeadHeading')}</h2>
           <p className="mt-1 text-xs text-ink-2">
-            What each one says far more than the other{loaded.length > 2 ? 's' : ''} - rate per million words of its
-            own dialogue.
+            {t(loaded.length > 2 ? 'compare.headToHeadIntroMany' : 'compare.headToHeadIntroPair')}
           </p>
           <div className="mt-3 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {loaded.map((c, i) => {
               const rows = h2h.get(encodeRef(c.ref)) ?? []
               return (
                 <section key={encodeRef(c.ref)}>
-                  <h3 className="border-b border-paper-2 pb-1 font-script text-sm font-bold" style={{ color: COLORS[i] }}>
-                    {c.label}
+                  <h3
+                    className={`border-b border-paper-2 pb-1 font-script text-sm font-bold${
+                      c.ref.kind === 'genre' ? ' uppercase' : ''
+                    }`}
+                    style={{ color: COLORS[i] }}
+                  >
+                    {cardLabel(c)}
                   </h3>
-                  {rows.length === 0 && <p className="mt-2 font-script text-xs text-ink-3">no standout words</p>}
+                  {rows.length === 0 && (
+                    <p className="mt-2 font-script text-xs text-ink-3">{t('compare.noStandoutWords')}</p>
+                  )}
                   <ol className="mt-2">
                     {rows.map((r) => (
                       <li key={r.word} className="flex items-baseline gap-2 py-0.5 font-script text-sm">
                         {wordChip(r.word, 'font-bold')}
-                        <span className="ml-auto shrink-0 text-xs tabular-nums text-ink-2">
-                          {r.ratio >= 10 ? Math.round(r.ratio) : r.ratio}× more
+                        <span className="ms-auto shrink-0 text-xs tabular-nums text-ink-2">
+                          {t('compare.ratioMoreLabel', {
+                            ratio: n(r.ratio >= 10 ? Math.round(r.ratio) : r.ratio, { maximumFractionDigits: 1 }),
+                          })}
                         </span>
                       </li>
                     ))}
@@ -379,8 +409,8 @@ export function CompareView() {
 
       {shared.length > 0 && (
         <div className="mt-8 border-2 border-ink bg-card p-4">
-          <h2 className="slug text-sm">Signature words they share</h2>
-          <p className="mt-2 font-script">{shared.map((w) => wordChip(w, 'mr-3 bg-mark px-1'))}</p>
+          <h2 className="slug text-sm">{t('compare.sharedSignatureWordsHeading')}</h2>
+          <p className="mt-2 font-script">{shared.map((w) => wordChip(w, 'me-3 bg-mark px-1'))}</p>
         </div>
       )}
     </div>

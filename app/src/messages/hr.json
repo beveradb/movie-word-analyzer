@@ -1,0 +1,403 @@
+{
+  "compare": {
+    "orLabel": "ili",
+    "addDecadeAriaLabel": "Dodaj desetljeće",
+    "addDecadeOption": "Dodaj desetljeće…",
+    "addFilmPlaceholder": "Dodaj film…",
+    "addGenreAriaLabel": "Dodaj žanr",
+    "addGenreOption": "Dodaj žanr…",
+    "decadeLabel": "{decade}-E",
+    "decadeOptionLabel": "{decade}-e",
+    "distinctWordsLabel": "Različite riječi",
+    "featuredMatchupPrefix": "Istaknuti dvoboj: {title}",
+    "filmsLabel": "Filmovi",
+    "filmsPerYearLabel": "filmova / godini",
+    "filmsPerYearTitle": "Filmova po godini izdanja u ovom dijelu korpusa",
+    "fullBreakdownLink": "potpuna raščlamba →",
+    "headToHeadHeading": "Jedan na jedan",
+    "introBody": "Stavi filmove, desetljeća i žanrove jedne pored drugih - do tri u bilo kojoj kombinaciji.",
+    "loadingLabel": "Učitavam…",
+    "movieLabel": "{title} - {year}",
+    "navNoun": "dvoboj",
+    "navSuffix": "rotira se svakodnevno - ili složi svoj iznad",
+    "noStandoutWords": "nema istaknutih riječi",
+    "nothingFoundMessage": "Ništa nije pronađeno za taj odabir.",
+    "pickFilmPlaceholder": "Odaberi film…",
+    "ratioMoreLabel": "{ratio}× više",
+    "removeButton": "ukloni",
+    "sharedSignatureWordsHeading": "Zajedničke prepoznatljive riječi",
+    "signatureWordsHeading": "Prepoznatljive riječi {note}",
+    "signatureWordsHighlightedNote": "(istaknuto = zajedničko)",
+    "swearsPer1kLabel": "Psovke / 1k riječi",
+    "wordsPerFilmLabel": "Riječi / filmu",
+    "wordsSpokenLabel": "Izgovorene riječi",
+    "headToHeadIntroMany": "Što svaki od njih govori puno više od ostalih - stopa na milijun riječi vlastitog dijaloga.",
+    "headToHeadIntroPair": "Što svaki od njih govori puno više od onog drugog - stopa na milijun riječi vlastitog dijaloga."
+  },
+  "languageSwitcher": {
+    "current": "Jezik",
+    "label": "Odaberi jezik"
+  },
+  "nav": {
+    "sectionsLabel": "Sekcije",
+    "compare": "Usporedi",
+    "decades": "Desetljeća",
+    "explore": "Istraži",
+    "genres": "Žanrovi",
+    "leaderboard": "Ljestvica",
+    "trends": "Trendovi"
+  },
+  "pos": {
+    "other": "ostalo",
+    "a": "pridjevi",
+    "adjective": "pridjev",
+    "adverb": "prilog",
+    "n": "imenice",
+    "noun": "imenica",
+    "r": "prilozi",
+    "v": "glagoli",
+    "verb": "glagol",
+    "x": "imena i ostalo"
+  },
+  "ui": {
+    "errorBox": {
+      "retryButton": "Pokušaj ponovno",
+      "heading": "Nedostaje scena"
+    },
+    "featuredNav": {
+      "nextAriaLabel": "Sljedeći istaknuti {noun}",
+      "position": "{idx} od {len}",
+      "prevAriaLabel": "Prethodni istaknuti {noun}"
+    },
+    "highlightWord": {
+      "spokenTimes": "izgovoreno {count} puta",
+      "title": "“{word}” - {display}"
+    },
+    "movieSearch": {
+      "ariaLabel": "Pretraži filmove",
+      "placeholder": "Pretraži naslov filma…"
+    },
+    "poster": {
+      "alt": "{title} plakat"
+    },
+    "seriesLegend": {
+      "exploreTitle": "Istraži “{word}”"
+    },
+    "slug": {
+      "defaultPrefix": "INT."
+    },
+    "wordFilterBar": {
+      "allButton": "sve riječi",
+      "anyKindButton": "bilo koja vrsta",
+      "commonnessAriaLabel": "Učestalost riječi",
+      "hidingDescription": "skriva svakodnevni engleski - oko 2.000 najčešćih riječi (the, know, get…)",
+      "interestingButton": "zanimljive riječi",
+      "onlyKindsSuffix": " · samo {kinds}",
+      "showingDescription": "prikazuje svaku riječ, uključujući svakodnevni engleski"
+    }
+  },
+  "boards": {
+    "films": {
+      "chattiestBlurb": "najviše riječi po minuti trajanja",
+      "chattiestFmt": "{v} rij/min",
+      "chattiestTitle": "Najbrži govornici",
+      "intro": "Rekorderi korpusa, četiri kategorije ekstremnih scenarija.",
+      "loadingSpinner": "Učitavam filmske superlative…",
+      "repetitiveBlurb": "najmanji udio različitih riječi",
+      "repetitiveFmt": "{v}% jedinstveno",
+      "repetitiveTitle": "Najrepetitivniji scenariji",
+      "sweariestBlurb": "psovki na 1.000 riječi",
+      "sweariestFmt": "{v}/1k",
+      "sweariestTitle": "Najprostiji scenariji",
+      "vocabularyBlurb": "najviše različitih riječi u jednom scenariju",
+      "vocabularyFmt": "{v} riječi",
+      "vocabularyTitle": "Najveći vokabulari"
+    },
+    "overview": {
+      "adjectivesBlurb": "najviše izgovorenih zanimljivih pridjeva",
+      "adjectivesTitle": "Filmski pridjevi",
+      "fallingBlurb": "govori se puno manje sada nego u ranom kinu",
+      "intro": "Glavni naglasci korpusa - najboljih pet sa svake ploče. Prati bilo koju karticu za cijeli popis, filtere i više.",
+      "loadingSpinner": "Učitavam naglaske…",
+      "risingBlurb": "govori se puno više sada nego u ranom kinu",
+      "ubiquityBlurb": "riječi koje gotovo nijedan scenarij ne preskače",
+      "wondersBlurb": "riječi koje posjeduje samo jedan film"
+    },
+    "ratio": {
+      "down": "{label}× manje",
+      "up": "{label}× više"
+    },
+    "shifts": {
+      "fallingTitle": "Blijede",
+      "intro": "Kako se dijalog promijenio: riječi koje se izgovaraju puno više (ili puno manje) na milijun riječi sada (2010-e–20-e) nego u ranom kinu (1930-e–40-e). Linije prate svako desetljeće; klikni na riječ za cijeli grafikon.",
+      "loadingSpinner": "Učitavam promjene…",
+      "risingTitle": "U porastu"
+    },
+    "taster": {
+      "seeAllLink": "vidi sve →"
+    },
+    "ubiquity": {
+      "intro": "Osim čistih veznika, ove se riječi pojavljuju u gotovo svakom od {nFilms} filmova.",
+      "loadingSpinner": "Učitavam…",
+      "shareOfFilms": "{share}% filmova"
+    },
+    "wonders": {
+      "intro": "Riječi koje jedan film izgovara više nego ostatak kinematografije zajedno - imena likova, izmišljene riječi, opsesije.",
+      "item": "izgovoreno {count}× u {movieLink} ({year}) - {share}% od svakog puta kada se izgovori na filmu",
+      "loadingSpinner": "Učitavam čuda jednog filma…"
+    }
+  },
+  "chart": {
+    "axisAriaLabel": "{yLabel} po godini",
+    "chartingSpinner": "Crtam istaknutu promjenu…",
+    "loadFailedMessage": "Nisam mogao nacrtati ovo - pokušaj sljedeće ▶",
+    "moreTrendsLink": "više trendova →",
+    "trendNoun": "trend",
+    "unpinAriaLabel": "Otkvači {year}",
+    "usesPerMillionCaption": "korištenja na milijun riječi dijaloga",
+    "yAxisLabel": "korištenja na milijun riječi"
+  },
+  "decadesView": {
+    "decadeLabel": "{decade}-e",
+    "eyebrow": "Pregledaj po",
+    "filmsCount": "{count} filmova",
+    "loadError": "Nisam mogao učitati desetljeća.",
+    "loadingSpinner": "Učitavam desetljeća…",
+    "subtitle": "Kako je govorila svaka era filma - {count} studija.",
+    "title": "DESETLJEĆA",
+    "notEnoughFilms": "Nema dovoljno filmova na {langs} za ovo - dodaj jezike ili prebaci na Sve filmove."
+  },
+  "entity": {
+    "compareButton": "Usporedi {label} s…",
+    "decadeEyebrow": "Proc. {decade}",
+    "decadeLabel": "{decade}-E",
+    "decadeSubject": "{decade}-e",
+    "genreEyebrow": "Studija žanra",
+    "kindDecade": "desetljeće",
+    "kindGenre": "žanr",
+    "loadingSpinner": "Učitavam…",
+    "mostSpokenBody": "Obični zbrojevi, isključene zaustavne riječi.",
+    "mostSpokenHeading": "Najviše izgovarane riječi",
+    "notFound": "Nema {kind} “{id}” u skupu podataka.",
+    "notableScriptsHeading": "Značajni scenariji",
+    "signatureWordsBody": "O čemu {subject} govori puno više nego filmovi općenito.",
+    "signatureWordsHeading": "Prepoznatljive riječi",
+    "statsLine": "{films} filmova · {words} riječi dijaloga",
+    "notEnoughFilms": "Nema dovoljno filmova na {langs} za {subject} - dodaj jezike ili prebaci na Sve filmove."
+  },
+  "eras": {
+    "1910": "prve role",
+    "1920": "dolaze zvučni filmovi",
+    "1930": "zlatno doba",
+    "1940": "rat i film noir",
+    "1950": "atomsko doba",
+    "1960": "novi val",
+    "1970": "Novi Hollywood",
+    "1980": "era blockbustera",
+    "1990": "indie boom",
+    "2000": "godine multipleksa",
+    "2010": "zora streaminga",
+    "2020": "kino danas"
+  },
+  "errors": {
+    "body": "Žao mi je zbog toga - {reload} obično to popravi. Još uvijek ne radi? Pošalji e-mail na {email}.",
+    "eyebrow": "Oštri rez na:",
+    "reload": "ponovno učitavanje",
+    "title": "Nešto se pokvarilo."
+  },
+  "footer": {
+    "creditsBody": "Otvoreni kod: {github} i nekomercijalno. Objavljuju se samo izvedeni brojevi riječi - ne distribuira se tekst titlova.",
+    "creditsHeading": "Zasluge.",
+    "dataBody": "Cijeli skup podataka dostupan je za preuzimanje - vidi {dataGuide} za poveznice i informacije ({license}). Zanima te metodologija, pristranost ili autorska prava? Pročitaj {faq}.",
+    "dataGuideLink": "vodič za podatke",
+    "dataHeading": "Zgrabi podatke.",
+    "dataSourcesBody": "Podaci: brojevi riječi iz {opus} (Lison & Tiedemann, 2016), putem {openSubtitles}; metapodaci o filmovima iz {imdbData} i {tmdb}. Informacije ljubaznošću IMDb-a ({imdbUrl}). Korišteno s dopuštenjem.",
+    "faqLink": "FAQ",
+    "githubLink": "github.com/beveradb/moviewords",
+    "githubProfileLink": "GitHub",
+    "ideaBody": "Mora da postoje zanimljive analize kojih se nismo sjetili! Ako želiš podijeliti ideju ili si napravio nešto cool s podacima, {email}",
+    "ideaEmailLink": "pošalji e-mail na andrew@beveridge.uk",
+    "ideaHeading": "Imaš ideju?",
+    "imdbDataLink": "IMDb",
+    "imdbUrlLink": "https://www.imdb.com",
+    "instagramLink": "Instagram",
+    "licenseLink": "CC BY-NC-SA 4.0",
+    "lindsayLink": "Lindsay Wright Graphic Design",
+    "linkedinLink": "LinkedIn",
+    "madeByBody": "Napravio Andrew Beveridge - {github} · {linkedin} · {instagram} - s originalnom idejom moje divne supruge {lindsay} - pogledaj njezin portfelj!",
+    "openSubtitlesLink": "OpenSubtitles.org",
+    "opusLink": "OPUS OpenSubtitles korpus",
+    "takedownEmailLink": "Pošalji e-mail za uklanjanje",
+    "tmdbDisclaimerBody": "Ovaj proizvod koristi TMDB API, ali nije podržan niti certificiran od strane TMDB-a. Plakati putem TMDB-a - autorska prava njihovih studija, prikazani radi identifikacije filmova o kojima se raspravlja. Nositelj prava? {takedown} i bit će odmah uklonjeno.",
+    "tmdbLink": "TMDB"
+  },
+  "genres": {
+    "Action": "Akcija",
+    "Adult": "Za odrasle",
+    "Adventure": "Avantura",
+    "Animation": "Animacija",
+    "Biography": "Biografija",
+    "Comedy": "Komedija",
+    "Crime": "Kriminalistika",
+    "Documentary": "Dokumentarni",
+    "Drama": "Drama",
+    "Family": "Obiteljski",
+    "Fantasy": "Fantazija",
+    "Film-Noir": "Film-Noir",
+    "History": "Povijesni",
+    "Horror": "Horor",
+    "Music": "Glazbeni",
+    "Musical": "Mjuzikl",
+    "Mystery": "Misterij",
+    "News": "Vijesti",
+    "Reality-TV": "Reality-TV",
+    "Romance": "Romantika",
+    "Sci-Fi": "Znanstvena fantastika",
+    "Sport": "Sport",
+    "Thriller": "Triler",
+    "War": "Ratni",
+    "Western": "Vestern"
+  },
+  "genresView": {
+    "eyebrow": "Pregledaj po",
+    "filmsCount": "{count} filmova",
+    "loadError": "Nisam mogao učitati žanrove.",
+    "loadingSpinner": "Učitavam žanrove…",
+    "subtitle": "O čemu svaki žanr govori - {count} studija.",
+    "title": "ŽANROVI",
+    "notEnoughFilms": "Nema dovoljno filmova na {langs} za ovo - dodaj jezike ili prebaci na Sve filmove."
+  },
+  "home": {
+    "aboutHeading": "O ovom skupu podataka",
+    "decadesBody": "Od zvučnih filmova do 2020-ih - kako je govorila svaka era filma.",
+    "decadesHeading": "Lutaj kroz desetljeća",
+    "fadeIn": "Fade in:",
+    "faqLink": "FAQ",
+    "heroBody": "Prebrojali smo svaku izgovorenu riječ u {count} filmova - njih {millions} milijuna. Prati {trends}, upoznaj {sweariest} i riješi {versus} riječ po riječ.",
+    "heroSweariest": "najprostiji scenarij ikad napravljen",
+    "heroTitle": "Svaki film ima {vocabulary}.",
+    "heroTrends": "kako 'awesome' prestiže 'swell'",
+    "heroVersus": "Alien protiv Aliens",
+    "heroVocabulary": "vokabular",
+    "movieMeta": "{year} · {words} riječi",
+    "opusLink": "OPUS OpenSubtitles korpus",
+    "shelfHeading": "Skini scenarij s police",
+    "aboutBody": "Obuhvaća {count} - svaku riječ dijaloga iz titlova iz {opus} za filmove s najmanje 300 IMDb glasova, prebrojano po filmu. Objavljuju se samo brojevi riječi; ne distribuira se tekst titlova. Metodologija i upozorenja: {faq}.",
+    "aboutCountAllFilms": "filmova - uključeni prevedeni titlovi",
+    "aboutCountLangFilms": "filmova na jeziku: {langs}",
+    "aboutCountTemplate": "{count} {kind}",
+    "aboutCountUnknown": "deseci tisuća",
+    "aboutSubtitleHint": "Ovi brojevi dolaze iz engleskih titlova filmova, a ne iz njihovog izvornog dijaloga."
+  },
+  "leaderboard": {
+    "tabs": {
+      "everywhere": "Izgovoreno u svakom filmu",
+      "films": "Filmski superlativi",
+      "overview": "Pregled",
+      "shifts": "U usponu i padu",
+      "wonders": "Čuda jednog filma",
+      "words": "Najbolje riječi"
+    },
+    "words": {
+      "allGenresOption": "Svi žanrovi",
+      "filmsCount": " · {count} filmova",
+      "filteringSpinner": "Filtriram korpus… (prvi filtrirani upit učitava analitički mehanizam)",
+      "fromLabel": "Od",
+      "genreLabel": "Žanr",
+      "intro": "Najviše izgovarane riječi u svakom filmu u korpusu.",
+      "noMatches": "Nijedna riječ ne odgovara ovim filterima - pokušaj “sve riječi” ili “bilo koja vrsta”.",
+      "rankByLabel": "Rangiraj po",
+      "sortMovieishButton": "najviše filmski",
+      "sortMovieishTitle": "Ponderira svaku riječ prema tome koliko je filmovi više izgovaraju u odnosu na svakodnevni engleski",
+      "sortSpokenButton": "najviše izgovarano",
+      "toLabel": "Do"
+    },
+    "languageNote": "Temeljeno na {count} filmova na jeziku: {langs}, izmjereno iz njihovih engleskih titlova."
+  },
+  "movie": {
+    "compareButton": "Usporedi s drugim filmom",
+    "decadeLinkTitle": "Više iz {decade}-ih",
+    "distinctWordsLabel": "Različite riječi",
+    "genreSeparator": " / ",
+    "imdbRatingLabel": "IMDb ocjena",
+    "loadingScript": "Učitavam scenarij…",
+    "mostSpokenHeading": "Najviše izgovarane riječi",
+    "notFound": "Nema filma s id-om “{id}” u skupu podataka.",
+    "signatureWordsBody": "Riječi koje ovaj film koristi puno više nego filmovi općenito (log-šanse u odnosu na cijeli korpus).",
+    "signatureWordsHeading": "Prepoznatljive riječi",
+    "slugTitle": "{title} - {year}",
+    "vocabRichnessLabel": "Bogatstvo vokabulara",
+    "wordsSpokenLabel": "Izgovorene riječi"
+  },
+  "themeToggle": {
+    "day": "DAN",
+    "dayShoot": "Dnevno snimanje",
+    "night": "NOĆ",
+    "nightShoot": "Noćno snimanje",
+    "switchToDay": "Prebaci na dnevni način",
+    "switchToNight": "Prebaci na noćni način"
+  },
+  "trends": {
+    "addAnotherWordPlaceholder": "Dodaj još jednu riječ…",
+    "bigMovers": "Veliki pomaci od 1930-ih",
+    "chartItButton": "Nacrtaj graf",
+    "chartedWordsAriaLabel": "Nacrtane riječi",
+    "featuredPrefix": "Istaknuto: {title}",
+    "firstWordPlaceholder": "Upiši riječ, npr. ljubav",
+    "fullList": "cijeli popis →",
+    "intro": "Koliko se često riječ izgovara u svim filmovima u korpusu, na milijun riječi dijaloga, po godini izdanja.",
+    "navNoun": "trend",
+    "navSuffix": "nova promjena svaki dan",
+    "notEnoughData": "Nema dovoljno podataka za: {words} (potrebno ≥20 korištenja u cijelom korpusu, u godinama s dovoljno filmova).",
+    "perThousandWords": " · {rate}/1k riječi",
+    "queryingCorpus": "Pretražujem korpus…",
+    "removeWordTitle": "Ukloni “{word}”",
+    "topFilmByYearHeading": "Najbolji film za “{word}” po godini",
+    "topFilmByYearLoading": "Tražim najbolji film za “{word}” po godini…",
+    "topFilmsHeading": "Filmovi koji najviše izgovaraju “{word}”",
+    "topFilmsLoading": "Tražim filmove koji najviše izgovaraju “{word}”…",
+    "trimmedYearsNote": "{years} skriveno - premalo filmova u korpusu za pouzdane stope",
+    "tryClassic": "Ili pokušaj s klasikom:",
+    "usesPerMillionWords": "korištenja na milijun riječi dijaloga",
+    "wordDetailsTablist": "Detalji riječi",
+    "wordInputAriaLabel": "Riječ za grafikon",
+    "yAxisLabel": "korištenja na milijun riječi",
+    "languageNote": "Temeljeno na {count} filmova na jeziku: {langs}, izmjereno iz njihovih engleskih titlova.",
+    "notEnoughFilms": "Nema dovoljno filmova na {langs} za ovaj trend - dodaj jezike ili prebaci na Sve filmove."
+  },
+  "languageFilter": {
+    "allFilms": "Svi filmovi",
+    "apply": "Primijeni",
+    "ariaLabel": "Filtriraj filmove po izvornom jeziku",
+    "countLabel": "{count} jezika",
+    "hint": "Filtrira po izvornom jeziku filma; brojevi riječi dolaze iz engleskih titlova.",
+    "menuAriaLabel": "Izvorni jezik",
+    "searchAriaLabel": "Pretraži jezike",
+    "searchPlaceholder": "Pretraži jezike…"
+  },
+  "localeFilterHint": {
+    "dismissAriaLabel": "Odbaci",
+    "filterButton": "Filtriraj",
+    "message": "Gledaš na {lang}? Filtriraj na filmove na jeziku: {lang}."
+  },
+  "modal": {
+    "closeAriaLabel": "Zatvori"
+  },
+  "filterExplainer": {
+    "badgeLabel": "prevedeno · {lang}",
+    "badgeTitle": "Izvorni jezik {lang} - brojevi dolaze iz engleskih prevedenih titlova. Kako ovo funkcionira?",
+    "dialogueNote": "Dijalog na izvornom jeziku nije u skupu podataka - samo engleski prijevod.",
+    "englishSubtitles": "engleski titlovi",
+    "englishTranslation": "engleski prijevod",
+    "filteringBody": "{whatFiltering} {originalLanguage} filma - gdje je napravljen, iz TMDB metapodataka - a ne jezik riječi ispod.",
+    "linkText": "Kako ovo funkcionira?",
+    "modalTitle": "Kako ovo funkcionira",
+    "origin": "podrijetla",
+    "originalLanguage": "izvorni jezik",
+    "soSpanishMeans": "Dakle, \"španjolski\" znači",
+    "spanishBody": "{soSpanishMeans} vokabular engleskih titlova kinematografije španjolskog {origin} - kako se riječi poput \"solidarity\" ili \"dictatorship\" pojavljuju u engleskim titlovima španjolskih filmova - a ne španjolske riječi.",
+    "whatFiltering": "Što filtriraš:",
+    "whatWords": "Koje su to riječi:",
+    "wordsBody": "{whatWords} svaki broj na Movie Words dolazi iz filma za koji se koriste {englishSubtitles}. Imamo samo englesku OpenSubtitles traku, pa su za neengleski film ovo riječi koje čine njegov {englishTranslation}, a ne izvorni dijalog. Zato se ponekad provuče neprevedena riječ - \"panna\", \"cotta\", \"samurai\"."
+  }
+}

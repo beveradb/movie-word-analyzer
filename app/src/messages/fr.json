@@ -1,0 +1,403 @@
+{
+  "compare": {
+    "orLabel": "ou",
+    "addDecadeAriaLabel": "Ajouter une décennie",
+    "addDecadeOption": "Ajouter une décennie…",
+    "addFilmPlaceholder": "Ajouter un film…",
+    "addGenreAriaLabel": "Ajouter un genre",
+    "addGenreOption": "Ajouter un genre…",
+    "decadeLabel": "LES ANNÉES {decade}",
+    "decadeOptionLabel": "Années {decade}",
+    "distinctWordsLabel": "Mots distincts",
+    "featuredMatchupPrefix": "Duel à la une : {title}",
+    "filmsLabel": "Films",
+    "filmsPerYearLabel": "films / an",
+    "filmsPerYearTitle": "Films par année de sortie dans cette partie du corpus",
+    "fullBreakdownLink": "analyse complète →",
+    "headToHeadHeading": "Face à face",
+    "introBody": "Mets des films, des décennies et des genres côte à côte - jusqu'à trois de n'importe quelle combinaison.",
+    "loadingLabel": "Chargement…",
+    "movieLabel": "{title} - {year}",
+    "navNoun": "duel",
+    "navSuffix": "change tous les jours - ou crée le tien ci-dessus",
+    "noStandoutWords": "aucun mot marquant",
+    "nothingFoundMessage": "Rien trouvé pour cette sélection.",
+    "pickFilmPlaceholder": "Choisis un film…",
+    "ratioMoreLabel": "{ratio}× plus",
+    "removeButton": "retirer",
+    "sharedSignatureWordsHeading": "Mots signatures qu'ils partagent",
+    "signatureWordsHeading": "Mots signatures {note}",
+    "signatureWordsHighlightedNote": "(surligné = partagé)",
+    "swearsPer1kLabel": "Gros mots / 1k mots",
+    "wordsPerFilmLabel": "Mots / film",
+    "wordsSpokenLabel": "Mots prononcés",
+    "headToHeadIntroMany": "Ce que chacun dit bien plus que les autres - fréquence par million de mots dans ses propres dialogues.",
+    "headToHeadIntroPair": "Ce que chacun dit bien plus que l'autre - fréquence par million de mots dans ses propres dialogues."
+  },
+  "languageSwitcher": {
+    "current": "Langue",
+    "label": "Choisir la langue"
+  },
+  "nav": {
+    "sectionsLabel": "Sections",
+    "compare": "Comparer",
+    "decades": "Décennies",
+    "explore": "Explorer",
+    "genres": "Genres",
+    "leaderboard": "Classement",
+    "trends": "Tendances"
+  },
+  "pos": {
+    "other": "autre",
+    "a": "adjectifs",
+    "adjective": "adjectif",
+    "adverb": "adverbe",
+    "n": "noms",
+    "noun": "nom",
+    "r": "adverbes",
+    "v": "verbes",
+    "verb": "verbe",
+    "x": "noms & autres"
+  },
+  "ui": {
+    "errorBox": {
+      "retryButton": "Réessayer",
+      "heading": "Scène manquante"
+    },
+    "featuredNav": {
+      "nextAriaLabel": "{noun} à la une suivant",
+      "position": "{idx} sur {len}",
+      "prevAriaLabel": "{noun} à la une précédent"
+    },
+    "highlightWord": {
+      "spokenTimes": "prononcé {count} fois",
+      "title": "« {word} » - {display}"
+    },
+    "movieSearch": {
+      "ariaLabel": "Rechercher des films",
+      "placeholder": "Rechercher un titre de film…"
+    },
+    "poster": {
+      "alt": "Affiche de {title}"
+    },
+    "seriesLegend": {
+      "exploreTitle": "Explorer « {word} »"
+    },
+    "slug": {
+      "defaultPrefix": "INT."
+    },
+    "wordFilterBar": {
+      "allButton": "tous les mots",
+      "anyKindButton": "n'importe quel type",
+      "commonnessAriaLabel": "Fréquence du mot",
+      "hidingDescription": "masque l'anglais courant - les ~2 000 mots les plus fréquents (le, savoir, obtenir…)",
+      "interestingButton": "mots intéressants",
+      "onlyKindsSuffix": " · uniquement {kinds}",
+      "showingDescription": "affiche tous les mots, y compris l'anglais courant"
+    }
+  },
+  "boards": {
+    "films": {
+      "chattiestBlurb": "le plus de mots par minute de film",
+      "chattiestFmt": "{v} mots/min",
+      "chattiestTitle": "Les plus bavards",
+      "intro": "Les détenteurs de records du corpus, quatre catégories de scénarios extrêmes.",
+      "loadingSpinner": "Chargement des superlatifs de films…",
+      "repetitiveBlurb": "la plus faible part de mots distincts",
+      "repetitiveFmt": "{v}% uniques",
+      "repetitiveTitle": "Les scénarios les plus répétitifs",
+      "sweariestBlurb": "gros mots pour 1 000 mots",
+      "sweariestFmt": "{v}/1k",
+      "sweariestTitle": "Les scénarios les plus vulgaires",
+      "vocabularyBlurb": "le plus de mots distincts dans un scénario",
+      "vocabularyFmt": "{v} mots",
+      "vocabularyTitle": "Les plus grands vocabulaires"
+    },
+    "overview": {
+      "adjectivesBlurb": "les adjectifs intéressants les plus prononcés",
+      "adjectivesTitle": "Les adjectifs du cinéma",
+      "fallingBlurb": "beaucoup moins dits aujourd'hui qu'aux débuts du cinéma",
+      "intro": "Les gros titres du corpus - le top cinq de chaque tableau. Clique sur une carte pour la liste complète, les filtres et plus encore.",
+      "loadingSpinner": "Chargement des gros titres…",
+      "risingBlurb": "beaucoup plus dits aujourd'hui qu'aux débuts du cinéma",
+      "ubiquityBlurb": "les mots qu'aucun scénario n'oublie",
+      "wondersBlurb": "les mots propres à un seul film"
+    },
+    "ratio": {
+      "down": "{label}× moins",
+      "up": "{label}× plus"
+    },
+    "shifts": {
+      "fallingTitle": "Fondu au noir",
+      "intro": "L'évolution des dialogues : les mots dits beaucoup plus (ou beaucoup moins) par million de mots aujourd'hui (2010s–20s) qu'aux débuts du cinéma (1930s–40s). Les lignes tracent chaque décennie ; clique sur un mot pour le graphique complet.",
+      "loadingSpinner": "Chargement des évolutions…",
+      "risingTitle": "En pleine ascension"
+    },
+    "taster": {
+      "seeAllLink": "tout voir →"
+    },
+    "ubiquity": {
+      "intro": "Au-delà des simples mots de liaison, ces mots apparaissent dans presque chacun des {nFilms} films.",
+      "loadingSpinner": "Chargement…",
+      "shareOfFilms": "{share}% des films"
+    },
+    "wonders": {
+      "intro": "Les mots qu'un film prononce plus que tout le reste du cinéma réuni - noms de personnages, mots inventés, obsessions.",
+      "item": "dit {count}× dans {movieLink} ({year}) - {share}% de toutes les fois où le cinéma le prononce",
+      "loadingSpinner": "Chargement des merveilles d'un seul film…"
+    }
+  },
+  "chart": {
+    "axisAriaLabel": "{yLabel} par année",
+    "chartingSpinner": "Traçage d'une évolution à la une…",
+    "loadFailedMessage": "Impossible de tracer celui-ci - essaie le suivant ▶",
+    "moreTrendsLink": "plus de tendances →",
+    "trendNoun": "tendance",
+    "unpinAriaLabel": "Détacher {year}",
+    "usesPerMillionCaption": "utilisations par million de mots de dialogue",
+    "yAxisLabel": "utilisations par million de mots"
+  },
+  "decadesView": {
+    "decadeLabel": "Années {decade}",
+    "eyebrow": "Parcourir par",
+    "filmsCount": "{count} films",
+    "loadError": "Impossible de charger les décennies.",
+    "loadingSpinner": "Chargement des décennies…",
+    "subtitle": "Comment chaque époque du cinéma parlait - {count} études.",
+    "title": "DÉCENNIES",
+    "notEnoughFilms": "Pas assez de films en {langs} pour ça - ajoute des langues ou passe à Tous les films."
+  },
+  "entity": {
+    "compareButton": "Comparer {label} avec…",
+    "decadeEyebrow": "Est. {decade}",
+    "decadeLabel": "LES ANNÉES {decade}",
+    "decadeSubject": "les années {decade}",
+    "genreEyebrow": "Étude de genre",
+    "kindDecade": "décennie",
+    "kindGenre": "genre",
+    "loadingSpinner": "Chargement…",
+    "mostSpokenBody": "Comptes simples, mots vides exclus.",
+    "mostSpokenHeading": "Mots les plus prononcés",
+    "notFound": "Aucun(e) {kind} « {id} » dans le jeu de données.",
+    "notableScriptsHeading": "Scénarios notables",
+    "signatureWordsBody": "Ce dont {subject} parle beaucoup plus que les films en général.",
+    "signatureWordsHeading": "Mots signatures",
+    "statsLine": "{films} films · {words} mots de dialogue",
+    "notEnoughFilms": "Pas assez de films en {langs} pour {subject} - ajoute des langues ou passe à Tous les films."
+  },
+  "eras": {
+    "1910": "les premières bobines",
+    "1920": "l'arrivée du parlant",
+    "1930": "l'âge d'or",
+    "1940": "guerre et film noir",
+    "1950": "l'ère atomique",
+    "1960": "la nouvelle vague",
+    "1970": "le Nouvel Hollywood",
+    "1980": "l'ère des blockbusters",
+    "1990": "le boom indé",
+    "2000": "les années multiplexe",
+    "2010": "l'aube du streaming",
+    "2020": "le cinéma d'aujourd'hui"
+  },
+  "errors": {
+    "body": "Désolé pour ça - un {reload} règle généralement le problème. Toujours cassé ? Envoie un e-mail à {email}.",
+    "eyebrow": "Coupe franche sur :",
+    "reload": "rechargement",
+    "title": "Quelque chose s'est cassé."
+  },
+  "footer": {
+    "creditsBody": "Open source : {github} et non commercial. Seuls les comptes de mots dérivés sont publiés - aucun texte de sous-titre n'est redistribué.",
+    "creditsHeading": "Crédits.",
+    "dataBody": "Le jeu de données complet est disponible au téléchargement - voir {dataGuide} pour les liens et infos ({license}). Des questions sur la méthodologie, les biais ou les droits d'auteur ? Lis la {faq}.",
+    "dataGuideLink": "le guide des données",
+    "dataHeading": "Récupère les données.",
+    "dataSourcesBody": "Données : comptes de mots du {opus} (Lison & Tiedemann, 2016), via {openSubtitles} ; métadonnées des films de {imdbData} et {tmdb}. Informations avec l'aimable autorisation d'IMDb ({imdbUrl}). Utilisé avec permission.",
+    "faqLink": "FAQ",
+    "githubLink": "github.com/beveradb/moviewords",
+    "githubProfileLink": "GitHub",
+    "ideaBody": "Il doit y avoir des analyses intéressantes auxquelles nous n'avons pas pensé ! Si tu veux partager une idée ou si tu as construit un truc cool avec les données, {email}",
+    "ideaEmailLink": "envoie un e-mail à andrew@beveridge.uk",
+    "ideaHeading": "Une idée ?",
+    "imdbDataLink": "IMDb",
+    "imdbUrlLink": "https://www.imdb.com",
+    "instagramLink": "Instagram",
+    "licenseLink": "CC BY-NC-SA 4.0",
+    "lindsayLink": "Lindsay Wright Graphic Design",
+    "linkedinLink": "LinkedIn",
+    "madeByBody": "Créé par Andrew Beveridge - {github} · {linkedin} · {instagram} - sur une idée originale de ma charmante épouse {lindsay} - jette un œil à son portfolio !",
+    "openSubtitlesLink": "OpenSubtitles.org",
+    "opusLink": "Corpus OPUS OpenSubtitles",
+    "takedownEmailLink": "Envoyer une demande de retrait par e-mail",
+    "tmdbDisclaimerBody": "Ce produit utilise l'API TMDB mais n'est ni approuvé ni certifié par TMDB. Affiches via TMDB - droits d'auteur de leurs studios respectifs, montrées pour identifier les films abordés. Ayant droit ? {takedown} et ce sera retiré rapidement.",
+    "tmdbLink": "TMDB"
+  },
+  "genres": {
+    "Action": "Action",
+    "Adult": "Adulte",
+    "Adventure": "Aventure",
+    "Animation": "Animation",
+    "Biography": "Biographie",
+    "Comedy": "Comédie",
+    "Crime": "Crime",
+    "Documentary": "Documentaire",
+    "Drama": "Drame",
+    "Family": "Famille",
+    "Fantasy": "Fantasy",
+    "Film-Noir": "Film-Noir",
+    "History": "Histoire",
+    "Horror": "Horreur",
+    "Music": "Musique",
+    "Musical": "Comédie musicale",
+    "Mystery": "Mystère",
+    "News": "Actualités",
+    "Reality-TV": "Télé-réalité",
+    "Romance": "Romance",
+    "Sci-Fi": "Science-fiction",
+    "Sport": "Sport",
+    "Thriller": "Thriller",
+    "War": "Guerre",
+    "Western": "Western"
+  },
+  "genresView": {
+    "eyebrow": "Parcourir par",
+    "filmsCount": "{count} films",
+    "loadError": "Impossible de charger les genres.",
+    "loadingSpinner": "Chargement des genres…",
+    "subtitle": "De quoi parle chaque genre - {count} études.",
+    "title": "GENRES",
+    "notEnoughFilms": "Pas assez de films en {langs} pour ça - ajoute des langues ou passe à Tous les films."
+  },
+  "home": {
+    "aboutHeading": "À propos de ce jeu de données",
+    "decadesBody": "Du parlant aux années 2020 - comment chaque époque du cinéma parlait.",
+    "decadesHeading": "Parcours les décennies",
+    "fadeIn": "Ouverture en fondu :",
+    "faqLink": "la FAQ",
+    "heroBody": "Nous avons compté chaque mot prononcé dans {count} films - {millions} de millions d'entre eux. Observe les {trends}, découvre {sweariest}, et règle les {versus} mot par mot.",
+    "heroSweariest": "le scénario le plus vulgaire jamais écrit",
+    "heroTitle": "Chaque film a un {vocabulary}.",
+    "heroTrends": "« génial » dépasser « chouette »",
+    "heroVersus": "Alien vs Aliens",
+    "heroVocabulary": "vocabulaire",
+    "movieMeta": "{year} · {words} mots",
+    "opusLink": "Corpus OPUS OpenSubtitles",
+    "shelfHeading": "Tire un scénario de l'étagère",
+    "aboutBody": "Couvrant {count} - chaque mot de dialogue sous-titré du {opus} pour les films avec au moins 300 votes IMDb, compté par film. Seuls les comptes de mots sont publiés ; aucun texte de sous-titre n'est redistribué. Méthodologie et avertissements : {faq}.",
+    "aboutCountAllFilms": "films - sous-titres traduits inclus",
+    "aboutCountLangFilms": "films en langue {langs}",
+    "aboutCountTemplate": "{count} {kind}",
+    "aboutCountUnknown": "des dizaines de milliers de",
+    "aboutSubtitleHint": "Ces comptes viennent des sous-titres anglais des films, pas de leurs dialogues originaux."
+  },
+  "leaderboard": {
+    "tabs": {
+      "everywhere": "Dit par tous les films",
+      "films": "Superlatifs de films",
+      "overview": "Aperçu",
+      "shifts": "En hausse & en baisse",
+      "wonders": "Merveilles d'un seul film",
+      "words": "Top des mots"
+    },
+    "words": {
+      "allGenresOption": "Tous les genres",
+      "filmsCount": " · {count} films",
+      "filteringSpinner": "Filtrage du corpus… (la première requête filtrée charge le moteur d'analyse)",
+      "fromLabel": "De",
+      "genreLabel": "Genre",
+      "intro": "Les mots les plus prononcés dans tous les films du corpus.",
+      "noMatches": "Aucun mot ne correspond à ces filtres - essaie « tous les mots » ou « n'importe quel type ».",
+      "rankByLabel": "Classer par",
+      "sortMovieishButton": "le plus cinématographique",
+      "sortMovieishTitle": "Pondère chaque mot selon qu'il est plus prononcé dans les films que dans l'anglais courant",
+      "sortSpokenButton": "le plus prononcé",
+      "toLabel": "À"
+    },
+    "languageNote": "Basé sur {count} films en langue {langs}, mesuré à partir de leurs sous-titres anglais."
+  },
+  "movie": {
+    "compareButton": "Comparer avec un autre film",
+    "decadeLinkTitle": "Plus des années {decade}",
+    "distinctWordsLabel": "Mots distincts",
+    "genreSeparator": " / ",
+    "imdbRatingLabel": "Note IMDb",
+    "loadingScript": "Chargement du scénario…",
+    "mostSpokenHeading": "Mots les plus prononcés",
+    "notFound": "Aucun film avec l'id « {id} » dans le jeu de données.",
+    "signatureWordsBody": "Les mots que ce film utilise beaucoup plus que les films en général (log-cotes par rapport à l'ensemble du corpus).",
+    "signatureWordsHeading": "Mots signatures",
+    "slugTitle": "{title} - {year}",
+    "vocabRichnessLabel": "Richesse du vocabulaire",
+    "wordsSpokenLabel": "Mots prononcés"
+  },
+  "themeToggle": {
+    "day": "JOUR",
+    "dayShoot": "Tournage de jour",
+    "night": "NUIT",
+    "nightShoot": "Tournage de nuit",
+    "switchToDay": "Passer en mode jour",
+    "switchToNight": "Passer en mode nuit"
+  },
+  "trends": {
+    "addAnotherWordPlaceholder": "Ajouter un autre mot…",
+    "bigMovers": "Grands changements depuis les années 1930",
+    "chartItButton": "Le tracer",
+    "chartedWordsAriaLabel": "Mots tracés",
+    "featuredPrefix": "À la une : {title}",
+    "firstWordPlaceholder": "Tape un mot, ex. amour",
+    "fullList": "liste complète →",
+    "intro": "À quelle fréquence un mot est prononcé dans tous les films du corpus, par million de mots de dialogue, selon l'année de sortie.",
+    "navNoun": "tendance",
+    "navSuffix": "une nouvelle évolution chaque jour",
+    "notEnoughData": "Pas assez de données pour : {words} (nécessite ≥20 utilisations dans tout le corpus, dans des années avec assez de films).",
+    "perThousandWords": " · {rate}/1k mots",
+    "queryingCorpus": "Interrogation du corpus…",
+    "removeWordTitle": "Retirer « {word} »",
+    "topFilmByYearHeading": "Meilleur film pour « {word} » par année",
+    "topFilmByYearLoading": "Recherche du meilleur film pour « {word} » par année…",
+    "topFilmsHeading": "Films qui disent le plus « {word} »",
+    "topFilmsLoading": "Recherche des films qui disent le plus « {word} »…",
+    "trimmedYearsNote": "{years} masquées - trop peu de films dans le corpus pour des taux fiables",
+    "tryClassic": "Ou essaie un classique :",
+    "usesPerMillionWords": "utilisations par million de mots de dialogue",
+    "wordDetailsTablist": "Détails du mot",
+    "wordInputAriaLabel": "Mot à tracer",
+    "yAxisLabel": "utilisations par million de mots",
+    "languageNote": "Basé sur {count} films en langue {langs}, mesuré à partir de leurs sous-titres anglais.",
+    "notEnoughFilms": "Pas assez de films en {langs} pour cette tendance - ajoute des langues ou passe à Tous les films."
+  },
+  "languageFilter": {
+    "allFilms": "Tous les films",
+    "apply": "Appliquer",
+    "ariaLabel": "Filtrer les films par langue originale",
+    "countLabel": "{count} langues",
+    "hint": "Filtre par la langue originale d'un film ; les comptes de mots viennent des sous-titres anglais.",
+    "menuAriaLabel": "Langue originale",
+    "searchAriaLabel": "Chercher des langues",
+    "searchPlaceholder": "Chercher des langues…"
+  },
+  "localeFilterHint": {
+    "dismissAriaLabel": "Ignorer",
+    "filterButton": "Filtrer",
+    "message": "Tu regardes en {lang} ? Filtre pour les films en langue {lang}."
+  },
+  "modal": {
+    "closeAriaLabel": "Fermer"
+  },
+  "filterExplainer": {
+    "badgeLabel": "traduit · {lang}",
+    "badgeTitle": "Langue originale {lang} - les comptes viennent des sous-titres traduits en anglais. Comment ça marche ?",
+    "dialogueNote": "Les dialogues en langue originale ne sont pas dans le jeu de données - juste la traduction anglaise.",
+    "englishSubtitles": "sous-titres anglais",
+    "englishTranslation": "traduction anglaise",
+    "filteringBody": "{whatFiltering} la {originalLanguage} d'un film - où il a été fait, d'après les métadonnées de TMDB - et non la langue des mots ci-dessous.",
+    "linkText": "Comment ça marche ?",
+    "modalTitle": "Comment ça marche",
+    "origin": "origine",
+    "originalLanguage": "langue originale",
+    "soSpanishMeans": "Donc \"Espagnol\" signifie",
+    "spanishBody": "{soSpanishMeans} le vocabulaire des sous-titres anglais du cinéma d'{origin} espagnole - comment des mots comme \"solidarity\" ou \"dictatorship\" apparaissent dans les sous-titres anglais des films espagnols - et non des mots espagnols.",
+    "whatFiltering": "Ce que tu filtres :",
+    "whatWords": "Ce que sont les mots :",
+    "wordsBody": "{whatWords} chaque compte sur Movie Words vient des {englishSubtitles} du film. Nous n'avons que la piste anglaise d'OpenSubtitles, donc pour un film non anglophone, ce sont les mots de sa {englishTranslation}, pas les dialogues originaux. C'est pourquoi un mot non traduit s'y glisse parfois - \"panna\", \"cotta\", \"samurai\"."
+  }
+}

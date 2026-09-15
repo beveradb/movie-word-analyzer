@@ -1,3 +1,5 @@
+import { useI18n } from '../i18n'
+
 /** Word rows carry [word, value, zipf, classes, pos] once the dataset has v2
  * meta; pos is the word's single dominant part of speech (n/v/a/r, or x for
  * names, interjections, contractions and other oddities). Rows without pos
@@ -35,13 +37,7 @@ export function passesFilter(row: WordRow, f: WordFilterState, stopwords?: Set<s
   return true
 }
 
-const POS_CHIPS: [string, string][] = [
-  ['n', 'nouns'],
-  ['v', 'verbs'],
-  ['a', 'adjectives'],
-  ['r', 'adverbs'],
-  ['x', 'names & other'],
-]
+const POS_CODES = ['n', 'v', 'a', 'r', 'x']
 
 const chipCls = (active: boolean) =>
   `border-2 border-ink px-2 py-0.5 ${active ? 'bg-mark font-bold' : 'hover:bg-mark'}`
@@ -53,6 +49,7 @@ export function WordFilterBar({
   filter: WordFilterState
   onChange: (f: WordFilterState) => void
 }) {
+  const { t } = useI18n()
   const togglePos = (c: string) => {
     const pos = new Set(filter.pos)
     if (pos.has(c)) pos.delete(c)
@@ -62,20 +59,20 @@ export function WordFilterBar({
   return (
     <div className="mt-3 font-script text-xs">
       <div className="flex flex-wrap items-center gap-2 border-2 border-ink bg-card p-2">
-        <div className="flex" role="group" aria-label="Word commonness">
+        <div className="flex" role="group" aria-label={t('ui.wordFilterBar.commonnessAriaLabel')}>
           <button
             onClick={() => onChange({ ...filter, common: 'interesting' })}
             aria-pressed={filter.common === 'interesting'}
             className={chipCls(filter.common === 'interesting')}
           >
-            interesting words
+            {t('ui.wordFilterBar.interestingButton')}
           </button>
           <button
             onClick={() => onChange({ ...filter, common: 'all' })}
             aria-pressed={filter.common === 'all'}
-            className={`-ml-0.5 ${chipCls(filter.common === 'all')}`}
+            className={`-ms-0.5 ${chipCls(filter.common === 'all')}`}
           >
-            all words
+            {t('ui.wordFilterBar.allButton')}
           </button>
         </div>
         <span className="text-ink-3" aria-hidden>
@@ -86,27 +83,29 @@ export function WordFilterBar({
           aria-pressed={filter.pos.size === 0}
           className={chipCls(filter.pos.size === 0)}
         >
-          any kind
+          {t('ui.wordFilterBar.anyKindButton')}
         </button>
-        {POS_CHIPS.map(([c, label]) => (
+        {POS_CODES.map((c) => (
           <button
             key={c}
             onClick={() => togglePos(c)}
             aria-pressed={filter.pos.has(c)}
             className={chipCls(filter.pos.has(c))}
           >
-            {label}
+            {t('pos.' + c)}
           </button>
         ))}
       </div>
       <p className="mt-1 text-ink-3">
         {filter.common === 'interesting'
-          ? 'hiding everyday English - the ~2,000 most common words (the, know, get…)'
-          : 'showing every word, including everyday English'}
+          ? t('ui.wordFilterBar.hidingDescription')
+          : t('ui.wordFilterBar.showingDescription')}
         {filter.pos.size > 0 &&
-          ` · only ${POS_CHIPS.filter(([c]) => filter.pos.has(c))
-            .map(([, l]) => l)
-            .join(', ')}`}
+          t('ui.wordFilterBar.onlyKindsSuffix', {
+            kinds: POS_CODES.filter((c) => filter.pos.has(c))
+              .map((c) => t('pos.' + c))
+              .join(', '),
+          })}
       </p>
     </div>
   )
