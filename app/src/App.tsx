@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { useRoute } from './lib/route'
 import { trackPageview } from './lib/analytics'
-import { CORPORA, activeCorpus, switchCorpus } from './lib/corpus'
+import { activeLanguages, switchLanguages, getLanguages, languageName, type LanguageOption } from './lib/languages'
+import { LocaleFilterHint } from './components/LocaleFilterHint'
 import { HomeView } from './views/Home'
 import { GenresView } from './views/Genres'
 import { DecadesView } from './views/Decades'
@@ -63,83 +64,69 @@ function ThemeToggle() {
   )
 }
 
-/** Corpus filter: a dropdown standing in for the coming multi-language filter.
- * Today it offers the two baked corpora (all films / English originals) as a
- * single-select menu; selecting one persists + reloads - see lib/corpus.ts.
- * The globe hints that this is where you narrow the corpus by language. */
-function CorpusDropdown() {
-  const corpus = activeCorpus()
+/** Original-language filter: a multiselect dropdown with a search box and a
+ * film count per language. Selection is batched behind an Apply button that
+ * persists + reloads - see lib/languages.ts. The globe hints that this is
+ * where you narrow the corpus by language. */
+function LanguageFilter() {
   const [open, setOpen] = useState(false)
+  const [opts, setOpts] = useState<LanguageOption[]>([])
+  const [query, setQuery] = useState('')
+  const [sel, setSel] = useState<string[]>(() => activeLanguages())
   const ref = useRef<HTMLDivElement>(null)
+  const active = activeLanguages()
 
-  // Close on outside click or Escape - only wired up while the menu is open.
+  useEffect(() => { getLanguages().then(setOpts).catch(() => setOpts([])) }, [])
   useEffect(() => {
     if (!open) return
-    const onDown = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
-    }
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpen(false)
-    }
-    document.addEventListener('mousedown', onDown)
-    document.addEventListener('keydown', onKey)
-    return () => {
-      document.removeEventListener('mousedown', onDown)
-      document.removeEventListener('keydown', onKey)
-    }
+    const onDown = (e: MouseEvent) => { if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false) }
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false) }
+    document.addEventListener('mousedown', onDown); document.addEventListener('keydown', onKey)
+    return () => { document.removeEventListener('mousedown', onDown); document.removeEventListener('keydown', onKey) }
   }, [open])
+
+  const label = active.length === 0 ? 'All films'
+    : active.length === 1 ? languageName(active[0]) : `${active.length} languages`
+  const filtered = opts.filter((o) =>
+    !query || languageName(o.code).toLowerCase().includes(query.toLowerCase()) || o.code.includes(query.toLowerCase()))
+  const toggle = (code: string) => setSel((s) => s.includes(code) ? s.filter((c) => c !== code) : [...s, code])
+  const apply = () => switchLanguages(sel)
+  // compare as sets, not order-sensitive lists - unchecking then rechecking a
+  // language (or any other reordering) shouldn't read as a change and shuffle
+  // ?langs= on Apply when membership is actually unchanged
+  const dirty = [...sel].sort().join(',') !== [...active].sort().join(',')
 
   return (
     <div ref={ref} className="relative">
-      <button
-        onClick={() => setOpen((o) => !o)}
-        aria-haspopup="menu"
-        aria-expanded={open}
-        aria-label="Filter film corpus"
-        title={corpus.description}
-        className="flex items-center gap-1.5 border-2 border-ink px-2.5 py-1 font-script text-sm font-bold uppercase hover:bg-mark"
-      >
-        {/* globe */}
+      <button onClick={() => setOpen((o) => !o)} aria-haspopup="menu" aria-expanded={open}
+        aria-label="Filter films by original language"
+        className="flex items-center gap-1.5 border-2 border-ink px-2.5 py-1 font-script text-sm font-bold uppercase hover:bg-mark">
         <svg viewBox="0 0 24 24" className="size-3.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-          <circle cx="12" cy="12" r="9" />
-          <path d="M3 12h18" />
+          <circle cx="12" cy="12" r="9" /><path d="M3 12h18" />
           <path d="M12 3c2.6 2.7 3.9 5.9 3.9 9s-1.3 6.3-3.9 9c-2.6-2.7-3.9-5.9-3.9-9S9.4 5.7 12 3Z" />
         </svg>
-        {corpus.short}
-        {/* chevron */}
-        <svg viewBox="0 0 24 24" className={`size-3 transition-transform ${open ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <path d="M6 9l6 6 6-6" />
-        </svg>
+        {label}
+        <svg viewBox="0 0 24 24" className={`size-3 transition-transform ${open ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
       </button>
       {open && (
-        <div
-          role="menu"
-          aria-label="Film corpus"
-          className="absolute right-0 z-20 mt-1 min-w-max border-2 border-ink bg-paper font-script text-sm font-bold"
-        >
-          {Object.values(CORPORA).map((c) => {
-            const active = corpus.id === c.id
-            return (
-              <button
-                key={c.id}
-                role="menuitemradio"
-                aria-checked={active}
-                onClick={() => {
-                  setOpen(false)
-                  if (!active) switchCorpus(c.id)
-                }}
-                title={c.description}
-                className={`flex w-full items-center gap-2 px-2.5 py-1.5 text-left uppercase ${
-                  active ? 'bg-ink text-paper' : 'hover:bg-mark'
-                }`}
-              >
-                <span aria-hidden="true" className="w-3 text-center">
-                  {active ? '✓' : ''}
-                </span>
-                {c.label}
+        <div role="menu" aria-label="Original language" className="absolute right-0 z-20 mt-1 w-64 border-2 border-ink bg-paper font-script text-sm">
+          <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search languages…"
+            className="w-full border-b-2 border-ink bg-transparent px-2.5 py-1.5 outline-none" aria-label="Search languages" />
+          <button onClick={() => setSel([])} aria-pressed={sel.length === 0}
+            className={`flex w-full items-center gap-2 px-2.5 py-1.5 text-left font-bold uppercase ${sel.length === 0 ? 'bg-ink text-paper' : 'hover:bg-mark'}`}>
+            <span aria-hidden="true" className="w-3">{sel.length === 0 ? '✓' : ''}</span> All films
+          </button>
+          <div className="max-h-72 overflow-auto">
+            {filtered.map((o) => (
+              <button key={o.code} onClick={() => toggle(o.code)} role="menuitemcheckbox" aria-checked={sel.includes(o.code)}
+                className={`flex w-full items-center justify-between gap-2 px-2.5 py-1.5 text-left uppercase ${sel.includes(o.code) ? 'bg-mark' : 'hover:bg-mark'}`}>
+                <span className="flex items-center gap-2"><span aria-hidden="true" className="w-3">{sel.includes(o.code) ? '✓' : ''}</span>{languageName(o.code)}</span>
+                <span className="text-ink-2">{o.films.toLocaleString()}</span>
               </button>
-            )
-          })}
+            ))}
+          </div>
+          <button onClick={apply} disabled={!dirty}
+            className="w-full border-t-2 border-ink px-2.5 py-1.5 font-bold uppercase disabled:opacity-40 hover:bg-mark">Apply</button>
         </div>
       )}
     </div>
@@ -198,12 +185,13 @@ export default function App() {
               </a>
             ))}
           </nav>
-          <CorpusDropdown />
+          <LanguageFilter />
           <ThemeToggle />
         </div>
       </header>
 
       <main className="pt-4">
+        <LocaleFilterHint />
         {section === '' && <HomeView />}
         {section === 'movie' && route.path[1] && <MovieView id={route.path[1]} />}
         {section === 'trends' && <TrendsView />}

@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import { FilmsBoard, OverviewBoard, ShiftsBoard, UbiquityBoard, WondersBoard } from '../components/boards'
-import { getLeaderboard, getMovieIndex, getWordlists } from '../lib/data'
-import { lit, pq, q } from '../lib/duck'
+import { getFilteredMovieIndex, getLeaderboard, getMovieIndex, getWordlists } from '../lib/data'
+import { langFilterSql, lit, pq, q } from '../lib/duck'
+import { activeLanguages, languageName } from '../lib/languages'
 import { navigate, useRoute } from '../lib/route'
 import { ErrorBox, Spinner } from '../components/ui'
 import { WordFilterBar, defaultFilter, passesFilter, type WordRow } from '../components/WordFilter'
@@ -44,8 +45,22 @@ const TABS: [string, string][] = [
 export function LeaderboardView() {
   const { params } = useRoute()
   const tab = params.get('b') ?? DEFAULT_TAB
+  const langs = activeLanguages()
+  const [filmCount, setFilmCount] = useState<number | null>(null)
+
+  useEffect(() => {
+    if (langs.length === 0) return
+    getFilteredMovieIndex().then((idx) => setFilmCount(idx.length)).catch(() => {})
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
     <div>
+      {langs.length > 0 && filmCount !== null && (
+        <p className="mt-1 text-sm text-ink-2">
+          Based on {filmCount.toLocaleString()} {langs.map((c) => languageName(c)).join(', ')}-language films.
+        </p>
+      )}
       <div className="mt-3 flex flex-wrap gap-2 font-script text-xs">
         {TABS.map(([key, label]) => (
           <button
@@ -138,6 +153,7 @@ function WordsBoard() {
        LEFT JOIN ${pq('word_meta.parquet')} wm ON wm.word = w.word
        WHERE m.year BETWEEN ${qFrom} AND ${qTo}
          ${genre ? `AND list_contains(m.genres, ${lit(genre)})` : ''}
+         ${langFilterSql('m')}
        GROUP BY w.word ORDER BY count DESC LIMIT 400`,
     )
       .then((r) => !cancelled && setRows(r))

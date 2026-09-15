@@ -30,4 +30,9 @@ fetch "${PREFIX}word_year.parquet" word_year.parquet
 fetch "${PREFIX}words_by_movie/data.parquet" words_by_movie.parquet
 fetch "${PREFIX}json/signature/decades.json" signature/decades.json
 fetch "${PREFIX}json/signature/genres.json" signature/genres.json
+# word_year_lang.parquet (all corpus only) drives the per-language bake -
+# build_lang_slice re-derives each language's word_year from it.
+if [ "$CORPUS" = "all" ]; then
+  fetch "${PREFIX}word_year_lang.parquet" word_year_lang.parquet
+fi
 ls -lh "$DEST"

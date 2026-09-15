@@ -5,6 +5,14 @@ import duckdb
 from scripts_path import add_scripts_to_path  # noqa: F401
 
 
+def test_set_corpus_lang_points_at_lang_subtree():
+    import rebuild_web_data as rwd
+    rwd.set_corpus("all", lang="es")
+    assert rwd.IN.parts[-3:] == ("all", "lang", "es")
+    assert rwd.OUT.parts[-3:] == ("all", "lang", "es")
+    rwd.set_corpus("en")  # reset for other tests
+
+
 def test_word_key_is_the_raw_word():
     # The R2/Cloudflare edge percent-decodes the request path once before key
     # lookup, so the object key must be the decoded (raw) word - the frontend

@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { MovieIndexEntry } from '../lib/data'
 import { getMovieIndex } from '../lib/data'
-import { activeCorpus } from '../lib/corpus'
 import { navigate } from '../lib/route'
 import type { Series } from './LineChart'
 
@@ -112,10 +111,10 @@ export function HighlightWord({
   )
 }
 
-/** "translated" marker for non-English originals - only meaningful (and only
- * shown) in the all-films corpus; the en corpus is English-only by cut. */
+/** "translated" marker for non-English originals - shown for any film whose
+ * original language isn't English, regardless of the active language filter. */
 export function LangBadge({ lang, className = '' }: { lang?: string; className?: string }) {
-  if (activeCorpus().id !== 'all' || !lang || lang === 'en') return null
+  if (!lang || lang === 'en') return null
   let name = lang.toUpperCase()
   try {
     name = new Intl.DisplayNames(['en'], { type: 'language' }).of(lang) ?? name

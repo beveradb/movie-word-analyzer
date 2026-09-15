@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import type { MovieIndexEntry, SignatureEntry } from '../lib/data'
-import { getMovieIndex, getSignatures } from '../lib/data'
+import { getFilteredMovieIndex, getSignatures } from '../lib/data'
+import { activeLanguages, languageName } from '../lib/languages'
 import { navigate } from '../lib/route'
 import { ErrorBox, HighlightWord, Poster, Spinner } from '../components/ui'
 import { DecadeMotif, GenreMotif } from '../components/motifs'
@@ -15,7 +16,7 @@ export function EntityView({ kind, id }: { kind: 'decade' | 'genre'; id: string 
     getSignatures(kind === 'decade' ? 'decades' : 'genres')
       .then((all) => setSig(all[id] ?? null))
       .catch(() => setSig(null))
-    getMovieIndex()
+    getFilteredMovieIndex()
       .then((idx) =>
         setFilms(
           idx
@@ -35,6 +36,16 @@ export function EntityView({ kind, id }: { kind: 'decade' | 'genre'; id: string 
   if (sig === undefined) return <Spinner label="Loading…" />
   if (sig === null)
     return <ErrorBox message={`No ${kind} “${id}” in the dataset.`} retry={() => navigate('/')} />
+
+  const langs = activeLanguages()
+  if (sig.movie_count === 0) {
+    return (
+      <p className="mt-8 font-script text-sm text-ink-2">
+        Not enough films in {langs.map((c) => languageName(c)).join(', ')} for {label.toLowerCase()} - add
+        languages or switch to All films.
+      </p>
+    )
+  }
 
   return (
     <div>

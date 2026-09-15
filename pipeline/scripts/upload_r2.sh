@@ -8,10 +8,16 @@
 #
 # Cache-Control: json gets a 5-minute TTL (rebuilt often; a stale edge copy
 # of featured-series.json once silently pushed the homepage onto the full SQL
-# engine), except the Trends bake (json/trend/** + year-totals.json), which
+# engine), except the Trends bake (json/trend/** + year-totals.json, including
+# the per-language all/lang/<code>/json/trend/** + year-totals.json), which
 # is one file per word and safe to cache for 1h. Parquets/posters keep 24h -
 # the post-upload purge swaps versions, and parquet range reads revalidate
 # via If-Range/ETag.
+#
+# rclone --filter patterns containing a non-trailing `/` (e.g. `all/json/trend/**`)
+# are anchored to the root, so per-language paths need their own explicit
+# `all/lang/*/...` rules - they are NOT covered by the `all/json/trend/**`
+# rule despite both ending in `/trend/**`.
 #
 # Requires: CLOUDFLARE_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY
 # Optional: MOVIEWORDS_CF_TOKEN (needs Zone Read + Cache Purge on the
@@ -33,12 +39,12 @@ export RCLONE_CONFIG_R2_ENDPOINT="https://${CLOUDFLARE_ACCOUNT_ID}.r2.cloudflare
 # beat `--include '*.json'`); --filter rules ARE first-match-wins in the
 # order given.
 rclone copy . r2:moviewords-data/ --checksum --progress \
-  --filter '+ json/trend/**' --filter '+ all/json/trend/**' \
-  --filter '+ json/year-totals.json' --filter '+ all/json/year-totals.json' \
+  --filter '+ json/trend/**' --filter '+ all/json/trend/**' --filter '+ all/lang/*/json/trend/**' \
+  --filter '+ json/year-totals.json' --filter '+ all/json/year-totals.json' --filter '+ all/lang/*/json/year-totals.json' \
   --filter '- *' --header-upload "Cache-Control: public, max-age=3600"
 rclone copy . r2:moviewords-data/ --checksum --progress \
-  --filter '- json/trend/**' --filter '- all/json/trend/**' \
-  --filter '- json/year-totals.json' --filter '- all/json/year-totals.json' \
+  --filter '- json/trend/**' --filter '- all/json/trend/**' --filter '- all/lang/*/json/trend/**' \
+  --filter '- json/year-totals.json' --filter '- all/json/year-totals.json' --filter '- all/lang/*/json/year-totals.json' \
   --filter '+ *.json' --filter '- *' \
   --header-upload "Cache-Control: public, max-age=300"
 rclone copy . r2:moviewords-data/ --checksum --progress \

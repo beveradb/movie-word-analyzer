@@ -1,5 +1,6 @@
 import * as duckdb from '@duckdb/duckdb-wasm'
 import { dataUrl } from './data'
+import { activeLanguages } from './languages'
 
 let dbPromise: Promise<duckdb.AsyncDuckDBConnection> | null = null
 
@@ -57,3 +58,12 @@ export const pq = (name: string) => `read_parquet('${dataUrl(name)}')`
 
 /** SQL string literal escape. */
 export const lit = (s: string) => `'${s.replaceAll("'", "''")}'`
+
+/** ` AND <alias>.original_language IN (...)` for the active selection, or '' when
+ * nothing is selected. Expands the merged Chinese option to both TMDB codes. */
+export function langFilterSql(alias = 'm'): string {
+  const langs = activeLanguages()
+  if (!langs.length) return ''
+  const codes = langs.includes('zh') ? [...langs, 'cn'] : langs
+  return ` AND ${alias}.original_language IN (${codes.map(lit).join(',')})`
+}

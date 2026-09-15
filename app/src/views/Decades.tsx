@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getSignatures } from '../lib/data'
+import { activeLanguages, languageName } from '../lib/languages'
 import { navigate } from '../lib/route'
 import { ErrorBox, Spinner } from '../components/ui'
 import { EraMotif } from '../components/motifs'
@@ -36,6 +37,7 @@ export function DecadesView() {
         setDecades(
           Object.entries(all)
             .map(([id, e]) => ({ id, movie_count: e.movie_count }))
+            .filter((d) => d.movie_count > 0)
             .sort((a, b) => Number(a.id) - Number(b.id)),
         ),
       )
@@ -45,6 +47,16 @@ export function DecadesView() {
   if (decades === undefined) return <Spinner label="Loading decades…" />
   if (decades === null)
     return <ErrorBox message="Couldn't load decades." retry={() => navigate('/')} />
+
+  const langs = activeLanguages()
+  if (decades.length === 0) {
+    return (
+      <p className="mt-8 font-script text-sm text-ink-2">
+        Not enough films in {langs.map((c) => languageName(c)).join(', ')} for this - add languages or switch to All
+        films.
+      </p>
+    )
+  }
 
   return (
     <div>

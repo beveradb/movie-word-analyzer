@@ -1,11 +1,19 @@
-import { activeCorpus } from './corpus'
+import { activeLanguages } from './languages'
+import {
+  mergeLeaderboard, mergeSignatures, mergeShifts, mergeSuperlatives,
+  mergeWonders, mergeUbiquity,
+} from './merge'
 
 export const DATA_BASE =
   import.meta.env.VITE_DATA_BASE ?? 'https://data.moviewords.org'
 
-/** Corpus-scoped data URL. Posters are corpus-independent and keep using
- * DATA_BASE directly - everything else lives under the corpus prefix. */
-export const dataUrl = (path: string) => `${DATA_BASE}/${activeCorpus().prefix}${path}`
+/** The unfiltered corpus tree (also the base for per-language slices). */
+export const globalUrl = (path: string) => `${DATA_BASE}/all/${path}`
+export const langUrl = (code: string, path: string) => `${DATA_BASE}/all/lang/${code}/${path}`
+
+// Back-compat shim for callers still importing dataUrl (movie/index/wordlists,
+// duck.ts parquet reads): the global all/ tree.
+export const dataUrl = (path: string) => globalUrl(path)
 
 export interface MovieIndexEntry {
   id: string
@@ -45,16 +53,30 @@ export interface Wordlists {
 // three compare cards mounting together) share one download of movies-index
 const cache = new Map<string, Promise<unknown>>()
 
-export function fetchJSON<T>(path: string): Promise<T> {
-  if (!cache.has(path)) {
-    const p = fetch(dataUrl(path)).then((res) => {
-      if (!res.ok) throw new Error(`${res.status} fetching ${path}`)
+function fetchOne<T>(url: string): Promise<T> {
+  if (!cache.has(url)) {
+    const p = fetch(url).then((res) => {
+      if (!res.ok) throw new Error(`${res.status} fetching ${url}`)
       return res.json()
     })
-    p.catch(() => cache.delete(path))
-    cache.set(path, p)
+    p.catch(() => cache.delete(url))
+    cache.set(url, p)
   }
-  return cache.get(path) as Promise<T>
+  return cache.get(url) as Promise<T>
+}
+
+export function fetchJSON<T>(path: string): Promise<T> {
+  return fetchOne<T>(globalUrl(path))
+}
+
+/** Language-aware aggregate fetch. 0 languages -> the global all/ file; 1 -> that
+ * slice (exact); 2+ -> fetch every selected slice and merge. */
+export function fetchLangMerged<T>(path: string, merge: (parts: T[]) => T): Promise<T> {
+  const langs = activeLanguages()
+  if (langs.length === 0) return fetchOne<T>(globalUrl(path))
+  return Promise.all(langs.map((c) => fetchOne<T>(langUrl(c, path)))).then((parts) =>
+    parts.length === 1 ? parts[0] : merge(parts),
+  )
 }
 
 export interface SignatureEntry {
@@ -110,15 +132,23 @@ export interface UbiquityRow {
   share: number
 }
 
-export const getShifts = () => fetchJSON<Shifts>('json/leaderboards/shifts.json')
-export const getSuperlatives = () => fetchJSON<Superlatives>('json/leaderboards/films.json')
-export const getWonders = () => fetchJSON<WonderRow[]>('json/leaderboards/wonders.json')
-export const getUbiquity = () => fetchJSON<UbiquityRow[]>('json/leaderboards/everywhere.json')
-
+export const getShifts = () => fetchLangMerged<Shifts>('json/leaderboards/shifts.json', mergeShifts)
+export const getSuperlatives = () => fetchLangMerged<Superlatives>('json/leaderboards/films.json', mergeSuperlatives)
+export const getWonders = () => fetchLangMerged<WonderRow[]>('json/leaderboards/wonders.json', mergeWonders)
+export const getUbiquity = () => fetchLangMerged<UbiquityRow[]>('json/leaderboards/everywhere.json', mergeUbiquity)
 export const getSignatures = (kind: 'decades' | 'genres') =>
-  fetchJSON<Record<string, SignatureEntry>>(`json/signature/${kind}.json`)
+  fetchLangMerged<Record<string, SignatureEntry>>(`json/signature/${kind}.json`, mergeSignatures)
+export const getLeaderboard = () => fetchLangMerged<Leaderboard>('json/leaderboard-default.json', mergeLeaderboard)
 
+// global (never per-language):
 export const getMovieIndex = () => fetchJSON<MovieIndexEntry[]>('json/movies-index.json')
 export const getMovie = (id: string) => fetchJSON<MovieDetail>(`json/movie/${id}.json`)
-export const getLeaderboard = () => fetchJSON<Leaderboard>('json/leaderboard-default.json')
 export const getWordlists = () => fetchJSON<Wordlists>('json/wordlists.json')
+
+/** The movie index filtered to the active language selection (empty = all). */
+export async function getFilteredMovieIndex(): Promise<MovieIndexEntry[]> {
+  const [idx, langs] = [await getMovieIndex(), activeLanguages()]
+  if (langs.length === 0) return idx
+  const set = new Set(langs.includes('zh') ? [...langs, 'cn'] : langs)
+  return idx.filter((m) => m.lang != null && set.has(m.lang))
+}
