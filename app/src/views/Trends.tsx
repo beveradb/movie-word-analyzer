@@ -7,6 +7,7 @@ import { FEATURED, dayIndex, stepFeatured } from '../lib/featured'
 import { loadFeaturedSeries, loadTrends } from '../lib/series'
 import { LineChart, type Series } from '../components/LineChart'
 import { ErrorBox, FeaturedNav, SeriesLegend, Spinner } from '../components/ui'
+import { ExplainerLink } from '../components/FilterExplainer'
 
 const COLORS = ['var(--color-s1)', 'var(--color-s2)', 'var(--color-s3)', 'var(--color-s4)']
 const MAX_WORDS = 4
@@ -256,7 +257,8 @@ export function TrendsView() {
       </p>
       {langs.length > 0 && filmCount !== null && (
         <p className="mt-1 text-sm text-ink-2">
-          Based on {filmCount.toLocaleString()} {langLabel}-language films.
+          Based on {filmCount.toLocaleString()} {langLabel}-language films, measured from their English subtitles.{' '}
+          <ExplainerLink />
         </p>
       )}
 

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useRoute } from './lib/route'
 import { trackPageview } from './lib/analytics'
 import { activeLanguages, switchLanguages, getLanguages, languageName, type LanguageOption } from './lib/languages'
+import { ExplainerLink } from './components/FilterExplainer'
 import { LocaleFilterHint } from './components/LocaleFilterHint'
 import { HomeView } from './views/Home'
 import { GenresView } from './views/Genres'
@@ -127,6 +128,10 @@ function LanguageFilter() {
           </div>
           <button onClick={apply} disabled={!dirty}
             className="w-full border-t-2 border-ink px-2.5 py-1.5 font-bold uppercase disabled:opacity-40 hover:bg-mark">Apply</button>
+          <p className="border-t-2 border-ink px-2.5 py-1.5 text-xs normal-case text-ink-2">
+            Filters by a film's original language; word counts come from the English subtitles.{' '}
+            <ExplainerLink />
+          </p>
         </div>
       )}
     </div>

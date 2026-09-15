@@ -4,6 +4,7 @@ import { getFilteredMovieIndex } from '../lib/data'
 import { navigate } from '../lib/route'
 import { MovieSearch, Poster } from '../components/ui'
 import { FeaturedChart } from '../components/FeaturedChart'
+import { ExplainerLink } from '../components/FilterExplainer'
 import { EraMotif } from '../components/motifs'
 import { activeLanguages, languageName } from '../lib/languages'
 
@@ -138,6 +139,12 @@ export function HomeView() {
           </a>
           .
         </p>
+        {activeLanguages().length > 0 && (
+          <p className="mt-2">
+            These counts come from the films' English subtitles, not their original dialogue.{' '}
+            <ExplainerLink />
+          </p>
+        )}
       </section>
     </div>
   )
