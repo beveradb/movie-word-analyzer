@@ -61,8 +61,17 @@ const POS_CHIPS: [string, string][] = [
   ['x', 'names & other'],
 ]
 
-const chipCls = (active: boolean) =>
-  `border-2 border-ink px-2 py-0.5 ${active ? 'bg-mark font-bold' : 'hover:bg-mark'}`
+const chipCls = (state: PosState | undefined) => {
+  const base = 'border-2 px-2 py-0.5'
+  if (state === 'include') return `${base} border-ink bg-mark font-bold`
+  if (state === 'exclude') return `${base} border-ink-3 text-ink-3 line-through`
+  return `${base} border-ink hover:bg-mark`
+}
+
+const ariaState = (label: string, state: PosState | undefined) =>
+  state === 'include' ? `${label}: included (click to exclude)`
+    : state === 'exclude' ? `${label}: excluded (click to reset)`
+      : `${label}: off (click to include)`
 
 export function WordFilterBar({
   filter,
@@ -71,16 +80,9 @@ export function WordFilterBar({
   filter: WordFilterState
   onChange: (f: WordFilterState) => void
 }) {
-  // TODO(Task 6): wire up rotatePos for the full off->include->exclude->off
-  // tri-state UI. For now this preserves prior on/off toggle behavior (every
-  // selected kind is 'include'), so the file compiles against the new
-  // Map<string, PosState> shape without building the tri-state chips yet.
-  const togglePos = (c: string) => {
-    const pos = new Map(filter.pos)
-    if (pos.has(c)) pos.delete(c)
-    else pos.set(c, 'include')
-    onChange({ ...filter, pos })
-  }
+  const rotate = (c: string) => onChange({ ...filter, pos: rotatePos(filter.pos, c) })
+  const included = POS_CHIPS.filter(([c]) => filter.pos.get(c) === 'include').map(([, l]) => l)
+  const excluded = POS_CHIPS.filter(([c]) => filter.pos.get(c) === 'exclude').map(([, l]) => l)
   return (
     <div className="mt-3 font-script text-xs">
       <div className="flex flex-wrap items-center gap-2 border-2 border-ink bg-card p-2">
@@ -88,14 +90,14 @@ export function WordFilterBar({
           <button
             onClick={() => onChange({ ...filter, common: 'interesting' })}
             aria-pressed={filter.common === 'interesting'}
-            className={chipCls(filter.common === 'interesting')}
+            className={`border-2 border-ink px-2 py-0.5 ${filter.common === 'interesting' ? 'bg-mark font-bold' : 'hover:bg-mark'}`}
           >
             interesting words
           </button>
           <button
             onClick={() => onChange({ ...filter, common: 'all' })}
             aria-pressed={filter.common === 'all'}
-            className={`-ml-0.5 ${chipCls(filter.common === 'all')}`}
+            className={`-ml-0.5 border-2 border-ink px-2 py-0.5 ${filter.common === 'all' ? 'bg-mark font-bold' : 'hover:bg-mark'}`}
           >
             all words
           </button>
@@ -106,29 +108,30 @@ export function WordFilterBar({
         <button
           onClick={() => onChange({ ...filter, pos: new Map() })}
           aria-pressed={filter.pos.size === 0}
-          className={chipCls(filter.pos.size === 0)}
+          className={filter.pos.size === 0 ? 'border-2 border-ink bg-mark px-2 py-0.5 font-bold' : 'border-2 border-ink px-2 py-0.5 hover:bg-mark'}
         >
           any kind
         </button>
-        {POS_CHIPS.map(([c, label]) => (
-          <button
-            key={c}
-            onClick={() => togglePos(c)}
-            aria-pressed={filter.pos.has(c)}
-            className={chipCls(filter.pos.has(c))}
-          >
-            {label}
-          </button>
-        ))}
+        {POS_CHIPS.map(([c, label]) => {
+          const state = filter.pos.get(c)
+          return (
+            <button
+              key={c}
+              onClick={() => rotate(c)}
+              aria-label={ariaState(label, state)}
+              className={chipCls(state)}
+            >
+              {state === 'exclude' ? `− ${label}` : label}
+            </button>
+          )
+        })}
       </div>
       <p className="mt-1 text-ink-3">
         {filter.common === 'interesting'
           ? 'hiding everyday English - the ~2,000 most common words (the, know, get…)'
           : 'showing every word, including everyday English'}
-        {filter.pos.size > 0 &&
-          ` · only ${POS_CHIPS.filter(([c]) => filter.pos.has(c))
-            .map(([, l]) => l)
-            .join(', ')}`}
+        {included.length > 0 && ` · only ${included.join(', ')}`}
+        {excluded.length > 0 && ` · hiding ${excluded.join(', ')}`}
       </p>
     </div>
   )
