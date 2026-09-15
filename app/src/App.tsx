@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useRoute } from './lib/route'
 import { trackPageview } from './lib/analytics'
 import { activeLanguages, switchLanguages, getLanguages, languageName, type LanguageOption } from './lib/languages'
+import { LocaleFilterHint } from './components/LocaleFilterHint'
 import { HomeView } from './views/Home'
 import { GenresView } from './views/Genres'
 import { DecadesView } from './views/Decades'
@@ -187,6 +188,7 @@ export default function App() {
       </header>
 
       <main className="pt-4">
+        <LocaleFilterHint />
         {section === '' && <HomeView />}
         {section === 'movie' && route.path[1] && <MovieView id={route.path[1]} />}
         {section === 'trends' && <TrendsView />}
