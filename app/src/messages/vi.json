@@ -1,0 +1,403 @@
+{
+  "compare": {
+    "orLabel": "hoặc",
+    "addDecadeAriaLabel": "Thêm một thập kỷ",
+    "addDecadeOption": "Thêm một thập kỷ…",
+    "addFilmPlaceholder": "Thêm một bộ phim…",
+    "addGenreAriaLabel": "Thêm một thể loại",
+    "addGenreOption": "Thêm một thể loại…",
+    "decadeLabel": "NHỮNG NĂM {decade}",
+    "decadeOptionLabel": "Những năm {decade}",
+    "distinctWordsLabel": "Từ vựng khác biệt",
+    "featuredMatchupPrefix": "Trận đấu nổi bật: {title}",
+    "filmsLabel": "Phim",
+    "filmsPerYearLabel": "phim / năm",
+    "filmsPerYearTitle": "Số phim theo năm phát hành trong phần này của kho dữ liệu",
+    "fullBreakdownLink": "phân tích đầy đủ →",
+    "headToHeadHeading": "Đối đầu trực tiếp",
+    "introBody": "Đặt phim, thập kỷ và thể loại cạnh nhau - tối đa ba lựa chọn kết hợp bất kỳ.",
+    "loadingLabel": "Đang tải…",
+    "movieLabel": "{title} - {year}",
+    "navNoun": "trận đấu",
+    "navSuffix": "luân phiên mỗi ngày - hoặc tự tạo ở trên",
+    "noStandoutWords": "không có từ nổi bật",
+    "nothingFoundMessage": "Không tìm thấy gì cho lựa chọn đó.",
+    "pickFilmPlaceholder": "Chọn một bộ phim…",
+    "ratioMoreLabel": "nhiều hơn {ratio}×",
+    "removeButton": "xóa",
+    "sharedSignatureWordsHeading": "Những từ đặc trưng chung",
+    "signatureWordsHeading": "Những từ đặc trưng {note}",
+    "signatureWordsHighlightedNote": "(được làm nổi bật = chung)",
+    "swearsPer1kLabel": "Chửi thề / 1k từ",
+    "wordsPerFilmLabel": "Từ / phim",
+    "wordsSpokenLabel": "Số từ được nói",
+    "headToHeadIntroMany": "Những gì mỗi bên nói nhiều hơn hẳn so với các bên còn lại - tỷ lệ trên một triệu từ trong lời thoại của chính mình.",
+    "headToHeadIntroPair": "Những gì mỗi bên nói nhiều hơn hẳn so với bên kia - tỷ lệ trên một triệu từ trong lời thoại của chính mình."
+  },
+  "languageSwitcher": {
+    "current": "Ngôn ngữ",
+    "label": "Chọn ngôn ngữ"
+  },
+  "nav": {
+    "sectionsLabel": "Các phần",
+    "compare": "So sánh",
+    "decades": "Thập kỷ",
+    "explore": "Khám phá",
+    "genres": "Thể loại",
+    "leaderboard": "Bảng xếp hạng",
+    "trends": "Xu hướng"
+  },
+  "pos": {
+    "other": "khác",
+    "a": "tính từ",
+    "adjective": "tính từ",
+    "adverb": "trạng từ",
+    "n": "danh từ",
+    "noun": "danh từ",
+    "r": "trạng từ",
+    "v": "động từ",
+    "verb": "động từ",
+    "x": "tên & khác"
+  },
+  "ui": {
+    "errorBox": {
+      "retryButton": "Thử lại",
+      "heading": "Thiếu cảnh"
+    },
+    "featuredNav": {
+      "nextAriaLabel": "{noun} nổi bật tiếp theo",
+      "position": "{idx} trên {len}",
+      "prevAriaLabel": "{noun} nổi bật trước đó"
+    },
+    "highlightWord": {
+      "spokenTimes": "được nói {count} lần",
+      "title": "“{word}” - {display}"
+    },
+    "movieSearch": {
+      "ariaLabel": "Tìm kiếm phim",
+      "placeholder": "Tìm kiếm tên phim…"
+    },
+    "poster": {
+      "alt": "Áp phích {title}"
+    },
+    "seriesLegend": {
+      "exploreTitle": "Khám phá “{word}”"
+    },
+    "slug": {
+      "defaultPrefix": "INT."
+    },
+    "wordFilterBar": {
+      "allButton": "tất cả các từ",
+      "anyKindButton": "bất kỳ loại nào",
+      "commonnessAriaLabel": "Độ phổ biến của từ",
+      "hidingDescription": "ẩn tiếng Anh thường ngày - ~2.000 từ phổ biến nhất (the, know, get…)",
+      "interestingButton": "những từ thú vị",
+      "onlyKindsSuffix": " · chỉ {kinds}",
+      "showingDescription": "hiển thị mọi từ, bao gồm cả tiếng Anh thường ngày"
+    }
+  },
+  "boards": {
+    "films": {
+      "chattiestBlurb": "nhiều từ nhất mỗi phút thời lượng",
+      "chattiestFmt": "{v} từ/phút",
+      "chattiestTitle": "Nói nhanh nhất",
+      "intro": "Những kỷ lục gia của kho dữ liệu, bốn hạng mục kịch bản cực đoan.",
+      "loadingSpinner": "Đang tải các kỷ lục phim…",
+      "repetitiveBlurb": "tỷ lệ từ vựng khác biệt thấp nhất",
+      "repetitiveFmt": "{v}% độc nhất",
+      "repetitiveTitle": "Kịch bản lặp lại nhiều nhất",
+      "sweariestBlurb": "từ chửi thề trên 1.000 từ",
+      "sweariestFmt": "{v}/1k",
+      "sweariestTitle": "Kịch bản chửi thề nhiều nhất",
+      "vocabularyBlurb": "nhiều từ vựng khác biệt nhất trong một kịch bản",
+      "vocabularyFmt": "{v} từ",
+      "vocabularyTitle": "Vốn từ vựng lớn nhất"
+    },
+    "overview": {
+      "adjectivesBlurb": "những tính từ thú vị được nói nhiều nhất",
+      "adjectivesTitle": "Tính từ của điện ảnh",
+      "fallingBlurb": "được nói ít hơn hẳn hiện nay so với thời kỳ đầu của điện ảnh",
+      "intro": "Những điểm nhấn của kho dữ liệu - top năm từ mọi bảng. Nhấn vào thẻ bất kỳ để xem danh sách đầy đủ, bộ lọc và hơn thế nữa.",
+      "loadingSpinner": "Đang tải các điểm nhấn…",
+      "risingBlurb": "được nói nhiều hơn hẳn hiện nay so với thời kỳ đầu của điện ảnh",
+      "ubiquityBlurb": "những từ hầu như không kịch bản nào bỏ qua",
+      "wondersBlurb": "những từ chỉ thuộc về một bộ phim"
+    },
+    "ratio": {
+      "down": "giảm {label}×",
+      "up": "tăng {label}×"
+    },
+    "shifts": {
+      "fallingTitle": "Đang mờ dần",
+      "intro": "Cách thoại thay đổi: những từ được nói nhiều hơn (hoặc ít hơn) hẳn trên mỗi triệu từ hiện nay (những năm 2010–20) so với thời kỳ đầu của điện ảnh (những năm 1930–40). Các đường kẻ theo dõi từng thập kỷ; nhấp vào một từ để xem biểu đồ đầy đủ.",
+      "loadingSpinner": "Đang tải các thay đổi…",
+      "risingTitle": "Đang trỗi dậy"
+    },
+    "taster": {
+      "seeAllLink": "xem tất cả →"
+    },
+    "ubiquity": {
+      "intro": "Vượt ra ngoài các từ nối đơn thuần, những từ này xuất hiện trong hầu hết mọi bộ phim trong số {nFilms} phim.",
+      "loadingSpinner": "Đang tải…",
+      "shareOfFilms": "{share}% số phim"
+    },
+    "wonders": {
+      "intro": "Những từ một bộ phim nói nhiều hơn phần còn lại của điện ảnh cộng lại - tên nhân vật, từ bịa ra, những nỗi ám ảnh.",
+      "item": "được nói {count}× trong {movieLink} ({year}) - {share}% trong tổng số lần điện ảnh nói từ này",
+      "loadingSpinner": "Đang tải những kỳ quan một phim…"
+    }
+  },
+  "chart": {
+    "axisAriaLabel": "{yLabel} theo năm",
+    "chartingSpinner": "Đang vẽ biểu đồ một thay đổi nổi bật…",
+    "loadFailedMessage": "Không thể vẽ biểu đồ cho từ này - hãy thử từ tiếp theo ▶",
+    "moreTrendsLink": "thêm xu hướng →",
+    "trendNoun": "xu hướng",
+    "unpinAriaLabel": "Bỏ ghim {year}",
+    "usesPerMillionCaption": "số lần sử dụng trên một triệu từ thoại",
+    "yAxisLabel": "số lần sử dụng trên một triệu từ"
+  },
+  "decadesView": {
+    "decadeLabel": "Những năm {decade}",
+    "eyebrow": "Duyệt theo",
+    "filmsCount": "{count} phim",
+    "loadError": "Không thể tải các thập kỷ.",
+    "loadingSpinner": "Đang tải các thập kỷ…",
+    "subtitle": "Cách mỗi thời đại điện ảnh trò chuyện - {count} nghiên cứu.",
+    "title": "THẬP KỶ",
+    "notEnoughFilms": "Không có đủ phim tiếng {langs} cho phần này - hãy thêm ngôn ngữ hoặc chuyển sang Tất cả các phim."
+  },
+  "entity": {
+    "compareButton": "So sánh {label} với…",
+    "decadeEyebrow": "Ước tính {decade}",
+    "decadeLabel": "NHỮNG NĂM {decade}",
+    "decadeSubject": "những năm {decade}",
+    "genreEyebrow": "Nghiên cứu thể loại",
+    "kindDecade": "thập kỷ",
+    "kindGenre": "thể loại",
+    "loadingSpinner": "Đang tải…",
+    "mostSpokenBody": "Đếm thuần túy, loại trừ các từ dừng (stopwords).",
+    "mostSpokenHeading": "Những từ được nói nhiều nhất",
+    "notFound": "Không có {kind} “{id}” trong tập dữ liệu.",
+    "notableScriptsHeading": "Các kịch bản đáng chú ý",
+    "signatureWordsBody": "Những gì {subject} nói đến nhiều hơn hẳn so với phim ảnh nói chung.",
+    "signatureWordsHeading": "Những từ đặc trưng",
+    "statsLine": "{films} phim · {words} từ thoại",
+    "notEnoughFilms": "Không có đủ phim tiếng {langs} cho {subject} - hãy thêm ngôn ngữ hoặc chuyển sang Tất cả các phim."
+  },
+  "eras": {
+    "1910": "những cuộn phim đầu tiên",
+    "1920": "phim có tiếng xuất hiện",
+    "1930": "thời kỳ hoàng kim",
+    "1940": "chiến tranh và phim noir",
+    "1950": "thời đại nguyên tử",
+    "1960": "làn sóng mới",
+    "1970": "Hollywood Mới",
+    "1980": "kỷ nguyên bom tấn",
+    "1990": "sự bùng nổ phim độc lập",
+    "2000": "những năm rạp chiếu đa màn hình",
+    "2010": "bình minh của phát trực tuyến",
+    "2020": "điện ảnh hiện nay"
+  },
+  "errors": {
+    "body": "Xin lỗi vì điều này - {reload} thường sẽ khắc phục được. Vẫn lỗi? Hãy gửi email tới {email}.",
+    "eyebrow": "Chuyển cảnh nhanh:",
+    "reload": "tải lại",
+    "title": "Có gì đó bị hỏng."
+  },
+  "footer": {
+    "creditsBody": "Mã nguồn mở: {github} và phi thương mại. Chỉ các số liệu đếm từ được xuất bản - không phân phối lại văn bản phụ đề.",
+    "creditsHeading": "Ghi công.",
+    "dataBody": "Tập dữ liệu đầy đủ có sẵn để tải xuống - xem {dataGuide} để biết liên kết & thông tin ({license}). Bạn thắc mắc về phương pháp, sự thiên lệch hay bản quyền? Hãy đọc {faq}.",
+    "dataGuideLink": "hướng dẫn dữ liệu",
+    "dataHeading": "Lấy dữ liệu.",
+    "dataSourcesBody": "Dữ liệu: số lượng từ từ {opus} (Lison & Tiedemann, 2016), qua {openSubtitles}; siêu dữ liệu phim từ {imdbData} và {tmdb}. Thông tin được cung cấp bởi IMDb ({imdbUrl}). Được sử dụng với sự cho phép.",
+    "faqLink": "FAQ",
+    "githubLink": "github.com/beveradb/moviewords",
+    "githubProfileLink": "GitHub",
+    "ideaBody": "Chắc chắn có những phân tích thú vị mà chúng tôi chưa nghĩ tới! Nếu bạn muốn chia sẻ ý tưởng hoặc đã xây dựng một thứ gì đó hay ho với dữ liệu này, hãy {email}",
+    "ideaEmailLink": "gửi email tới andrew@beveridge.uk",
+    "ideaHeading": "Bạn có ý tưởng?",
+    "imdbDataLink": "IMDb",
+    "imdbUrlLink": "https://www.imdb.com",
+    "instagramLink": "Instagram",
+    "licenseLink": "CC BY-NC-SA 4.0",
+    "lindsayLink": "Lindsay Wright Graphic Design",
+    "linkedinLink": "LinkedIn",
+    "madeByBody": "Được tạo bởi Andrew Beveridge - {github} · {linkedin} · {instagram} - với ý tưởng ban đầu từ người vợ đáng yêu của tôi {lindsay} - hãy xem qua portfolio của cô ấy nhé!",
+    "openSubtitlesLink": "OpenSubtitles.org",
+    "opusLink": "OPUS OpenSubtitles corpus",
+    "takedownEmailLink": "Gửi email yêu cầu gỡ bỏ",
+    "tmdbDisclaimerBody": "Sản phẩm này sử dụng TMDB API nhưng không được TMDB xác nhận hoặc chứng nhận. Áp phích qua TMDB - bản quyền thuộc về các studio tương ứng, được hiển thị để nhận diện các bộ phim được thảo luận. Bạn là người giữ bản quyền? {takedown} và nó sẽ được gỡ xuống ngay lập tức.",
+    "tmdbLink": "TMDB"
+  },
+  "genres": {
+    "Action": "Hành động",
+    "Adult": "Người lớn",
+    "Adventure": "Phiêu lưu",
+    "Animation": "Hoạt hình",
+    "Biography": "Tiểu sử",
+    "Comedy": "Hài",
+    "Crime": "Tội phạm",
+    "Documentary": "Tài liệu",
+    "Drama": "Chính kịch",
+    "Family": "Gia đình",
+    "Fantasy": "Kỳ ảo",
+    "Film-Noir": "Film-Noir",
+    "History": "Lịch sử",
+    "Horror": "Kinh dị",
+    "Music": "Âm nhạc",
+    "Musical": "Nhạc kịch",
+    "Mystery": "Bí ẩn",
+    "News": "Tin tức",
+    "Reality-TV": "Truyền hình thực tế",
+    "Romance": "Lãng mạn",
+    "Sci-Fi": "Khoa học viễn tưởng",
+    "Sport": "Thể thao",
+    "Thriller": "Giật gân",
+    "War": "Chiến tranh",
+    "Western": "Viễn Tây"
+  },
+  "genresView": {
+    "eyebrow": "Duyệt theo",
+    "filmsCount": "{count} phim",
+    "loadError": "Không thể tải các thể loại.",
+    "loadingSpinner": "Đang tải các thể loại…",
+    "subtitle": "Mỗi thể loại nói về điều gì - {count} nghiên cứu.",
+    "title": "THỂ LOẠI",
+    "notEnoughFilms": "Không có đủ phim tiếng {langs} cho phần này - hãy thêm ngôn ngữ hoặc chuyển sang Tất cả các phim."
+  },
+  "home": {
+    "aboutHeading": "Về tập dữ liệu này",
+    "decadesBody": "Từ phim có tiếng đến những năm 2020 - cách mỗi thời đại điện ảnh trò chuyện.",
+    "decadesHeading": "Dạo quanh các thập kỷ",
+    "fadeIn": "Cảnh sáng dần:",
+    "faqLink": "FAQ",
+    "heroBody": "Chúng tôi đã đếm mọi từ được nói trong {count} bộ phim - {millions} triệu từ trong số đó. Xem {trends}, gặp gỡ {sweariest}, và giải quyết {versus} qua từng từ.",
+    "heroSweariest": "kịch bản chửi thề nhiều nhất từng được tạo ra",
+    "heroTitle": "Mỗi bộ phim đều có một {vocabulary}.",
+    "heroTrends": "'awesome' vượt qua 'swell'",
+    "heroVersus": "Alien vs Aliens",
+    "heroVocabulary": "vốn từ vựng",
+    "movieMeta": "{year} · {words} từ",
+    "opusLink": "OPUS OpenSubtitles corpus",
+    "shelfHeading": "Lấy một kịch bản khỏi kệ",
+    "aboutBody": "Bao gồm {count} - mọi từ trong thoại phụ đề từ {opus} cho các bộ phim có ít nhất 300 lượt bình chọn trên IMDb, được đếm theo từng phim. Chỉ số lượng từ được xuất bản; không phân phối lại văn bản phụ đề. Phương pháp và các lưu ý: {faq}.",
+    "aboutCountAllFilms": "phim - bao gồm cả phụ đề đã dịch",
+    "aboutCountLangFilms": "phim tiếng {langs}",
+    "aboutCountTemplate": "{count} {kind}",
+    "aboutCountUnknown": "hàng chục ngàn",
+    "aboutSubtitleHint": "Những số đếm này đến từ phụ đề tiếng Anh của các bộ phim, không phải thoại gốc của chúng."
+  },
+  "leaderboard": {
+    "tabs": {
+      "everywhere": "Được nói bởi mọi phim",
+      "films": "Kỷ lục phim",
+      "overview": "Tổng quan",
+      "shifts": "Tăng & giảm",
+      "wonders": "Kỳ quan một phim",
+      "words": "Từ hàng đầu"
+    },
+    "words": {
+      "allGenresOption": "Tất cả thể loại",
+      "filmsCount": " · {count} phim",
+      "filteringSpinner": "Đang lọc kho dữ liệu… (truy vấn lọc đầu tiên sẽ tải công cụ phân tích)",
+      "fromLabel": "Từ",
+      "genreLabel": "Thể loại",
+      "intro": "Những từ được nói nhiều nhất trên mọi bộ phim trong kho dữ liệu.",
+      "noMatches": "Không có từ nào khớp với các bộ lọc này - hãy thử “tất cả các từ” hoặc “bất kỳ loại nào”.",
+      "rankByLabel": "Xếp hạng theo",
+      "sortMovieishButton": "đậm chất phim nhất",
+      "sortMovieishTitle": "Đánh trọng số mỗi từ dựa trên mức độ phim ảnh nói từ đó nhiều hơn tiếng Anh thường ngày",
+      "sortSpokenButton": "được nói nhiều nhất",
+      "toLabel": "Đến"
+    },
+    "languageNote": "Dựa trên {count} phim tiếng {langs}, được đo lường từ phụ đề tiếng Anh của chúng."
+  },
+  "movie": {
+    "compareButton": "So sánh với phim khác",
+    "decadeLinkTitle": "Thêm từ những năm {decade}",
+    "distinctWordsLabel": "Từ vựng khác biệt",
+    "genreSeparator": " / ",
+    "imdbRatingLabel": "Điểm IMDb",
+    "loadingScript": "Đang tải kịch bản…",
+    "mostSpokenHeading": "Những từ được nói nhiều nhất",
+    "notFound": "Không có phim nào với id “{id}” trong tập dữ liệu.",
+    "signatureWordsBody": "Những từ bộ phim này sử dụng nhiều hơn hẳn so với phim ảnh nói chung (log-odds so với toàn bộ kho dữ liệu).",
+    "signatureWordsHeading": "Những từ đặc trưng",
+    "slugTitle": "{title} - {year}",
+    "vocabRichnessLabel": "Độ phong phú từ vựng",
+    "wordsSpokenLabel": "Số từ được nói"
+  },
+  "themeToggle": {
+    "day": "NGÀY",
+    "dayShoot": "Quay ban ngày",
+    "night": "ĐÊM",
+    "nightShoot": "Quay ban đêm",
+    "switchToDay": "Chuyển sang chế độ ban ngày",
+    "switchToNight": "Chuyển sang chế độ ban đêm"
+  },
+  "trends": {
+    "addAnotherWordPlaceholder": "Thêm một từ khác…",
+    "bigMovers": "Những thay đổi lớn từ những năm 1930",
+    "chartItButton": "Vẽ biểu đồ",
+    "chartedWordsAriaLabel": "Các từ đã vẽ biểu đồ",
+    "featuredPrefix": "Nổi bật: {title}",
+    "firstWordPlaceholder": "Nhập một từ, vd: love",
+    "fullList": "danh sách đầy đủ →",
+    "intro": "Tần suất một từ được nói trên tất cả các phim trong kho dữ liệu, trên một triệu từ thoại, theo năm phát hành.",
+    "navNoun": "xu hướng",
+    "navSuffix": "một thay đổi mới mỗi ngày",
+    "notEnoughData": "Không đủ dữ liệu cho: {words} (cần ≥20 lần sử dụng trên toàn kho dữ liệu, trong những năm có đủ số phim).",
+    "perThousandWords": " · {rate}/1k từ",
+    "queryingCorpus": "Đang truy vấn kho dữ liệu…",
+    "removeWordTitle": "Xóa “{word}”",
+    "topFilmByYearHeading": "Phim hàng đầu cho “{word}” theo năm",
+    "topFilmByYearLoading": "Đang tìm phim có “{word}” hàng đầu mỗi năm…",
+    "topFilmsHeading": "Những phim nói “{word}” nhiều nhất",
+    "topFilmsLoading": "Đang tìm những phim nói “{word}” nhiều nhất…",
+    "trimmedYearsNote": "{years} bị ẩn - quá ít phim trong kho dữ liệu để có tỷ lệ đáng tin cậy",
+    "tryClassic": "Hoặc thử một từ kinh điển:",
+    "usesPerMillionWords": "số lần sử dụng trên một triệu từ thoại",
+    "wordDetailsTablist": "Chi tiết từ",
+    "wordInputAriaLabel": "Từ để vẽ biểu đồ",
+    "yAxisLabel": "số lần sử dụng trên một triệu từ",
+    "languageNote": "Dựa trên {count} phim tiếng {langs}, được đo lường từ phụ đề tiếng Anh của chúng.",
+    "notEnoughFilms": "Không có đủ phim tiếng {langs} cho xu hướng này - hãy thêm ngôn ngữ hoặc chuyển sang Tất cả các phim."
+  },
+  "languageFilter": {
+    "allFilms": "Tất cả phim",
+    "apply": "Áp dụng",
+    "ariaLabel": "Lọc phim theo ngôn ngữ gốc",
+    "countLabel": "{count} ngôn ngữ",
+    "hint": "Lọc theo ngôn ngữ gốc của phim; số đếm từ vựng đến từ phụ đề tiếng Anh.",
+    "menuAriaLabel": "Ngôn ngữ gốc",
+    "searchAriaLabel": "Tìm kiếm ngôn ngữ",
+    "searchPlaceholder": "Tìm kiếm ngôn ngữ…"
+  },
+  "localeFilterHint": {
+    "dismissAriaLabel": "Bỏ qua",
+    "filterButton": "Lọc",
+    "message": "Đang xem bằng tiếng {lang}? Lọc thành phim tiếng {lang}."
+  },
+  "modal": {
+    "closeAriaLabel": "Đóng"
+  },
+  "filterExplainer": {
+    "badgeLabel": "đã dịch · {lang}",
+    "badgeTitle": "Ngôn ngữ gốc {lang} - số đếm được lấy từ phụ đề dịch tiếng Anh. Điều này hoạt động như thế nào?",
+    "dialogueNote": "Thoại ngôn ngữ gốc không có trong tập dữ liệu - chỉ có bản dịch tiếng Anh.",
+    "englishSubtitles": "phụ đề tiếng Anh",
+    "englishTranslation": "bản dịch tiếng Anh",
+    "filteringBody": "{whatFiltering} {originalLanguage} của một bộ phim - nơi nó được sản xuất, từ siêu dữ liệu của TMDB - không phải ngôn ngữ của các từ bên dưới.",
+    "linkText": "Điều này hoạt động như thế nào?",
+    "modalTitle": "Cách hoạt động",
+    "origin": "xuất xứ",
+    "originalLanguage": "ngôn ngữ gốc",
+    "soSpanishMeans": "Vì vậy \"tiếng Tây Ban Nha\" có nghĩa là",
+    "spanishBody": "{soSpanishMeans} từ vựng phụ đề tiếng Anh của điện ảnh có {origin} Tây Ban Nha - cách các từ như \"solidarity\" hoặc \"dictatorship\" xuất hiện trong phụ đề tiếng Anh của phim Tây Ban Nha - không phải các từ tiếng Tây Ban Nha.",
+    "whatFiltering": "Bạn đang lọc gì:",
+    "whatWords": "Các từ này là gì:",
+    "wordsBody": "{whatWords} mọi số đếm trên Movie Words đều đến từ {englishSubtitles} của phim. Chúng tôi chỉ có dữ liệu OpenSubtitles tiếng Anh, vì vậy đối với một bộ phim không nói tiếng Anh, đây là những từ trong {englishTranslation} của nó, không phải thoại gốc. Đó là lý do tại sao đôi khi có một từ chưa được dịch lọt qua - \"panna\", \"cotta\", \"samurai\"."
+  }
+}

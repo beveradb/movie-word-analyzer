@@ -1,0 +1,403 @@
+{
+  "compare": {
+    "orLabel": "או",
+    "addDecadeAriaLabel": "הוסף עשור",
+    "addDecadeOption": "הוסף עשור…",
+    "addFilmPlaceholder": "הוסף סרט…",
+    "addGenreAriaLabel": "הוסף ז'אנר",
+    "addGenreOption": "הוסף ז'אנר…",
+    "decadeLabel": "שנות ה-{decade}",
+    "decadeOptionLabel": "שנות ה-{decade}",
+    "distinctWordsLabel": "מילים ייחודיות",
+    "featuredMatchupPrefix": "עימות נבחר: {title}",
+    "filmsLabel": "סרטים",
+    "filmsPerYearLabel": "סרטים / שנה",
+    "filmsPerYearTitle": "סרטים לפי שנת יציאה בחלק זה של המאגר",
+    "fullBreakdownLink": "פירוט מלא →",
+    "headToHeadHeading": "ראש בראש",
+    "introBody": "שימו סרטים, עשורים וז'אנרים זה לצד זה - עד שלושה מכל שילוב.",
+    "loadingLabel": "טוען…",
+    "movieLabel": "{title} - {year}",
+    "navNoun": "עימות",
+    "navSuffix": "מתחלף מדי יום - או בנו אחד משלכם למעלה",
+    "noStandoutWords": "אין מילים בולטות",
+    "nothingFoundMessage": "לא נמצא דבר עבור בחירה זו.",
+    "pickFilmPlaceholder": "בחרו סרט…",
+    "ratioMoreLabel": "פי {ratio} יותר",
+    "removeButton": "הסר",
+    "sharedSignatureWordsHeading": "מילות חותם משותפות",
+    "signatureWordsHeading": "מילות חותם {note}",
+    "signatureWordsHighlightedNote": "(מודגש = משותף)",
+    "swearsPer1kLabel": "קללות / 1k מילים",
+    "wordsPerFilmLabel": "מילים / סרט",
+    "wordsSpokenLabel": "מילים שנאמרו",
+    "headToHeadIntroMany": "מה שכל אחד אומר הרבה יותר מהאחרים - שיעור לכל מיליון מילים מתוך הדיאלוג של עצמו.",
+    "headToHeadIntroPair": "מה שכל אחד אומר הרבה יותר מהשני - שיעור לכל מיליון מילים מתוך הדיאלוג של עצמו."
+  },
+  "languageSwitcher": {
+    "current": "שפה",
+    "label": "בחרו שפה"
+  },
+  "nav": {
+    "sectionsLabel": "מקטעים",
+    "compare": "השוואה",
+    "decades": "עשורים",
+    "explore": "חקור",
+    "genres": "ז'אנרים",
+    "leaderboard": "טבלת מובילים",
+    "trends": "מגמות"
+  },
+  "pos": {
+    "other": "אחר",
+    "a": "שמות תואר",
+    "adjective": "שם תואר",
+    "adverb": "תואר הפועל",
+    "n": "שמות עצם",
+    "noun": "שם עצם",
+    "r": "תוארי הפועל",
+    "v": "פעלים",
+    "verb": "פועל",
+    "x": "שמות ואחרים"
+  },
+  "ui": {
+    "errorBox": {
+      "retryButton": "נסה שוב",
+      "heading": "סצנה חסרה"
+    },
+    "featuredNav": {
+      "nextAriaLabel": "{noun} נבחר הבא",
+      "position": "{idx} מתוך {len}",
+      "prevAriaLabel": "{noun} נבחר קודם"
+    },
+    "highlightWord": {
+      "spokenTimes": "נאמרה {count} פעמים",
+      "title": "“{word}” - {display}"
+    },
+    "movieSearch": {
+      "ariaLabel": "חפש סרטים",
+      "placeholder": "חפשו שם של סרט…"
+    },
+    "poster": {
+      "alt": "פוסטר של {title}"
+    },
+    "seriesLegend": {
+      "exploreTitle": "חקור את “{word}”"
+    },
+    "slug": {
+      "defaultPrefix": "פנים."
+    },
+    "wordFilterBar": {
+      "allButton": "כל המילים",
+      "anyKindButton": "כל סוג",
+      "commonnessAriaLabel": "שכיחות המילה",
+      "hidingDescription": "מסתיר אנגלית יומיומית - כ-2,000 המילים הנפוצות ביותר (the, know, get…)",
+      "interestingButton": "מילים מעניינות",
+      "onlyKindsSuffix": " · רק {kinds}",
+      "showingDescription": "מציג כל מילה, כולל אנגלית יומיומית"
+    }
+  },
+  "boards": {
+    "films": {
+      "chattiestBlurb": "הכי הרבה מילים לדקת צפייה",
+      "chattiestFmt": "{v} מילים/דק'",
+      "chattiestTitle": "המדברים הכי מהר",
+      "intro": "מחזיקי השיאים של המאגר, ארבע קטגוריות של תסריטי קיצון.",
+      "loadingSpinner": "טוען שיאי סרטים…",
+      "repetitiveBlurb": "השיעור הנמוך ביותר של מילים ייחודיות",
+      "repetitiveFmt": "{v}% ייחודיות",
+      "repetitiveTitle": "התסריטים הכי חזרתיים",
+      "sweariestBlurb": "קללות לכל 1,000 מילים",
+      "sweariestFmt": "{v}/1k",
+      "sweariestTitle": "התסריטים הכי מקללים",
+      "vocabularyBlurb": "הכי הרבה מילים ייחודיות בתסריט אחד",
+      "vocabularyFmt": "{v} מילים",
+      "vocabularyTitle": "אוצר המילים הגדול ביותר"
+    },
+    "overview": {
+      "adjectivesBlurb": "שמות התואר המעניינים המדוברים ביותר",
+      "adjectivesTitle": "שמות התואר של הקולנוע",
+      "fallingBlurb": "נאמרות הרבה פחות היום מאשר בקולנוע המוקדם",
+      "intro": "הכותרות של המאגר - החמישייה הפותחת מכל לוח. לחצו על כל כרטיסיה לרשימה המלאה, סינונים ועוד.",
+      "loadingSpinner": "טוען את הכותרות…",
+      "risingBlurb": "נאמרות הרבה יותר היום מאשר בקולנוע המוקדם",
+      "ubiquityBlurb": "מילים שכמעט אף תסריט לא מדלג עליהן",
+      "wondersBlurb": "מילים ששייכות לסרט אחד"
+    },
+    "ratio": {
+      "down": "פי {label} פחות",
+      "up": "פי {label} יותר"
+    },
+    "shifts": {
+      "fallingTitle": "דועכות",
+      "intro": "איך הדיאלוג השתנה: מילים שנאמרות הרבה יותר (או הרבה פחות) לכל מיליון מילים היום (שנות ה-2010–20) מאשר בקולנוע המוקדם (שנות ה-1930–40). הקווים עוקבים אחרי כל עשור; לחצו על מילה לגרף המלא.",
+      "loadingSpinner": "טוען שינויים…",
+      "risingTitle": "במגמת עלייה"
+    },
+    "taster": {
+      "seeAllLink": "ראו הכל →"
+    },
+    "ubiquity": {
+      "intro": "מעבר למילות קישור טהורות, המילים האלו מופיעות בכמעט כל אחד מ-{nFilms} הסרטים.",
+      "loadingSpinner": "טוען…",
+      "shareOfFilms": "{share}% מהסרטים"
+    },
+    "wonders": {
+      "intro": "מילים שסרט אחד אומר יותר מכל שאר הקולנוע גם יחד - שמות דמויות, מילים מומצאות, אובססיות.",
+      "item": "נאמרה {count} פעמים ב-{movieLink} ({year}) - {share}% מכל הפעמים שהקולנוע אומר אותה",
+      "loadingSpinner": "טוען פלאי סרט-אחד…"
+    }
+  },
+  "chart": {
+    "axisAriaLabel": "{yLabel} לפי שנה",
+    "chartingSpinner": "משרטט שינוי נבחר…",
+    "loadFailedMessage": "לא הצלחנו לשרטט את זה - נסו את הבא ▶",
+    "moreTrendsLink": "מגמות נוספות →",
+    "trendNoun": "מגמה",
+    "unpinAriaLabel": "בטל נעיצה של {year}",
+    "usesPerMillionCaption": "שימושים לכל מיליון מילות דיאלוג",
+    "yAxisLabel": "שימושים לכל מיליון מילים"
+  },
+  "decadesView": {
+    "decadeLabel": "שנות ה-{decade}",
+    "eyebrow": "דפדפו לפי",
+    "filmsCount": "{count} סרטים",
+    "loadError": "לא הצלחנו לטעון עשורים.",
+    "loadingSpinner": "טוען עשורים…",
+    "subtitle": "איך כל תקופה בקולנוע דיברה - {count} מחקרים.",
+    "title": "עשורים",
+    "notEnoughFilms": "אין מספיק סרטים ב-{langs} עבור זה - הוסיפו שפות או עברו לכל הסרטים."
+  },
+  "entity": {
+    "compareButton": "השוו את {label} עם…",
+    "decadeEyebrow": "שנות ה-{decade}",
+    "decadeLabel": "שנות ה-{decade}",
+    "decadeSubject": "שנות ה-{decade}",
+    "genreEyebrow": "חקר ז'אנר",
+    "kindDecade": "עשור",
+    "kindGenre": "ז'אנר",
+    "loadingSpinner": "טוען…",
+    "mostSpokenBody": "ספירות פשוטות, ללא מילות עצירה.",
+    "mostSpokenHeading": "המילים המדוברות ביותר",
+    "notFound": "אין {kind} “{id}” במאגר הנתונים.",
+    "notableScriptsHeading": "תסריטים בולטים",
+    "signatureWordsBody": "על מה {subject} מדבר הרבה יותר מסרטים באופן כללי.",
+    "signatureWordsHeading": "מילות חותם",
+    "statsLine": "{films} סרטים · {words} מילות דיאלוג",
+    "notEnoughFilms": "אין מספיק סרטים ב-{langs} עבור {subject} - הוסיפו שפות או עברו לכל הסרטים."
+  },
+  "eras": {
+    "1910": "הסלילים הראשונים",
+    "1920": "הסרטים המדברים מגיעים",
+    "1930": "תור הזהב",
+    "1940": "מלחמה ופילם נואר",
+    "1950": "העידן האטומי",
+    "1960": "הגל החדש",
+    "1970": "הוליווד החדשה",
+    "1980": "עידן שוברי הקופות",
+    "1990": "בום האינדי",
+    "2000": "שנות המולטיפלקס",
+    "2010": "שחר הסטרימינג",
+    "2020": "הקולנוע עכשיו"
+  },
+  "errors": {
+    "body": "סליחה על זה - {reload} בדרך כלל מסדר את זה. עדיין שבור? שלחו אימייל ל-{email}.",
+    "eyebrow": "קאט חד ל:",
+    "reload": "רענון",
+    "title": "משהו נשבר."
+  },
+  "footer": {
+    "creditsBody": "קוד פתוח: {github} ולא מסחרי. רק ספירות מילים נגזרות מפורסמות - טקסט הכתוביות אינו מופץ מחדש.",
+    "creditsHeading": "קרדיטים.",
+    "dataBody": "מאגר הנתונים המלא זמין להורדה - ראו את {dataGuide} לקישורים ומידע ({license}). תוהים לגבי מתודולוגיה, הטיה או זכויות יוצרים? קראו את ה-{faq}.",
+    "dataGuideLink": "מדריך הנתונים",
+    "dataHeading": "קחו את הנתונים.",
+    "dataSourcesBody": "נתונים: ספירות מילים מ-{opus} (Lison & Tiedemann, 2016), דרך {openSubtitles}; מטא-דאטה של סרטים מ-{imdbData} ו-{tmdb}. המידע באדיבות IMDb ({imdbUrl}). בשימוש באישור.",
+    "faqLink": "שאלות נפוצות",
+    "githubLink": "github.com/beveradb/moviewords",
+    "githubProfileLink": "GitHub",
+    "ideaBody": "בטוח יש ניתוחים מעניינים שלא חשבנו עליהם! אם תרצו לשתף רעיון או שבניתם משהו מגניב עם הנתונים, {email}",
+    "ideaEmailLink": "שלחו אימייל ל-andrew@beveridge.uk",
+    "ideaHeading": "יש לכם רעיון?",
+    "imdbDataLink": "IMDb",
+    "imdbUrlLink": "https://www.imdb.com",
+    "instagramLink": "Instagram",
+    "licenseLink": "CC BY-NC-SA 4.0",
+    "lindsayLink": "Lindsay Wright Graphic Design",
+    "linkedinLink": "LinkedIn",
+    "madeByBody": "נוצר על ידי Andrew Beveridge - {github} · {linkedin} · {instagram} - עם הרעיון המקורי של אשתי המקסימה {lindsay} - בדקו את תיק העבודות שלה!",
+    "openSubtitlesLink": "OpenSubtitles.org",
+    "opusLink": "OPUS OpenSubtitles corpus",
+    "takedownEmailLink": "שלחו בקשת הסרה באימייל",
+    "tmdbDisclaimerBody": "מוצר זה משתמש ב-API של TMDB אך אינו מאושר או מוסמך על ידי TMDB. פוסטרים דרך TMDB - זכויות היוצרים שייכות לאולפנים שלהם, מוצגים כדי לזהות את הסרטים הנדונים. בעלי זכויות? {takedown} וזה יורד מיד.",
+    "tmdbLink": "TMDB"
+  },
+  "genres": {
+    "Action": "פעולה",
+    "Adult": "מבוגרים",
+    "Adventure": "הרפתקאות",
+    "Animation": "אנימציה",
+    "Biography": "ביוגרפיה",
+    "Comedy": "קומדיה",
+    "Crime": "פשע",
+    "Documentary": "דוקומנטרי",
+    "Drama": "דרמה",
+    "Family": "משפחה",
+    "Fantasy": "פנטזיה",
+    "Film-Noir": "פילם נואר",
+    "History": "היסטוריה",
+    "Horror": "אימה",
+    "Music": "מוזיקה",
+    "Musical": "מחזמר",
+    "Mystery": "מסתורין",
+    "News": "חדשות",
+    "Reality-TV": "ריאליטי",
+    "Romance": "רומנטיקה",
+    "Sci-Fi": "מדע בדיוני",
+    "Sport": "ספורט",
+    "Thriller": "מותחן",
+    "War": "מלחמה",
+    "Western": "מערבון"
+  },
+  "genresView": {
+    "eyebrow": "דפדפו לפי",
+    "filmsCount": "{count} סרטים",
+    "loadError": "לא הצלחנו לטעון ז'אנרים.",
+    "loadingSpinner": "טוען ז'אנרים…",
+    "subtitle": "על מה כל ז'אנר מדבר - {count} מחקרים.",
+    "title": "ז'אנרים",
+    "notEnoughFilms": "אין מספיק סרטים ב-{langs} עבור זה - הוסיפו שפות או עברו לכל הסרטים."
+  },
+  "home": {
+    "aboutHeading": "אודות מאגר נתונים זה",
+    "decadesBody": "מהסרטים המדברים ועד שנות ה-2020 - איך כל תקופה בקולנוע דיברה.",
+    "decadesHeading": "שוטטו בעשורים",
+    "fadeIn": "פייד אין:",
+    "faqLink": "השאלות הנפוצות",
+    "heroBody": "ספרנו כל מילה שנאמרה ב-{count} סרטים - {millions} מיליון מהן. צפו ב-{trends}, פגשו את {sweariest}, ויישבו את {versus} מילה במילה.",
+    "heroSweariest": "התסריט הכי מקלל שנוצר אי פעם",
+    "heroTitle": "לכל סרט יש {vocabulary}.",
+    "heroTrends": "'awesome' עוקף את 'swell'",
+    "heroVersus": "Alien נגד Aliens",
+    "heroVocabulary": "אוצר מילים",
+    "movieMeta": "{year} · {words} מילים",
+    "opusLink": "OPUS OpenSubtitles corpus",
+    "shelfHeading": "שלפו תסריט מהמדף",
+    "aboutBody": "מכסה {count} - כל מילה של דיאלוג כתוביות מ-{opus} עבור סרטים עם לפחות 300 הצבעות ב-IMDb, נספרת לכל סרט. רק ספירות מילים מפורסמות; טקסט הכתוביות אינו מופץ מחדש. מתודולוגיה והסתייגויות: {faq}.",
+    "aboutCountAllFilms": "סרטים - כולל כתוביות מתורגמות",
+    "aboutCountLangFilms": "סרטים ב-{langs}",
+    "aboutCountTemplate": "{count} {kind}",
+    "aboutCountUnknown": "עשרות אלפי",
+    "aboutSubtitleHint": "הספירות האלו מגיעות מהכתוביות באנגלית של הסרטים, לא מהדיאלוג המקורי שלהם."
+  },
+  "leaderboard": {
+    "tabs": {
+      "everywhere": "נאמר בכל סרט",
+      "films": "שיאי סרטים",
+      "overview": "סקירה כללית",
+      "shifts": "עולות ויורדות",
+      "wonders": "פלאי סרט-אחד",
+      "words": "המילים המובילות"
+    },
+    "words": {
+      "allGenresOption": "כל הז'אנרים",
+      "filmsCount": " · {count} סרטים",
+      "filteringSpinner": "מסנן את המאגר… (השאילתה המסוננת הראשונה טוענת את מנוע האנליטיקה)",
+      "fromLabel": "מ-",
+      "genreLabel": "ז'אנר",
+      "intro": "המילים המדוברות ביותר בכל סרט במאגר.",
+      "noMatches": "אין מילים שתואמות לסינונים אלה - נסו “כל המילים” או “כל סוג”.",
+      "rankByLabel": "דרגו לפי",
+      "sortMovieishButton": "הכי קולנועי",
+      "sortMovieishTitle": "משקלל כל מילה לפי כמה יותר סרטים אומרים אותה מאשר אנגלית יומיומית",
+      "sortSpokenButton": "הכי מדובר",
+      "toLabel": "עד"
+    },
+    "languageNote": "מבוסס על {count} סרטים ב-{langs}, נמדד מהכתוביות שלהם באנגלית."
+  },
+  "movie": {
+    "compareButton": "השוו עם סרט אחר",
+    "decadeLinkTitle": "עוד משנות ה-{decade}",
+    "distinctWordsLabel": "מילים ייחודיות",
+    "genreSeparator": " / ",
+    "imdbRatingLabel": "דירוג IMDb",
+    "loadingScript": "טוען תסריט…",
+    "mostSpokenHeading": "המילים המדוברות ביותר",
+    "notFound": "אין סרט עם מזהה “{id}” במאגר הנתונים.",
+    "signatureWordsBody": "מילים שסרט זה משתמש בהן הרבה יותר מסרטים באופן כללי (הסתברות לוגריתמית מול כל המאגר).",
+    "signatureWordsHeading": "מילות חותם",
+    "slugTitle": "{title} - {year}",
+    "vocabRichnessLabel": "עושר אוצר מילים",
+    "wordsSpokenLabel": "מילים שנאמרו"
+  },
+  "themeToggle": {
+    "day": "יום",
+    "dayShoot": "צילום יום",
+    "night": "לילה",
+    "nightShoot": "צילום לילה",
+    "switchToDay": "החלף למצב יום",
+    "switchToNight": "החלף למצב לילה"
+  },
+  "trends": {
+    "addAnotherWordPlaceholder": "הוסף מילה נוספת…",
+    "bigMovers": "שינויים גדולים מאז שנות ה-1930",
+    "chartItButton": "שרטט את זה",
+    "chartedWordsAriaLabel": "מילים משורטטות",
+    "featuredPrefix": "נבחר: {title}",
+    "firstWordPlaceholder": "הקלידו מילה, למשל אהבה",
+    "fullList": "רשימה מלאה →",
+    "intro": "באיזו תדירות מילה נאמרת בכל הסרטים במאגר, לכל מיליון מילות דיאלוג, לפי שנת יציאה.",
+    "navNoun": "מגמה",
+    "navSuffix": "שינוי חדש בכל יום",
+    "notEnoughData": "אין מספיק נתונים עבור: {words} (נדרשים ≥20 שימושים בכל המאגר, בשנים עם מספיק סרטים).",
+    "perThousandWords": " · {rate}/1k מילים",
+    "queryingCorpus": "מתשאל את המאגר…",
+    "removeWordTitle": "הסר את “{word}”",
+    "topFilmByYearHeading": "הסרט המוביל עבור “{word}” לפי שנה",
+    "topFilmByYearLoading": "מחפש את הסרט המוביל עבור “{word}” בכל שנה…",
+    "topFilmsHeading": "סרטים שאומרים “{word}” הכי הרבה",
+    "topFilmsLoading": "מחפש סרטים שאומרים “{word}” הכי הרבה…",
+    "trimmedYearsNote": "{years} מוסתרות - מעט מדי סרטים במאגר לשיעורים אמינים",
+    "tryClassic": "או נסו קלאסיקה:",
+    "usesPerMillionWords": "שימושים לכל מיליון מילות דיאלוג",
+    "wordDetailsTablist": "פרטי מילה",
+    "wordInputAriaLabel": "מילה לשרטוט",
+    "yAxisLabel": "שימושים לכל מיליון מילים",
+    "languageNote": "מבוסס על {count} סרטים ב-{langs}, נמדד מהכתוביות שלהם באנגלית.",
+    "notEnoughFilms": "אין מספיק סרטים ב-{langs} עבור מגמה זו - הוסיפו שפות או עברו לכל הסרטים."
+  },
+  "languageFilter": {
+    "allFilms": "כל הסרטים",
+    "apply": "החל",
+    "ariaLabel": "סינון סרטים לפי שפת מקור",
+    "countLabel": "{count} שפות",
+    "hint": "מסנן לפי שפת המקור של הסרט; ספירות המילים מגיעות מהכתוביות באנגלית.",
+    "menuAriaLabel": "שפת מקור",
+    "searchAriaLabel": "חיפוש שפות",
+    "searchPlaceholder": "חיפוש שפות…"
+  },
+  "localeFilterHint": {
+    "dismissAriaLabel": "התעלם",
+    "filterButton": "סינון",
+    "message": "צופים ב-{lang}? סננו לסרטים ב-{lang}."
+  },
+  "modal": {
+    "closeAriaLabel": "סגירה"
+  },
+  "filterExplainer": {
+    "badgeLabel": "תורגם · {lang}",
+    "badgeTitle": "שפת המקור {lang} - הספירות מגיעות מהכתוביות המתורגמות לאנגלית. איך זה עובד?",
+    "dialogueNote": "הדיאלוג בשפת המקור אינו נמצא במאגר הנתונים - רק התרגום לאנגלית.",
+    "englishSubtitles": "כתוביות באנגלית",
+    "englishTranslation": "תרגום לאנגלית",
+    "filteringBody": "{whatFiltering} ה-{originalLanguage} של הסרט - היכן הוא הופק, מנתוני TMDB - לא השפה של המילים למטה.",
+    "linkText": "איך זה עובד?",
+    "modalTitle": "איך זה עובד",
+    "origin": "מקור",
+    "originalLanguage": "שפת מקור",
+    "soSpanishMeans": "אז המשמעות של \"ספרדית\" היא",
+    "spanishBody": "{soSpanishMeans} אוצר המילים בכתוביות באנגלית של קולנוע מ-{origin} ספרדי - איך מילים כמו \"solidarity\" או \"dictatorship\" מופיעות בכתוביות באנגלית של סרטים ספרדיים - לא מילים בספרדית.",
+    "whatFiltering": "מה שאתם מסננים:",
+    "whatWords": "מהן המילים:",
+    "wordsBody": "{whatWords} כל ספירה ב-Movie Words מגיעה מה-{englishSubtitles} של הסרט. יש לנו רק את הרצועה באנגלית של OpenSubtitles, כך שעבור סרט שאינו באנגלית אלו המילים של ה-{englishTranslation} שלו, לא הדיאלוג המקורי. זו הסיבה שמילה לא מתורגמת חומקת מדי פעם - \"panna\", \"cotta\", \"samurai\"."
+  }
+}

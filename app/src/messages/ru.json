@@ -1,0 +1,403 @@
+{
+  "compare": {
+    "orLabel": "или",
+    "addDecadeAriaLabel": "Добавить десятилетие",
+    "addDecadeOption": "Добавить десятилетие…",
+    "addFilmPlaceholder": "Добавить фильм…",
+    "addGenreAriaLabel": "Добавить жанр",
+    "addGenreOption": "Добавить жанр…",
+    "decadeLabel": "{decade}-Е",
+    "decadeOptionLabel": "{decade}-е",
+    "distinctWordsLabel": "Уникальные слова",
+    "featuredMatchupPrefix": "Рекомендуемая битва: {title}",
+    "filmsLabel": "Фильмы",
+    "filmsPerYearLabel": "фильмов / год",
+    "filmsPerYearTitle": "Фильмов по году выпуска в этом срезе корпуса",
+    "fullBreakdownLink": "полный разбор →",
+    "headToHeadHeading": "Лицом к лицу",
+    "introBody": "Сравнивай фильмы, десятилетия и жанры - до трех в любой комбинации.",
+    "loadingLabel": "Загрузка…",
+    "movieLabel": "{title} - {year}",
+    "navNoun": "битва",
+    "navSuffix": "меняется каждый день - или создай свою выше",
+    "noStandoutWords": "нет выделяющихся слов",
+    "nothingFoundMessage": "По этому запросу ничего не найдено.",
+    "pickFilmPlaceholder": "Выбери фильм…",
+    "ratioMoreLabel": "в {ratio}× больше",
+    "removeButton": "удалить",
+    "sharedSignatureWordsHeading": "Общие характерные слова",
+    "signatureWordsHeading": "Характерные слова {note}",
+    "signatureWordsHighlightedNote": "(выделено = общие)",
+    "swearsPer1kLabel": "Ругательств / 1тыс слов",
+    "wordsPerFilmLabel": "Слов / фильм",
+    "wordsSpokenLabel": "Произнесено слов",
+    "headToHeadIntroMany": "Какие слова каждый из них использует гораздо чаще остальных - частота на миллион слов в собственных диалогах.",
+    "headToHeadIntroPair": "Какие слова каждый из них использует гораздо чаще другого - частота на миллион слов в собственных диалогах."
+  },
+  "languageSwitcher": {
+    "current": "Язык",
+    "label": "Выбрать язык"
+  },
+  "nav": {
+    "sectionsLabel": "Разделы",
+    "compare": "Сравнить",
+    "decades": "Десятилетия",
+    "explore": "Исследовать",
+    "genres": "Жанры",
+    "leaderboard": "Рейтинги",
+    "trends": "Тренды"
+  },
+  "pos": {
+    "other": "другое",
+    "a": "прилагательные",
+    "adjective": "прилагательное",
+    "adverb": "наречие",
+    "n": "существительные",
+    "noun": "существительное",
+    "r": "наречия",
+    "v": "глаголы",
+    "verb": "глагол",
+    "x": "имена и прочее"
+  },
+  "ui": {
+    "errorBox": {
+      "retryButton": "Повторить",
+      "heading": "Сцена пропущена"
+    },
+    "featuredNav": {
+      "nextAriaLabel": "Следующий рекомендуемый {noun}",
+      "position": "{idx} из {len}",
+      "prevAriaLabel": "Предыдущий рекомендуемый {noun}"
+    },
+    "highlightWord": {
+      "spokenTimes": "произнесено {count} раз",
+      "title": "“{word}” - {display}"
+    },
+    "movieSearch": {
+      "ariaLabel": "Поиск фильмов",
+      "placeholder": "Искать название фильма…"
+    },
+    "poster": {
+      "alt": "Постер {title}"
+    },
+    "seriesLegend": {
+      "exploreTitle": "Исследовать “{word}”"
+    },
+    "slug": {
+      "defaultPrefix": "ИНТ."
+    },
+    "wordFilterBar": {
+      "allButton": "все слова",
+      "anyKindButton": "любой тип",
+      "commonnessAriaLabel": "Частотность слова",
+      "hidingDescription": "скрываем повседневный английский - ~2000 самых частых слов (the, know, get…)",
+      "interestingButton": "интересные слова",
+      "onlyKindsSuffix": " · только {kinds}",
+      "showingDescription": "показываем все слова, включая повседневный английский"
+    }
+  },
+  "boards": {
+    "films": {
+      "chattiestBlurb": "больше всего слов в минуту экранного времени",
+      "chattiestFmt": "{v} сл/мин",
+      "chattiestTitle": "Самые болтливые",
+      "intro": "Рекордсмены корпуса, четыре категории самых экстремальных сценариев.",
+      "loadingSpinner": "Загружаем кинорекорды…",
+      "repetitiveBlurb": "наименьшая доля уникальных слов",
+      "repetitiveFmt": "{v}% уникальных",
+      "repetitiveTitle": "Самые повторяющиеся сценарии",
+      "sweariestBlurb": "ругательств на 1000 слов",
+      "sweariestFmt": "{v}/1тыс",
+      "sweariestTitle": "Самые матерные сценарии",
+      "vocabularyBlurb": "больше всего уникальных слов в одном сценарии",
+      "vocabularyFmt": "{v} слов",
+      "vocabularyTitle": "Самый богатый словарный запас"
+    },
+    "overview": {
+      "adjectivesBlurb": "самые популярные интересные прилагательные",
+      "adjectivesTitle": "Прилагательные кинематографа",
+      "fallingBlurb": "сейчас говорят гораздо реже, чем на заре кино",
+      "intro": "Главные новости корпуса - топ-5 с каждой доски. Кликай на любую карточку, чтобы увидеть полный список, фильтры и многое другое.",
+      "loadingSpinner": "Загружаем заголовки…",
+      "risingBlurb": "сейчас говорят гораздо чаще, чем на заре кино",
+      "ubiquityBlurb": "слова, без которых не обходится почти ни один сценарий",
+      "wondersBlurb": "слова, принадлежащие одному фильму"
+    },
+    "ratio": {
+      "down": "в {label}× меньше",
+      "up": "в {label}× больше"
+    },
+    "shifts": {
+      "fallingTitle": "Уходят в затемнение",
+      "intro": "Как изменились диалоги: слова, которые сейчас (2010-е–20-е) произносят гораздо чаще (или реже) на миллион слов, чем в раннем кино (1930-е–40-е). Линии отслеживают каждое десятилетие; кликни на слово, чтобы увидеть полный график.",
+      "loadingSpinner": "Загружаем сдвиги…",
+      "risingTitle": "На подъеме"
+    },
+    "taster": {
+      "seeAllLink": "смотреть все →"
+    },
+    "ubiquity": {
+      "intro": "Помимо обычных союзов, эти слова встречаются почти в каждом из {nFilms} фильмов.",
+      "loadingSpinner": "Загрузка…",
+      "shareOfFilms": "{share}% фильмов"
+    },
+    "wonders": {
+      "intro": "Слова, которые в одном фильме произносят чаще, чем во всем остальном кино вместе взятом - имена персонажей, выдуманные слова, навязчивые идеи.",
+      "item": "произнесено {count}× в {movieLink} ({year}) - {share}% от всех случаев в кино",
+      "loadingSpinner": "Загружаем чудеса одного фильма…"
+    }
+  },
+  "chart": {
+    "axisAriaLabel": "{yLabel} по годам",
+    "chartingSpinner": "Рисуем график сдвига…",
+    "loadFailedMessage": "Не удалось построить график - попробуй следующий ▶",
+    "moreTrendsLink": "больше трендов →",
+    "trendNoun": "тренд",
+    "unpinAriaLabel": "Открепить {year}",
+    "usesPerMillionCaption": "использований на миллион слов диалога",
+    "yAxisLabel": "использований на миллион слов"
+  },
+  "decadesView": {
+    "decadeLabel": "{decade}-е",
+    "eyebrow": "Искать по",
+    "filmsCount": "{count} фильмов",
+    "loadError": "Не удалось загрузить десятилетия.",
+    "loadingSpinner": "Загружаем десятилетия…",
+    "subtitle": "Как говорила каждая эпоха кино - {count} исследований.",
+    "title": "ДЕСЯТИЛЕТИЯ",
+    "notEnoughFilms": "Недостаточно фильмов на {langs} для этого - добавь языки или переключись на Все фильмы."
+  },
+  "entity": {
+    "compareButton": "Сравнить {label} с…",
+    "decadeEyebrow": "Осн. {decade}",
+    "decadeLabel": "{decade}-Е",
+    "decadeSubject": "{decade}-е",
+    "genreEyebrow": "Изучение жанра",
+    "kindDecade": "десятилетие",
+    "kindGenre": "жанр",
+    "loadingSpinner": "Загрузка…",
+    "mostSpokenBody": "Простые подсчеты, стоп-слова исключены.",
+    "mostSpokenHeading": "Самые произносимые слова",
+    "notFound": "{kind} “{id}” не найден в наборе данных.",
+    "notableScriptsHeading": "Выдающиеся сценарии",
+    "signatureWordsBody": "О чем {subject} говорит гораздо больше, чем кино в целом.",
+    "signatureWordsHeading": "Характерные слова",
+    "statsLine": "{films} фильмов · {words} слов диалога",
+    "notEnoughFilms": "Недостаточно фильмов на {langs} для {subject} - добавь языки или переключись на Все фильмы."
+  },
+  "eras": {
+    "1910": "первые пленки",
+    "1920": "приход звукового кино",
+    "1930": "золотой век",
+    "1940": "война и нуар",
+    "1950": "атомный век",
+    "1960": "новая волна",
+    "1970": "Новый Голливуд",
+    "1980": "эпоха блокбастеров",
+    "1990": "бум инди-кино",
+    "2000": "годы мультиплексов",
+    "2010": "рассвет стримингов",
+    "2020": "кино сегодня"
+  },
+  "errors": {
+    "body": "Прости за это - {reload} обычно помогает. Все еще сломано? Напиши на {email}.",
+    "eyebrow": "Резкая склейка:",
+    "reload": "перезагрузка",
+    "title": "Что-то сломалось."
+  },
+  "footer": {
+    "creditsBody": "Открытый исходный код: {github} и некоммерческий проект. Публикуется только статистика слов - тексты субтитров не распространяются.",
+    "creditsHeading": "Титры.",
+    "dataBody": "Полный набор данных доступен для скачивания - смотри {dataGuide} для ссылок и инфо ({license}). Интересует методология, предвзятость или авторские права? Читай {faq}.",
+    "dataGuideLink": "руководство по данным",
+    "dataHeading": "Забирай данные.",
+    "dataSourcesBody": "Данные: подсчет слов из {opus} (Lison & Tiedemann, 2016), через {openSubtitles}; метаданные фильмов от {imdbData} и {tmdb}. Информация предоставлена IMDb ({imdbUrl}). Используется с разрешения.",
+    "faqLink": "FAQ",
+    "githubLink": "github.com/beveradb/moviewords",
+    "githubProfileLink": "GitHub",
+    "ideaBody": "Наверняка есть интересные анализы, о которых мы не подумали! Если хочешь поделиться идеей или сделал что-то крутое с данными, {email}",
+    "ideaEmailLink": "напиши на andrew@beveridge.uk",
+    "ideaHeading": "Есть идея?",
+    "imdbDataLink": "IMDb",
+    "imdbUrlLink": "https://www.imdb.com",
+    "instagramLink": "Instagram",
+    "licenseLink": "CC BY-NC-SA 4.0",
+    "lindsayLink": "Lindsay Wright Graphic Design",
+    "linkedinLink": "LinkedIn",
+    "madeByBody": "Сделано Andrew Beveridge - {github} · {linkedin} · {instagram} - оригинальная идея моей любимой жены {lindsay} - зацени ее портфолио!",
+    "openSubtitlesLink": "OpenSubtitles.org",
+    "opusLink": "OPUS OpenSubtitles corpus",
+    "takedownEmailLink": "Написать жалобу",
+    "tmdbDisclaimerBody": "Этот продукт использует TMDB API, но не одобрен и не сертифицирован TMDB. Постеры через TMDB - авторские права принадлежат соответствующим студиям, показаны для идентификации обсуждаемых фильмов. Правообладатель? {takedown} и мы оперативно удалим.",
+    "tmdbLink": "TMDB"
+  },
+  "genres": {
+    "Action": "Боевик",
+    "Adult": "Для взрослых",
+    "Adventure": "Приключения",
+    "Animation": "Анимация",
+    "Biography": "Биография",
+    "Comedy": "Комедия",
+    "Crime": "Криминал",
+    "Documentary": "Документальный",
+    "Drama": "Драма",
+    "Family": "Семейный",
+    "Fantasy": "Фэнтези",
+    "Film-Noir": "Нуар",
+    "History": "История",
+    "Horror": "Ужасы",
+    "Music": "Музыка",
+    "Musical": "Мюзикл",
+    "Mystery": "Детектив",
+    "News": "Новости",
+    "Reality-TV": "Реалити-шоу",
+    "Romance": "Мелодрама",
+    "Sci-Fi": "Фантастика",
+    "Sport": "Спорт",
+    "Thriller": "Триллер",
+    "War": "Военный",
+    "Western": "Вестерн"
+  },
+  "genresView": {
+    "eyebrow": "Искать по",
+    "filmsCount": "{count} фильмов",
+    "loadError": "Не удалось загрузить жанры.",
+    "loadingSpinner": "Загружаем жанры…",
+    "subtitle": "О чем говорит каждый жанр - {count} исследований.",
+    "title": "ЖАНРЫ",
+    "notEnoughFilms": "Недостаточно фильмов на {langs} для этого - добавь языки или переключись на Все фильмы."
+  },
+  "home": {
+    "aboutHeading": "Об этом наборе данных",
+    "decadesBody": "От звукового кино до 2020-х - как говорила каждая эпоха кинематографа.",
+    "decadesHeading": "Прогулка по десятилетиям",
+    "fadeIn": "Из затемнения:",
+    "faqLink": "FAQ",
+    "heroBody": "Мы подсчитали каждое слово, произнесенное в {count} фильмах - {millions} миллионов слов. Смотри {trends}, встречай {sweariest} и решай {versus} слово за словом.",
+    "heroSweariest": "самый матерный сценарий в истории",
+    "heroTitle": "У каждого фильма есть свой {vocabulary}.",
+    "heroTrends": "как 'awesome' обгоняет 'swell'",
+    "heroVersus": "Чужой против Чужих",
+    "heroVocabulary": "словарный запас",
+    "movieMeta": "{year} · {words} слов",
+    "opusLink": "OPUS OpenSubtitles corpus",
+    "shelfHeading": "Возьми сценарий с полки",
+    "aboutBody": "Охватывает {count} - каждое слово из диалогов в субтитрах из {opus} для фильмов с минимум 300 голосами на IMDb, подсчитано для каждого фильма. Публикуется только статистика слов; тексты субтитров не распространяются. Методология и нюансы: {faq}.",
+    "aboutCountAllFilms": "фильмов - включая переведенные субтитры",
+    "aboutCountLangFilms": "фильмов на {langs}",
+    "aboutCountTemplate": "{count} {kind}",
+    "aboutCountUnknown": "десятки тысяч",
+    "aboutSubtitleHint": "Эти подсчеты сделаны по английским субтитрам фильмов, а не по их оригинальным диалогам."
+  },
+  "leaderboard": {
+    "tabs": {
+      "everywhere": "Говорят в каждом фильме",
+      "films": "Кинорекорды",
+      "overview": "Обзор",
+      "shifts": "Взлеты и падения",
+      "wonders": "Чудеса одного фильма",
+      "words": "Топ слов"
+    },
+    "words": {
+      "allGenresOption": "Все жанры",
+      "filmsCount": " · {count} фильмов",
+      "filteringSpinner": "Фильтруем корпус… (первый запрос с фильтром загружает движок аналитики)",
+      "fromLabel": "От",
+      "genreLabel": "Жанр",
+      "intro": "Самые произносимые слова во всех фильмах корпуса.",
+      "noMatches": "Нет слов, подходящих под эти фильтры - попробуй “все слова” или “любой тип”.",
+      "rankByLabel": "Сортировать по",
+      "sortMovieishButton": "самые киношные",
+      "sortMovieishTitle": "Оценивает каждое слово по тому, насколько чаще его говорят в кино, чем в повседневном английском",
+      "sortSpokenButton": "самые произносимые",
+      "toLabel": "До"
+    },
+    "languageNote": "Основано на {count} фильмах на {langs}, подсчитано по их английским субтитрам."
+  },
+  "movie": {
+    "compareButton": "Сравнить с другим фильмом",
+    "decadeLinkTitle": "Больше из {decade}-х",
+    "distinctWordsLabel": "Уникальные слова",
+    "genreSeparator": " / ",
+    "imdbRatingLabel": "Рейтинг IMDb",
+    "loadingScript": "Загружаем сценарий…",
+    "mostSpokenHeading": "Самые произносимые слова",
+    "notFound": "Фильм с id “{id}” не найден в наборе данных.",
+    "signatureWordsBody": "Слова, которые этот фильм использует гораздо чаще, чем кино в целом (логарифм шансов по сравнению со всем корпусом).",
+    "signatureWordsHeading": "Характерные слова",
+    "slugTitle": "{title} - {year}",
+    "vocabRichnessLabel": "Богатство словаря",
+    "wordsSpokenLabel": "Произнесено слов"
+  },
+  "themeToggle": {
+    "day": "ДЕНЬ",
+    "dayShoot": "Дневная съемка",
+    "night": "НОЧЬ",
+    "nightShoot": "Ночная съемка",
+    "switchToDay": "Переключить на дневной режим",
+    "switchToNight": "Переключить на ночной режим"
+  },
+  "trends": {
+    "addAnotherWordPlaceholder": "Добавить еще слово…",
+    "bigMovers": "Сильные сдвиги с 1930-х",
+    "chartItButton": "Построить график",
+    "chartedWordsAriaLabel": "Слова на графике",
+    "featuredPrefix": "Рекомендуем: {title}",
+    "firstWordPlaceholder": "Введи слово, например, love",
+    "fullList": "полный список →",
+    "intro": "Как часто слово произносится во всех фильмах корпуса, на миллион слов диалога, по году выпуска.",
+    "navNoun": "тренд",
+    "navSuffix": "новый сдвиг каждый день",
+    "notEnoughData": "Недостаточно данных для: {words} (нужно ≥20 использований по всему корпусу, в годы с достаточным количеством фильмов).",
+    "perThousandWords": " · {rate}/1тыс слов",
+    "queryingCorpus": "Опрашиваем корпус…",
+    "removeWordTitle": "Удалить “{word}”",
+    "topFilmByYearHeading": "Топ фильм для “{word}” по годам",
+    "topFilmByYearLoading": "Ищем топ фильм для “{word}” по годам…",
+    "topFilmsHeading": "Фильмы, где чаще всего говорят “{word}”",
+    "topFilmsLoading": "Ищем фильмы, где чаще всего говорят “{word}”…",
+    "trimmedYearsNote": "{years} скрыто - слишком мало фильмов в корпусе для надежной статистики",
+    "tryClassic": "Или попробуй классику:",
+    "usesPerMillionWords": "использований на миллион слов диалога",
+    "wordDetailsTablist": "Детали слова",
+    "wordInputAriaLabel": "Слово для графика",
+    "yAxisLabel": "использований на миллион слов",
+    "languageNote": "Основано на {count} фильмах на {langs}, подсчитано по их английским субтитрам.",
+    "notEnoughFilms": "Недостаточно фильмов на {langs} для этого тренда - добавь языки или переключись на Все фильмы."
+  },
+  "languageFilter": {
+    "allFilms": "Все фильмы",
+    "apply": "Применить",
+    "ariaLabel": "Фильтровать фильмы по языку оригинала",
+    "countLabel": "{count} языков",
+    "hint": "Фильтрует по оригинальному языку фильма; подсчет слов ведется по английским субтитрам.",
+    "menuAriaLabel": "Оригинальный язык",
+    "searchAriaLabel": "Поиск языков",
+    "searchPlaceholder": "Поиск языков…"
+  },
+  "localeFilterHint": {
+    "dismissAriaLabel": "Скрыть",
+    "filterButton": "Фильтр",
+    "message": "Смотришь на {lang}? Отфильтруй фильмы на {lang}."
+  },
+  "modal": {
+    "closeAriaLabel": "Закрыть"
+  },
+  "filterExplainer": {
+    "badgeLabel": "переведено · {lang}",
+    "badgeTitle": "Оригинальный язык {lang} - подсчеты ведутся по английским субтитрам. Как это работает?",
+    "dialogueNote": "Диалогов на языке оригинала нет в наборе данных - только английский перевод.",
+    "englishSubtitles": "английских субтитров",
+    "englishTranslation": "английского перевода",
+    "filteringBody": "{whatFiltering} {originalLanguage} фильма - где он был снят, из метаданных TMDB - а не язык слов ниже.",
+    "linkText": "Как это работает?",
+    "modalTitle": "Как это работает",
+    "origin": "происхождения",
+    "originalLanguage": "оригинальный язык",
+    "soSpanishMeans": "Так что \"Испанский\" означает",
+    "spanishBody": "{soSpanishMeans} словарный запас английских субтитров кино испанского {origin} - как слова вроде \"solidarity\" или \"dictatorship\" появляются в английских сабах испанских фильмов - а не сами испанские слова.",
+    "whatFiltering": "Что ты фильтруешь:",
+    "whatWords": "Что это за слова:",
+    "wordsBody": "{whatWords} каждый подсчет на Movie Words берется из {englishSubtitles} фильма. У нас есть только английская дорожка OpenSubtitles, поэтому для неанглоязычного фильма это слова его {englishTranslation}, а не оригинальные диалоги. Вот почему иногда проскакивают непереведенные слова - \"panna\", \"cotta\", \"samurai\"."
+  }
+}

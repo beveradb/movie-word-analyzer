@@ -1,0 +1,403 @@
+{
+  "compare": {
+    "orLabel": "또는",
+    "addDecadeAriaLabel": "연대 추가",
+    "addDecadeOption": "연대 추가…",
+    "addFilmPlaceholder": "영화 추가…",
+    "addGenreAriaLabel": "장르 추가",
+    "addGenreOption": "장르 추가…",
+    "decadeLabel": "{decade}년대",
+    "decadeOptionLabel": "{decade}년대",
+    "distinctWordsLabel": "고유 단어",
+    "featuredMatchupPrefix": "주요 대결: {title}",
+    "filmsLabel": "영화",
+    "filmsPerYearLabel": "연간 영화 수",
+    "filmsPerYearTitle": "이 말뭉치 부분의 개봉 연도별 영화 수",
+    "fullBreakdownLink": "전체 분석 →",
+    "headToHeadHeading": "정면 대결",
+    "introBody": "영화, 연대, 장르를 나란히 비교해 보세요 - 어떤 조합이든 최대 3개까지 가능합니다.",
+    "loadingLabel": "불러오는 중…",
+    "movieLabel": "{title} - {year}",
+    "navNoun": "대결",
+    "navSuffix": "매일 변경됩니다 - 또는 위에서 직접 만들어 보세요",
+    "noStandoutWords": "눈에 띄는 단어 없음",
+    "nothingFoundMessage": "선택한 항목에 대한 결과가 없습니다.",
+    "pickFilmPlaceholder": "영화 선택…",
+    "ratioMoreLabel": "{ratio}배 더 많음",
+    "removeButton": "제거",
+    "sharedSignatureWordsHeading": "공통 시그니처 단어",
+    "signatureWordsHeading": "시그니처 단어 {note}",
+    "signatureWordsHighlightedNote": "(강조됨 = 공통)",
+    "swearsPer1kLabel": "1천 단어당 욕설",
+    "wordsPerFilmLabel": "영화당 단어",
+    "wordsSpokenLabel": "사용된 단어",
+    "headToHeadIntroMany": "각각이 나머지보다 유독 더 많이 쓰는 단어 - 자체 대사 100만 단어당 비율.",
+    "headToHeadIntroPair": "각각이 상대보다 유독 더 많이 쓰는 단어 - 자체 대사 100만 단어당 비율."
+  },
+  "languageSwitcher": {
+    "current": "언어",
+    "label": "언어 선택"
+  },
+  "nav": {
+    "sectionsLabel": "섹션",
+    "compare": "비교",
+    "decades": "연대",
+    "explore": "탐색",
+    "genres": "장르",
+    "leaderboard": "리더보드",
+    "trends": "트렌드"
+  },
+  "pos": {
+    "other": "기타",
+    "a": "형용사",
+    "adjective": "형용사",
+    "adverb": "부사",
+    "n": "명사",
+    "noun": "명사",
+    "r": "부사",
+    "v": "동사",
+    "verb": "동사",
+    "x": "이름 및 기타"
+  },
+  "ui": {
+    "errorBox": {
+      "retryButton": "다시 시도",
+      "heading": "장면 누락"
+    },
+    "featuredNav": {
+      "nextAriaLabel": "다음 추천 {noun}",
+      "position": "{len} 중 {idx}",
+      "prevAriaLabel": "이전 추천 {noun}"
+    },
+    "highlightWord": {
+      "spokenTimes": "{count}번 사용됨",
+      "title": "“{word}” - {display}"
+    },
+    "movieSearch": {
+      "ariaLabel": "영화 검색",
+      "placeholder": "영화 제목 검색…"
+    },
+    "poster": {
+      "alt": "{title} 포스터"
+    },
+    "seriesLegend": {
+      "exploreTitle": "“{word}” 탐색"
+    },
+    "slug": {
+      "defaultPrefix": "실내."
+    },
+    "wordFilterBar": {
+      "allButton": "모든 단어",
+      "anyKindButton": "모든 종류",
+      "commonnessAriaLabel": "단어 빈도",
+      "hidingDescription": "일상 영어 숨기기 - 가장 흔한 약 2,000개 단어 (the, know, get…)",
+      "interestingButton": "흥미로운 단어",
+      "onlyKindsSuffix": " · {kinds}만",
+      "showingDescription": "일상 영어를 포함한 모든 단어 표시"
+    }
+  },
+  "boards": {
+    "films": {
+      "chattiestBlurb": "상영 시간 분당 가장 많은 단어",
+      "chattiestFmt": "분당 {v}단어",
+      "chattiestTitle": "가장 말이 빠른 영화",
+      "intro": "말뭉치의 기록 보유자들 - 4가지 극단적인 대본 카테고리입니다.",
+      "loadingSpinner": "영화 최고 기록 불러오는 중…",
+      "repetitiveBlurb": "고유 단어 비율이 가장 낮은 영화",
+      "repetitiveFmt": "고유 단어 {v}%",
+      "repetitiveTitle": "가장 반복적인 대본",
+      "sweariestBlurb": "1,000단어당 욕설 수",
+      "sweariestFmt": "1천 단어당 {v}번",
+      "sweariestTitle": "가장 욕설이 많은 대본",
+      "vocabularyBlurb": "한 대본에서 가장 많은 고유 단어 사용",
+      "vocabularyFmt": "{v}단어",
+      "vocabularyTitle": "가장 방대한 어휘"
+    },
+    "overview": {
+      "adjectivesBlurb": "가장 많이 쓰인 흥미로운 형용사",
+      "adjectivesTitle": "영화의 형용사",
+      "fallingBlurb": "초기 영화보다 현재 훨씬 덜 쓰이는 단어",
+      "intro": "말뭉치의 헤드라인 - 모든 보드의 상위 5개입니다. 카드를 클릭해 전체 목록, 필터 등을 확인해 보세요.",
+      "loadingSpinner": "헤드라인 불러오는 중…",
+      "risingBlurb": "초기 영화보다 현재 훨씬 더 많이 쓰이는 단어",
+      "ubiquityBlurb": "거의 모든 대본에 등장하는 단어",
+      "wondersBlurb": "한 영화가 독점한 단어"
+    },
+    "ratio": {
+      "down": "{label}배 감소",
+      "up": "{label}배 증가"
+    },
+    "shifts": {
+      "fallingTitle": "페이드 아웃",
+      "intro": "대사의 변화: 초기 영화(1930s–40s)보다 현재(2010s–20s) 백만 단어당 훨씬 더 많이(또는 적게) 쓰이는 단어들입니다. 선은 각 연대를 나타냅니다. 단어를 클릭해 전체 차트를 확인하세요.",
+      "loadingSpinner": "변화 불러오는 중…",
+      "risingTitle": "상승 중"
+    },
+    "taster": {
+      "seeAllLink": "모두 보기 →"
+    },
+    "ubiquity": {
+      "intro": "단순한 접속사를 넘어, 이 단어들은 {nFilms}편의 영화 중 거의 모든 영화에 등장합니다.",
+      "loadingSpinner": "불러오는 중…",
+      "shareOfFilms": "영화의 {share}%"
+    },
+    "wonders": {
+      "intro": "다른 모든 영화를 합친 것보다 한 영화에서 더 많이 쓰인 단어들 - 캐릭터 이름, 만들어진 단어, 집착하는 단어들입니다.",
+      "item": "{movieLink} ({year})에서 {count}번 사용 - 전체 영화 등장 횟수의 {share}%",
+      "loadingSpinner": "한 영화 독점 단어 불러오는 중…"
+    }
+  },
+  "chart": {
+    "axisAriaLabel": "연도별 {yLabel}",
+    "chartingSpinner": "주요 변화 차트 그리는 중…",
+    "loadFailedMessage": "이 차트를 그릴 수 없습니다 - 다음을 시도해 보세요 ▶",
+    "moreTrendsLink": "더 많은 트렌드 →",
+    "trendNoun": "트렌드",
+    "unpinAriaLabel": "{year}년 고정 해제",
+    "usesPerMillionCaption": "대사 백만 단어당 사용 횟수",
+    "yAxisLabel": "백만 단어당 사용 횟수"
+  },
+  "decadesView": {
+    "decadeLabel": "{decade}년대",
+    "eyebrow": "탐색 기준",
+    "filmsCount": "영화 {count}편",
+    "loadError": "연대를 불러올 수 없습니다.",
+    "loadingSpinner": "연대 불러오는 중…",
+    "subtitle": "각 영화 시대의 대화 방식 - {count}개의 연구.",
+    "title": "연대",
+    "notEnoughFilms": "이 항목을 위한 {langs} 영화가 충분하지 않습니다 - 언어를 추가하거나 모든 영화로 전환하세요."
+  },
+  "entity": {
+    "compareButton": "{label} 비교하기…",
+    "decadeEyebrow": "{decade}년대 추정",
+    "decadeLabel": "{decade}년대",
+    "decadeSubject": "{decade}년대",
+    "genreEyebrow": "장르 연구",
+    "kindDecade": "연대",
+    "kindGenre": "장르",
+    "loadingSpinner": "불러오는 중…",
+    "mostSpokenBody": "불용어를 제외한 단순 빈도수입니다.",
+    "mostSpokenHeading": "가장 많이 쓰인 단어",
+    "notFound": "데이터셋에 “{id}” {kind}이(가) 없습니다.",
+    "notableScriptsHeading": "주목할 만한 대본",
+    "signatureWordsBody": "전체 영화보다 {subject}에서 훨씬 더 많이 이야기하는 단어입니다.",
+    "signatureWordsHeading": "시그니처 단어",
+    "statsLine": "영화 {films}편 · 대사 {words}단어",
+    "notEnoughFilms": "{subject}에 대한 {langs} 영화가 충분하지 않습니다 - 언어를 추가하거나 모든 영화로 전환하세요."
+  },
+  "eras": {
+    "1910": "최초의 릴",
+    "1920": "유성 영화의 등장",
+    "1930": "황금기",
+    "1940": "전쟁과 필름 느와르",
+    "1950": "원자력 시대",
+    "1960": "누벨바그",
+    "1970": "뉴 할리우드",
+    "1980": "블록버스터 시대",
+    "1990": "인디 붐",
+    "2000": "멀티플렉스 시대",
+    "2010": "스트리밍의 여명",
+    "2020": "현재의 영화"
+  },
+  "errors": {
+    "body": "죄송합니다 - 보통 {reload}하면 해결됩니다. 여전히 문제가 있나요? {email}로 이메일을 보내주세요.",
+    "eyebrow": "스매시 컷:",
+    "reload": "새로고침",
+    "title": "문제가 발생했습니다."
+  },
+  "footer": {
+    "creditsBody": "오픈 소스: {github} 및 비상업적 용도. 파생된 단어 빈도수만 게시되며 - 자막 텍스트는 재배포되지 않습니다.",
+    "creditsHeading": "크레딧.",
+    "dataBody": "전체 데이터셋을 다운로드할 수 있습니다 - 링크 및 정보는 {dataGuide}를 참조하세요 ({license}). 방법론, 편향성 또는 저작권이 궁금하신가요? {faq}를 읽어보세요.",
+    "dataGuideLink": "데이터 가이드",
+    "dataHeading": "데이터 가져오기.",
+    "dataSourcesBody": "데이터: {openSubtitles}를 통한 {opus} (Lison & Tiedemann, 2016)의 단어 빈도수; {imdbData} 및 {tmdb}의 영화 메타데이터. 정보 제공: IMDb ({imdbUrl}). 허가 하에 사용됨.",
+    "faqLink": "FAQ",
+    "githubLink": "github.com/beveradb/moviewords",
+    "githubProfileLink": "GitHub",
+    "ideaBody": "우리가 미처 생각하지 못한 흥미로운 분석이 있을 겁니다! 아이디어를 공유하고 싶거나 데이터로 멋진 것을 만들었다면, {email}",
+    "ideaEmailLink": "andrew@beveridge.uk로 이메일 보내기",
+    "ideaHeading": "아이디어가 있으신가요?",
+    "imdbDataLink": "IMDb",
+    "imdbUrlLink": "https://www.imdb.com",
+    "instagramLink": "Instagram",
+    "licenseLink": "CC BY-NC-SA 4.0",
+    "lindsayLink": "Lindsay Wright Graphic Design",
+    "linkedinLink": "LinkedIn",
+    "madeByBody": "제작: Andrew Beveridge - {github} · {linkedin} · {instagram} - 오리지널 아이디어: 사랑하는 아내 {lindsay} - 그녀의 포트폴리오를 확인해 보세요!",
+    "openSubtitlesLink": "OpenSubtitles.org",
+    "opusLink": "OPUS OpenSubtitles 말뭉치",
+    "takedownEmailLink": "게시 중단 이메일 보내기",
+    "tmdbDisclaimerBody": "이 제품은 TMDB API를 사용하지만 TMDB가 보증하거나 인증하지 않았습니다. 포스터는 TMDB 제공 - 저작권은 각 스튜디오에 있으며, 논의되는 영화를 식별하기 위해 표시됩니다. 권리자이신가요? {takedown}하시면 즉시 삭제됩니다.",
+    "tmdbLink": "TMDB"
+  },
+  "genres": {
+    "Action": "액션",
+    "Adult": "성인",
+    "Adventure": "어드벤처",
+    "Animation": "애니메이션",
+    "Biography": "전기",
+    "Comedy": "코미디",
+    "Crime": "범죄",
+    "Documentary": "다큐멘터리",
+    "Drama": "드라마",
+    "Family": "가족",
+    "Fantasy": "판타지",
+    "Film-Noir": "필름 느와르",
+    "History": "역사",
+    "Horror": "공포",
+    "Music": "음악",
+    "Musical": "뮤지컬",
+    "Mystery": "미스터리",
+    "News": "뉴스",
+    "Reality-TV": "리얼리티 TV",
+    "Romance": "로맨스",
+    "Sci-Fi": "SF",
+    "Sport": "스포츠",
+    "Thriller": "스릴러",
+    "War": "전쟁",
+    "Western": "서부극"
+  },
+  "genresView": {
+    "eyebrow": "탐색 기준",
+    "filmsCount": "영화 {count}편",
+    "loadError": "장르를 불러올 수 없습니다.",
+    "loadingSpinner": "장르 불러오는 중…",
+    "subtitle": "각 장르가 이야기하는 것 - {count}개의 연구.",
+    "title": "장르",
+    "notEnoughFilms": "이 항목을 위한 {langs} 영화가 충분하지 않습니다 - 언어를 추가하거나 모든 영화로 전환하세요."
+  },
+  "home": {
+    "aboutHeading": "이 데이터셋에 대하여",
+    "decadesBody": "유성 영화부터 2020년대까지 - 각 영화 시대의 대화 방식.",
+    "decadesHeading": "연대별 탐색",
+    "fadeIn": "페이드 인:",
+    "faqLink": "FAQ",
+    "heroBody": "우리는 {count}편의 영화에서 쓰인 모든 단어를 세었습니다 - 무려 {millions}백만 개에 달하죠. {trends}를 지켜보고, {sweariest}를 만나고, 단어별로 {versus}를 판가름해 보세요.",
+    "heroSweariest": "역대 가장 욕설이 많은 대본",
+    "heroTitle": "모든 영화에는 {vocabulary}가 있습니다.",
+    "heroTrends": "'awesome'이 'swell'을 추월하는",
+    "heroVersus": "에이리언 대 에이리언 2",
+    "heroVocabulary": "어휘",
+    "movieMeta": "{year}년 · {words}단어",
+    "opusLink": "OPUS OpenSubtitles 말뭉치",
+    "shelfHeading": "선반에서 대본 꺼내기",
+    "aboutBody": "{count}편을 다룹니다 - 최소 300개의 IMDb 투표를 받은 영화에 대해 {opus}의 자막 대사 모든 단어를 영화별로 계산했습니다. 단어 빈도수만 게시되며, 자막 텍스트는 재배포되지 않습니다. 방법론 및 주의 사항: {faq}.",
+    "aboutCountAllFilms": "영화 - 번역된 자막 포함",
+    "aboutCountLangFilms": "{langs} 영화",
+    "aboutCountTemplate": "{count} {kind}",
+    "aboutCountUnknown": "수만 편의",
+    "aboutSubtitleHint": "이 단어 수는 영화의 원어 대사가 아닌 영어 자막에서 가져온 것입니다."
+  },
+  "leaderboard": {
+    "tabs": {
+      "everywhere": "모든 영화에서 쓰인 단어",
+      "films": "영화 최고 기록",
+      "overview": "개요",
+      "shifts": "상승 및 하락 단어",
+      "wonders": "한 영화 독점 단어",
+      "words": "인기 단어"
+    },
+    "words": {
+      "allGenresOption": "모든 장르",
+      "filmsCount": " · 영화 {count}편",
+      "filteringSpinner": "말뭉치 필터링 중… (첫 번째 필터링된 쿼리는 분석 엔진을 로드합니다)",
+      "fromLabel": "시작",
+      "genreLabel": "장르",
+      "intro": "말뭉치 내 모든 영화에서 가장 많이 쓰인 단어입니다.",
+      "noMatches": "이 필터와 일치하는 단어가 없습니다 - “모든 단어” 또는 “모든 종류”를 시도해 보세요.",
+      "rankByLabel": "순위 기준",
+      "sortMovieishButton": "가장 영화다운",
+      "sortMovieishTitle": "일상 영어보다 영화에서 얼마나 더 많이 쓰이는지에 따라 각 단어에 가중치를 부여합니다",
+      "sortSpokenButton": "가장 많이 쓰인",
+      "toLabel": "끝"
+    },
+    "languageNote": "{count}편의 {langs} 영화를 바탕으로 영어 자막에서 측정되었습니다."
+  },
+  "movie": {
+    "compareButton": "다른 영화와 비교하기",
+    "decadeLinkTitle": "{decade}년대 더 보기",
+    "distinctWordsLabel": "고유 단어",
+    "genreSeparator": " / ",
+    "imdbRatingLabel": "IMDb 평점",
+    "loadingScript": "대본 불러오는 중…",
+    "mostSpokenHeading": "가장 많이 쓰인 단어",
+    "notFound": "데이터셋에 ID가 “{id}”인 영화가 없습니다.",
+    "signatureWordsBody": "이 영화가 전체 영화보다 훨씬 더 많이 사용하는 단어입니다 (전체 말뭉치 대비 로그 오즈).",
+    "signatureWordsHeading": "시그니처 단어",
+    "slugTitle": "{title} - {year}",
+    "vocabRichnessLabel": "어휘 풍부도",
+    "wordsSpokenLabel": "사용된 단어"
+  },
+  "themeToggle": {
+    "day": "주간",
+    "dayShoot": "주간 촬영",
+    "night": "야간",
+    "nightShoot": "야간 촬영",
+    "switchToDay": "주간 모드로 전환",
+    "switchToNight": "야간 모드로 전환"
+  },
+  "trends": {
+    "addAnotherWordPlaceholder": "다른 단어 추가…",
+    "bigMovers": "1930년대 이후 큰 변화",
+    "chartItButton": "차트 그리기",
+    "chartedWordsAriaLabel": "차트로 그려진 단어",
+    "featuredPrefix": "추천: {title}",
+    "firstWordPlaceholder": "단어를 입력하세요, 예: love",
+    "fullList": "전체 목록 →",
+    "intro": "개봉 연도별로 말뭉치 내 모든 영화에서 대사 백만 단어당 단어가 얼마나 자주 쓰이는지 보여줍니다.",
+    "navNoun": "트렌드",
+    "navSuffix": "매일 새로운 변화",
+    "notEnoughData": "{words}에 대한 데이터가 부족합니다 (말뭉치 전체에서 20번 이상 사용되어야 하며, 영화 수가 충분한 연도여야 합니다).",
+    "perThousandWords": " · 1천 단어당 {rate}번",
+    "queryingCorpus": "말뭉치 쿼리 중…",
+    "removeWordTitle": "“{word}” 제거",
+    "topFilmByYearHeading": "연도별 “{word}” 최고 영화",
+    "topFilmByYearLoading": "연도별 “{word}” 최고 영화 찾는 중…",
+    "topFilmsHeading": "“{word}”을(를) 가장 많이 사용하는 영화",
+    "topFilmsLoading": "“{word}”을(를) 가장 많이 사용하는 영화 찾는 중…",
+    "trimmedYearsNote": "{years}년 숨김 - 말뭉치에 영화가 너무 적어 신뢰할 수 없는 비율입니다",
+    "tryClassic": "또는 클래식을 시도해 보세요:",
+    "usesPerMillionWords": "대사 백만 단어당 사용 횟수",
+    "wordDetailsTablist": "단어 세부 정보",
+    "wordInputAriaLabel": "차트에 그릴 단어",
+    "yAxisLabel": "백만 단어당 사용 횟수",
+    "languageNote": "{count}편의 {langs} 영화를 바탕으로 영어 자막에서 측정되었습니다.",
+    "notEnoughFilms": "이 트렌드를 위한 {langs} 영화가 충분하지 않습니다 - 언어를 추가하거나 모든 영화로 전환하세요."
+  },
+  "languageFilter": {
+    "allFilms": "모든 영화",
+    "apply": "적용",
+    "ariaLabel": "원어로 영화 필터링",
+    "countLabel": "{count}개 언어",
+    "hint": "영화의 원어를 기준으로 필터링합니다; 단어 수는 영어 자막에서 가져옵니다.",
+    "menuAriaLabel": "원어",
+    "searchAriaLabel": "언어 검색",
+    "searchPlaceholder": "언어 검색…"
+  },
+  "localeFilterHint": {
+    "dismissAriaLabel": "닫기",
+    "filterButton": "필터",
+    "message": "{lang}로 보고 계신가요? {lang} 영화로 필터링하세요."
+  },
+  "modal": {
+    "closeAriaLabel": "닫기"
+  },
+  "filterExplainer": {
+    "badgeLabel": "번역됨 · {lang}",
+    "badgeTitle": "원어 {lang} - 단어 수는 영어로 번역된 자막에서 가져옵니다. 어떻게 작동하나요?",
+    "dialogueNote": "원어 대사는 데이터셋에 없습니다 - 영어 번역만 있습니다.",
+    "englishSubtitles": "영어 자막",
+    "englishTranslation": "영어 번역",
+    "filteringBody": "{whatFiltering} 영화의 {originalLanguage} - TMDB 메타데이터를 기반으로 한 제작 국가이며, 아래에 표시된 단어들의 언어가 아닙니다.",
+    "linkText": "어떻게 작동하나요?",
+    "modalTitle": "작동 방식",
+    "origin": "제작",
+    "originalLanguage": "원어",
+    "soSpanishMeans": "따라서 \"스페인어\"란",
+    "spanishBody": "{soSpanishMeans} 스페인 {origin} 영화의 영어 자막 어휘를 의미합니다 - 스페인어 단어가 아니라, 스페인 영화의 영어 자막에서 \"solidarity\"나 \"dictatorship\" 같은 단어가 어떻게 나타나는지를 보여줍니다.",
+    "whatFiltering": "필터링 대상:",
+    "whatWords": "단어의 출처:",
+    "wordsBody": "{whatWords} Movie Words의 모든 단어 수는 영화의 {englishSubtitles}에서 가져옵니다. 영어 OpenSubtitles 트랙만 보유하고 있으므로, 비영어권 영화의 경우 원어 대사가 아닌 {englishTranslation}의 단어들입니다. 그렇기 때문에 가끔 \"panna\", \"cotta\", \"samurai\"처럼 번역되지 않은 단어가 섞여 들어오기도 합니다."
+  }
+}

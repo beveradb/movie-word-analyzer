@@ -7,6 +7,7 @@ import { FeaturedChart } from '../components/FeaturedChart'
 import { ExplainerLink } from '../components/FilterExplainer'
 import { EraMotif } from '../components/motifs'
 import { activeLanguages, languageName } from '../lib/languages'
+import { useI18n } from '../i18n'
 
 const HOME_DECADES = ['1930', '1950', '1970', '1990', '2010']
 
@@ -19,24 +20,29 @@ const heroLink = (href: string, label: string) => (
 /** Hero: the pitch on the left, the product on the right - a live featured
  * trend chart doing the explaining for anyone who won't read or scroll. */
 function Hero({ count, words }: { count: number; words: number }) {
+  const { t, tn, n } = useI18n()
   return (
     <div className="mt-8 grid items-start gap-8 sm:mt-12 lg:grid-cols-2">
       <div>
-        <p className="font-script text-sm uppercase tracking-widest text-ink-2">Fade in:</p>
+        <p className="font-script text-sm uppercase tracking-widest text-ink-2">{t('home.fadeIn')}</p>
         <h1 className="mt-3 max-w-2xl font-script text-4xl font-bold leading-tight sm:text-5xl">
-          Every film has a<br />
-          <span className="hl">
-            <span className="hl-mark" style={{ width: 'calc(100% + 0.3em)' }} />
-            <span className="hl-word">vocabulary</span>
-          </span>
-          .
+          {tn('home.heroTitle', {
+            vocabulary: (
+              <span className="hl">
+                <span className="hl-mark" style={{ width: 'calc(100% + 0.3em)' }} />
+                <span className="hl-word">{t('home.heroVocabulary')}</span>
+              </span>
+            ),
+          })}
         </h1>
         <p className="mt-4 max-w-xl text-ink-2">
-          We counted every word spoken in {count ? count.toLocaleString() : '18,000+'} films -{' '}
-          {words ? Math.round(words / 1e6).toLocaleString() : '126'} million of them. Watch{' '}
-          {heroLink('#/trends?w=awesome,swell', "'awesome' overtake 'swell'")}, meet{' '}
-          {heroLink('#/leaderboard?b=films', 'the sweariest script ever made')}, and settle{' '}
-          {heroLink('#/compare?e=tt0078748,tt0090605', 'Alien vs Aliens')} word by word.
+          {tn('home.heroBody', {
+            count: n(count || 18000),
+            millions: n(words ? Math.round(words / 1e6) : 126),
+            trends: heroLink('#/trends?w=awesome,swell', t('home.heroTrends')),
+            sweariest: heroLink('#/leaderboard?b=films', t('home.heroSweariest')),
+            versus: heroLink('#/compare?e=tt0078748,tt0090605', t('home.heroVersus')),
+          })}
         </p>
         <div className="mt-6 max-w-md">
           <MovieSearch onPick={(m) => navigate(`/movie/${m.id}`)} />
@@ -48,6 +54,7 @@ function Hero({ count, words }: { count: number; words: number }) {
 }
 
 export function HomeView() {
+  const { t, tn, n, locale } = useI18n()
   const [featured, setFeatured] = useState<MovieIndexEntry[]>([])
   const [count, setCount] = useState(0)
   const [words, setWords] = useState(0)
@@ -74,19 +81,19 @@ export function HomeView() {
 
       {featured.length > 0 && (
         <section className="mt-10">
-          <h2 className="slug border-b-2 border-ink pb-1 text-sm">Pull a script off the shelf</h2>
+          <h2 className="slug border-b-2 border-ink pb-1 text-sm">{t('home.shelfHeading')}</h2>
           <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
             {featured.map((m) => (
               <button
                 key={m.id}
                 onClick={() => navigate(`/movie/${m.id}`)}
-                className="border-2 border-ink bg-card text-left transition-transform hover:-translate-y-0.5 hover:shadow-[4px_4px_0_0_var(--color-ink)]"
+                className="border-2 border-ink bg-card text-start transition-transform hover:-translate-y-0.5 hover:shadow-[4px_4px_0_0_var(--color-ink)]"
               >
                 <Poster id={m.id} title={m.title} className="w-full border-b-2 border-ink" />
                 <div className="p-2.5">
                   <div className="line-clamp-2 font-script text-sm font-bold leading-snug">{m.title}</div>
                   <div className="mt-1 text-xs text-ink-2">
-                    {m.year} · {m.total_words.toLocaleString()} words
+                    {t('home.movieMeta', { year: m.year, words: n(m.total_words) })}
                   </div>
                 </div>
               </button>
@@ -101,10 +108,8 @@ export function HomeView() {
           className="flex flex-wrap items-center justify-between gap-4 border-2 border-ink bg-card p-4 transition-transform hover:-translate-y-0.5 hover:shadow-[4px_4px_0_0_var(--color-ink)]"
         >
           <div>
-            <h2 className="slug text-sm">Wander the decades</h2>
-            <p className="mt-1 text-sm text-ink-2">
-              From the talkies to the 2020s - how each era of cinema talked.
-            </p>
+            <h2 className="slug text-sm">{t('home.decadesHeading')}</h2>
+            <p className="mt-1 text-sm text-ink-2">{t('home.decadesBody')}</p>
           </div>
           <div className="flex items-center gap-3 text-ink-3">
             {HOME_DECADES.map((d, i) => (
@@ -116,33 +121,37 @@ export function HomeView() {
       </section>
 
       <section className="mt-10 border-2 border-ink bg-paper-2 p-4 text-sm text-ink-2">
-        <p className="font-script font-bold uppercase text-ink">About this dataset</p>
+        <p className="font-script font-bold uppercase text-ink">{t('home.aboutHeading')}</p>
         <p className="mt-1">
-          Covering{' '}
-          <strong>
-            {count ? count.toLocaleString() : 'tens of thousands of'}{' '}
-            {activeLanguages().length === 0
-              ? 'films - translated subtitles included'
-              : `${activeLanguages().map((c) => languageName(c)).join(', ')}-language films`}
-          </strong>{' '}
-          - every word of subtitle dialogue from the{' '}
-          <a className="underline" href="https://opus.nlpl.eu/datasets/OpenSubtitles">
-            OPUS OpenSubtitles corpus
-          </a>{' '}
-          for movies with at least 300 IMDb votes, counted per film. Only word counts are published; no subtitle
-          text is redistributed. Methodology and caveats:{' '}
-          <a
-            className="underline"
-            href="https://github.com/beveradb/moviewords/blob/main/docs/FAQ.md"
-          >
-            the FAQ
-          </a>
-          .
+          {tn('home.aboutBody', {
+            count: (
+              <strong>
+                {t('home.aboutCountTemplate', {
+                  count: count ? n(count) : t('home.aboutCountUnknown'),
+                  kind:
+                    activeLanguages().length === 0
+                      ? t('home.aboutCountAllFilms')
+                      : t('home.aboutCountLangFilms', {
+                          langs: activeLanguages().map((c) => languageName(c, locale)).join(', '),
+                        }),
+                })}
+              </strong>
+            ),
+            opus: (
+              <a className="underline" href="https://opus.nlpl.eu/datasets/OpenSubtitles">
+                {t('home.opusLink')}
+              </a>
+            ),
+            faq: (
+              <a className="underline" href="https://github.com/beveradb/moviewords/blob/main/docs/FAQ.md">
+                {t('home.faqLink')}
+              </a>
+            ),
+          })}
         </p>
         {activeLanguages().length > 0 && (
           <p className="mt-2">
-            These counts come from the films' English subtitles, not their original dialogue.{' '}
-            <ExplainerLink />
+            {t('home.aboutSubtitleHint')} <ExplainerLink />
           </p>
         )}
       </section>

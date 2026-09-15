@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { useI18n } from '../i18n'
 
 /** Minimal accessible dialog: fixed backdrop + centered hard-border card.
  * Closes on Escape and backdrop click; moves focus into the dialog on open and
@@ -14,6 +15,7 @@ export function Modal({
   title: string
   children: React.ReactNode
 }) {
+  const { t } = useI18n()
   const ref = useRef<HTMLDivElement>(null)
   const prevFocus = useRef<HTMLElement | null>(null)
 
@@ -52,7 +54,7 @@ export function Modal({
           <button
             type="button"
             onClick={onClose}
-            aria-label="Close"
+            aria-label={t('modal.closeAriaLabel')}
             className="shrink-0 border-2 border-ink px-2 font-script font-bold hover:bg-mark"
           >
             ✕

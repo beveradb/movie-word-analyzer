@@ -1,0 +1,403 @@
+{
+  "compare": {
+    "orLabel": "eller",
+    "addDecadeAriaLabel": "Legg til et tiår",
+    "addDecadeOption": "Legg til et tiår…",
+    "addFilmPlaceholder": "Legg til en film…",
+    "addGenreAriaLabel": "Legg til en sjanger",
+    "addGenreOption": "Legg til en sjanger…",
+    "decadeLabel": "{decade}-TALLET",
+    "decadeOptionLabel": "{decade}-tallet",
+    "distinctWordsLabel": "Unike ord",
+    "featuredMatchupPrefix": "Utvalgt duell: {title}",
+    "filmsLabel": "Filmer",
+    "filmsPerYearLabel": "filmer / år",
+    "filmsPerYearTitle": "Filmer per utgivelsesår i denne delen av korpuset",
+    "fullBreakdownLink": "full oversikt →",
+    "headToHeadHeading": "Mot hverandre",
+    "introBody": "Sett filmer, tiår og sjangere side om side - opptil tre i valgfri blanding.",
+    "loadingLabel": "Laster inn…",
+    "movieLabel": "{title} - {year}",
+    "navNoun": "duell",
+    "navSuffix": "roterer daglig - eller bygg din egen ovenfor",
+    "noStandoutWords": "ingen utmerkende ord",
+    "nothingFoundMessage": "Ingenting funnet for det utvalget.",
+    "pickFilmPlaceholder": "Velg en film…",
+    "ratioMoreLabel": "{ratio}× mer",
+    "removeButton": "fjern",
+    "sharedSignatureWordsHeading": "Signaturord de deler",
+    "signatureWordsHeading": "Signaturord {note}",
+    "signatureWordsHighlightedNote": "(uthevet = delt)",
+    "swearsPer1kLabel": "Banneord / 1k ord",
+    "wordsPerFilmLabel": "Ord / film",
+    "wordsSpokenLabel": "Ord sagt",
+    "headToHeadIntroMany": "Hva hver av dem sier langt oftere enn de andre - forekomst per million ord i sin egen dialog.",
+    "headToHeadIntroPair": "Hva hver av dem sier langt oftere enn den andre - forekomst per million ord i sin egen dialog."
+  },
+  "languageSwitcher": {
+    "current": "Språk",
+    "label": "Velg språk"
+  },
+  "nav": {
+    "sectionsLabel": "Seksjoner",
+    "compare": "Sammenlign",
+    "decades": "Tiår",
+    "explore": "Utforsk",
+    "genres": "Sjangere",
+    "leaderboard": "Toppliste",
+    "trends": "Trender"
+  },
+  "pos": {
+    "other": "annet",
+    "a": "adjektiver",
+    "adjective": "adjektiv",
+    "adverb": "adverb",
+    "n": "substantiver",
+    "noun": "substantiv",
+    "r": "adverb",
+    "v": "verb",
+    "verb": "verb",
+    "x": "navn og annet"
+  },
+  "ui": {
+    "errorBox": {
+      "retryButton": "Prøv igjen",
+      "heading": "Scene mangler"
+    },
+    "featuredNav": {
+      "nextAriaLabel": "Neste utvalgte {noun}",
+      "position": "{idx} av {len}",
+      "prevAriaLabel": "Forrige utvalgte {noun}"
+    },
+    "highlightWord": {
+      "spokenTimes": "sagt {count} ganger",
+      "title": "«{word}» - {display}"
+    },
+    "movieSearch": {
+      "ariaLabel": "Søk etter filmer",
+      "placeholder": "Søk etter en filmtittel…"
+    },
+    "poster": {
+      "alt": "{title}-plakat"
+    },
+    "seriesLegend": {
+      "exploreTitle": "Utforsk «{word}»"
+    },
+    "slug": {
+      "defaultPrefix": "INT."
+    },
+    "wordFilterBar": {
+      "allButton": "alle ord",
+      "anyKindButton": "alle typer",
+      "commonnessAriaLabel": "Ordets vanlighet",
+      "hidingDescription": "skjuler hverdagslig engelsk - de ~2000 vanligste ordene (the, know, get…)",
+      "interestingButton": "interessante ord",
+      "onlyKindsSuffix": " · kun {kinds}",
+      "showingDescription": "viser alle ord, inkludert hverdagslig engelsk"
+    }
+  },
+  "boards": {
+    "films": {
+      "chattiestBlurb": "flest ord per minutt spilletid",
+      "chattiestFmt": "{v} ord/min",
+      "chattiestTitle": "Raskeste snakkere",
+      "intro": "Rekordholderne i korpuset, fire kategorier med ekstreme manus.",
+      "loadingSpinner": "Laster inn filmsuperlativer…",
+      "repetitiveBlurb": "lavest andel unike ord",
+      "repetitiveFmt": "{v} % unike",
+      "repetitiveTitle": "Mest repeterende manus",
+      "sweariestBlurb": "banning per 1000 ord",
+      "sweariestFmt": "{v}/1k",
+      "sweariestTitle": "Groveste manus",
+      "vocabularyBlurb": "flest unike ord i ett manus",
+      "vocabularyFmt": "{v} ord",
+      "vocabularyTitle": "Størst ordforråd"
+    },
+    "overview": {
+      "adjectivesBlurb": "de mest brukte interessante adjektivene",
+      "adjectivesTitle": "Filmens adjektiver",
+      "fallingBlurb": "sagt mye sjeldnere nå enn i tidlig film",
+      "intro": "Korpusets overskrifter - de fem på topp fra hver tavle. Følg et kort for hele listen, filtre og mer.",
+      "loadingSpinner": "Laster inn overskriftene…",
+      "risingBlurb": "sagt mye oftere nå enn i tidlig film",
+      "ubiquityBlurb": "ord nesten ingen manus hopper over",
+      "wondersBlurb": "ord som eies av én film"
+    },
+    "ratio": {
+      "down": "{label}× ned",
+      "up": "{label}× opp"
+    },
+    "shifts": {
+      "fallingTitle": "Fader ut",
+      "intro": "Hvordan dialogen endret seg: ord som sies mye oftere (eller mye sjeldnere) per million ord nå (2010–20-tallet) enn i tidlig film (1930–40-tallet). Linjene sporer hvert tiår; klikk på et ord for hele diagrammet.",
+      "loadingSpinner": "Laster inn skifter…",
+      "risingTitle": "På vei opp"
+    },
+    "taster": {
+      "seeAllLink": "se alle →"
+    },
+    "ubiquity": {
+      "intro": "Utover rene bindeord, dukker disse ordene opp i nesten hver eneste av de {nFilms} filmene.",
+      "loadingSpinner": "Laster inn…",
+      "shareOfFilms": "{share} % av filmene"
+    },
+    "wonders": {
+      "intro": "Ord én film sier mer enn resten av filmhistorien til sammen - karakternavn, oppdiktede ord, besettelser.",
+      "item": "sagt {count}× i {movieLink} ({year}) - {share} % av alle gangene det sies på film",
+      "loadingSpinner": "Laster inn én-film-vidundere…"
+    }
+  },
+  "chart": {
+    "axisAriaLabel": "{yLabel} etter år",
+    "chartingSpinner": "Tegner opp et utvalgt skifte…",
+    "loadFailedMessage": "Kunne ikke tegne opp denne - prøv den neste ▶",
+    "moreTrendsLink": "flere trender →",
+    "trendNoun": "trend",
+    "unpinAriaLabel": "Løsne {year}",
+    "usesPerMillionCaption": "bruk per million ord med dialog",
+    "yAxisLabel": "bruk per million ord"
+  },
+  "decadesView": {
+    "decadeLabel": "{decade}-tallet",
+    "eyebrow": "Utforsk etter",
+    "filmsCount": "{count} filmer",
+    "loadError": "Kunne ikke laste inn tiår.",
+    "loadingSpinner": "Laster inn tiår…",
+    "subtitle": "Hvordan hver filmepoke snakket - {count} studier.",
+    "title": "TIÅR",
+    "notEnoughFilms": "Ikke nok filmer på {langs} for dette - legg til språk eller bytt til Alle filmer."
+  },
+  "entity": {
+    "compareButton": "Sammenlign {label} med…",
+    "decadeEyebrow": "Etabl. {decade}",
+    "decadeLabel": "{decade}-TALLET",
+    "decadeSubject": "{decade}-tallet",
+    "genreEyebrow": "Sjangerstudie",
+    "kindDecade": "tiår",
+    "kindGenre": "sjanger",
+    "loadingSpinner": "Laster inn…",
+    "mostSpokenBody": "Rene tellinger, stoppord ekskludert.",
+    "mostSpokenHeading": "Mest brukte ord",
+    "notFound": "Ingen {kind} «{id}» i datasettet.",
+    "notableScriptsHeading": "Nevneverdige manus",
+    "signatureWordsBody": "Hva {subject} snakker om mye oftere enn filmer generelt.",
+    "signatureWordsHeading": "Signaturord",
+    "statsLine": "{films} filmer · {words} ord med dialog",
+    "notEnoughFilms": "Ikke nok filmer på {langs} for {subject} - legg til språk eller bytt til Alle filmer."
+  },
+  "eras": {
+    "1910": "de første rullene",
+    "1920": "lydfilmen ankommer",
+    "1930": "gullalderen",
+    "1940": "krig og film noir",
+    "1950": "atomalderen",
+    "1960": "den nye bølgen",
+    "1970": "New Hollywood",
+    "1980": "blockbuster-æraen",
+    "1990": "indie-boomen",
+    "2000": "multipleks-årene",
+    "2010": "strømmingens inntog",
+    "2020": "film i dag"
+  },
+  "errors": {
+    "body": "Beklager det - en {reload} fikser det som regel. Fortsatt ødelagt? Send e-post til {email}.",
+    "eyebrow": "Smash cut til:",
+    "reload": "oppdatering",
+    "title": "Noe gikk i stykker."
+  },
+  "footer": {
+    "creditsBody": "Åpen kildekode: {github} og ikke-kommersiell. Kun utledede ordtellinger publiseres - ingen undertekster videredistribueres.",
+    "creditsHeading": "Rulletekst.",
+    "dataBody": "Hele datasettet er tilgjengelig for nedlasting - se {dataGuide} for lenker og info ({license}). Lurer du på metodikk, skjevheter eller opphavsrett? Les {faq}.",
+    "dataGuideLink": "dataguiden",
+    "dataHeading": "Hent dataene.",
+    "dataSourcesBody": "Data: ordtellinger fra {opus} (Lison & Tiedemann, 2016), via {openSubtitles}; film-metadata fra {imdbData} og {tmdb}. Informasjon med tillatelse fra IMDb ({imdbUrl}). Brukt med tillatelse.",
+    "faqLink": "FAQ",
+    "githubLink": "github.com/beveradb/moviewords",
+    "githubProfileLink": "GitHub",
+    "ideaBody": "Det må finnes interessante analyser vi ikke har tenkt på! Hvis du vil dele en idé eller har bygget noe kult med dataene, {email}",
+    "ideaEmailLink": "send e-post til andrew@beveridge.uk",
+    "ideaHeading": "Har du en idé?",
+    "imdbDataLink": "IMDb",
+    "imdbUrlLink": "https://www.imdb.com",
+    "instagramLink": "Instagram",
+    "licenseLink": "CC BY-NC-SA 4.0",
+    "lindsayLink": "Lindsay Wright Graphic Design",
+    "linkedinLink": "LinkedIn",
+    "madeByBody": "Laget av Andrew Beveridge - {github} · {linkedin} · {instagram} - med den opprinnelige ideen fra min nydelige kone {lindsay} - sjekk ut porteføljen hennes!",
+    "openSubtitlesLink": "OpenSubtitles.org",
+    "opusLink": "OPUS OpenSubtitles-korpus",
+    "takedownEmailLink": "Send e-post om fjerning",
+    "tmdbDisclaimerBody": "Dette produktet bruker TMDB API, men er ikke støttet eller sertifisert av TMDB. Plakater via TMDB - opphavsrett tilhører de respektive studioene, vist for å identifisere filmene som diskuteres. Rettighetshaver? {takedown} og det fjernes umiddelbart.",
+    "tmdbLink": "TMDB"
+  },
+  "genres": {
+    "Action": "Action",
+    "Adult": "Voksenfilm",
+    "Adventure": "Eventyr",
+    "Animation": "Animasjon",
+    "Biography": "Biografi",
+    "Comedy": "Komedie",
+    "Crime": "Krim",
+    "Documentary": "Dokumentar",
+    "Drama": "Drama",
+    "Family": "Familie",
+    "Fantasy": "Fantasy",
+    "Film-Noir": "Film-Noir",
+    "History": "Historie",
+    "Horror": "Skrekk",
+    "Music": "Musikk",
+    "Musical": "Musikal",
+    "Mystery": "Mysterie",
+    "News": "Nyheter",
+    "Reality-TV": "Reality-TV",
+    "Romance": "Romantikk",
+    "Sci-Fi": "Sci-Fi",
+    "Sport": "Sport",
+    "Thriller": "Thriller",
+    "War": "Krig",
+    "Western": "Western"
+  },
+  "genresView": {
+    "eyebrow": "Utforsk etter",
+    "filmsCount": "{count} filmer",
+    "loadError": "Kunne ikke laste inn sjangere.",
+    "loadingSpinner": "Laster inn sjangere…",
+    "subtitle": "Hva hver sjanger snakker om - {count} studier.",
+    "title": "SJANGERE",
+    "notEnoughFilms": "Ikke nok filmer på {langs} for dette - legg til språk eller bytt til Alle filmer."
+  },
+  "home": {
+    "aboutHeading": "Om dette datasettet",
+    "decadesBody": "Fra lydfilmens inntog til 2020-tallet - hvordan hver filmepoke snakket.",
+    "decadesHeading": "Vandre gjennom tiårene",
+    "fadeIn": "Fade in:",
+    "faqLink": "FAQ-en",
+    "heroBody": "Vi telte hvert eneste ord sagt i {count} filmer - {millions} millioner av dem. Se {trends}, møt {sweariest}, og avgjør {versus} ord for ord.",
+    "heroSweariest": "det groveste manuset noensinne laget",
+    "heroTitle": "Hver film har et {vocabulary}.",
+    "heroTrends": "«awesome» tar over for «swell»",
+    "heroVersus": "Alien vs Aliens",
+    "heroVocabulary": "ordforråd",
+    "movieMeta": "{year} · {words} ord",
+    "opusLink": "OPUS OpenSubtitles-korpus",
+    "shelfHeading": "Trekk et manus ned fra hylla",
+    "aboutBody": "Dekker {count} - hvert eneste ord med undertekstdialog fra {opus} for filmer med minst 300 IMDb-stemmer, talt per film. Kun ordtellinger publiseres; ingen undertekster videredistribueres. Metodikk og forbehold: {faq}.",
+    "aboutCountAllFilms": "filmer - oversatte undertekster inkludert",
+    "aboutCountLangFilms": "filmer på {langs}",
+    "aboutCountTemplate": "{count} {kind}",
+    "aboutCountUnknown": "titusenvis av",
+    "aboutSubtitleHint": "Disse tellingene kommer fra filmenes engelske undertekster, ikke fra originaldialogen."
+  },
+  "leaderboard": {
+    "tabs": {
+      "everywhere": "Sagt av alle filmer",
+      "films": "Filmsuperlativer",
+      "overview": "Oversikt",
+      "shifts": "Klatrere og fallere",
+      "wonders": "Én-film-vidundere",
+      "words": "Toppord"
+    },
+    "words": {
+      "allGenresOption": "Alle sjangere",
+      "filmsCount": " · {count} filmer",
+      "filteringSpinner": "Filtrerer korpus… (første filtrerte søk laster inn analysemotoren)",
+      "fromLabel": "Fra",
+      "genreLabel": "Sjanger",
+      "intro": "De mest brukte ordene på tvers av alle filmer i korpuset.",
+      "noMatches": "Ingen ord samsvarer med disse filtrene - prøv «alle ord» eller «alle typer».",
+      "rankByLabel": "Ranger etter",
+      "sortMovieishButton": "mest filmaktig",
+      "sortMovieishTitle": "Vekter hvert ord etter hvor mye oftere det sies på film enn i dagligtale",
+      "sortSpokenButton": "mest brukt",
+      "toLabel": "Til"
+    },
+    "languageNote": "Basert på {count} filmer på {langs}, målt fra de engelske undertekstene."
+  },
+  "movie": {
+    "compareButton": "Sammenlign med en annen film",
+    "decadeLinkTitle": "Mer fra {decade}-tallet",
+    "distinctWordsLabel": "Unike ord",
+    "genreSeparator": " / ",
+    "imdbRatingLabel": "IMDb-vurdering",
+    "loadingScript": "Laster inn manus…",
+    "mostSpokenHeading": "Mest brukte ord",
+    "notFound": "Ingen film med id «{id}» i datasettet.",
+    "signatureWordsBody": "Ord denne filmen bruker mye oftere enn filmer generelt (log-odds mot hele korpuset).",
+    "signatureWordsHeading": "Signaturord",
+    "slugTitle": "{title} - {year}",
+    "vocabRichnessLabel": "Ordforrådets rikdom",
+    "wordsSpokenLabel": "Ord sagt"
+  },
+  "themeToggle": {
+    "day": "DAG",
+    "dayShoot": "Dagopptak",
+    "night": "NATT",
+    "nightShoot": "Nattopptak",
+    "switchToDay": "Bytt til dagmodus",
+    "switchToNight": "Bytt til nattmodus"
+  },
+  "trends": {
+    "addAnotherWordPlaceholder": "Legg til et annet ord…",
+    "bigMovers": "Store endringer siden 1930-tallet",
+    "chartItButton": "Tegn det",
+    "chartedWordsAriaLabel": "Opptegnede ord",
+    "featuredPrefix": "Utvalgt: {title}",
+    "firstWordPlaceholder": "Skriv et ord, f.eks. love",
+    "fullList": "full liste →",
+    "intro": "Hvor ofte et ord sies på tvers av alle filmer i korpuset, per million ord med dialog, etter utgivelsesår.",
+    "navNoun": "trend",
+    "navSuffix": "et nytt skifte hver dag",
+    "notEnoughData": "Ikke nok data for: {words} (trenger ≥20 gangers bruk i korpuset, i år med nok filmer).",
+    "perThousandWords": " · {rate}/1k ord",
+    "queryingCorpus": "Søker i korpuset…",
+    "removeWordTitle": "Fjern «{word}»",
+    "topFilmByYearHeading": "Toppfilm for «{word}» etter år",
+    "topFilmByYearLoading": "Finner toppfilm for «{word}» per år…",
+    "topFilmsHeading": "Filmer som sier «{word}» mest",
+    "topFilmsLoading": "Finner filmer som sier «{word}» mest…",
+    "trimmedYearsNote": "{years} skjult - for få filmer i korpuset for pålitelige rater",
+    "tryClassic": "Eller prøv en klassiker:",
+    "usesPerMillionWords": "bruk per million ord med dialog",
+    "wordDetailsTablist": "Orddetaljer",
+    "wordInputAriaLabel": "Ord å tegne opp",
+    "yAxisLabel": "bruk per million ord",
+    "languageNote": "Basert på {count} filmer på {langs}, målt fra de engelske undertekstene.",
+    "notEnoughFilms": "Ikke nok filmer på {langs} for denne trenden - legg til språk eller bytt til Alle filmer."
+  },
+  "languageFilter": {
+    "allFilms": "Alle filmer",
+    "apply": "Bruk",
+    "ariaLabel": "Filtrer filmer etter originalspråk",
+    "countLabel": "{count} språk",
+    "hint": "Filtrerer etter en films originalspråk; ordtellingene kommer fra de engelske undertekstene.",
+    "menuAriaLabel": "Originalspråk",
+    "searchAriaLabel": "Søk etter språk",
+    "searchPlaceholder": "Søk etter språk…"
+  },
+  "localeFilterHint": {
+    "dismissAriaLabel": "Lukk",
+    "filterButton": "Filtrer",
+    "message": "Ser du på {lang}? Filtrer til filmer på {lang}."
+  },
+  "modal": {
+    "closeAriaLabel": "Lukk"
+  },
+  "filterExplainer": {
+    "badgeLabel": "oversatt · {lang}",
+    "badgeTitle": "Originalspråk {lang} - tellingene kommer fra de oversatte engelske undertekstene. Hvordan fungerer dette?",
+    "dialogueNote": "Dialog på originalspråket er ikke i datasettet - bare den engelske oversettelsen.",
+    "englishSubtitles": "engelske undertekster",
+    "englishTranslation": "engelske oversettelse",
+    "filteringBody": "{whatFiltering} en films {originalLanguage} - hvor den ble laget, fra TMDB-metadata - ikke språket til ordene nedenfor.",
+    "linkText": "Hvordan fungerer dette?",
+    "modalTitle": "Slik fungerer det",
+    "origin": "opprinnelse",
+    "originalLanguage": "originalspråk",
+    "soSpanishMeans": "Så \"spansk\" betyr",
+    "spanishBody": "{soSpanishMeans} det engelske undertekst-vokabularet til film med spansk {origin} - hvordan ord som \"solidarity\" eller \"dictatorship\" dukker opp i de engelske undertekstene til spanske filmer - ikke spanske ord.",
+    "whatFiltering": "Det du filtrerer på:",
+    "whatWords": "Hva ordene er:",
+    "wordsBody": "{whatWords} hver telling på Movie Words kommer fra filmens {englishSubtitles}. Vi har bare det engelske OpenSubtitles-sporet, så for en ikke-engelsk film er dette ordene fra dens {englishTranslation}, ikke den originale dialogen. Det er derfor et uoversatt ord av og til slipper gjennom - \"panna\", \"cotta\", \"samurai\"."
+  }
+}
