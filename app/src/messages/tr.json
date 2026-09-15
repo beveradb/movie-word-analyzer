@@ -1,0 +1,411 @@
+{
+  "compare": {
+    "orLabel": "veya",
+    "addDecadeAriaLabel": "Bir on yıl ekle",
+    "addDecadeOption": "Bir on yıl ekle…",
+    "addFilmPlaceholder": "Bir film ekle…",
+    "addGenreAriaLabel": "Bir tür ekle",
+    "addGenreOption": "Bir tür ekle…",
+    "decadeLabel": "{decade}'LAR",
+    "decadeOptionLabel": "{decade}'lar",
+    "distinctWordsLabel": "Farklı kelimeler",
+    "featuredMatchupPrefix": "Öne çıkan eşleşme: {title}",
+    "filmsLabel": "Filmler",
+    "filmsPerYearLabel": "film / yıl",
+    "filmsPerYearTitle": "Derlemin bu diliminde vizyon yılı başına düşen film sayısı",
+    "fullBreakdownLink": "tam döküm →",
+    "headToHeadHeading": "Başa baş",
+    "introBody": "Filmleri, on yılları ve türleri yan yana koy - herhangi bir karışımdan en fazla üç tane.",
+    "loadingLabel": "Yükleniyor…",
+    "movieLabel": "{title} - {year}",
+    "navNoun": "eşleşme",
+    "navSuffix": "her gün değişir - veya yukarıdan kendininkini oluştur",
+    "noStandoutWords": "öne çıkan kelime yok",
+    "nothingFoundMessage": "Bu seçim için hiçbir şey bulunamadı.",
+    "pickFilmPlaceholder": "Bir film seç…",
+    "ratioMoreLabel": "{ratio}× daha fazla",
+    "removeButton": "kaldır",
+    "sharedSignatureWordsHeading": "Paylaştıkları imza kelimeler",
+    "signatureWordsHeading": "İmza kelimeler {note}",
+    "signatureWordsHighlightedNote": "(vurgulanan = paylaşılan)",
+    "swearsPer1kLabel": "Küfür / 1b kelime",
+    "wordsPerFilmLabel": "Kelime / film",
+    "wordsSpokenLabel": "Konuşulan kelimeler",
+    "headToHeadIntroMany": "Her birinin diğerlerinden çok daha fazla söylediği kelimeler - kendi diyaloglarındaki milyon kelime başına oran.",
+    "headToHeadIntroPair": "Her birinin diğerinden çok daha fazla söylediği kelimeler - kendi diyaloglarındaki milyon kelime başına oran."
+  },
+  "languageSwitcher": {
+    "current": "Dil",
+    "label": "Dil seç"
+  },
+  "nav": {
+    "sectionsLabel": "Bölümler",
+    "compare": "Karşılaştır",
+    "decades": "On Yıllar",
+    "explore": "Keşfet",
+    "genres": "Türler",
+    "leaderboard": "Liderlik Tablosu",
+    "trends": "Trendler"
+  },
+  "pos": {
+    "other": "diğer",
+    "a": "sıfatlar",
+    "adjective": "sıfat",
+    "adverb": "zarf",
+    "n": "isimler",
+    "noun": "isim",
+    "r": "zarflar",
+    "v": "fiiller",
+    "verb": "fiil",
+    "x": "isimler ve diğerleri"
+  },
+  "ui": {
+    "errorBox": {
+      "retryButton": "Tekrar Dene",
+      "heading": "Eksik sahne"
+    },
+    "featuredNav": {
+      "nextAriaLabel": "Sonraki öne çıkan {noun}",
+      "position": "{idx} / {len}",
+      "prevAriaLabel": "Önceki öne çıkan {noun}"
+    },
+    "highlightWord": {
+      "spokenTimes": "{count} kez söylendi",
+      "title": "“{word}” - {display}"
+    },
+    "movieSearch": {
+      "ariaLabel": "Film ara",
+      "placeholder": "Bir film adı ara…"
+    },
+    "poster": {
+      "alt": "{title} afişi"
+    },
+    "seriesLegend": {
+      "exploreTitle": "“{word}” kelimesini keşfet"
+    },
+    "slug": {
+      "defaultPrefix": "İÇ."
+    },
+    "wordFilterBar": {
+      "allButton": "tüm kelimeler",
+      "anyKindButton": "herhangi bir tür",
+      "commonnessAriaLabel": "Kelime yaygınlığı",
+      "hidingDescription": "günlük İngilizceyi gizliyor - en yaygın ~2.000 kelime (the, know, get…)",
+      "interestingButton": "ilginç kelimeler",
+      "onlyKindsSuffix": " · sadece {kinds}",
+      "showingDescription": "günlük İngilizce dahil her kelimeyi gösteriyor",
+      "excludingKindsSuffix": " · {kinds} gizleniyor",
+      "posStateExcluded": "{kind}: hariç tutuldu (sıfırlamak için tıkla)",
+      "posStateIncluded": "{kind}: dahil edildi (hariç tutmak için tıkla)",
+      "posStateOff": "{kind}: kapalı (dahil etmek için tıkla)"
+    }
+  },
+  "boards": {
+    "films": {
+      "chattiestBlurb": "dakika başına en çok kelime",
+      "chattiestFmt": "{v} kelime/dk",
+      "chattiestTitle": "En hızlı konuşanlar",
+      "intro": "Derlemin rekor sahipleri, dört kategoride uçuk senaryolar.",
+      "loadingSpinner": "Filmlerin enleri yükleniyor…",
+      "repetitiveBlurb": "en düşük farklı kelime oranı",
+      "repetitiveFmt": "%{v} benzersiz",
+      "repetitiveTitle": "En tekrarlayan senaryolar",
+      "sweariestBlurb": "1.000 kelime başına küfür",
+      "sweariestFmt": "{v}/1b",
+      "sweariestTitle": "En küfürlü senaryolar",
+      "vocabularyBlurb": "bir senaryodaki en çok farklı kelime",
+      "vocabularyFmt": "{v} kelime",
+      "vocabularyTitle": "En geniş kelime dağarcıkları"
+    },
+    "overview": {
+      "adjectivesBlurb": "en çok konuşulan ilginç sıfatlar",
+      "adjectivesTitle": "Sinemanın sıfatları",
+      "fallingBlurb": "eski sinemaya göre artık çok daha az söyleniyor",
+      "intro": "Derlemin manşetleri - her panodan ilk beş. Tam liste, filtreler ve daha fazlası için herhangi bir kartı takip et.",
+      "loadingSpinner": "Manşetler yükleniyor…",
+      "risingBlurb": "eski sinemaya göre artık çok daha fazla söyleniyor",
+      "ubiquityBlurb": "neredeyse hiçbir senaryonun atlamadığı kelimeler",
+      "wondersBlurb": "tek bir filmin sahip olduğu kelimeler"
+    },
+    "ratio": {
+      "down": "{label}× düşüş",
+      "up": "{label}× artış"
+    },
+    "shifts": {
+      "fallingTitle": "Karararak bitenler",
+      "intro": "Diyaloglar nasıl değişti: günümüzde (2010'lar–20'ler) eski sinemaya (1930'lar–40'lar) kıyasla milyon kelime başına çok daha fazla (veya çok daha az) söylenen kelimeler. Çizgiler her on yılı izler; tam grafik için bir kelimeye tıkla.",
+      "loadingSpinner": "Değişimler yükleniyor…",
+      "risingTitle": "Yükselişte"
+    },
+    "taster": {
+      "seeAllLink": "tümünü gör →"
+    },
+    "ubiquity": {
+      "intro": "Salt bağlaçların ötesinde, bu kelimeler {nFilms} filmin neredeyse hepsinde geçiyor.",
+      "loadingSpinner": "Yükleniyor…",
+      "shareOfFilms": "filmlerin %{share}'i"
+    },
+    "wonders": {
+      "intro": "Bir filmin sinemanın geri kalanının toplamından daha fazla söylediği kelimeler - karakter isimleri, uydurma kelimeler, takıntılar.",
+      "item": "{movieLink} ({year}) filminde {count}× söylendi - sinemada söylendiği tüm zamanların %{share}'i",
+      "loadingSpinner": "Tek filmlik harikalar yükleniyor…"
+    }
+  },
+  "chart": {
+    "axisAriaLabel": "yıllara göre {yLabel}",
+    "chartingSpinner": "Öne çıkan bir değişim grafiğe dökülüyor…",
+    "loadFailedMessage": "Bunun grafiği çizilemedi - sonrakini dene ▶",
+    "moreTrendsLink": "daha fazla trend →",
+    "trendNoun": "trend",
+    "unpinAriaLabel": "{year} sabitlemesini kaldır",
+    "usesPerMillionCaption": "milyon diyalog kelimesi başına kullanım",
+    "yAxisLabel": "milyon kelime başına kullanım"
+  },
+  "decadesView": {
+    "decadeLabel": "{decade}'lar",
+    "eyebrow": "Şuna göre göz at:",
+    "filmsCount": "{count} film",
+    "loadError": "On yıllar yüklenemedi.",
+    "loadingSpinner": "On yıllar yükleniyor…",
+    "subtitle": "Sinemanın her dönemi nasıl konuşuyordu - {count} çalışma.",
+    "title": "ON YILLAR",
+    "notEnoughFilms": "Bunun için {langs} dilinde yeterli film yok - dil ekle veya Tüm filmlere geç."
+  },
+  "entity": {
+    "compareButton": "{label} ile karşılaştır…",
+    "decadeEyebrow": "Kuruluş {decade}",
+    "decadeLabel": "{decade}'LAR",
+    "decadeSubject": "{decade}'lar",
+    "genreEyebrow": "Tür çalışması",
+    "kindDecade": "on yıl",
+    "kindGenre": "tür",
+    "loadingSpinner": "Yükleniyor…",
+    "mostSpokenBody": "Düz sayımlar, dolgu kelimeleri hariç.",
+    "mostSpokenHeading": "En çok konuşulan kelimeler",
+    "notFound": "Veri kümesinde “{id}” adında {kind} yok.",
+    "notableScriptsHeading": "Dikkate değer senaryolar",
+    "signatureWordsBody": "{subject} genel olarak filmlerden çok daha fazla ne hakkında konuşuyor.",
+    "signatureWordsHeading": "İmza kelimeler",
+    "statsLine": "{films} film · {words} kelimelik diyalog",
+    "notEnoughFilms": "{subject} için {langs} dilinde yeterli film yok - dil ekle veya Tüm filmlere geç."
+  },
+  "eras": {
+    "1910": "ilk makaralar",
+    "1920": "sesli filmler geliyor",
+    "1930": "altın çağ",
+    "1940": "savaş ve kara film",
+    "1950": "atom çağı",
+    "1960": "yeni dalga",
+    "1970": "Yeni Hollywood",
+    "1980": "gişe rekortmenleri dönemi",
+    "1990": "bağımsız film patlaması",
+    "2000": "çok salonlu sinema yılları",
+    "2010": "yayın platformlarının doğuşu",
+    "2020": "günümüzde sinema"
+  },
+  "errors": {
+    "body": "Bunun için üzgünüz - bir {reload} genellikle bunu çözer. Hâlâ bozuk mu? {email} adresine e-posta gönder.",
+    "eyebrow": "Sert geçiş:",
+    "reload": "yenileme",
+    "title": "Bir şeyler bozuldu."
+  },
+  "footer": {
+    "creditsBody": "Açık kaynak: {github} ve ticari değildir. Yalnızca türetilmiş kelime sayımları yayınlanır - hiçbir altyazı metni yeniden dağıtılmaz.",
+    "creditsHeading": "Jenerik.",
+    "dataBody": "Tam veri kümesi indirilebilir - bağlantılar ve bilgi için {dataGuide} bölümüne bak ({license}). Metodoloji, önyargı veya telif hakkı hakkında merak ettiklerin mi var? {faq} bölümünü oku.",
+    "dataGuideLink": "veri rehberi",
+    "dataHeading": "Verileri al.",
+    "dataSourcesBody": "Veriler: {openSubtitles} aracılığıyla {opus} (Lison & Tiedemann, 2016) kelime sayımları; {imdbData} ve {tmdb} film meta verileri. Bilgiler IMDb'nin ({imdbUrl}) izniyle kullanılmıştır.",
+    "faqLink": "SSS",
+    "githubLink": "github.com/beveradb/moviewords",
+    "githubProfileLink": "GitHub",
+    "ideaBody": "Düşünmediğimiz ilginç analizler olmalı! Bir fikir paylaşmak istersen veya verilerle harika bir şey yaptıysan, {email}",
+    "ideaEmailLink": "andrew@beveridge.uk adresine e-posta gönder",
+    "ideaHeading": "Bir fikrin mi var?",
+    "imdbDataLink": "IMDb",
+    "imdbUrlLink": "https://www.imdb.com",
+    "instagramLink": "Instagram",
+    "licenseLink": "CC BY-NC-SA 4.0",
+    "lindsayLink": "Lindsay Wright Graphic Design",
+    "linkedinLink": "LinkedIn",
+    "madeByBody": "Andrew Beveridge tarafından yapıldı - {github} · {linkedin} · {instagram} - orijinal fikir sevgili eşim {lindsay}'e ait - portföyüne göz at!",
+    "openSubtitlesLink": "OpenSubtitles.org",
+    "opusLink": "OPUS OpenSubtitles derlemi",
+    "takedownEmailLink": "Kaldırma talebi e-postası gönder",
+    "tmdbDisclaimerBody": "Bu ürün TMDB API'sini kullanır ancak TMDB tarafından onaylanmamış veya sertifikalandırılmamıştır. Afişler TMDB aracılığıyla sağlanır - telif hakları ilgili stüdyolara aittir, tartışılan filmleri tanımlamak için gösterilir. Hak sahibi misin? {takedown} ve derhal kaldırılır.",
+    "tmdbLink": "TMDB"
+  },
+  "genres": {
+    "Action": "Aksiyon",
+    "Adult": "Yetişkin",
+    "Adventure": "Macera",
+    "Animation": "Animasyon",
+    "Biography": "Biyografi",
+    "Comedy": "Komedi",
+    "Crime": "Suç",
+    "Documentary": "Belgesel",
+    "Drama": "Dram",
+    "Family": "Aile",
+    "Fantasy": "Fantastik",
+    "Film-Noir": "Kara Film",
+    "History": "Tarih",
+    "Horror": "Korku",
+    "Music": "Müzik",
+    "Musical": "Müzikal",
+    "Mystery": "Gizem",
+    "News": "Haber",
+    "Reality-TV": "Reality-TV",
+    "Romance": "Romantik",
+    "Sci-Fi": "Bilimkurgu",
+    "Sport": "Spor",
+    "Thriller": "Gerilim",
+    "War": "Savaş",
+    "Western": "Western"
+  },
+  "genresView": {
+    "eyebrow": "Şuna göre göz at:",
+    "filmsCount": "{count} film",
+    "loadError": "Türler yüklenemedi.",
+    "loadingSpinner": "Türler yükleniyor…",
+    "subtitle": "Her tür ne hakkında konuşuyor - {count} çalışma.",
+    "title": "TÜRLER",
+    "notEnoughFilms": "Bunun için {langs} dilinde yeterli film yok - dil ekle veya Tüm filmlere geç."
+  },
+  "home": {
+    "aboutHeading": "Bu veri kümesi hakkında",
+    "decadesBody": "Sesli filmlerden 2020'lere - sinemanın her dönemi nasıl konuşuyordu.",
+    "decadesHeading": "On yıllarda gezin",
+    "fadeIn": "Karararak açılma:",
+    "faqLink": "SSS",
+    "heroBody": "{count} filmde konuşulan her kelimeyi saydık - tam {millions} milyon kelime. {trends} izle, {sweariest} ile tanış ve {versus} kelime kelime çöz.",
+    "heroSweariest": "şimdiye kadar yapılmış en küfürlü senaryo",
+    "heroTitle": "Her filmin bir {vocabulary} vardır.",
+    "heroTrends": "'harika'nın 'mükemmel'i geçişini",
+    "heroVersus": "Alien vs Aliens'ı",
+    "heroVocabulary": "kelime dağarcığı",
+    "movieMeta": "{year} · {words} kelime",
+    "opusLink": "OPUS OpenSubtitles derlemi",
+    "shelfHeading": "Raftan bir senaryo çek",
+    "aboutBody": "{count} kapsanıyor - en az 300 IMDb oyu olan filmler için {opus} kaynaklı altyazı diyaloglarının her kelimesi film başına sayıldı. Yalnızca kelime sayımları yayınlanır; hiçbir altyazı metni yeniden dağıtılmaz. Metodoloji ve uyarılar: {faq}.",
+    "aboutCountAllFilms": "film - çevrilmiş altyazılar dahil",
+    "aboutCountLangFilms": "{langs} dilindeki filmler",
+    "aboutCountTemplate": "{count} {kind}",
+    "aboutCountUnknown": "on binlerce",
+    "aboutSubtitleHint": "Bu sayımlar filmlerin orijinal diyaloglarından değil, İngilizce altyazılarından geliyor."
+  },
+  "leaderboard": {
+    "tabs": {
+      "everywhere": "Her filmde söylenenler",
+      "films": "Filmlerin enleri",
+      "overview": "Genel Bakış",
+      "shifts": "Yükselenler ve düşenler",
+      "wonders": "Tek filmlik harikalar",
+      "words": "En iyi kelimeler"
+    },
+    "words": {
+      "allGenresOption": "Tüm türler",
+      "filmsCount": " · {count} film",
+      "filteringSpinner": "Derlem filtreleniyor… (ilk filtrelenen sorgu analiz motorunu yükler)",
+      "fromLabel": "Başlangıç",
+      "genreLabel": "Tür",
+      "intro": "Derlemdeki tüm filmlerde en çok konuşulan kelimeler.",
+      "noMatches": "Bu filtrelere uyan kelime yok - “tüm kelimeler” veya “herhangi bir tür” seçeneğini dene.",
+      "rankByLabel": "Sıralama ölçütü",
+      "sortMovieishButton": "en sinematik",
+      "sortMovieishTitle": "Her kelimeyi, filmlerin günlük İngilizceden ne kadar daha fazla söylediğine göre ağırlıklandırır",
+      "sortSpokenButton": "en çok konuşulan",
+      "toLabel": "Bitiş"
+    },
+    "languageNote": "{count} adet {langs} dilindeki filme dayanır, İngilizce altyazıları üzerinden ölçülmüştür."
+  },
+  "movie": {
+    "compareButton": "Başka bir filmle karşılaştır",
+    "decadeLinkTitle": "{decade}'lardan daha fazlası",
+    "distinctWordsLabel": "Farklı kelimeler",
+    "genreSeparator": " / ",
+    "imdbRatingLabel": "IMDb puanı",
+    "loadingScript": "Senaryo yükleniyor…",
+    "mostSpokenHeading": "En çok konuşulan kelimeler",
+    "notFound": "Veri kümesinde “{id}” kimliğine sahip film yok.",
+    "signatureWordsBody": "Bu filmin genel olarak filmlerden çok daha fazla kullandığı kelimeler (tüm derleme karşı log-olasılık).",
+    "signatureWordsHeading": "İmza kelimeler",
+    "slugTitle": "{title} - {year}",
+    "vocabRichnessLabel": "Kelime dağarcığı zenginliği",
+    "wordsSpokenLabel": "Konuşulan kelimeler",
+    "imdbPosterTitle": "{title} IMDb'de",
+    "runtimeLabel": "Süre",
+    "runtimeValue": "{minutes} dk",
+    "wordsPerMinuteLabel": "Dakika başına kelime"
+  },
+  "themeToggle": {
+    "day": "GÜNDÜZ",
+    "dayShoot": "Gündüz çekimi",
+    "night": "GECE",
+    "nightShoot": "Gece çekimi",
+    "switchToDay": "Gündüz moduna geç",
+    "switchToNight": "Gece moduna geç"
+  },
+  "trends": {
+    "addAnotherWordPlaceholder": "Başka bir kelime ekle…",
+    "bigMovers": "1930'lardan bu yana büyük hareket edenler",
+    "chartItButton": "Grafiğe dök",
+    "chartedWordsAriaLabel": "Grafiğe dökülen kelimeler",
+    "featuredPrefix": "Öne Çıkan: {title}",
+    "firstWordPlaceholder": "Bir kelime yaz, ör. aşk",
+    "fullList": "tam liste →",
+    "intro": "Bir kelimenin derlemdeki tüm filmlerde, milyon diyalog kelimesi başına, vizyon yılına göre ne sıklıkla konuşulduğu.",
+    "navNoun": "trend",
+    "navSuffix": "her gün yeni bir değişim",
+    "notEnoughData": "{words} için yeterli veri yok (derlem genelinde, yeterli film olan yıllarda ≥20 kullanım gerekir).",
+    "perThousandWords": " · {rate}/1b kelime",
+    "queryingCorpus": "Derlem sorgulanıyor…",
+    "removeWordTitle": "“{word}” kelimesini kaldır",
+    "topFilmByYearHeading": "Yıllara göre “{word}” için en iyi film",
+    "topFilmByYearLoading": "Yıllara göre en iyi “{word}” filmi bulunuyor…",
+    "topFilmsHeading": "“{word}” kelimesini en çok söyleyen filmler",
+    "topFilmsLoading": "“{word}” kelimesini en çok söyleyen filmler bulunuyor…",
+    "trimmedYearsNote": "{years} gizlendi - güvenilir oranlar için derlemde çok az film var",
+    "tryClassic": "Veya bir klasik dene:",
+    "usesPerMillionWords": "milyon diyalog kelimesi başına kullanım",
+    "wordDetailsTablist": "Kelime detayları",
+    "wordInputAriaLabel": "Grafiğe dökülecek kelime",
+    "yAxisLabel": "milyon kelime başına kullanım",
+    "languageNote": "{count} adet {langs} dilindeki filme dayanır, İngilizce altyazıları üzerinden ölçülmüştür.",
+    "notEnoughFilms": "Bu trend için {langs} dilinde yeterli film yok - dil ekle veya Tüm filmlere geç."
+  },
+  "languageFilter": {
+    "allFilms": "Tüm filmler",
+    "apply": "Uygula",
+    "ariaLabel": "Filmleri orijinal diline göre filtrele",
+    "countLabel": "{count} dil",
+    "hint": "Bir filmin orijinal diline göre filtreler; kelime sayımları İngilizce altyazılardan gelir.",
+    "menuAriaLabel": "Orijinal dil",
+    "searchAriaLabel": "Dillerde ara",
+    "searchPlaceholder": "Dillerde ara…"
+  },
+  "localeFilterHint": {
+    "dismissAriaLabel": "Kapat",
+    "filterButton": "Filtrele",
+    "message": "{lang} dilinde mi görüntülüyorsun? {lang} dilindeki filmlere filtrele."
+  },
+  "modal": {
+    "closeAriaLabel": "Kapat"
+  },
+  "filterExplainer": {
+    "badgeLabel": "çevrildi · {lang}",
+    "badgeTitle": "Orijinal dil {lang} - sayımlar İngilizceye çevrilmiş altyazılardan geliyor. Bu nasıl çalışıyor?",
+    "dialogueNote": "Orijinal dilindeki diyaloglar veri setinde yok - sadece İngilizce çevirisi var.",
+    "englishSubtitles": "İngilizce altyazılar",
+    "englishTranslation": "İngilizce çeviri",
+    "filteringBody": "{whatFiltering} bir filmin {originalLanguage} - TMDB meta verilerine göre nerede yapıldığı - aşağıdaki kelimelerin dili değil.",
+    "linkText": "Bu nasıl çalışıyor?",
+    "modalTitle": "Nasıl çalışıyor",
+    "origin": "yapımı",
+    "originalLanguage": "orijinal dili",
+    "soSpanishMeans": "Yani \"İspanyolca\" demek",
+    "spanishBody": "{soSpanishMeans} İspanyol {origin} sinemasının İngilizce altyazı kelime dağarcığıdır - \"solidarity\" veya \"dictatorship\" gibi kelimelerin İspanyol filmlerinin İngilizce altyazılarında nasıl göründüğüdür - İspanyolca kelimeler değil.",
+    "whatFiltering": "Filtrelediğin şey:",
+    "whatWords": "Kelimeler aslında nedir:",
+    "wordsBody": "{whatWords} Movie Words üzerindeki her sayım filmin {englishSubtitles} kısmından gelir. Elimizde sadece İngilizce OpenSubtitles kanalı var, bu yüzden İngilizce olmayan bir film için bunlar orijinal diyaloglar değil, {englishTranslation} kelimeleridir. Bu yüzden bazen çevrilmemiş bir kelime aradan sızar - \"panna\", \"cotta\", \"samurai\"."
+  }
+}

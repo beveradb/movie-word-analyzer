@@ -1,0 +1,411 @@
+{
+  "compare": {
+    "orLabel": "alebo",
+    "addDecadeAriaLabel": "Pridať desaťročie",
+    "addDecadeOption": "Pridať desaťročie…",
+    "addFilmPlaceholder": "Pridať film…",
+    "addGenreAriaLabel": "Pridať žáner",
+    "addGenreOption": "Pridať žáner…",
+    "decadeLabel": "ROKY {decade}",
+    "decadeOptionLabel": "roky {decade}",
+    "distinctWordsLabel": "Jedinečné slová",
+    "featuredMatchupPrefix": "Vybraný súboj: {title}",
+    "filmsLabel": "Filmy",
+    "filmsPerYearLabel": "filmov / rok",
+    "filmsPerYearTitle": "Filmy podľa roku vydania v tejto časti korpusu",
+    "fullBreakdownLink": "úplný rozbor →",
+    "headToHeadHeading": "Jeden na jedného",
+    "introBody": "Daj filmy, desaťročia a žánre vedľa seba - až tri z akejkoľvek kombinácie.",
+    "loadingLabel": "Načítavam…",
+    "movieLabel": "{title} - {year}",
+    "navNoun": "súboj",
+    "navSuffix": "sa mení denne - alebo si vytvor vlastný vyššie",
+    "noStandoutWords": "žiadne výrazné slová",
+    "nothingFoundMessage": "Pre tento výber sa nič nenašlo.",
+    "pickFilmPlaceholder": "Vyber si film…",
+    "ratioMoreLabel": "{ratio}× viac",
+    "removeButton": "odstrániť",
+    "sharedSignatureWordsHeading": "Charakteristické slová, ktoré zdieľajú",
+    "signatureWordsHeading": "Charakteristické slová {note}",
+    "signatureWordsHighlightedNote": "(zvýraznené = zdieľané)",
+    "swearsPer1kLabel": "Nadávky / 1k slov",
+    "wordsPerFilmLabel": "Slov / film",
+    "wordsSpokenLabel": "Hovorené slová",
+    "headToHeadIntroMany": "Čo každý z nich hovorí oveľa viac ako ostatní - frekvencia na milión slov vlastného dialógu.",
+    "headToHeadIntroPair": "Čo každý z nich hovorí oveľa viac ako ten druhý - frekvencia na milión slov vlastného dialógu."
+  },
+  "languageSwitcher": {
+    "current": "Jazyk",
+    "label": "Vyber si jazyk"
+  },
+  "nav": {
+    "sectionsLabel": "Sekcie",
+    "compare": "Porovnať",
+    "decades": "Desaťročia",
+    "explore": "Preskúmať",
+    "genres": "Žánre",
+    "leaderboard": "Rebríček",
+    "trends": "Trendy"
+  },
+  "pos": {
+    "other": "iné",
+    "a": "prídavné mená",
+    "adjective": "prídavné meno",
+    "adverb": "príslovka",
+    "n": "podstatné mená",
+    "noun": "podstatné meno",
+    "r": "príslovky",
+    "v": "slovesá",
+    "verb": "sloveso",
+    "x": "mená a iné"
+  },
+  "ui": {
+    "errorBox": {
+      "retryButton": "Skúsiť znova",
+      "heading": "Scene missing"
+    },
+    "featuredNav": {
+      "nextAriaLabel": "Ďalší vybraný {noun}",
+      "position": "{idx} z {len}",
+      "prevAriaLabel": "Predchádzajúci vybraný {noun}"
+    },
+    "highlightWord": {
+      "spokenTimes": "povedané {count}-krát",
+      "title": "„{word}“ - {display}"
+    },
+    "movieSearch": {
+      "ariaLabel": "Hľadať filmy",
+      "placeholder": "Hľadať názov filmu…"
+    },
+    "poster": {
+      "alt": "Plagát {title}"
+    },
+    "seriesLegend": {
+      "exploreTitle": "Preskúmať „{word}“"
+    },
+    "slug": {
+      "defaultPrefix": "INT."
+    },
+    "wordFilterBar": {
+      "allButton": "všetky slová",
+      "anyKindButton": "akýkoľvek druh",
+      "commonnessAriaLabel": "Bežnosť slova",
+      "hidingDescription": "skrývam bežnú angličtinu - ~2 000 najbežnejších slov (the, know, get…)",
+      "interestingButton": "zaujímavé slová",
+      "onlyKindsSuffix": " · len {kinds}",
+      "showingDescription": "zobrazujem každé slovo, vrátane bežnej angličtiny",
+      "excludingKindsSuffix": " · skryté {kinds}",
+      "posStateExcluded": "{kind}: vylúčené (kliknutím resetuješ)",
+      "posStateIncluded": "{kind}: zahrnuté (kliknutím vylúčiš)",
+      "posStateOff": "{kind}: vypnuté (kliknutím zahrnieš)"
+    }
+  },
+  "boards": {
+    "films": {
+      "chattiestBlurb": "najviac slov za minútu stopáže",
+      "chattiestFmt": "{v} slov/min",
+      "chattiestTitle": "Najrýchlejší rečníci",
+      "intro": "Rekordéri korpusu, štyri kategórie extrémnych scenárov.",
+      "loadingSpinner": "Načítavam filmové superlatívy…",
+      "repetitiveBlurb": "najnižší podiel jedinečných slov",
+      "repetitiveFmt": "{v}% jedinečných",
+      "repetitiveTitle": "Najviac sa opakujúce scenáre",
+      "sweariestBlurb": "nadávky na 1 000 slov",
+      "sweariestFmt": "{v}/1k",
+      "sweariestTitle": "Najvulgárnejšie scenáre",
+      "vocabularyBlurb": "najviac jedinečných slov v jednom scenári",
+      "vocabularyFmt": "{v} slov",
+      "vocabularyTitle": "Najväčšie slovníky"
+    },
+    "overview": {
+      "adjectivesBlurb": "najčastejšie hovorené zaujímavé prídavné mená",
+      "adjectivesTitle": "Prídavné mená kinematografie",
+      "fallingBlurb": "hovorené oveľa menej teraz ako v ranej kinematografii",
+      "intro": "To najhlavnejšie z korpusu - prvých päť z každej tabule. Klikni na akúkoľvek kartu pre úplný zoznam, filtre a viac.",
+      "loadingSpinner": "Načítavam hlavné správy…",
+      "risingBlurb": "hovorené oveľa viac teraz ako v ranej kinematografii",
+      "ubiquityBlurb": "slová, ktoré nevynechá takmer žiadny scenár",
+      "wondersBlurb": "slová, ktoré vlastní jeden film"
+    },
+    "ratio": {
+      "down": "{label}× menej",
+      "up": "{label}× viac"
+    },
+    "shifts": {
+      "fallingTitle": "Do stratena",
+      "intro": "Ako sa zmenili dialógy: slová hovorené oveľa viac (alebo oveľa menej) na milión slov teraz (2010s–20s) než v ranej kinematografii (1930s–40s). Čiary sledujú každé desaťročie; klikni na slovo pre úplný graf.",
+      "loadingSpinner": "Načítavam posuny…",
+      "risingTitle": "Na vzostupe"
+    },
+    "taster": {
+      "seeAllLink": "zobraziť všetko →"
+    },
+    "ubiquity": {
+      "intro": "Okrem obyčajných spojok sa tieto slová objavujú takmer v každom z {nFilms} filmov.",
+      "loadingSpinner": "Načítavam…",
+      "shareOfFilms": "{share}% filmov"
+    },
+    "wonders": {
+      "intro": "Slová, ktoré jeden film hovorí viac ako zvyšok kinematografie dokopy - mená postáv, vymyslené slová, obsesie.",
+      "item": "povedané {count}× vo filme {movieLink} ({year}) - {share}% zo všetkých prípadov, kedy to kinematografia povie",
+      "loadingSpinner": "Načítavam zázraky jedného filmu…"
+    }
+  },
+  "chart": {
+    "axisAriaLabel": "{yLabel} podľa roku",
+    "chartingSpinner": "Vykresľujem vybraný posun…",
+    "loadFailedMessage": "Toto sa nepodarilo vykresliť - skús ďalšie ▶",
+    "moreTrendsLink": "viac trendov →",
+    "trendNoun": "trend",
+    "unpinAriaLabel": "Odopnúť {year}",
+    "usesPerMillionCaption": "použití na milión slov dialógu",
+    "yAxisLabel": "použití na milión slov"
+  },
+  "decadesView": {
+    "decadeLabel": "roky {decade}",
+    "eyebrow": "Prehľadávať podľa",
+    "filmsCount": "{count} filmov",
+    "loadError": "Nepodarilo sa načítať desaťročia.",
+    "loadingSpinner": "Načítavam desaťročia…",
+    "subtitle": "Ako hovorila každá éra kinematografie - {count} štúdií.",
+    "title": "DESAŤROČIA",
+    "notEnoughFilms": "Pre toto nie je dostatok filmov v jazyku {langs} - pridaj jazyky alebo prepni na Všetky filmy."
+  },
+  "entity": {
+    "compareButton": "Porovnať {label} s…",
+    "decadeEyebrow": "Zal. {decade}",
+    "decadeLabel": "ROKY {decade}",
+    "decadeSubject": "roky {decade}",
+    "genreEyebrow": "Žánrová štúdia",
+    "kindDecade": "desaťročie",
+    "kindGenre": "žáner",
+    "loadingSpinner": "Načítavam…",
+    "mostSpokenBody": "Čisté počty, bez vylúčených slov (stopwords).",
+    "mostSpokenHeading": "Najčastejšie hovorené slová",
+    "notFound": "V datasete nie je žiadny {kind} „{id}“.",
+    "notableScriptsHeading": "Významné scenáre",
+    "signatureWordsBody": "O čom {subject} hovorí oveľa viac ako filmy celkovo.",
+    "signatureWordsHeading": "Charakteristické slová",
+    "statsLine": "{films} filmov · {words} slov dialógu",
+    "notEnoughFilms": "Pre {subject} nie je dostatok filmov v jazyku {langs} - pridaj jazyky alebo prepni na Všetky filmy."
+  },
+  "eras": {
+    "1910": "prvé kotúče",
+    "1920": "prichádzajú zvukové filmy",
+    "1930": "zlatý vek",
+    "1940": "vojna a film noir",
+    "1950": "atómový vek",
+    "1960": "nová vlna",
+    "1970": "Nový Hollywood",
+    "1980": "éra blockbusterov",
+    "1990": "indie boom",
+    "2000": "roky multiplexov",
+    "2010": "úsvit streamovania",
+    "2020": "súčasná kinematografia"
+  },
+  "errors": {
+    "body": "Ospravedlňujeme sa - {reload} to zvyčajne spraví. Stále to nefunguje? Napíš na {email}.",
+    "eyebrow": "Smash cut to:",
+    "reload": "obnovenie",
+    "title": "Niečo sa pokazilo."
+  },
+  "footer": {
+    "creditsBody": "Open source: {github} a nekomerčné. Zverejnené sú len odvodené počty slov - žiadny text titulkov sa nešíri ďalej.",
+    "creditsHeading": "Záverečné titulky.",
+    "dataBody": "Celý dataset je k dispozícii na stiahnutie - pozri {dataGuide} pre odkazy a info ({license}). Zaujíma ťa metodológia, skreslenie alebo autorské práva? Prečítaj si {faq}.",
+    "dataGuideLink": "sprievodcu dátami",
+    "dataHeading": "Vezmi si dáta.",
+    "dataSourcesBody": "Dáta: počty slov z {opus} (Lison & Tiedemann, 2016), cez {openSubtitles}; filmové metadáta z {imdbData} a {tmdb}. Informácie s láskavým dovolením IMDb ({imdbUrl}). Použité so súhlasom.",
+    "faqLink": "FAQ",
+    "githubLink": "github.com/beveradb/moviewords",
+    "githubProfileLink": "GitHub",
+    "ideaBody": "Určite existujú zaujímavé analýzy, na ktoré sme nepomysleli! Ak sa chceš podeliť o nápad alebo si vytvoril niečo super s týmito dátami, {email}",
+    "ideaEmailLink": "napíš na andrew@beveridge.uk",
+    "ideaHeading": "Máš nápad?",
+    "imdbDataLink": "IMDb",
+    "imdbUrlLink": "https://www.imdb.com",
+    "instagramLink": "Instagram",
+    "licenseLink": "CC BY-NC-SA 4.0",
+    "lindsayLink": "Lindsay Wright Graphic Design",
+    "linkedinLink": "LinkedIn",
+    "madeByBody": "Vytvoril Andrew Beveridge - {github} · {linkedin} · {instagram} - s pôvodným nápadom od mojej milovanej manželky {lindsay} - pozri si jej portfólio!",
+    "openSubtitlesLink": "OpenSubtitles.org",
+    "opusLink": "OPUS OpenSubtitles corpus",
+    "takedownEmailLink": "Pošli žiadosť o stiahnutie",
+    "tmdbDisclaimerBody": "Tento produkt používa TMDB API, ale nie je schválený ani certifikovaný spoločnosťou TMDB. Plagáty cez TMDB - autorské práva patria príslušným štúdiám, zobrazené na identifikáciu diskutovaných filmov. Si držiteľom práv? {takedown} a okamžite to stiahneme.",
+    "tmdbLink": "TMDB"
+  },
+  "genres": {
+    "Action": "Akčný",
+    "Adult": "Pre dospelých",
+    "Adventure": "Dobrodružný",
+    "Animation": "Animovaný",
+    "Biography": "Životopisný",
+    "Comedy": "Komédia",
+    "Crime": "Krimi",
+    "Documentary": "Dokumentárny",
+    "Drama": "Dráma",
+    "Family": "Rodinný",
+    "Fantasy": "Fantasy",
+    "Film-Noir": "Film-Noir",
+    "History": "Historický",
+    "Horror": "Horor",
+    "Music": "Hudobný",
+    "Musical": "Muzikál",
+    "Mystery": "Mysteriózny",
+    "News": "Správy",
+    "Reality-TV": "Reality-TV",
+    "Romance": "Romantický",
+    "Sci-Fi": "Sci-Fi",
+    "Sport": "Športový",
+    "Thriller": "Triler",
+    "War": "Vojnový",
+    "Western": "Western"
+  },
+  "genresView": {
+    "eyebrow": "Prehľadávať podľa",
+    "filmsCount": "{count} filmov",
+    "loadError": "Nepodarilo sa načítať žánre.",
+    "loadingSpinner": "Načítavam žánre…",
+    "subtitle": "O čom hovorí každý žáner - {count} štúdií.",
+    "title": "ŽÁNRE",
+    "notEnoughFilms": "Pre toto nie je dostatok filmov v jazyku {langs} - pridaj jazyky alebo prepni na Všetky filmy."
+  },
+  "home": {
+    "aboutHeading": "O tomto datasete",
+    "decadesBody": "Od zvukových filmov po 2020s - ako hovorila každá éra kinematografie.",
+    "decadesHeading": "Túlaj sa desaťročiami",
+    "fadeIn": "Fade in:",
+    "faqLink": "FAQ",
+    "heroBody": "Spočítali sme každé slovo povedané v {count} filmoch - {millions} miliónov z nich. Sleduj {trends}, spoznaj {sweariest} a vyrieš {versus} slovo po slove.",
+    "heroSweariest": "najvulgárnejší scenár, aký bol kedy napísaný",
+    "heroTitle": "Každý film má svoj {vocabulary}.",
+    "heroTrends": "ako 'awesome' predbieha 'swell'",
+    "heroVersus": "Votrelec vs Votrelci",
+    "heroVocabulary": "slovník",
+    "movieMeta": "{year} · {words} slov",
+    "opusLink": "OPUS OpenSubtitles corpus",
+    "shelfHeading": "Vytiahni si scenár z police",
+    "aboutBody": "Pokrýva {count} - každé slovo z titulkov dialógov z {opus} pre filmy s aspoň 300 hlasmi na IMDb, počítané na film. Zverejnené sú len počty slov; žiadny text titulkov sa nešíri ďalej. Metodológia a upozornenia: {faq}.",
+    "aboutCountAllFilms": "filmov - vrátane preložených titulkov",
+    "aboutCountLangFilms": "filmov v jazyku {langs}",
+    "aboutCountTemplate": "{count} {kind}",
+    "aboutCountUnknown": "desaťtisíce",
+    "aboutSubtitleHint": "Tieto počty pochádzajú z anglických titulkov filmov, nie z ich pôvodných dialógov."
+  },
+  "leaderboard": {
+    "tabs": {
+      "everywhere": "Povedané v každom filme",
+      "films": "Filmové superlatívy",
+      "overview": "Prehľad",
+      "shifts": "Skokani a prepadáky",
+      "wonders": "Zázraky jedného filmu",
+      "words": "Top slová"
+    },
+    "words": {
+      "allGenresOption": "Všetky žánre",
+      "filmsCount": " · {count} filmov",
+      "filteringSpinner": "Filtrujem korpus… (prvá filtrovaná požiadavka načíta analytický engine)",
+      "fromLabel": "Od",
+      "genreLabel": "Žáner",
+      "intro": "Najčastejšie hovorené slová vo všetkých filmoch v korpuse.",
+      "noMatches": "Týmto filtrom nezodpovedajú žiadne slová - skús „všetky slová“ alebo „akýkoľvek druh“.",
+      "rankByLabel": "Zoradiť podľa",
+      "sortMovieishButton": "najviac filmové",
+      "sortMovieishTitle": "Váži každé slovo podľa toho, o koľko viac ho hovoria filmy v porovnaní s bežnou angličtinou",
+      "sortSpokenButton": "najčastejšie hovorené",
+      "toLabel": "Do"
+    },
+    "languageNote": "Založené na {count} filmoch v jazyku {langs}, merané z ich anglických titulkov."
+  },
+  "movie": {
+    "compareButton": "Porovnať s iným filmom",
+    "decadeLinkTitle": "Viac z rokov {decade}",
+    "distinctWordsLabel": "Jedinečné slová",
+    "genreSeparator": " / ",
+    "imdbRatingLabel": "Hodnotenie IMDb",
+    "loadingScript": "Načítavam scenár…",
+    "mostSpokenHeading": "Najčastejšie hovorené slová",
+    "notFound": "V datasete nie je žiadny film s id „{id}“.",
+    "signatureWordsBody": "Slová, ktoré tento film používa oveľa viac ako filmy celkovo (log-odds vs celý korpus).",
+    "signatureWordsHeading": "Charakteristické slová",
+    "slugTitle": "{title} - {year}",
+    "vocabRichnessLabel": "Bohatosť slovníka",
+    "wordsSpokenLabel": "Hovorené slová",
+    "imdbPosterTitle": "{title} na IMDb",
+    "runtimeLabel": "Dĺžka",
+    "runtimeValue": "{minutes} min",
+    "wordsPerMinuteLabel": "Slov za minútu"
+  },
+  "themeToggle": {
+    "day": "DEŇ",
+    "dayShoot": "Denné natáčanie",
+    "night": "NOC",
+    "nightShoot": "Nočné natáčanie",
+    "switchToDay": "Prepnúť na denný režim",
+    "switchToNight": "Prepnúť na nočný režim"
+  },
+  "trends": {
+    "addAnotherWordPlaceholder": "Pridať ďalšie slovo…",
+    "bigMovers": "Veľké skoky od 30. rokov",
+    "chartItButton": "Vykresliť",
+    "chartedWordsAriaLabel": "Vykreslené slová",
+    "featuredPrefix": "Vybrané: {title}",
+    "firstWordPlaceholder": "Napíš slovo, napr. love",
+    "fullList": "úplný zoznam →",
+    "intro": "Ako často sa slovo hovorí vo všetkých filmoch v korpuse, na milión slov dialógu, podľa roku vydania.",
+    "navNoun": "trend",
+    "navSuffix": "nový posun každý deň",
+    "notEnoughData": "Nedostatok dát pre: {words} (potrebuje ≥20 použití v celom korpuse, v rokoch s dostatkom filmov).",
+    "perThousandWords": " · {rate}/1k slov",
+    "queryingCorpus": "Prehľadávam korpus…",
+    "removeWordTitle": "Odstrániť „{word}“",
+    "topFilmByYearHeading": "Top film pre „{word}“ podľa roku",
+    "topFilmByYearLoading": "Hľadám top film pre „{word}“ na rok…",
+    "topFilmsHeading": "Filmy, ktoré hovoria „{word}“ najviac",
+    "topFilmsLoading": "Hľadám filmy, ktoré hovoria „{word}“ najviac…",
+    "trimmedYearsNote": "{years} skrytých - príliš málo filmov v korpuse pre spoľahlivé miery",
+    "tryClassic": "Alebo skús klasiku:",
+    "usesPerMillionWords": "použití na milión slov dialógu",
+    "wordDetailsTablist": "Detaily slova",
+    "wordInputAriaLabel": "Slovo na vykreslenie",
+    "yAxisLabel": "použití na milión slov",
+    "languageNote": "Založené na {count} filmoch v jazyku {langs}, merané z ich anglických titulkov.",
+    "notEnoughFilms": "Pre tento trend nie je dostatok filmov v jazyku {langs} - pridaj jazyky alebo prepni na Všetky filmy."
+  },
+  "languageFilter": {
+    "allFilms": "Všetky filmy",
+    "apply": "Použiť",
+    "ariaLabel": "Filtrovať filmy podľa pôvodného jazyka",
+    "countLabel": "{count} jazykov",
+    "hint": "Filtruje podľa pôvodného jazyka filmu; počty slov pochádzajú z anglických titulkov.",
+    "menuAriaLabel": "Pôvodný jazyk",
+    "searchAriaLabel": "Hľadať jazyky",
+    "searchPlaceholder": "Hľadať jazyky…"
+  },
+  "localeFilterHint": {
+    "dismissAriaLabel": "Zavrieť",
+    "filterButton": "Filtrovať",
+    "message": "Prezeráš v jazyku {lang}? Filtruj na filmy v jazyku {lang}."
+  },
+  "modal": {
+    "closeAriaLabel": "Zavrieť"
+  },
+  "filterExplainer": {
+    "badgeLabel": "preložené · {lang}",
+    "badgeTitle": "Pôvodný jazyk {lang} - počty pochádzajú z anglických preložených titulkov. Ako to funguje?",
+    "dialogueNote": "Dialógy v pôvodnom jazyku nie sú v datasete - iba anglický preklad.",
+    "englishSubtitles": "anglických titulkov",
+    "englishTranslation": "anglického prekladu",
+    "filteringBody": "{whatFiltering} {originalLanguage} filmu - kde bol natočený, z metadát TMDB - nie jazyk slov nižšie.",
+    "linkText": "Ako to funguje?",
+    "modalTitle": "Ako to funguje",
+    "origin": "pôvodu",
+    "originalLanguage": "pôvodný jazyk",
+    "soSpanishMeans": "Takže „španielsky“ znamená",
+    "spanishBody": "{soSpanishMeans} slovnú zásobu anglických titulkov kinematografie španielskeho {origin} - ako sa slová ako „solidarity“ alebo „dictatorship“ objavujú v anglických titulkoch španielskych filmov - nie španielske slová.",
+    "whatFiltering": "Čo filtruješ:",
+    "whatWords": "Aké sú to slová:",
+    "wordsBody": "{whatWords} každý počet na Movie Words pochádza z {englishSubtitles} filmu. Máme iba anglickú stopu z OpenSubtitles, takže pre neanglický film sú to slová jeho {englishTranslation}, nie pôvodného dialógu. Preto občas prekĺzne nepreložené slovo - „panna“, „cotta“, „samurai“."
+  }
+}

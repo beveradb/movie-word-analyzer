@@ -1,0 +1,411 @@
+{
+  "compare": {
+    "orLabel": "ή",
+    "addDecadeAriaLabel": "Προσθήκη δεκαετίας",
+    "addDecadeOption": "Προσθήκη δεκαετίας…",
+    "addFilmPlaceholder": "Προσθήκη ταινίας…",
+    "addGenreAriaLabel": "Προσθήκη είδους",
+    "addGenreOption": "Προσθήκη είδους…",
+    "decadeLabel": "Η ΔΕΚΑΕΤΙΑ ΤΟΥ {decade}",
+    "decadeOptionLabel": "Δεκαετία του {decade}",
+    "distinctWordsLabel": "Διαφορετικές λέξεις",
+    "featuredMatchupPrefix": "Επιλεγμένη αναμέτρηση: {title}",
+    "filmsLabel": "Ταινίες",
+    "filmsPerYearLabel": "ταινίες / έτος",
+    "filmsPerYearTitle": "Ταινίες ανά έτος κυκλοφορίας σε αυτό το τμήμα της συλλογής",
+    "fullBreakdownLink": "πλήρης ανάλυση →",
+    "headToHeadHeading": "Στήθος με στήθος",
+    "introBody": "Βάλε ταινίες, δεκαετίες και είδη δίπλα-δίπλα - έως τρία από οποιονδήποτε συνδυασμό.",
+    "loadingLabel": "Φόρτωση…",
+    "movieLabel": "{title} - {year}",
+    "navNoun": "αναμέτρηση",
+    "navSuffix": "αλλάζει καθημερινά - ή φτιάξε τη δική σου παραπάνω",
+    "noStandoutWords": "καμία λέξη που να ξεχωρίζει",
+    "nothingFoundMessage": "Δεν βρέθηκε τίποτα για αυτήν την επιλογή.",
+    "pickFilmPlaceholder": "Επίλεξε μια ταινία…",
+    "ratioMoreLabel": "{ratio}× περισσότερο",
+    "removeButton": "αφαίρεση",
+    "sharedSignatureWordsHeading": "Χαρακτηριστικές λέξεις που μοιράζονται",
+    "signatureWordsHeading": "Χαρακτηριστικές λέξεις {note}",
+    "signatureWordsHighlightedNote": "(επισημασμένες = κοινές)",
+    "swearsPer1kLabel": "Βρισιές / 1χιλ. λέξεις",
+    "wordsPerFilmLabel": "Λέξεις / ταινία",
+    "wordsSpokenLabel": "Λέξεις που ειπώθηκαν",
+    "headToHeadIntroMany": "Τι λέει το καθένα πολύ περισσότερο από τα υπόλοιπα - συχνότητα ανά εκατομμύριο λέξεις του δικού του διαλόγου.",
+    "headToHeadIntroPair": "Τι λέει το καθένα πολύ περισσότερο από το άλλο - συχνότητα ανά εκατομμύριο λέξεις του δικού του διαλόγου."
+  },
+  "languageSwitcher": {
+    "current": "Γλώσσα",
+    "label": "Επιλογή γλώσσας"
+  },
+  "nav": {
+    "sectionsLabel": "Ενότητες",
+    "compare": "Σύγκριση",
+    "decades": "Δεκαετίες",
+    "explore": "Εξερεύνηση",
+    "genres": "Είδη",
+    "leaderboard": "Κατάταξη",
+    "trends": "Τάσεις"
+  },
+  "pos": {
+    "other": "άλλο",
+    "a": "επίθετα",
+    "adjective": "επίθετο",
+    "adverb": "επίρρημα",
+    "n": "ουσιαστικά",
+    "noun": "ουσιαστικό",
+    "r": "επιρρήματα",
+    "v": "ρήματα",
+    "verb": "ρήμα",
+    "x": "ονόματα & άλλα"
+  },
+  "ui": {
+    "errorBox": {
+      "retryButton": "Δοκίμασε ξανά",
+      "heading": "Λείπει σκηνή"
+    },
+    "featuredNav": {
+      "nextAriaLabel": "Επόμενο επιλεγμένο {noun}",
+      "position": "{idx} από {len}",
+      "prevAriaLabel": "Προηγούμενο επιλεγμένο {noun}"
+    },
+    "highlightWord": {
+      "spokenTimes": "ειπώθηκε {count} φορές",
+      "title": "“{word}” - {display}"
+    },
+    "movieSearch": {
+      "ariaLabel": "Αναζήτηση ταινιών",
+      "placeholder": "Αναζήτηση τίτλου ταινίας…"
+    },
+    "poster": {
+      "alt": "Αφίσα {title}"
+    },
+    "seriesLegend": {
+      "exploreTitle": "Εξερεύνησε το “{word}”"
+    },
+    "slug": {
+      "defaultPrefix": "ΕΣΩΤ."
+    },
+    "wordFilterBar": {
+      "allButton": "όλες οι λέξεις",
+      "anyKindButton": "οποιοδήποτε είδος",
+      "commonnessAriaLabel": "Συχνότητα λέξης",
+      "hidingDescription": "απόκρυψη καθημερινών αγγλικών - οι ~2.000 πιο κοινές λέξεις (the, know, get…)",
+      "interestingButton": "ενδιαφέρουσες λέξεις",
+      "onlyKindsSuffix": " · μόνο {kinds}",
+      "showingDescription": "εμφάνιση κάθε λέξης, συμπεριλαμβανομένων των καθημερινών αγγλικών",
+      "excludingKindsSuffix": " · απόκρυψη {kinds}",
+      "posStateExcluded": "{kind}: εξαιρείται (κλικ για επαναφορά)",
+      "posStateIncluded": "{kind}: περιλαμβάνεται (κλικ για εξαίρεση)",
+      "posStateOff": "{kind}: ανενεργό (κλικ για συμπερίληψη)"
+    }
+  },
+  "boards": {
+    "films": {
+      "chattiestBlurb": "περισσότερες λέξεις ανά λεπτό διάρκειας",
+      "chattiestFmt": "{v} λ/λεπτό",
+      "chattiestTitle": "Οι πιο γρήγοροι ομιλητές",
+      "intro": "Οι κάτοχοι των ρεκόρ της συλλογής, τέσσερις κατηγορίες ακραίων σεναρίων.",
+      "loadingSpinner": "Φόρτωση ρεκόρ ταινιών…",
+      "repetitiveBlurb": "χαμηλότερο ποσοστό διαφορετικών λέξεων",
+      "repetitiveFmt": "{v}% μοναδικές",
+      "repetitiveTitle": "Τα πιο επαναλαμβανόμενα σενάρια",
+      "sweariestBlurb": "βρισιές ανά 1.000 λέξεις",
+      "sweariestFmt": "{v}/1χιλ.",
+      "sweariestTitle": "Τα πιο βωμολόχα σενάρια",
+      "vocabularyBlurb": "περισσότερες διαφορετικές λέξεις σε ένα σενάριο",
+      "vocabularyFmt": "{v} λέξεις",
+      "vocabularyTitle": "Τα μεγαλύτερα λεξιλόγια"
+    },
+    "overview": {
+      "adjectivesBlurb": "τα πιο συχνά ενδιαφέροντα επίθετα",
+      "adjectivesTitle": "Επίθετα του σινεμά",
+      "fallingBlurb": "ακούγονται πολύ λιγότερο τώρα από ό,τι στον πρώιμο κινηματογράφο",
+      "intro": "Οι τίτλοι της συλλογής - η κορυφαία πεντάδα από κάθε πίνακα. Ακολούθησε οποιαδήποτε κάρτα για την πλήρη λίστα, φίλτρα και άλλα.",
+      "loadingSpinner": "Φόρτωση τίτλων…",
+      "risingBlurb": "ακούγονται πολύ περισσότερο τώρα από ό,τι στον πρώιμο κινηματογράφο",
+      "ubiquityBlurb": "λέξεις που σχεδόν κανένα σενάριο δεν παραλείπει",
+      "wondersBlurb": "λέξεις που ανήκουν σε μία μόνο ταινία"
+    },
+    "ratio": {
+      "down": "{label}× κάτω",
+      "up": "{label}× πάνω"
+    },
+    "shifts": {
+      "fallingTitle": "Σε πτώση",
+      "intro": "Πώς άλλαξε ο διάλογος: λέξεις που ακούγονται πολύ περισσότερο (ή πολύ λιγότερο) ανά εκατομμύριο λέξεων τώρα (δεκαετίες 2010–20) από ό,τι στον πρώιμο κινηματογράφο (δεκαετίες 1930–40). Οι γραμμές ακολουθούν κάθε δεκαετία· κάνε κλικ σε μια λέξη για το πλήρες γράφημα.",
+      "loadingSpinner": "Φόρτωση αλλαγών…",
+      "risingTitle": "Σε άνοδο"
+    },
+    "taster": {
+      "seeAllLink": "δες τα όλα →"
+    },
+    "ubiquity": {
+      "intro": "Πέρα από τους απλούς συνδέσμους, αυτές οι λέξεις εμφανίζονται σχεδόν σε κάθε μία από τις {nFilms} ταινίες.",
+      "loadingSpinner": "Φόρτωση…",
+      "shareOfFilms": "{share}% των ταινιών"
+    },
+    "wonders": {
+      "intro": "Λέξεις που μια ταινία λέει περισσότερο από όλο τον υπόλοιπο κινηματογράφο μαζί - ονόματα χαρακτήρων, επινοημένες λέξεις, εμμονές.",
+      "item": "ακούστηκε {count}× στο {movieLink} ({year}) - {share}% από κάθε φορά που το λέει ο κινηματογράφος",
+      "loadingSpinner": "Φόρτωση θαυμάτων μίας ταινίας…"
+    }
+  },
+  "chart": {
+    "axisAriaLabel": "{yLabel} ανά έτος",
+    "chartingSpinner": "Γράφημα μιας επιλεγμένης αλλαγής…",
+    "loadFailedMessage": "Δεν ήταν δυνατή η δημιουργία γραφήματος - δοκίμασε το επόμενο ▶",
+    "moreTrendsLink": "περισσότερες τάσεις →",
+    "trendNoun": "τάση",
+    "unpinAriaLabel": "Ξεκαρφίτσωμα {year}",
+    "usesPerMillionCaption": "χρήσεις ανά εκατομμύριο λέξεων διαλόγου",
+    "yAxisLabel": "χρήσεις ανά εκατομμύριο λέξεων"
+  },
+  "decadesView": {
+    "decadeLabel": "Δεκαετία του {decade}",
+    "eyebrow": "Περιήγηση ανά",
+    "filmsCount": "{count} ταινίες",
+    "loadError": "Δεν ήταν δυνατή η φόρτωση δεκαετιών.",
+    "loadingSpinner": "Φόρτωση δεκαετιών…",
+    "subtitle": "Πώς μιλούσε κάθε εποχή του κινηματογράφου - {count} μελέτες.",
+    "title": "ΔΕΚΑΕΤΙΕΣ",
+    "notEnoughFilms": "Δεν υπάρχουν αρκετές ταινίες σε {langs} για αυτό - πρόσθεσε γλώσσες ή άλλαξε σε Όλες τις ταινίες."
+  },
+  "entity": {
+    "compareButton": "Σύγκρινε το {label} με…",
+    "decadeEyebrow": "Εκτ. {decade}",
+    "decadeLabel": "Η ΔΕΚΑΕΤΙΑ ΤΟΥ {decade}",
+    "decadeSubject": "τη δεκαετία του {decade}",
+    "genreEyebrow": "Μελέτη είδους",
+    "kindDecade": "δεκαετία",
+    "kindGenre": "είδος",
+    "loadingSpinner": "Φόρτωση…",
+    "mostSpokenBody": "Απλές μετρήσεις, εξαιρούνται οι λέξεις κενού (stopwords).",
+    "mostSpokenHeading": "Οι πιο συχνές λέξεις",
+    "notFound": "Δεν βρέθηκε {kind} “{id}” στο σύνολο δεδομένων.",
+    "notableScriptsHeading": "Αξιοσημείωτα σενάρια",
+    "signatureWordsBody": "Για τι μιλάει το {subject} πολύ περισσότερο από τις ταινίες συνολικά.",
+    "signatureWordsHeading": "Χαρακτηριστικές λέξεις",
+    "statsLine": "{films} ταινίες · {words} λέξεις διαλόγου",
+    "notEnoughFilms": "Δεν υπάρχουν αρκετές ταινίες σε {langs} για {subject} - πρόσθεσε γλώσσες ή άλλαξε σε Όλες τις ταινίες."
+  },
+  "eras": {
+    "1910": "οι πρώτες μπομπίνες",
+    "1920": "έρχεται ο ομιλών κινηματογράφος",
+    "1930": "η χρυσή εποχή",
+    "1940": "πόλεμος και φιλμ νουάρ",
+    "1950": "η ατομική εποχή",
+    "1960": "το νέο κύμα",
+    "1970": "Νέο Χόλιγουντ",
+    "1980": "η εποχή των blockbuster",
+    "1990": "η έκρηξη του indie",
+    "2000": "τα χρόνια των multiplex",
+    "2010": "η αυγή του streaming",
+    "2020": "ο κινηματογράφος σήμερα"
+  },
+  "errors": {
+    "body": "Συγγνώμη για αυτό - μια {reload} συνήθως το φτιάχνει. Ακόμα χαλασμένο; Στείλε email στο {email}.",
+    "eyebrow": "Smash cut σε:",
+    "reload": "ανανέωση",
+    "title": "Κάτι χάλασε."
+  },
+  "footer": {
+    "creditsBody": "Ανοιχτού κώδικα: {github} και μη εμπορικό. Δημοσιεύονται μόνο παράγωγες μετρήσεις λέξεων - δεν αναδιανέμεται κείμενο υποτίτλων.",
+    "creditsHeading": "Συντελεστές.",
+    "dataBody": "Το πλήρες σύνολο δεδομένων είναι διαθέσιμο για λήψη - δες {dataGuide} για συνδέσμους & πληροφορίες ({license}). Αναρωτιέσαι για τη μεθοδολογία, την προκατάληψη ή τα πνευματικά δικαιώματα; Διάβασε το {faq}.",
+    "dataGuideLink": "τον οδηγό δεδομένων",
+    "dataHeading": "Πάρε τα δεδομένα.",
+    "dataSourcesBody": "Δεδομένα: μετρήσεις λέξεων από το {opus} (Lison & Tiedemann, 2016), μέσω του {openSubtitles}· μεταδεδομένα ταινιών από το {imdbData} και το {tmdb}. Πληροφορίες με την ευγενική παραχώρηση του IMDb ({imdbUrl}). Χρησιμοποιούνται με άδεια.",
+    "faqLink": "FAQ",
+    "githubLink": "github.com/beveradb/moviewords",
+    "githubProfileLink": "GitHub",
+    "ideaBody": "Σίγουρα υπάρχουν ενδιαφέρουσες αναλύσεις που δεν έχουμε σκεφτεί! Αν θέλεις να μοιραστείς μια ιδέα ή έχεις φτιάξει κάτι ωραίο με τα δεδομένα, {email}",
+    "ideaEmailLink": "στείλε email στο andrew@beveridge.uk",
+    "ideaHeading": "Έχεις καμιά ιδέα;",
+    "imdbDataLink": "IMDb",
+    "imdbUrlLink": "https://www.imdb.com",
+    "instagramLink": "Instagram",
+    "licenseLink": "CC BY-NC-SA 4.0",
+    "lindsayLink": "Lindsay Wright Graphic Design",
+    "linkedinLink": "LinkedIn",
+    "madeByBody": "Φτιαγμένο από τον Andrew Beveridge - {github} · {linkedin} · {instagram} - με την αρχική ιδέα από την υπέροχη σύζυγό μου {lindsay} - ρίξε μια ματιά στο πορτφόλιό της!",
+    "openSubtitlesLink": "OpenSubtitles.org",
+    "opusLink": "Συλλογή OPUS OpenSubtitles",
+    "takedownEmailLink": "Στείλε email για αφαίρεση",
+    "tmdbDisclaimerBody": "Αυτό το προϊόν χρησιμοποιεί το TMDB API αλλά δεν είναι εγκεκριμένο ή πιστοποιημένο από το TMDB. Αφίσες μέσω TMDB - πνευματικά δικαιώματα των αντίστοιχων στούντιο, εμφανίζονται για την αναγνώριση των ταινιών που συζητούνται. Κάτοχος δικαιωμάτων; {takedown} και θα κατέβει άμεσα.",
+    "tmdbLink": "TMDB"
+  },
+  "genres": {
+    "Action": "Δράση",
+    "Adult": "Ενηλίκων",
+    "Adventure": "Περιπέτεια",
+    "Animation": "Animation",
+    "Biography": "Βιογραφία",
+    "Comedy": "Κωμωδία",
+    "Crime": "Έγκλημα",
+    "Documentary": "Ντοκιμαντέρ",
+    "Drama": "Δράμα",
+    "Family": "Οικογενειακή",
+    "Fantasy": "Φαντασία",
+    "Film-Noir": "Φιλμ Νουάρ",
+    "History": "Ιστορία",
+    "Horror": "Τρόμου",
+    "Music": "Μουσική",
+    "Musical": "Μιούζικαλ",
+    "Mystery": "Μυστήριο",
+    "News": "Ειδήσεις",
+    "Reality-TV": "Reality-TV",
+    "Romance": "Ρομάντζο",
+    "Sci-Fi": "Επιστημονική Φαντασία",
+    "Sport": "Αθλητική",
+    "Thriller": "Θρίλερ",
+    "War": "Πολεμική",
+    "Western": "Γουέστερν"
+  },
+  "genresView": {
+    "eyebrow": "Περιήγηση ανά",
+    "filmsCount": "{count} ταινίες",
+    "loadError": "Δεν ήταν δυνατή η φόρτωση ειδών.",
+    "loadingSpinner": "Φόρτωση ειδών…",
+    "subtitle": "Για τι μιλάει κάθε είδος - {count} μελέτες.",
+    "title": "ΕΙΔΗ",
+    "notEnoughFilms": "Δεν υπάρχουν αρκετές ταινίες σε {langs} για αυτό - πρόσθεσε γλώσσες ή άλλαξε σε Όλες τις ταινίες."
+  },
+  "home": {
+    "aboutHeading": "Σχετικά με αυτό το σύνολο δεδομένων",
+    "decadesBody": "Από τον ομιλούντα κινηματογράφο μέχρι τη δεκαετία του 2020 - πώς μιλούσε κάθε εποχή του σινεμά.",
+    "decadesHeading": "Περιπλανήσου στις δεκαετίες",
+    "fadeIn": "Fade in:",
+    "faqLink": "το FAQ",
+    "heroBody": "Μετρήσαμε κάθε λέξη που ειπώθηκε σε {count} ταινίες - {millions} εκατομμύρια από αυτές. Δες {trends}, γνώρισε {sweariest}, και ξεκαθάρισε το {versus} λέξη προς λέξη.",
+    "heroSweariest": "το πιο βωμολόχο σενάριο που γράφτηκε ποτέ",
+    "heroTitle": "Κάθε ταινία έχει ένα {vocabulary}.",
+    "heroTrends": "το 'awesome' να ξεπερνά το 'swell'",
+    "heroVersus": "Alien vs Aliens",
+    "heroVocabulary": "λεξιλόγιο",
+    "movieMeta": "{year} · {words} λέξεις",
+    "opusLink": "Συλλογή OPUS OpenSubtitles",
+    "shelfHeading": "Τράβηξε ένα σενάριο από το ράφι",
+    "aboutBody": "Καλύπτει {count} - κάθε λέξη διαλόγου υποτίτλων από το {opus} για ταινίες με τουλάχιστον 300 ψήφους στο IMDb, μετρημένες ανά ταινία. Δημοσιεύονται μόνο μετρήσεις λέξεων· δεν αναδιανέμεται κείμενο υποτίτλων. Μεθοδολογία και επιφυλάξεις: {faq}.",
+    "aboutCountAllFilms": "ταινίες - συμπεριλαμβάνονται μεταφρασμένοι υπότιτλοι",
+    "aboutCountLangFilms": "ταινίες στη γλώσσα {langs}",
+    "aboutCountTemplate": "{count} {kind}",
+    "aboutCountUnknown": "δεκάδες χιλιάδες",
+    "aboutSubtitleHint": "Αυτές οι μετρήσεις προέρχονται από τους αγγλικούς υπότιτλους των ταινιών, όχι από τους πρωτότυπους διαλόγους τους."
+  },
+  "leaderboard": {
+    "tabs": {
+      "everywhere": "Ακούγεται σε κάθε ταινία",
+      "films": "Ρεκόρ ταινιών",
+      "overview": "Επισκόπηση",
+      "shifts": "Σε άνοδο & σε πτώση",
+      "wonders": "Θαύματα μίας ταινίας",
+      "words": "Κορυφαίες λέξεις"
+    },
+    "words": {
+      "allGenresOption": "Όλα τα είδη",
+      "filmsCount": " · {count} ταινίες",
+      "filteringSpinner": "Φιλτράρισμα συλλογής… (το πρώτο φιλτραρισμένο ερώτημα φορτώνει τη μηχανή ανάλυσης)",
+      "fromLabel": "Από",
+      "genreLabel": "Είδος",
+      "intro": "Οι πιο συχνές λέξεις σε κάθε ταινία της συλλογής.",
+      "noMatches": "Καμία λέξη δεν ταιριάζει με αυτά τα φίλτρα - δοκίμασε “όλες οι λέξεις” ή “οποιοδήποτε είδος”.",
+      "rankByLabel": "Κατάταξη ανά",
+      "sortMovieishButton": "πιο κινηματογραφικές",
+      "sortMovieishTitle": "Σταθμίζει κάθε λέξη με βάση το πόσο περισσότερο ακούγεται στις ταινίες σε σχέση με τα καθημερινά αγγλικά",
+      "sortSpokenButton": "πιο συχνές",
+      "toLabel": "Έως"
+    },
+    "languageNote": "Βασίζεται σε {count} ταινίες στη γλώσσα {langs}, μετρημένες από τους αγγλικούς υπότιτλους τους."
+  },
+  "movie": {
+    "compareButton": "Σύγκρινε με άλλη ταινία",
+    "decadeLinkTitle": "Περισσότερα από τη δεκαετία του {decade}",
+    "distinctWordsLabel": "Διαφορετικές λέξεις",
+    "genreSeparator": " / ",
+    "imdbRatingLabel": "Βαθμολογία IMDb",
+    "loadingScript": "Φόρτωση σεναρίου…",
+    "mostSpokenHeading": "Οι πιο συχνές λέξεις",
+    "notFound": "Καμία ταινία με id “{id}” στο σύνολο δεδομένων.",
+    "signatureWordsBody": "Λέξεις που αυτή η ταινία χρησιμοποιεί πολύ περισσότερο από τις ταινίες συνολικά (log-odds σε σχέση με όλη τη συλλογή).",
+    "signatureWordsHeading": "Χαρακτηριστικές λέξεις",
+    "slugTitle": "{title} - {year}",
+    "vocabRichnessLabel": "Πλούτος λεξιλογίου",
+    "wordsSpokenLabel": "Λέξεις που ειπώθηκαν",
+    "imdbPosterTitle": "{title} στο IMDb",
+    "runtimeLabel": "Διάρκεια",
+    "runtimeValue": "{minutes} λεπτά",
+    "wordsPerMinuteLabel": "Λέξεις ανά λεπτό"
+  },
+  "themeToggle": {
+    "day": "ΜΕΡΑ",
+    "dayShoot": "Γύρισμα ημέρας",
+    "night": "ΝΥΧΤΑ",
+    "nightShoot": "Νυχτερινό γύρισμα",
+    "switchToDay": "Αλλαγή σε λειτουργία ημέρας",
+    "switchToNight": "Αλλαγή σε λειτουργία νύχτας"
+  },
+  "trends": {
+    "addAnotherWordPlaceholder": "Πρόσθεσε άλλη μια λέξη…",
+    "bigMovers": "Μεγάλες αλλαγές από τη δεκαετία του 1930",
+    "chartItButton": "Κάντο γράφημα",
+    "chartedWordsAriaLabel": "Λέξεις σε γράφημα",
+    "featuredPrefix": "Επιλεγμένο: {title}",
+    "firstWordPlaceholder": "Πληκτρολόγησε μια λέξη, π.χ. αγάπη",
+    "fullList": "πλήρης λίστα →",
+    "intro": "Πόσο συχνά ακούγεται μια λέξη σε όλες τις ταινίες της συλλογής, ανά εκατομμύριο λέξεων διαλόγου, ανά έτος κυκλοφορίας.",
+    "navNoun": "τάση",
+    "navSuffix": "μια νέα αλλαγή κάθε μέρα",
+    "notEnoughData": "Δεν υπάρχουν αρκετά δεδομένα για: {words} (χρειάζεται ≥20 χρήσεις σε όλη τη συλλογή, σε έτη με αρκετές ταινίες).",
+    "perThousandWords": " · {rate}/1χιλ. λέξεις",
+    "queryingCorpus": "Αναζήτηση στη συλλογή…",
+    "removeWordTitle": "Αφαίρεση “{word}”",
+    "topFilmByYearHeading": "Κορυφαία ταινία για “{word}” ανά έτος",
+    "topFilmByYearLoading": "Εύρεση κορυφαίας ταινίας για “{word}” ανά έτος…",
+    "topFilmsHeading": "Ταινίες που λένε “{word}” περισσότερο",
+    "topFilmsLoading": "Εύρεση ταινιών που λένε “{word}” περισσότερο…",
+    "trimmedYearsNote": "{years} κρυμμένα - πολύ λίγες ταινίες στη συλλογή για αξιόπιστα ποσοστά",
+    "tryClassic": "Ή δοκίμασε ένα κλασικό:",
+    "usesPerMillionWords": "χρήσεις ανά εκατομμύριο λέξεων διαλόγου",
+    "wordDetailsTablist": "Λεπτομέρειες λέξης",
+    "wordInputAriaLabel": "Λέξη για γράφημα",
+    "yAxisLabel": "χρήσεις ανά εκατομμύριο λέξεων",
+    "languageNote": "Βασίζεται σε {count} ταινίες στη γλώσσα {langs}, μετρημένες από τους αγγλικούς υπότιτλους τους.",
+    "notEnoughFilms": "Δεν υπάρχουν αρκετές ταινίες σε {langs} για αυτή την τάση - πρόσθεσε γλώσσες ή άλλαξε σε Όλες τις ταινίες."
+  },
+  "languageFilter": {
+    "allFilms": "Όλες οι ταινίες",
+    "apply": "Εφαρμογή",
+    "ariaLabel": "Φιλτράρισμα ταινιών ανά πρωτότυπη γλώσσα",
+    "countLabel": "{count} γλώσσες",
+    "hint": "Φιλτράρει με βάση την πρωτότυπη γλώσσα μιας ταινίας· οι μετρήσεις λέξεων προέρχονται από τους αγγλικούς υπότιτλους.",
+    "menuAriaLabel": "Πρωτότυπη γλώσσα",
+    "searchAriaLabel": "Αναζήτηση γλωσσών",
+    "searchPlaceholder": "Αναζήτηση γλωσσών…"
+  },
+  "localeFilterHint": {
+    "dismissAriaLabel": "Απόρριψη",
+    "filterButton": "Φίλτρο",
+    "message": "Βλέπεις στα {lang}; Φίλτραρε σε ταινίες στη γλώσσα {lang}."
+  },
+  "modal": {
+    "closeAriaLabel": "Κλείσιμο"
+  },
+  "filterExplainer": {
+    "badgeLabel": "μεταφρασμένο · {lang}",
+    "badgeTitle": "Πρωτότυπη γλώσσα {lang} - οι μετρήσεις προέρχονται από τους αγγλικούς μεταφρασμένους υπότιτλους. Πώς λειτουργεί αυτό;",
+    "dialogueNote": "Οι διάλογοι στην πρωτότυπη γλώσσα δεν βρίσκονται στο σύνολο δεδομένων - μόνο η αγγλική μετάφραση.",
+    "englishSubtitles": "αγγλικούς υπότιτλους",
+    "englishTranslation": "αγγλικής μετάφρασης",
+    "filteringBody": "{whatFiltering} την {originalLanguage} μιας ταινίας - πού γυρίστηκε, από τα μεταδεδομένα του TMDB - όχι τη γλώσσα των παρακάτω λέξεων.",
+    "linkText": "Πώς λειτουργεί αυτό;",
+    "modalTitle": "Πώς λειτουργεί",
+    "origin": "προέλευσης",
+    "originalLanguage": "πρωτότυπη γλώσσα",
+    "soSpanishMeans": "Άρα το \"Ισπανικά\" σημαίνει",
+    "spanishBody": "{soSpanishMeans} το λεξιλόγιο των αγγλικών υποτίτλων του κινηματογράφου ισπανικής {origin} - πώς λέξεις όπως \"solidarity\" ή \"dictatorship\" εμφανίζονται στους αγγλικούς υπότιτλους ισπανικών ταινιών - όχι ισπανικές λέξεις.",
+    "whatFiltering": "Τι φιλτράρεις:",
+    "whatWords": "Ποιες είναι οι λέξεις:",
+    "wordsBody": "{whatWords} κάθε μέτρηση στο Movie Words προέρχεται από τους {englishSubtitles} της ταινίας. Έχουμε μόνο το αγγλικό κομμάτι του OpenSubtitles, οπότε για μια μη αγγλόφωνη ταινία αυτές είναι οι λέξεις της {englishTranslation} της, όχι οι πρωτότυποι διάλογοι. Γι' αυτό μερικές φορές ξεγλιστράει μια αμετάφραστη λέξη - \"panna\", \"cotta\", \"samurai\"."
+  }
+}

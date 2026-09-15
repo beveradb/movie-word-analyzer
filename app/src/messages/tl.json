@@ -1,0 +1,411 @@
+{
+  "compare": {
+    "orLabel": "o",
+    "addDecadeAriaLabel": "Magdagdag ng dekada",
+    "addDecadeOption": "Magdagdag ng dekada…",
+    "addFilmPlaceholder": "Magdagdag ng pelikula…",
+    "addGenreAriaLabel": "Magdagdag ng genre",
+    "addGenreOption": "Magdagdag ng genre…",
+    "decadeLabel": "ANG {decade}S",
+    "decadeOptionLabel": "{decade}s",
+    "distinctWordsLabel": "Mga natatanging salita",
+    "featuredMatchupPrefix": "Tampok na matchup: {title}",
+    "filmsLabel": "Mga Pelikula",
+    "filmsPerYearLabel": "mga pelikula / taon",
+    "filmsPerYearTitle": "Mga pelikula bawat taon ng pag-release sa bahaging ito ng corpus",
+    "fullBreakdownLink": "buong breakdown →",
+    "headToHeadHeading": "Head to head",
+    "introBody": "Pagtabihin ang mga pelikula, dekada, at genre - hanggang tatlo ng anumang kombinasyon.",
+    "loadingLabel": "Nilo-load…",
+    "movieLabel": "{title} - {year}",
+    "navNoun": "matchup",
+    "navSuffix": "nagbabago araw-araw - o gumawa ng sarili mo sa itaas",
+    "noStandoutWords": "walang namumukod-tanging salita",
+    "nothingFoundMessage": "Walang nahanap para sa pagpipiliang iyon.",
+    "pickFilmPlaceholder": "Pumili ng pelikula…",
+    "ratioMoreLabel": "{ratio}× higit pa",
+    "removeButton": "alisin",
+    "sharedSignatureWordsHeading": "Mga signature na salitang pareho sila",
+    "signatureWordsHeading": "Mga signature na salita {note}",
+    "signatureWordsHighlightedNote": "(naka-highlight = pareho)",
+    "swearsPer1kLabel": "Mga mura / 1k salita",
+    "wordsPerFilmLabel": "Mga salita / pelikula",
+    "wordsSpokenLabel": "Mga salitang sinabi",
+    "headToHeadIntroMany": "Mga salitang mas madalas sabihin ng bawat isa kumpara sa iba - rate kada milyong salita ng sarili nitong diyalogo.",
+    "headToHeadIntroPair": "Mga salitang mas madalas sabihin ng bawat isa kumpara sa isa't isa - rate kada milyong salita ng sarili nitong diyalogo."
+  },
+  "languageSwitcher": {
+    "current": "Wika",
+    "label": "Pumili ng wika"
+  },
+  "nav": {
+    "sectionsLabel": "Mga Seksyon",
+    "compare": "Ihambing",
+    "decades": "Mga Dekada",
+    "explore": "I-explore",
+    "genres": "Mga Genre",
+    "leaderboard": "Leaderboard",
+    "trends": "Mga Trend"
+  },
+  "pos": {
+    "other": "iba pa",
+    "a": "mga pang-uri",
+    "adjective": "pang-uri",
+    "adverb": "pang-abay",
+    "n": "mga pangngalan",
+    "noun": "pangngalan",
+    "r": "mga pang-abay",
+    "v": "mga pandiwa",
+    "verb": "pandiwa",
+    "x": "mga pangalan at iba pa"
+  },
+  "ui": {
+    "errorBox": {
+      "retryButton": "Subukan Muli",
+      "heading": "Nawawalang eksena"
+    },
+    "featuredNav": {
+      "nextAriaLabel": "Susunod na tampok na {noun}",
+      "position": "{idx} ng {len}",
+      "prevAriaLabel": "Nakaraang tampok na {noun}"
+    },
+    "highlightWord": {
+      "spokenTimes": "sinabi ng {count} na beses",
+      "title": "“{word}” - {display}"
+    },
+    "movieSearch": {
+      "ariaLabel": "Maghanap ng mga pelikula",
+      "placeholder": "Maghanap ng pamagat ng pelikula…"
+    },
+    "poster": {
+      "alt": "Poster ng {title}"
+    },
+    "seriesLegend": {
+      "exploreTitle": "I-explore ang “{word}”"
+    },
+    "slug": {
+      "defaultPrefix": "INT."
+    },
+    "wordFilterBar": {
+      "allButton": "lahat ng salita",
+      "anyKindButton": "anumang uri",
+      "commonnessAriaLabel": "Pagiging karaniwan ng salita",
+      "hidingDescription": "itinatago ang pang-araw-araw na Ingles - ang ~2,000 pinakakaraniwang salita (the, know, get…)",
+      "interestingButton": "mga kawili-wiling salita",
+      "onlyKindsSuffix": " · tanging {kinds} lamang",
+      "showingDescription": "ipinapakita ang bawat salita, kabilang ang pang-araw-araw na Ingles",
+      "excludingKindsSuffix": " · itinatago ang {kinds}",
+      "posStateExcluded": "{kind}: hindi kasama (i-click para i-reset)",
+      "posStateIncluded": "{kind}: kasama (i-click para alisin)",
+      "posStateOff": "{kind}: naka-off (i-click para isama)"
+    }
+  },
+  "boards": {
+    "films": {
+      "chattiestBlurb": "pinakamaraming salita bawat minuto ng runtime",
+      "chattiestFmt": "{v} salita/min",
+      "chattiestTitle": "Pinakamabibilis magsalita",
+      "intro": "Ang mga record-holder ng corpus, apat na kategorya ng mga matitinding script.",
+      "loadingSpinner": "Nilo-load ang mga superlative ng pelikula…",
+      "repetitiveBlurb": "pinakamababang bahagi ng mga natatanging salita",
+      "repetitiveFmt": "{v}% natatangi",
+      "repetitiveTitle": "Pinakapaulit-ulit na mga script",
+      "sweariestBlurb": "pagmumura bawat 1,000 salita",
+      "sweariestFmt": "{v}/1k",
+      "sweariestTitle": "Mga script na pinakamaraming mura",
+      "vocabularyBlurb": "pinakamaraming natatanging salita sa isang script",
+      "vocabularyFmt": "{v} salita",
+      "vocabularyTitle": "Pinakamalalaking bokabularyo"
+    },
+    "overview": {
+      "adjectivesBlurb": "ang pinakamadalas sabihing mga kawili-wiling pang-uri",
+      "adjectivesTitle": "Mga pang-uri ng sine",
+      "fallingBlurb": "mas bihirang sabihin ngayon kaysa sa unang panahon ng sine",
+      "intro": "Ang mga headline ng corpus - ang nangungunang lima mula sa bawat board. Sundan ang anumang card para sa buong listahan, mga filter, at higit pa.",
+      "loadingSpinner": "Nilo-load ang mga headline…",
+      "risingBlurb": "mas madalas sabihin ngayon kaysa sa unang panahon ng sine",
+      "ubiquityBlurb": "mga salitang halos hindi nilalaktawan ng anumang script",
+      "wondersBlurb": "mga salitang pag-aari ng isang pelikula"
+    },
+    "ratio": {
+      "down": "{label}× pababa",
+      "up": "{label}× pataas"
+    },
+    "shifts": {
+      "fallingTitle": "Naglalaho",
+      "intro": "Paano nagbago ang diyalogo: mga salitang mas madalas (o mas bihirang) sabihin bawat milyong salita ngayon (2010s–20s) kaysa sa unang panahon ng sine (1930s–40s). Sinusundan ng mga linya ang bawat dekada; i-click ang isang salita para sa buong chart.",
+      "loadingSpinner": "Nilo-load ang mga pagbabago…",
+      "risingTitle": "Umuusbong"
+    },
+    "taster": {
+      "seeAllLink": "tingnan lahat →"
+    },
+    "ubiquity": {
+      "intro": "Bukod sa mga purong pang-ugnay, ang mga salitang ito ay lumalabas sa halos bawat isa sa {nFilms} na pelikula.",
+      "loadingSpinner": "Nilo-load…",
+      "shareOfFilms": "{share}% ng mga pelikula"
+    },
+    "wonders": {
+      "intro": "Mga salitang mas madalas sabihin ng isang pelikula kaysa sa pinagsama-samang iba pang pelikula - mga pangalan ng karakter, inimbentong salita, mga obsesyon.",
+      "item": "sinabi ng {count}× sa {movieLink} ({year}) - {share}% ng bawat pagkakataong sinasabi ito sa sine",
+      "loadingSpinner": "Nilo-load ang mga one-film wonder…"
+    }
+  },
+  "chart": {
+    "axisAriaLabel": "{yLabel} bawat taon",
+    "chartingSpinner": "Bumubuo ng chart ng tampok na pagbabago…",
+    "loadFailedMessage": "Hindi magawan ng chart ito - subukan ang susunod ▶",
+    "moreTrendsLink": "higit pang trend →",
+    "trendNoun": "trend",
+    "unpinAriaLabel": "I-unpin ang {year}",
+    "usesPerMillionCaption": "paggamit bawat milyong salita ng diyalogo",
+    "yAxisLabel": "paggamit bawat milyong salita"
+  },
+  "decadesView": {
+    "decadeLabel": "{decade}s",
+    "eyebrow": "Mag-browse ayon sa",
+    "filmsCount": "{count} na pelikula",
+    "loadError": "Hindi ma-load ang mga dekada.",
+    "loadingSpinner": "Nilo-load ang mga dekada…",
+    "subtitle": "Kung paano nagsalita ang bawat panahon ng sine - {count} na pag-aaral.",
+    "title": "MGA DEKADA",
+    "notEnoughFilms": "Hindi sapat ang mga pelikula sa {langs} para rito - magdagdag ng mga wika o lumipat sa Lahat ng pelikula."
+  },
+  "entity": {
+    "compareButton": "Ihambing ang {label} sa…",
+    "decadeEyebrow": "Est. {decade}",
+    "decadeLabel": "ANG {decade}S",
+    "decadeSubject": "ang {decade}s",
+    "genreEyebrow": "Pag-aaral ng genre",
+    "kindDecade": "dekada",
+    "kindGenre": "genre",
+    "loadingSpinner": "Nilo-load…",
+    "mostSpokenBody": "Mga simpleng bilang, hindi kasama ang mga stopword.",
+    "mostSpokenHeading": "Pinakamadalas sabihing mga salita",
+    "notFound": "Walang {kind} na “{id}” sa dataset.",
+    "notableScriptsHeading": "Mga kapansin-pansing script",
+    "signatureWordsBody": "Kung ano ang mas madalas pag-usapan ng {subject} kaysa sa mga pelikula sa pangkalahatan.",
+    "signatureWordsHeading": "Mga signature na salita",
+    "statsLine": "{films} na pelikula · {words} na salita ng diyalogo",
+    "notEnoughFilms": "Hindi sapat ang mga pelikula sa {langs} para sa {subject} - magdagdag ng mga wika o lumipat sa Lahat ng pelikula."
+  },
+  "eras": {
+    "1910": "ang mga unang reel",
+    "1920": "dumating ang mga talkie",
+    "1930": "ang ginintuang panahon",
+    "1940": "digmaan at film noir",
+    "1950": "ang atomic age",
+    "1960": "ang new wave",
+    "1970": "New Hollywood",
+    "1980": "ang panahon ng blockbuster",
+    "1990": "ang pag-usbong ng indie",
+    "2000": "ang mga taon ng multiplex",
+    "2010": "ang bukang-liwayway ng streaming",
+    "2020": "sine ngayon"
+  },
+  "errors": {
+    "body": "Pasensya na - karaniwang naaayos ito ng isang {reload}. Sira pa rin? Mag-email sa {email}.",
+    "eyebrow": "Smash cut sa:",
+    "reload": "reload",
+    "title": "May nasira."
+  },
+  "footer": {
+    "creditsBody": "Open source: {github} at non-commercial. Tanging mga hinangong bilang ng salita ang pina-publish - walang teksto ng subtitle na muling ipinamamahagi.",
+    "creditsHeading": "Mga Credit.",
+    "dataBody": "Ang buong dataset ay available na ma-download - tingnan ang {dataGuide} para sa mga link at impormasyon ({license}). Nagtataka tungkol sa pamamaraan, bias, o copyright? Basahin ang {faq}.",
+    "dataGuideLink": "ang gabay sa data",
+    "dataHeading": "Kunin ang data.",
+    "dataSourcesBody": "Data: mga bilang ng salita mula sa {opus} (Lison & Tiedemann, 2016), sa pamamagitan ng {openSubtitles}; metadata ng pelikula mula sa {imdbData} at {tmdb}. Impormasyon mula sa IMDb ({imdbUrl}). Ginamit nang may pahintulot.",
+    "faqLink": "FAQ",
+    "githubLink": "github.com/beveradb/moviewords",
+    "githubProfileLink": "GitHub",
+    "ideaBody": "Tiyak na may mga kawili-wiling pagsusuri na hindi pa namin naiisip! Kung gusto mong magbahagi ng ideya o nakabuo ng isang astig na bagay gamit ang data, {email}",
+    "ideaEmailLink": "mag-email sa andrew@beveridge.uk",
+    "ideaHeading": "May ideya?",
+    "imdbDataLink": "IMDb",
+    "imdbUrlLink": "https://www.imdb.com",
+    "instagramLink": "Instagram",
+    "licenseLink": "CC BY-NC-SA 4.0",
+    "lindsayLink": "Lindsay Wright Graphic Design",
+    "linkedinLink": "LinkedIn",
+    "madeByBody": "Gawa ni Andrew Beveridge - {github} · {linkedin} · {instagram} - na may orihinal na ideya ng aking mahal na asawang si {lindsay} - tingnan ang kanyang portfolio!",
+    "openSubtitlesLink": "OpenSubtitles.org",
+    "opusLink": "OPUS OpenSubtitles corpus",
+    "takedownEmailLink": "Mag-email ng takedown",
+    "tmdbDisclaimerBody": "Gumagamit ang produktong ito ng TMDB API ngunit hindi ini-endorso o na-certify ng TMDB. Mga poster sa pamamagitan ng TMDB - copyright ng kani-kanilang mga studio, ipinapakita upang tukuyin ang mga pelikulang tinatalakay. May hawak ng karapatan? {takedown} at aalisin ito kaagad.",
+    "tmdbLink": "TMDB"
+  },
+  "genres": {
+    "Action": "Aksyon",
+    "Adult": "Pang-adulto",
+    "Adventure": "Pakikipagsapalaran",
+    "Animation": "Animasyon",
+    "Biography": "Talambuhay",
+    "Comedy": "Komedya",
+    "Crime": "Krimen",
+    "Documentary": "Dokumentaryo",
+    "Drama": "Drama",
+    "Family": "Pamilya",
+    "Fantasy": "Pantasya",
+    "Film-Noir": "Film-Noir",
+    "History": "Kasaysayan",
+    "Horror": "Katatakutan",
+    "Music": "Musika",
+    "Musical": "Musikal",
+    "Mystery": "Misteryo",
+    "News": "Balita",
+    "Reality-TV": "Reality-TV",
+    "Romance": "Romansa",
+    "Sci-Fi": "Sci-Fi",
+    "Sport": "Palakasan",
+    "Thriller": "Thriller",
+    "War": "Digmaan",
+    "Western": "Western"
+  },
+  "genresView": {
+    "eyebrow": "Mag-browse ayon sa",
+    "filmsCount": "{count} na pelikula",
+    "loadError": "Hindi ma-load ang mga genre.",
+    "loadingSpinner": "Nilo-load ang mga genre…",
+    "subtitle": "Kung ano ang pinag-uusapan ng bawat genre - {count} na pag-aaral.",
+    "title": "MGA GENRE",
+    "notEnoughFilms": "Hindi sapat ang mga pelikula sa {langs} para rito - magdagdag ng mga wika o lumipat sa Lahat ng pelikula."
+  },
+  "home": {
+    "aboutHeading": "Tungkol sa dataset na ito",
+    "decadesBody": "Mula sa mga talkie hanggang sa 2020s - kung paano nagsalita ang bawat panahon ng sine.",
+    "decadesHeading": "Libutin ang mga dekada",
+    "fadeIn": "Fade in:",
+    "faqLink": "ang FAQ",
+    "heroBody": "Binilang namin ang bawat salitang sinabi sa {count} na pelikula - {millions} milyon sa kanila. Panoorin ang {trends}, kilalanin ang {sweariest}, at ayusin ang {versus} salita bawat salita.",
+    "heroSweariest": "ang script na may pinakamaraming mura na ginawa kailanman",
+    "heroTitle": "Bawat pelikula ay may {vocabulary}.",
+    "heroTrends": "nilampasan ng 'awesome' ang 'swell'",
+    "heroVersus": "Alien vs Aliens",
+    "heroVocabulary": "bokabularyo",
+    "movieMeta": "{year} · {words} na salita",
+    "opusLink": "OPUS OpenSubtitles corpus",
+    "shelfHeading": "Kumuha ng script mula sa istante",
+    "aboutBody": "Sumasaklaw sa {count} - bawat salita ng diyalogo ng subtitle mula sa {opus} para sa mga pelikulang may hindi bababa sa 300 boto sa IMDb, binilang bawat pelikula. Tanging mga bilang ng salita ang pina-publish; walang teksto ng subtitle na muling ipinamamahagi. Pamamaraan at mga caveat: {faq}.",
+    "aboutCountAllFilms": "mga pelikula - kasama ang mga isinaling subtitle",
+    "aboutCountLangFilms": "mga pelikulang nasa wikang {langs}",
+    "aboutCountTemplate": "{count} {kind}",
+    "aboutCountUnknown": "sampu-sampung libong",
+    "aboutSubtitleHint": "Ang mga bilang na ito ay mula sa English subtitles ng mga pelikula, hindi sa orihinal nilang diyalogo."
+  },
+  "leaderboard": {
+    "tabs": {
+      "everywhere": "Sinabi ng bawat pelikula",
+      "films": "Mga superlative ng pelikula",
+      "overview": "Pangkalahatang-ideya",
+      "shifts": "Mga umaangat at bumabagsak",
+      "wonders": "Mga one-film wonder",
+      "words": "Mga nangungunang salita"
+    },
+    "words": {
+      "allGenresOption": "Lahat ng genre",
+      "filmsCount": " · {count} na pelikula",
+      "filteringSpinner": "Pini-filter ang corpus… (ang unang na-filter na query ay naglo-load ng analytics engine)",
+      "fromLabel": "Mula",
+      "genreLabel": "Genre",
+      "intro": "Ang pinakamadalas sabihing mga salita sa bawat pelikula sa corpus.",
+      "noMatches": "Walang mga salitang tumutugma sa mga filter na ito - subukan ang “lahat ng salita” o “anumang uri”.",
+      "rankByLabel": "I-rank ayon sa",
+      "sortMovieishButton": "pinaka-movie-ish",
+      "sortMovieishTitle": "Tinitimbang ang bawat salita kung gaano kadalas itong sabihin sa mga pelikula kaysa sa pang-araw-araw na Ingles",
+      "sortSpokenButton": "pinakamadalas sabihin",
+      "toLabel": "Hanggang"
+    },
+    "languageNote": "Batay sa {count} na pelikulang nasa wikang {langs}, na sinukat mula sa kanilang English subtitles."
+  },
+  "movie": {
+    "compareButton": "Ihambing sa ibang pelikula",
+    "decadeLinkTitle": "Higit pa mula sa {decade}s",
+    "distinctWordsLabel": "Mga natatanging salita",
+    "genreSeparator": " / ",
+    "imdbRatingLabel": "Rating sa IMDb",
+    "loadingScript": "Nilo-load ang script…",
+    "mostSpokenHeading": "Pinakamadalas sabihing mga salita",
+    "notFound": "Walang pelikulang may id na “{id}” sa dataset.",
+    "signatureWordsBody": "Mga salitang mas madalas gamitin ng pelikulang ito kaysa sa mga pelikula sa pangkalahatan (log-odds vs ang buong corpus).",
+    "signatureWordsHeading": "Mga signature na salita",
+    "slugTitle": "{title} - {year}",
+    "vocabRichnessLabel": "Yaman ng bokabularyo",
+    "wordsSpokenLabel": "Mga salitang sinabi",
+    "imdbPosterTitle": "{title} sa IMDb",
+    "runtimeLabel": "Haba",
+    "runtimeValue": "{minutes} min",
+    "wordsPerMinuteLabel": "Mga salita kada minuto"
+  },
+  "themeToggle": {
+    "day": "ARAW",
+    "dayShoot": "Day shoot",
+    "night": "GABI",
+    "nightShoot": "Night shoot",
+    "switchToDay": "Lumipat sa day mode",
+    "switchToNight": "Lumipat sa night mode"
+  },
+  "trends": {
+    "addAnotherWordPlaceholder": "Magdagdag ng isa pang salita…",
+    "bigMovers": "Mga malalaking pagbabago mula noong 1930s",
+    "chartItButton": "Gawan ng chart",
+    "chartedWordsAriaLabel": "Mga salitang ginawan ng chart",
+    "featuredPrefix": "Tampok: {title}",
+    "firstWordPlaceholder": "Mag-type ng salita, hal. love",
+    "fullList": "buong listahan →",
+    "intro": "Kung gaano kadalas sinasabi ang isang salita sa lahat ng pelikula sa corpus, bawat milyong salita ng diyalogo, ayon sa taon ng pag-release.",
+    "navNoun": "trend",
+    "navSuffix": "isang bagong pagbabago araw-araw",
+    "notEnoughData": "Hindi sapat ang data para sa: {words} (kailangan ng ≥20 na paggamit sa buong corpus, sa mga taon na may sapat na pelikula).",
+    "perThousandWords": " · {rate}/1k salita",
+    "queryingCorpus": "Kini-query ang corpus…",
+    "removeWordTitle": "Alisin ang “{word}”",
+    "topFilmByYearHeading": "Nangungunang pelikula para sa “{word}” bawat taon",
+    "topFilmByYearLoading": "Hinahanap ang nangungunang pelikula ng “{word}” bawat taon…",
+    "topFilmsHeading": "Mga pelikulang pinakamadalas magsabi ng “{word}”",
+    "topFilmsLoading": "Hinahanap ang mga pelikulang pinakamadalas magsabi ng “{word}”…",
+    "trimmedYearsNote": "{years} ang nakatago - masyadong kaunti ang mga pelikula sa corpus para sa maaasahang mga rate",
+    "tryClassic": "O subukan ang isang classic:",
+    "usesPerMillionWords": "paggamit bawat milyong salita ng diyalogo",
+    "wordDetailsTablist": "Mga detalye ng salita",
+    "wordInputAriaLabel": "Salitang gagawan ng chart",
+    "yAxisLabel": "paggamit bawat milyong salita",
+    "languageNote": "Batay sa {count} na pelikulang nasa wikang {langs}, na sinukat mula sa kanilang English subtitles.",
+    "notEnoughFilms": "Hindi sapat ang mga pelikula sa {langs} para sa trend na ito - magdagdag ng mga wika o lumipat sa Lahat ng pelikula."
+  },
+  "languageFilter": {
+    "allFilms": "Lahat ng pelikula",
+    "apply": "I-apply",
+    "ariaLabel": "I-filter ang mga pelikula ayon sa orihinal na wika",
+    "countLabel": "{count} na wika",
+    "hint": "Fini-filter ayon sa orihinal na wika ng pelikula; ang bilang ng mga salita ay mula sa English subtitles.",
+    "menuAriaLabel": "Orihinal na wika",
+    "searchAriaLabel": "Maghanap ng mga wika",
+    "searchPlaceholder": "Maghanap ng mga wika…"
+  },
+  "localeFilterHint": {
+    "dismissAriaLabel": "I-dismiss",
+    "filterButton": "I-filter",
+    "message": "Tinitingnan sa {lang}? I-filter sa mga pelikulang nasa wikang {lang}."
+  },
+  "modal": {
+    "closeAriaLabel": "Isara"
+  },
+  "filterExplainer": {
+    "badgeLabel": "isinalin · {lang}",
+    "badgeTitle": "Orihinal na wika {lang} - ang mga bilang ay mula sa isinaling English subtitles. Paano ito gumagana?",
+    "dialogueNote": "Wala sa dataset ang orihinal na diyalogo - tanging ang English na salin lamang.",
+    "englishSubtitles": "English subtitles",
+    "englishTranslation": "English na salin",
+    "filteringBody": "{whatFiltering} ang {originalLanguage} ng pelikula - kung saan ito ginawa, mula sa TMDB metadata - hindi ang wika ng mga salita sa ibaba.",
+    "linkText": "Paano ito gumagana?",
+    "modalTitle": "Paano ito gumagana",
+    "origin": "pinagmulan",
+    "originalLanguage": "orihinal na wika",
+    "soSpanishMeans": "Kaya ang ibig sabihin ng \"Spanish\" ay",
+    "spanishBody": "{soSpanishMeans} ang bokabularyo sa English-subtitle ng sinehang Spanish-{origin} - kung paano lumalabas ang mga salitang tulad ng \"solidarity\" o \"dictatorship\" sa English subs ng mga Spanish na pelikula - hindi mga salitang Spanish.",
+    "whatFiltering": "Ang fini-filter mo:",
+    "whatWords": "Ang mga salita:",
+    "wordsBody": "{whatWords} bawat bilang sa Movie Words ay mula sa {englishSubtitles} ng pelikula. Mayroon lang kaming English OpenSubtitles track, kaya para sa pelikulang hindi English, ito ang mga salita ng {englishTranslation} nito, hindi ang orihinal na diyalogo. Kaya minsan may nakakalusot na hindi isinaling salita - \"panna\", \"cotta\", \"samurai\"."
+  }
+}

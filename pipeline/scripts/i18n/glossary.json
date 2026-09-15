@@ -1,0 +1,14 @@
+{
+  "_meta": { "note": "null value = keep term untranslated; string = forced translation" },
+  "terms": {
+    "Movie Words": { "_all": null },
+    "moviewords.org": { "_all": null },
+    "IMDb": { "_all": null },
+    "TMDB": { "_all": null },
+    "OpenSubtitles": { "_all": null },
+    "OPUS": { "_all": null },
+    "DuckDB": { "_all": null },
+    "Cloudflare": { "_all": null },
+    "The Big Lebowski": { "_all": null }
+  }
+}

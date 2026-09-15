@@ -1,0 +1,411 @@
+{
+  "compare": {
+    "orLabel": "tai",
+    "addDecadeAriaLabel": "Lisää vuosikymmen",
+    "addDecadeOption": "Lisää vuosikymmen…",
+    "addFilmPlaceholder": "Lisää elokuva…",
+    "addGenreAriaLabel": "Lisää genre",
+    "addGenreOption": "Lisää genre…",
+    "decadeLabel": "{decade}-LUKU",
+    "decadeOptionLabel": "{decade}-luku",
+    "distinctWordsLabel": "Eri sanoja",
+    "featuredMatchupPrefix": "Esitelty taistelupari: {title}",
+    "filmsLabel": "Elokuvat",
+    "filmsPerYearLabel": "elokuvaa / vuosi",
+    "filmsPerYearTitle": "Elokuvia julkaisuvuotta kohden tässä aineiston osassa",
+    "fullBreakdownLink": "koko erittely →",
+    "headToHeadHeading": "Vastakkain",
+    "introBody": "Laita elokuvia, vuosikymmeniä ja genrejä vierekkäin - enintään kolme mitä tahansa yhdistelmää.",
+    "loadingLabel": "Ladataan…",
+    "movieLabel": "{title} - {year}",
+    "navNoun": "taistelupari",
+    "navSuffix": "vaihtuu päivittäin - tai rakenna omasi yllä",
+    "noStandoutWords": "ei erottuvia sanoja",
+    "nothingFoundMessage": "Tällä valinnalla ei löytynyt mitään.",
+    "pickFilmPlaceholder": "Valitse elokuva…",
+    "ratioMoreLabel": "{ratio}× enemmän",
+    "removeButton": "poista",
+    "sharedSignatureWordsHeading": "Jaetut tunnusomaiset sanat",
+    "signatureWordsHeading": "Tunnusomaiset sanat {note}",
+    "signatureWordsHighlightedNote": "(korostettu = jaettu)",
+    "swearsPer1kLabel": "Kirosanoja / 1k sanaa",
+    "wordsPerFilmLabel": "Sanoja / elokuva",
+    "wordsSpokenLabel": "Puhuttuja sanoja",
+    "headToHeadIntroMany": "Mitä kukin sanoo paljon enemmän kuin muut - esiintyvyys miljoonaa sanaa kohden omassa dialogissaan.",
+    "headToHeadIntroPair": "Mitä kumpikin sanoo paljon enemmän kuin toinen - esiintyvyys miljoonaa sanaa kohden omassa dialogissaan."
+  },
+  "languageSwitcher": {
+    "current": "Kieli",
+    "label": "Valitse kieli"
+  },
+  "nav": {
+    "sectionsLabel": "Osiot",
+    "compare": "Vertaile",
+    "decades": "Vuosikymmenet",
+    "explore": "Tutki",
+    "genres": "Genret",
+    "leaderboard": "Tulostaulu",
+    "trends": "Trendit"
+  },
+  "pos": {
+    "other": "muu",
+    "a": "adjektiivit",
+    "adjective": "adjektiivi",
+    "adverb": "adverbi",
+    "n": "substantiivit",
+    "noun": "substantiivi",
+    "r": "adverbit",
+    "v": "verbit",
+    "verb": "verbi",
+    "x": "nimet ja muut"
+  },
+  "ui": {
+    "errorBox": {
+      "retryButton": "Yritä uudelleen",
+      "heading": "Kohtaus puuttuu"
+    },
+    "featuredNav": {
+      "nextAriaLabel": "Seuraava esitelty {noun}",
+      "position": "{idx} / {len}",
+      "prevAriaLabel": "Edellinen esitelty {noun}"
+    },
+    "highlightWord": {
+      "spokenTimes": "puhuttu {count} kertaa",
+      "title": "”{word}” - {display}"
+    },
+    "movieSearch": {
+      "ariaLabel": "Etsi elokuvia",
+      "placeholder": "Etsi elokuvan nimellä…"
+    },
+    "poster": {
+      "alt": "{title} -juliste"
+    },
+    "seriesLegend": {
+      "exploreTitle": "Tutki sanaa ”{word}”"
+    },
+    "slug": {
+      "defaultPrefix": "SISÄKUVA."
+    },
+    "wordFilterBar": {
+      "allButton": "kaikki sanat",
+      "anyKindButton": "mikä tahansa tyyppi",
+      "commonnessAriaLabel": "Sanan yleisyys",
+      "hidingDescription": "piilotetaan arkikieli - noin 2 000 yleisintä sanaa (the, know, get…)",
+      "interestingButton": "mielenkiintoiset sanat",
+      "onlyKindsSuffix": " · vain {kinds}",
+      "showingDescription": "näytetään kaikki sanat, arkikieli mukaan lukien",
+      "excludingKindsSuffix": " · piilotetaan {kinds}",
+      "posStateExcluded": "{kind}: poissuljettu (klikkaa palauttaaksesi)",
+      "posStateIncluded": "{kind}: sisällytetty (klikkaa poissulkeaksesi)",
+      "posStateOff": "{kind}: pois päältä (klikkaa sisällyttääksesi)"
+    }
+  },
+  "boards": {
+    "films": {
+      "chattiestBlurb": "eniten sanoja minuutissa",
+      "chattiestFmt": "{v} sanaa/min",
+      "chattiestTitle": "Nopeimmat puhujat",
+      "intro": "Aineiston ennätyksenhaltijat, neljä kategoriaa äärimmäisiä käsikirjoituksia.",
+      "loadingSpinner": "Ladataan elokuvien huippuja…",
+      "repetitiveBlurb": "pienin osuus uniikkeja sanoja",
+      "repetitiveFmt": "{v}% uniikkeja",
+      "repetitiveTitle": "Toistavimmat käsikirjoitukset",
+      "sweariestBlurb": "kirosanoja 1 000 sanaa kohden",
+      "sweariestFmt": "{v}/1k",
+      "sweariestTitle": "Kiroilevimmat käsikirjoitukset",
+      "vocabularyBlurb": "eniten eri sanoja yhdessä käsikirjoituksessa",
+      "vocabularyFmt": "{v} sanaa",
+      "vocabularyTitle": "Laajimmat sanavarastot"
+    },
+    "overview": {
+      "adjectivesBlurb": "eniten puhutut mielenkiintoiset adjektiivit",
+      "adjectivesTitle": "Elokuvan adjektiivit",
+      "fallingBlurb": "sanotaan nykyään paljon vähemmän kuin varhaisissa elokuvissa",
+      "intro": "Aineiston otsikot - jokaisen taulun viisi parasta. Klikkaa mitä tahansa korttia nähdäksesi koko listan, suodattimet ja muuta.",
+      "loadingSpinner": "Ladataan otsikoita…",
+      "risingBlurb": "sanotaan nykyään paljon enemmän kuin varhaisissa elokuvissa",
+      "ubiquityBlurb": "sanoja, joita melkein mikään käsikirjoitus ei ohita",
+      "wondersBlurb": "sanoja, jotka yksi elokuva omistaa"
+    },
+    "ratio": {
+      "down": "{label}× alas",
+      "up": "{label}× ylös"
+    },
+    "shifts": {
+      "fallingTitle": "Häivytys ulos",
+      "intro": "Miten dialogi muuttui: sanoja, joita sanotaan paljon enemmän (tai paljon vähemmän) miljoonaa sanaa kohden nyt (2010–20-luvuilla) kuin varhaisissa elokuvissa (1930–40-luvuilla). Viivat seuraavat jokaista vuosikymmentä; klikkaa sanaa nähdäksesi koko kaavion.",
+      "loadingSpinner": "Ladataan muutoksia…",
+      "risingTitle": "Nousussa"
+    },
+    "taster": {
+      "seeAllLink": "katso kaikki →"
+    },
+    "ubiquity": {
+      "intro": "Pelkkien sidesanojen lisäksi nämä sanat esiintyvät melkein jokaisessa aineiston {nFilms} elokuvasta.",
+      "loadingSpinner": "Ladataan…",
+      "shareOfFilms": "{share}% elokuvista"
+    },
+    "wonders": {
+      "intro": "Sanoja, joita yksi elokuva sanoo enemmän kuin muu elokuvamaailma yhteensä - hahmojen nimiä, keksittyjä sanoja, pakkomielteitä.",
+      "item": "sanottu {count}× elokuvassa {movieLink} ({year}) - {share}% kaikista kerroista, kun elokuvissa sanotaan niin",
+      "loadingSpinner": "Ladataan yhden elokuvan ihmeitä…"
+    }
+  },
+  "chart": {
+    "axisAriaLabel": "{yLabel} vuoden mukaan",
+    "chartingSpinner": "Piirretään esiteltyä muutosta…",
+    "loadFailedMessage": "Tätä ei voitu piirtää - kokeile seuraavaa ▶",
+    "moreTrendsLink": "lisää trendejä →",
+    "trendNoun": "trendi",
+    "unpinAriaLabel": "Irrota {year}",
+    "usesPerMillionCaption": "käyttökertaa miljoonaa dialogin sanaa kohden",
+    "yAxisLabel": "käyttökertaa miljoonaa sanaa kohden"
+  },
+  "decadesView": {
+    "decadeLabel": "{decade}-luku",
+    "eyebrow": "Selaa",
+    "filmsCount": "{count} elokuvaa",
+    "loadError": "Vuosikymmeniä ei voitu ladata.",
+    "loadingSpinner": "Ladataan vuosikymmeniä…",
+    "subtitle": "Miten elokuvan eri aikakausina puhuttiin - {count} tutkimusta.",
+    "title": "VUOSIKYMMENET",
+    "notEnoughFilms": "Tähän ei ole tarpeeksi elokuvia kielellä {langs} - lisää kieliä tai valitse Kaikki elokuvat."
+  },
+  "entity": {
+    "compareButton": "Vertaile: {label} ja…",
+    "decadeEyebrow": "Arviolta {decade}",
+    "decadeLabel": "{decade}-LUKU",
+    "decadeSubject": "{decade}-luku",
+    "genreEyebrow": "Genretutkimus",
+    "kindDecade": "vuosikymmen",
+    "kindGenre": "genre",
+    "loadingSpinner": "Ladataan…",
+    "mostSpokenBody": "Pelkät lukumäärät, sulkusanoja ei lasketa.",
+    "mostSpokenHeading": "Eniten puhutut sanat",
+    "notFound": "Aineistosta ei löydy: {kind} ”{id}”.",
+    "notableScriptsHeading": "Merkittäviä käsikirjoituksia",
+    "signatureWordsBody": "Mistä {subject} puhuu paljon enemmän kuin elokuvat yleensä.",
+    "signatureWordsHeading": "Tunnusomaiset sanat",
+    "statsLine": "{films} elokuvaa · {words} sanaa dialogia",
+    "notEnoughFilms": "Kohteelle {subject} ei ole tarpeeksi elokuvia kielellä {langs} - lisää kieliä tai valitse Kaikki elokuvat."
+  },
+  "eras": {
+    "1910": "ensimmäiset kelat",
+    "1920": "äänielokuvat saapuvat",
+    "1930": "kultakausi",
+    "1940": "sota ja film noir",
+    "1950": "atomiaika",
+    "1960": "uusi aalto",
+    "1970": "Uusi Hollywood",
+    "1980": "blockbuster-aikakausi",
+    "1990": "indie-buumi",
+    "2000": "multiplex-vuodet",
+    "2010": "suoratoiston aamunkoitto",
+    "2020": "elokuva nyt"
+  },
+  "errors": {
+    "body": "Pahoittelut tästä - {reload} yleensä korjaa asian. Yhä rikki? Laita sähköpostia {email}.",
+    "eyebrow": "Äkkileikkaus:",
+    "reload": "sivun päivitys",
+    "title": "Jotain meni rikki."
+  },
+  "footer": {
+    "creditsBody": "Avointa lähdekoodia: {github} ja ei-kaupallinen. Vain johdetut sanamäärät julkaistaan - tekstityksiä ei jaeta eteenpäin.",
+    "creditsHeading": "Tekijät.",
+    "dataBody": "Koko aineisto on ladattavissa - katso linkit ja tiedot täältä: {dataGuide} ({license}). Mietitkö metodologiaa, vinoumia tai tekijänoikeuksia? Lue {faq}.",
+    "dataGuideLink": "dataopas",
+    "dataHeading": "Hae data.",
+    "dataSourcesBody": "Data: sanamäärät {opus} (Lison & Tiedemann, 2016), lähteenä {openSubtitles}; elokuvien metatiedot {imdbData} ja {tmdb}. Tiedot tarjoaa IMDb ({imdbUrl}). Käytetty luvalla.",
+    "faqLink": "UKK",
+    "githubLink": "github.com/beveradb/moviewords",
+    "githubProfileLink": "GitHub",
+    "ideaBody": "Varmasti on mielenkiintoisia analyysejä, joita emme ole tulleet ajatelleeksi! Jos haluat jakaa idean tai olet rakentanut jotain siistiä datalla, {email}",
+    "ideaEmailLink": "laita sähköpostia andrew@beveridge.uk",
+    "ideaHeading": "Onko sinulla idea?",
+    "imdbDataLink": "IMDb",
+    "imdbUrlLink": "https://www.imdb.com",
+    "instagramLink": "Instagram",
+    "licenseLink": "CC BY-NC-SA 4.0",
+    "lindsayLink": "Lindsay Wright Graphic Design",
+    "linkedinLink": "LinkedIn",
+    "madeByBody": "Tekijä Andrew Beveridge - {github} · {linkedin} · {instagram} - alkuperäinen idea ihanalta vaimoltani {lindsay} - käy katsomassa hänen portfoliotaan!",
+    "openSubtitlesLink": "OpenSubtitles.org",
+    "opusLink": "OPUS OpenSubtitles corpus",
+    "takedownEmailLink": "Lähetä poistopyyntö sähköpostitse",
+    "tmdbDisclaimerBody": "Tämä tuote käyttää TMDB APIa, mutta TMDB ei ole suositellut tai sertifioinut sitä. Julisteet TMDB:n kautta - tekijänoikeudet kuuluvat niiden vastaaville studioille, näytetään käsiteltyjen elokuvien tunnistamiseksi. Oletko oikeuksienhaltija? {takedown} ja se poistetaan viipymättä.",
+    "tmdbLink": "TMDB"
+  },
+  "genres": {
+    "Action": "Toiminta",
+    "Adult": "Aikuisten",
+    "Adventure": "Seikkailu",
+    "Animation": "Animaatio",
+    "Biography": "Elämäkerta",
+    "Comedy": "Komedia",
+    "Crime": "Rikos",
+    "Documentary": "Dokumentti",
+    "Drama": "Draama",
+    "Family": "Perhe",
+    "Fantasy": "Fantasia",
+    "Film-Noir": "Film-Noir",
+    "History": "Historia",
+    "Horror": "Kauhu",
+    "Music": "Musiikki",
+    "Musical": "Musikaali",
+    "Mystery": "Mysteeri",
+    "News": "Uutiset",
+    "Reality-TV": "Tosi-TV",
+    "Romance": "Romantiikka",
+    "Sci-Fi": "Sci-Fi",
+    "Sport": "Urheilu",
+    "Thriller": "Trilleri",
+    "War": "Sota",
+    "Western": "Lännenelokuva"
+  },
+  "genresView": {
+    "eyebrow": "Selaa",
+    "filmsCount": "{count} elokuvaa",
+    "loadError": "Genrejä ei voitu ladata.",
+    "loadingSpinner": "Ladataan genrejä…",
+    "subtitle": "Mistä kukin genre puhuu - {count} tutkimusta.",
+    "title": "GENRET",
+    "notEnoughFilms": "Tähän ei ole tarpeeksi elokuvia kielellä {langs} - lisää kieliä tai valitse Kaikki elokuvat."
+  },
+  "home": {
+    "aboutHeading": "Tietoa tästä aineistosta",
+    "decadesBody": "Äänielokuvista 2020-luvulle - miten elokuvan eri aikakausina puhuttiin.",
+    "decadesHeading": "Vaella vuosikymmenissä",
+    "fadeIn": "Häivytys sisään:",
+    "faqLink": "UKK",
+    "heroBody": "Laskimme jokaisen puhutun sanan {count} elokuvassa - niitä on {millions} miljoonaa. Seuraa {trends}, tapaa {sweariest} ja ratkaise {versus} sana sanalta.",
+    "heroSweariest": "kaikkien aikojen kiroilevin käsikirjoitus",
+    "heroTitle": "Jokaisella elokuvalla on {vocabulary}.",
+    "heroTrends": "'awesome' ohittaa sanan 'swell'",
+    "heroVersus": "Alien vs Aliens",
+    "heroVocabulary": "sanavarasto",
+    "movieMeta": "{year} · {words} sanaa",
+    "opusLink": "OPUS OpenSubtitles corpus",
+    "shelfHeading": "Vedä käsikirjoitus hyllystä",
+    "aboutBody": "Kattaa {count} - jokainen dialogin sana tekstityksistä {opus} -aineistosta elokuville, joilla on vähintään 300 IMDb-ääntä, laskettuna elokuvaa kohden. Vain sanamäärät julkaistaan; tekstityksiä ei jaeta eteenpäin. Metodologia ja varaukset: {faq}.",
+    "aboutCountAllFilms": "elokuvaa - käännetyt tekstitykset mukana",
+    "aboutCountLangFilms": "{langs}-kielistä elokuvaa",
+    "aboutCountTemplate": "{count} {kind}",
+    "aboutCountUnknown": "kymmeniä tuhansia",
+    "aboutSubtitleHint": "Nämä luvut tulevat elokuvien englanninkielisistä tekstityksistä, eivät niiden alkuperäisestä dialogista."
+  },
+  "leaderboard": {
+    "tabs": {
+      "everywhere": "Jokaisessa elokuvassa sanottu",
+      "films": "Elokuvien huiput",
+      "overview": "Yleiskatsaus",
+      "shifts": "Nousijat ja laskijat",
+      "wonders": "Yhden elokuvan ihmeet",
+      "words": "Huippusanat"
+    },
+    "words": {
+      "allGenresOption": "Kaikki genret",
+      "filmsCount": " · {count} elokuvaa",
+      "filteringSpinner": "Suodatetaan aineistoa… (ensimmäinen suodatettu kysely lataa analytiikkamoottorin)",
+      "fromLabel": "Alkaen",
+      "genreLabel": "Genre",
+      "intro": "Eniten puhutut sanat kaikissa aineiston elokuvissa.",
+      "noMatches": "Mitkään sanat eivät vastaa näitä suodattimia - kokeile ”kaikki sanat” tai ”mikä tahansa tyyppi”.",
+      "rankByLabel": "Järjestä",
+      "sortMovieishButton": "elokuvamaisin",
+      "sortMovieishTitle": "Painottaa jokaista sanaa sen mukaan, kuinka paljon enemmän elokuvissa sanotaan sitä kuin arkikielessä",
+      "sortSpokenButton": "eniten puhuttu",
+      "toLabel": "Asti"
+    },
+    "languageNote": "Perustuu {count} {langs}-kieliseen elokuvaan, mitattuna niiden englanninkielisistä tekstityksistä."
+  },
+  "movie": {
+    "compareButton": "Vertaile toisen elokuvan kanssa",
+    "decadeLinkTitle": "Lisää {decade}-luvulta",
+    "distinctWordsLabel": "Eri sanoja",
+    "genreSeparator": " / ",
+    "imdbRatingLabel": "IMDb-arvosana",
+    "loadingScript": "Ladataan käsikirjoitusta…",
+    "mostSpokenHeading": "Eniten puhutut sanat",
+    "notFound": "Aineistossa ei ole elokuvaa id:llä ”{id}”.",
+    "signatureWordsBody": "Sanoja, joita tämä elokuva käyttää paljon enemmän kuin elokuvat yleensä (log-odds verrattuna koko aineistoon).",
+    "signatureWordsHeading": "Tunnusomaiset sanat",
+    "slugTitle": "{title} - {year}",
+    "vocabRichnessLabel": "Sanavaraston rikkaus",
+    "wordsSpokenLabel": "Puhuttuja sanoja",
+    "imdbPosterTitle": "{title} IMDb:ssä",
+    "runtimeLabel": "Kesto",
+    "runtimeValue": "{minutes} min",
+    "wordsPerMinuteLabel": "Sanoja minuutissa"
+  },
+  "themeToggle": {
+    "day": "PÄIVÄ",
+    "dayShoot": "Päiväkuvaus",
+    "night": "YÖ",
+    "nightShoot": "Yökuvaus",
+    "switchToDay": "Vaihda päivätilaan",
+    "switchToNight": "Vaihda yötilaan"
+  },
+  "trends": {
+    "addAnotherWordPlaceholder": "Lisää toinen sana…",
+    "bigMovers": "Suuret muuttujat 1930-luvulta lähtien",
+    "chartItButton": "Piirrä kaavio",
+    "chartedWordsAriaLabel": "Kaavioon piirretyt sanat",
+    "featuredPrefix": "Esittelyssä: {title}",
+    "firstWordPlaceholder": "Kirjoita sana, esim. love",
+    "fullList": "koko lista →",
+    "intro": "Kuinka usein sanaa puhutaan kaikissa aineiston elokuvissa, miljoonaa dialogin sanaa kohden, julkaisuvuoden mukaan.",
+    "navNoun": "trendi",
+    "navSuffix": "uusi muutos joka päivä",
+    "notEnoughData": "Ei tarpeeksi dataa sanalle: {words} (vaatii ≥20 käyttökertaa koko aineistossa, vuosina, joina on tarpeeksi elokuvia).",
+    "perThousandWords": " · {rate}/1k sanaa",
+    "queryingCorpus": "Haetaan aineistosta…",
+    "removeWordTitle": "Poista ”{word}”",
+    "topFilmByYearHeading": "Huippuelokuva sanalle ”{word}” vuoden mukaan",
+    "topFilmByYearLoading": "Etsitään huippuelokuvaa sanalle ”{word}” per vuosi…",
+    "topFilmsHeading": "Elokuvat, jotka sanovat ”{word}” eniten",
+    "topFilmsLoading": "Etsitään elokuvia, jotka sanovat ”{word}” eniten…",
+    "trimmedYearsNote": "{years} piilotettu - liian vähän elokuvia aineistossa luotettavia suhteita varten",
+    "tryClassic": "Tai kokeile klassikkoa:",
+    "usesPerMillionWords": "käyttökertaa miljoonaa dialogin sanaa kohden",
+    "wordDetailsTablist": "Sanan tiedot",
+    "wordInputAriaLabel": "Kaavioon piirrettävä sana",
+    "yAxisLabel": "käyttökertaa miljoonaa sanaa kohden",
+    "languageNote": "Perustuu {count} {langs}-kieliseen elokuvaan, mitattuna niiden englanninkielisistä tekstityksistä.",
+    "notEnoughFilms": "Tähän trendiin ei ole tarpeeksi elokuvia kielellä {langs} - lisää kieliä tai valitse Kaikki elokuvat."
+  },
+  "languageFilter": {
+    "allFilms": "Kaikki elokuvat",
+    "apply": "Käytä",
+    "ariaLabel": "Suodata elokuvia alkuperäiskielen mukaan",
+    "countLabel": "{count} kieltä",
+    "hint": "Suodattaa elokuvan alkuperäiskielen mukaan; sanaluvut tulevat englanninkielisistä tekstityksistä.",
+    "menuAriaLabel": "Alkuperäiskieli",
+    "searchAriaLabel": "Etsi kieliä",
+    "searchPlaceholder": "Etsi kieliä…"
+  },
+  "localeFilterHint": {
+    "dismissAriaLabel": "Ohita",
+    "filterButton": "Suodata",
+    "message": "Selaatko kielellä {lang}? Suodata {lang}-kielisiin elokuviin."
+  },
+  "modal": {
+    "closeAriaLabel": "Sulje"
+  },
+  "filterExplainer": {
+    "badgeLabel": "käännetty · {lang}",
+    "badgeTitle": "Alkuperäiskieli {lang} - luvut tulevat englanniksi käännetyistä tekstityksistä. Miten tämä toimii?",
+    "dialogueNote": "Alkuperäiskielistä dialogia ei ole tietoaineistossa - vain englanninkielinen käännös.",
+    "englishSubtitles": "englanninkielisistä tekstityksistä",
+    "englishTranslation": "englanninkielisen käännöksen",
+    "filteringBody": "{whatFiltering} elokuvan {originalLanguage} - missä se on tehty, TMDB:n metadatan perusteella - ei alla olevien sanojen kieltä.",
+    "linkText": "Miten tämä toimii?",
+    "modalTitle": "Miten tämä toimii",
+    "origin": "alkuperää",
+    "originalLanguage": "alkuperäiskieltä",
+    "soSpanishMeans": "Joten \"espanja\" tarkoittaa",
+    "spanishBody": "{soSpanishMeans} espanjalaista {origin} olevien elokuvien englanninkielisten tekstitysten sanastoa - miten sanat kuten \"solidarity\" tai \"dictatorship\" esiintyvät espanjalaisten elokuvien englanninkielisissä tekstityksissä - ei espanjankielisiä sanoja.",
+    "whatFiltering": "Mitä suodatat:",
+    "whatWords": "Mitä sanat ovat:",
+    "wordsBody": "{whatWords} jokainen Movie Words -sivuston luku tulee elokuvan {englishSubtitles}. Meillä on vain englanninkielinen OpenSubtitles-raita, joten ei-englanninkielisen elokuvan kohdalla nämä ovat sen {englishTranslation} sanoja, eivät alkuperäistä dialogia. Siksi kääntämätön sana livahtaa joskus läpi - \"panna\", \"cotta\", \"samurai\"."
+  }
+}

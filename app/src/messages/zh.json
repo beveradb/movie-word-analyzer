@@ -1,0 +1,411 @@
+{
+  "compare": {
+    "orLabel": "或",
+    "addDecadeAriaLabel": "添加一个年代",
+    "addDecadeOption": "添加一个年代…",
+    "addFilmPlaceholder": "添加一部电影…",
+    "addGenreAriaLabel": "添加一个类型",
+    "addGenreOption": "添加一个类型…",
+    "decadeLabel": "{decade} 年代",
+    "decadeOptionLabel": "{decade} 年代",
+    "distinctWordsLabel": "不重复词汇",
+    "featuredMatchupPrefix": "精选对决：{title}",
+    "filmsLabel": "电影",
+    "filmsPerYearLabel": "部电影 / 年",
+    "filmsPerYearTitle": "该语料库切片中按发行年份统计的电影数量",
+    "fullBreakdownLink": "完整细分 →",
+    "headToHeadHeading": "正面交锋",
+    "introBody": "将电影、年代和类型并排比较 - 最多可混合选择三项。",
+    "loadingLabel": "正在加载…",
+    "movieLabel": "{title} - {year}",
+    "navNoun": "对决",
+    "navSuffix": "每日轮换 - 或在上方创建你自己的",
+    "noStandoutWords": "没有突出的词",
+    "nothingFoundMessage": "未找到符合该选择的内容。",
+    "pickFilmPlaceholder": "选择一部电影…",
+    "ratioMoreLabel": "多 {ratio} 倍",
+    "removeButton": "移除",
+    "sharedSignatureWordsHeading": "它们共有的标志性词汇",
+    "signatureWordsHeading": "标志性词汇 {note}",
+    "signatureWordsHighlightedNote": "(高亮 = 共有)",
+    "swearsPer1kLabel": "脏话 / 千字",
+    "wordsPerFilmLabel": "词数 / 部",
+    "wordsSpokenLabel": "说出的词数",
+    "headToHeadIntroMany": "各自比其他多说了哪些词 - 按其自身对话每百万词的频率计算。",
+    "headToHeadIntroPair": "各自比另一个多说了哪些词 - 按其自身对话每百万词的频率计算。"
+  },
+  "languageSwitcher": {
+    "current": "语言",
+    "label": "选择语言"
+  },
+  "nav": {
+    "sectionsLabel": "版块",
+    "compare": "比较",
+    "decades": "年代",
+    "explore": "探索",
+    "genres": "类型",
+    "leaderboard": "排行榜",
+    "trends": "趋势"
+  },
+  "pos": {
+    "other": "其他",
+    "a": "形容词",
+    "adjective": "形容词",
+    "adverb": "副词",
+    "n": "名词",
+    "noun": "名词",
+    "r": "副词",
+    "v": "动词",
+    "verb": "动词",
+    "x": "名字及其他"
+  },
+  "ui": {
+    "errorBox": {
+      "retryButton": "重试",
+      "heading": "场景缺失"
+    },
+    "featuredNav": {
+      "nextAriaLabel": "下一个精选{noun}",
+      "position": "第 {idx} 个，共 {len} 个",
+      "prevAriaLabel": "上一个精选{noun}"
+    },
+    "highlightWord": {
+      "spokenTimes": "说了 {count} 次",
+      "title": "“{word}” - {display}"
+    },
+    "movieSearch": {
+      "ariaLabel": "搜索电影",
+      "placeholder": "搜索电影名称…"
+    },
+    "poster": {
+      "alt": "{title} 海报"
+    },
+    "seriesLegend": {
+      "exploreTitle": "探索“{word}”"
+    },
+    "slug": {
+      "defaultPrefix": "内景."
+    },
+    "wordFilterBar": {
+      "allButton": "所有词",
+      "anyKindButton": "任意种类",
+      "commonnessAriaLabel": "词汇常见度",
+      "hidingDescription": "隐藏日常英语 - 约 2,000 个最常见的词 (the, know, get…)",
+      "interestingButton": "有趣的词",
+      "onlyKindsSuffix": " · 仅 {kinds}",
+      "showingDescription": "显示所有词，包括日常英语",
+      "excludingKindsSuffix": " · 隐藏 {kinds}",
+      "posStateExcluded": "{kind}：已排除（点击重置）",
+      "posStateIncluded": "{kind}：已包含（点击排除）",
+      "posStateOff": "{kind}：已关闭（点击包含）"
+    }
+  },
+  "boards": {
+    "films": {
+      "chattiestBlurb": "每分钟片长字数最多",
+      "chattiestFmt": "{v} 字/分钟",
+      "chattiestTitle": "语速最快",
+      "intro": "语料库的纪录保持者，四类极端的剧本。",
+      "loadingSpinner": "正在加载电影之最…",
+      "repetitiveBlurb": "不重复词汇比例最低",
+      "repetitiveFmt": "{v}% 独有",
+      "repetitiveTitle": "最重复的剧本",
+      "sweariestBlurb": "每千字脏话数",
+      "sweariestFmt": "{v}/千字",
+      "sweariestTitle": "最爱爆粗口的剧本",
+      "vocabularyBlurb": "单部剧本中不重复词汇最多",
+      "vocabularyFmt": "{v} 词",
+      "vocabularyTitle": "词汇量最大"
+    },
+    "overview": {
+      "adjectivesBlurb": "最常说的有趣形容词",
+      "adjectivesTitle": "电影中的形容词",
+      "fallingBlurb": "现在比早期电影说得少得多",
+      "intro": "语料库的头条新闻 - 每个榜单的前五名。点击任意卡片查看完整列表、筛选器及更多内容。",
+      "loadingSpinner": "正在加载头条新闻…",
+      "risingBlurb": "现在比早期电影说得多得多",
+      "ubiquityBlurb": "几乎所有剧本都会用到的词",
+      "wondersBlurb": "一部电影独有的词"
+    },
+    "ratio": {
+      "down": "下降 {label} 倍",
+      "up": "上升 {label} 倍"
+    },
+    "shifts": {
+      "fallingTitle": "逐渐淡出",
+      "intro": "对白是如何演变的：现在（2010–20年代）每百万词中比早期电影（1930–40年代）使用频率高得多（或低得多）的词。折线追踪了每个十年的变化；点击单词查看完整图表。",
+      "loadingSpinner": "正在加载变迁…",
+      "risingTitle": "正在崛起"
+    },
+    "taster": {
+      "seeAllLink": "查看全部 →"
+    },
+    "ubiquity": {
+      "intro": "除了纯粹的连接词，这些词几乎出现在 {nFilms} 部电影的每一部中。",
+      "loadingSpinner": "正在加载…",
+      "shareOfFilms": "{share}% 的电影"
+    },
+    "wonders": {
+      "intro": "一部电影比其他所有电影加起来说得还要多的词 - 角色名字、生造词、口头禅。",
+      "item": "在 {movieLink} ({year}) 中说了 {count} 次 - 占所有电影中该词出现总次数的 {share}%",
+      "loadingSpinner": "正在加载单片奇词…"
+    }
+  },
+  "chart": {
+    "axisAriaLabel": "按年份划分的 {yLabel}",
+    "chartingSpinner": "正在绘制精选变迁图表…",
+    "loadFailedMessage": "无法绘制此图表 - 试试下一个 ▶",
+    "moreTrendsLink": "更多趋势 →",
+    "trendNoun": "趋势",
+    "unpinAriaLabel": "取消固定 {year}",
+    "usesPerMillionCaption": "每百万对白词汇使用次数",
+    "yAxisLabel": "每百万词使用次数"
+  },
+  "decadesView": {
+    "decadeLabel": "{decade} 年代",
+    "eyebrow": "浏览方式",
+    "filmsCount": "{count} 部电影",
+    "loadError": "无法加载年代。",
+    "loadingSpinner": "正在加载年代…",
+    "subtitle": "每个电影时代的说话方式 - {count} 项研究。",
+    "title": "年代",
+    "notEnoughFilms": "在 {langs} 中没有足够的电影来显示此内容 - 请添加语言或切换到所有电影。"
+  },
+  "entity": {
+    "compareButton": "将 {label} 与…比较",
+    "decadeEyebrow": "始于 {decade} 年代",
+    "decadeLabel": "{decade} 年代",
+    "decadeSubject": "{decade} 年代",
+    "genreEyebrow": "类型研究",
+    "kindDecade": "年代",
+    "kindGenre": "类型",
+    "loadingSpinner": "正在加载…",
+    "mostSpokenBody": "纯计数，排除停用词。",
+    "mostSpokenHeading": "最常说的词",
+    "notFound": "数据集中没有 {kind} “{id}”。",
+    "notableScriptsHeading": "著名剧本",
+    "signatureWordsBody": "{subject} 谈论得比整体电影多得多的词汇。",
+    "signatureWordsHeading": "标志性词汇",
+    "statsLine": "{films} 部电影 · {words} 个对白词汇",
+    "notEnoughFilms": "在 {langs} 中没有足够的电影来显示 {subject} - 请添加语言或切换到所有电影。"
+  },
+  "eras": {
+    "1910": "最初的胶片",
+    "1920": "有声电影的到来",
+    "1930": "黄金时代",
+    "1940": "战争与黑色电影",
+    "1950": "原子时代",
+    "1960": "新浪潮",
+    "1970": "新好莱坞",
+    "1980": "大片时代",
+    "1990": "独立电影热潮",
+    "2000": "多厅影院岁月",
+    "2010": "流媒体曙光",
+    "2020": "当今电影"
+  },
+  "errors": {
+    "body": "抱歉 - {reload} 通常能解决问题。还是不行？请发送邮件至 {email}。",
+    "eyebrow": "跳切至：",
+    "reload": "重新加载",
+    "title": "出错了。"
+  },
+  "footer": {
+    "creditsBody": "开源：{github} 且非商业用途。仅发布派生的词频统计 - 不重新分发任何字幕文本。",
+    "creditsHeading": "致谢。",
+    "dataBody": "完整数据集可供下载 - 有关链接和信息，请参阅 {dataGuide} ({license})。对方法论、偏差或版权有疑问？请阅读 {faq}。",
+    "dataGuideLink": "数据指南",
+    "dataHeading": "获取数据。",
+    "dataSourcesBody": "数据：词频统计来自 {opus} (Lison & Tiedemann, 2016)，通过 {openSubtitles} 获取；电影元数据来自 {imdbData} 和 {tmdb}。信息由 IMDb ({imdbUrl}) 提供。经许可使用。",
+    "faqLink": "常见问题 (FAQ)",
+    "githubLink": "github.com/beveradb/moviewords",
+    "githubProfileLink": "GitHub",
+    "ideaBody": "肯定还有我们没想到的有趣分析！如果你想分享想法，或者用这些数据做出了很酷的东西，{email}",
+    "ideaEmailLink": "发邮件给 andrew@beveridge.uk",
+    "ideaHeading": "有想法？",
+    "imdbDataLink": "IMDb",
+    "imdbUrlLink": "https://www.imdb.com",
+    "instagramLink": "Instagram",
+    "licenseLink": "CC BY-NC-SA 4.0",
+    "lindsayLink": "Lindsay Wright Graphic Design",
+    "linkedinLink": "LinkedIn",
+    "madeByBody": "由 Andrew Beveridge 制作 - {github} · {linkedin} · {instagram} - 最初的想法来自我可爱的妻子 {lindsay} - 去看看她的作品集吧！",
+    "openSubtitlesLink": "OpenSubtitles.org",
+    "opusLink": "OPUS OpenSubtitles 语料库",
+    "takedownEmailLink": "发送下架邮件",
+    "tmdbDisclaimerBody": "本产品使用 TMDB API，但未经 TMDB 认可或认证。海报通过 TMDB 获取 - 版权归各自的工作室所有，仅用于标识所讨论的电影。你是权利人？{takedown}，我们会立即下架。",
+    "tmdbLink": "TMDB"
+  },
+  "genres": {
+    "Action": "动作",
+    "Adult": "成人",
+    "Adventure": "冒险",
+    "Animation": "动画",
+    "Biography": "传记",
+    "Comedy": "喜剧",
+    "Crime": "犯罪",
+    "Documentary": "纪录片",
+    "Drama": "剧情",
+    "Family": "家庭",
+    "Fantasy": "奇幻",
+    "Film-Noir": "黑色电影",
+    "History": "历史",
+    "Horror": "恐怖",
+    "Music": "音乐",
+    "Musical": "歌舞",
+    "Mystery": "悬疑",
+    "News": "新闻",
+    "Reality-TV": "真人秀",
+    "Romance": "爱情",
+    "Sci-Fi": "科幻",
+    "Sport": "体育",
+    "Thriller": "惊悚",
+    "War": "战争",
+    "Western": "西部"
+  },
+  "genresView": {
+    "eyebrow": "浏览方式",
+    "filmsCount": "{count} 部电影",
+    "loadError": "无法加载类型。",
+    "loadingSpinner": "正在加载类型…",
+    "subtitle": "每种类型都在谈论什么 - {count} 项研究。",
+    "title": "类型",
+    "notEnoughFilms": "在 {langs} 中没有足够的电影来显示此内容 - 请添加语言或切换到所有电影。"
+  },
+  "home": {
+    "aboutHeading": "关于此数据集",
+    "decadesBody": "从有声电影到 2020 年代 - 每个电影时代的说话方式。",
+    "decadesHeading": "漫游年代",
+    "fadeIn": "淡入：",
+    "faqLink": "常见问题 (FAQ)",
+    "heroBody": "我们统计了 {count} 部电影中说出的每一个词 - 共计 {millions} 百万词。观察 {trends}，见识 {sweariest}，并逐词解决 {versus}。",
+    "heroSweariest": "史上最爱爆粗口的剧本",
+    "heroTitle": "每部电影都有自己的 {vocabulary}。",
+    "heroTrends": "“awesome”如何超越“swell”",
+    "heroVersus": "《异形》对决《异形2》",
+    "heroVocabulary": "词汇表",
+    "movieMeta": "{year} · {words} 词",
+    "opusLink": "OPUS OpenSubtitles 语料库",
+    "shelfHeading": "从架子上拿下一本剧本",
+    "aboutBody": "涵盖 {count} - 来自 {opus} 中至少有 300 个 IMDb 投票的电影的每一个字幕对白词汇，按电影统计。仅发布词频统计；不重新分发任何字幕文本。方法论和注意事项：{faq}。",
+    "aboutCountAllFilms": "部电影 - 包含翻译字幕",
+    "aboutCountLangFilms": "部 {langs} 电影",
+    "aboutCountTemplate": "{count} {kind}",
+    "aboutCountUnknown": "数以万计的",
+    "aboutSubtitleHint": "这些计数来自电影的英文字幕，而不是它们的原始对话。"
+  },
+  "leaderboard": {
+    "tabs": {
+      "everywhere": "每部电影都在说",
+      "films": "电影之最",
+      "overview": "概览",
+      "shifts": "上升与下降",
+      "wonders": "单片奇词",
+      "words": "热门词汇"
+    },
+    "words": {
+      "allGenresOption": "所有类型",
+      "filmsCount": " · {count} 部电影",
+      "filteringSpinner": "正在筛选语料库…（首次筛选查询会加载分析引擎）",
+      "fromLabel": "从",
+      "genreLabel": "类型",
+      "intro": "语料库中所有电影里最常说的词。",
+      "noMatches": "没有符合这些筛选条件的词 - 试试“所有词”或“任意种类”。",
+      "rankByLabel": "排序依据",
+      "sortMovieishButton": "最电影化",
+      "sortMovieishTitle": "根据电影中使用频率高于日常英语的程度对每个词进行加权",
+      "sortSpokenButton": "最常说",
+      "toLabel": "至"
+    },
+    "languageNote": "基于 {count} 部 {langs} 电影，从它们的英文字幕中统计得出。"
+  },
+  "movie": {
+    "compareButton": "与另一部电影比较",
+    "decadeLinkTitle": "更多 {decade} 年代的电影",
+    "distinctWordsLabel": "不重复词汇",
+    "genreSeparator": " / ",
+    "imdbRatingLabel": "IMDb 评分",
+    "loadingScript": "正在加载剧本…",
+    "mostSpokenHeading": "最常说的词",
+    "notFound": "数据集中没有 ID 为“{id}”的电影。",
+    "signatureWordsBody": "这部电影使用频率远高于整体电影的词（对数几率对比整个语料库）。",
+    "signatureWordsHeading": "标志性词汇",
+    "slugTitle": "{title} - {year}",
+    "vocabRichnessLabel": "词汇丰富度",
+    "wordsSpokenLabel": "说出的词数",
+    "imdbPosterTitle": "IMDb 上的 {title}",
+    "runtimeLabel": "片长",
+    "runtimeValue": "{minutes} 分钟",
+    "wordsPerMinuteLabel": "每分钟词数"
+  },
+  "themeToggle": {
+    "day": "日间",
+    "dayShoot": "日景拍摄",
+    "night": "夜间",
+    "nightShoot": "夜景拍摄",
+    "switchToDay": "切换到日间模式",
+    "switchToNight": "切换到夜间模式"
+  },
+  "trends": {
+    "addAnotherWordPlaceholder": "添加另一个词…",
+    "bigMovers": "自 1930 年代以来的巨大变迁",
+    "chartItButton": "绘制图表",
+    "chartedWordsAriaLabel": "已绘制图表的词",
+    "featuredPrefix": "精选：{title}",
+    "firstWordPlaceholder": "输入一个词，例如 love",
+    "fullList": "完整列表 →",
+    "intro": "按发行年份统计，某个词在语料库所有电影中每百万对白词汇的出现频率。",
+    "navNoun": "趋势",
+    "navSuffix": "每天都有新变迁",
+    "notEnoughData": "{words} 的数据不足（需要在语料库中至少使用 20 次，且所在年份有足够多的电影）。",
+    "perThousandWords": " · {rate}/千字",
+    "queryingCorpus": "正在查询语料库…",
+    "removeWordTitle": "移除“{word}”",
+    "topFilmByYearHeading": "按年份统计“{word}”出现最多的电影",
+    "topFilmByYearLoading": "正在查找每年“{word}”出现最多的电影…",
+    "topFilmsHeading": "说“{word}”最多的电影",
+    "topFilmsLoading": "正在查找说“{word}”最多的电影…",
+    "trimmedYearsNote": "已隐藏 {years} - 语料库中电影太少，无法提供可靠的频率",
+    "tryClassic": "或者试试经典词汇：",
+    "usesPerMillionWords": "每百万对白词汇使用次数",
+    "wordDetailsTablist": "单词详情",
+    "wordInputAriaLabel": "要绘制图表的词",
+    "yAxisLabel": "每百万词使用次数",
+    "languageNote": "基于 {count} 部 {langs} 电影，从它们的英文字幕中统计得出。",
+    "notEnoughFilms": "在 {langs} 中没有足够的电影来显示此趋势 - 请添加语言或切换到所有电影。"
+  },
+  "languageFilter": {
+    "allFilms": "所有电影",
+    "apply": "应用",
+    "ariaLabel": "按原语言筛选电影",
+    "countLabel": "{count} 种语言",
+    "hint": "按电影的原语言进行筛选；单词计数来自英文字幕。",
+    "menuAriaLabel": "原语言",
+    "searchAriaLabel": "搜索语言",
+    "searchPlaceholder": "搜索语言…"
+  },
+  "localeFilterHint": {
+    "dismissAriaLabel": "忽略",
+    "filterButton": "筛选",
+    "message": "正在使用 {lang}？筛选出 {lang} 电影。"
+  },
+  "modal": {
+    "closeAriaLabel": "关闭"
+  },
+  "filterExplainer": {
+    "badgeLabel": "已翻译 · {lang}",
+    "badgeTitle": "原语言 {lang} - 计数来自英文字幕翻译。这是如何运作的？",
+    "dialogueNote": "原语言对话不在数据集中 - 只有英文翻译。",
+    "englishSubtitles": "英文字幕",
+    "englishTranslation": "英文翻译",
+    "filteringBody": "{whatFiltering} 电影的 {originalLanguage} - 即电影的制作地，数据来自 TMDB - 而不是下方单词的语言。",
+    "linkText": "这是如何运作的？",
+    "modalTitle": "运作原理",
+    "origin": "产地",
+    "originalLanguage": "原语言",
+    "soSpanishMeans": "所以“西班牙语”意味着",
+    "spanishBody": "{soSpanishMeans} 西班牙 {origin} 电影的英文字幕词汇 - 比如“solidarity”（团结）或“dictatorship”（独裁）等词如何出现在西班牙电影的英文字幕中 - 而不是西班牙语单词本身。",
+    "whatFiltering": "你正在筛选的内容：",
+    "whatWords": "这些单词是什么：",
+    "wordsBody": "{whatWords} Movie Words 上的每一个计数都来自电影的 {englishSubtitles}。我们只使用英文的 OpenSubtitles 字幕轨，所以对于非英语电影，这些是其 {englishTranslation} 中的单词，而不是原始对话。这就是为什么偶尔会有未翻译的单词溜进来 - 比如“panna”、“cotta”、“samurai”。"
+  }
+}

@@ -1,0 +1,411 @@
+{
+  "compare": {
+    "orLabel": "of",
+    "addDecadeAriaLabel": "Voeg een decennium toe",
+    "addDecadeOption": "Voeg een decennium toe…",
+    "addFilmPlaceholder": "Voeg een film toe…",
+    "addGenreAriaLabel": "Voeg een genre toe",
+    "addGenreOption": "Voeg een genre toe…",
+    "decadeLabel": "DE JAREN {decade}",
+    "decadeOptionLabel": "Jaren {decade}",
+    "distinctWordsLabel": "Unieke woorden",
+    "featuredMatchupPrefix": "Uitgelichte confrontatie: {title}",
+    "filmsLabel": "Films",
+    "filmsPerYearLabel": "films / jaar",
+    "filmsPerYearTitle": "Films per releasejaar in dit deel van het corpus",
+    "fullBreakdownLink": "volledige uitsplitsing →",
+    "headToHeadHeading": "Oog in oog",
+    "introBody": "Zet films, decennia en genres naast elkaar - tot drie van elke mix.",
+    "loadingLabel": "Laden…",
+    "movieLabel": "{title} - {year}",
+    "navNoun": "confrontatie",
+    "navSuffix": "wisselt dagelijks - of bouw hierboven je eigen",
+    "noStandoutWords": "geen opvallende woorden",
+    "nothingFoundMessage": "Niets gevonden voor die selectie.",
+    "pickFilmPlaceholder": "Kies een film…",
+    "ratioMoreLabel": "{ratio}× meer",
+    "removeButton": "verwijderen",
+    "sharedSignatureWordsHeading": "Kenmerkende woorden die ze delen",
+    "signatureWordsHeading": "Kenmerkende woorden {note}",
+    "signatureWordsHighlightedNote": "(gemarkeerd = gedeeld)",
+    "swearsPer1kLabel": "Vloeken / 1k woorden",
+    "wordsPerFilmLabel": "Woorden / film",
+    "wordsSpokenLabel": "Uitgesproken woorden",
+    "headToHeadIntroMany": "Wat de één veel vaker zegt dan de anderen - aantal per miljoen woorden van de eigen dialoog.",
+    "headToHeadIntroPair": "Wat de één veel vaker zegt dan de ander - aantal per miljoen woorden van de eigen dialoog."
+  },
+  "languageSwitcher": {
+    "current": "Taal",
+    "label": "Kies taal"
+  },
+  "nav": {
+    "sectionsLabel": "Secties",
+    "compare": "Vergelijken",
+    "decades": "Decennia",
+    "explore": "Ontdekken",
+    "genres": "Genres",
+    "leaderboard": "Ranglijst",
+    "trends": "Trends"
+  },
+  "pos": {
+    "other": "overig",
+    "a": "bijvoeglijke naamwoorden",
+    "adjective": "bijvoeglijk naamwoord",
+    "adverb": "bijwoord",
+    "n": "zelfstandige naamwoorden",
+    "noun": "zelfstandig naamwoord",
+    "r": "bijwoorden",
+    "v": "werkwoorden",
+    "verb": "werkwoord",
+    "x": "namen & overige"
+  },
+  "ui": {
+    "errorBox": {
+      "retryButton": "Opnieuw proberen",
+      "heading": "Scène ontbreekt"
+    },
+    "featuredNav": {
+      "nextAriaLabel": "Volgende uitgelichte {noun}",
+      "position": "{idx} van {len}",
+      "prevAriaLabel": "Vorige uitgelichte {noun}"
+    },
+    "highlightWord": {
+      "spokenTimes": "{count} keer uitgesproken",
+      "title": "“{word}” - {display}"
+    },
+    "movieSearch": {
+      "ariaLabel": "Zoek films",
+      "placeholder": "Zoek een filmtitel…"
+    },
+    "poster": {
+      "alt": "{title} poster"
+    },
+    "seriesLegend": {
+      "exploreTitle": "Ontdek “{word}”"
+    },
+    "slug": {
+      "defaultPrefix": "INT."
+    },
+    "wordFilterBar": {
+      "allButton": "alle woorden",
+      "anyKindButton": "elk type",
+      "commonnessAriaLabel": "Woordfrequentie",
+      "hidingDescription": "verbergt alledaags Engels - de ~2.000 meest voorkomende woorden (the, know, get…)",
+      "interestingButton": "interessante woorden",
+      "onlyKindsSuffix": " · alleen {kinds}",
+      "showingDescription": "toont elk woord, inclusief alledaags Engels",
+      "excludingKindsSuffix": " · {kinds} verborgen",
+      "posStateExcluded": "{kind}: uitgesloten (klik om te resetten)",
+      "posStateIncluded": "{kind}: inbegrepen (klik om uit te sluiten)",
+      "posStateOff": "{kind}: uit (klik om toe te voegen)"
+    }
+  },
+  "boards": {
+    "films": {
+      "chattiestBlurb": "meeste woorden per minuut speeltijd",
+      "chattiestFmt": "{v} w/min",
+      "chattiestTitle": "Snelste praters",
+      "intro": "De recordhouders van het corpus, vier categorieën van extreme scripts.",
+      "loadingSpinner": "Filmsuperlatieven laden…",
+      "repetitiveBlurb": "laagste aandeel unieke woorden",
+      "repetitiveFmt": "{v}% uniek",
+      "repetitiveTitle": "Meest repetitieve scripts",
+      "sweariestBlurb": "scheldwoorden per 1.000 woorden",
+      "sweariestFmt": "{v}/1k",
+      "sweariestTitle": "Grofste scripts",
+      "vocabularyBlurb": "meeste unieke woorden in één script",
+      "vocabularyFmt": "{v} woorden",
+      "vocabularyTitle": "Grootste woordenschat"
+    },
+    "overview": {
+      "adjectivesBlurb": "de meest uitgesproken interessante bijvoeglijke naamwoorden",
+      "adjectivesTitle": "Bijvoeglijke naamwoorden van de cinema",
+      "fallingBlurb": "nu veel minder gezegd dan in vroege cinema",
+      "intro": "De krantenkoppen van het corpus - de top vijf van elk bord. Volg een kaart voor de volledige lijst, filters en meer.",
+      "loadingSpinner": "Krantenkoppen laden…",
+      "risingBlurb": "nu veel vaker gezegd dan in vroege cinema",
+      "ubiquityBlurb": "woorden die bijna geen enkel script overslaat",
+      "wondersBlurb": "woorden die van één film zijn"
+    },
+    "ratio": {
+      "down": "{label}× omlaag",
+      "up": "{label}× omhoog"
+    },
+    "shifts": {
+      "fallingTitle": "Fade-out",
+      "intro": "Hoe dialoog veranderde: woorden die nu (jaren 2010–20) veel vaker (of veel minder) per miljoen woorden worden gezegd dan in de vroege cinema (jaren 1930–40). Lijnen volgen elk decennium; klik op een woord voor de volledige grafiek.",
+      "loadingSpinner": "Verschuivingen laden…",
+      "risingTitle": "In de lift"
+    },
+    "taster": {
+      "seeAllLink": "bekijk alles →"
+    },
+    "ubiquity": {
+      "intro": "Naast pure verbindingswoorden, komen deze woorden voor in bijna elk van de {nFilms} films.",
+      "loadingSpinner": "Laden…",
+      "shareOfFilms": "{share}% van de films"
+    },
+    "wonders": {
+      "intro": "Woorden die één film vaker zegt dan de rest van de cinema bij elkaar - personagenamen, verzonnen woorden, obsessies.",
+      "item": "{count}× gezegd in {movieLink} ({year}) - {share}% van alle keren dat de cinema het zegt",
+      "loadingSpinner": "Unieke filmwoorden laden…"
+    }
+  },
+  "chart": {
+    "axisAriaLabel": "{yLabel} per jaar",
+    "chartingSpinner": "Uitgelichte verschuiving in kaart brengen…",
+    "loadFailedMessage": "Kon deze niet in kaart brengen - probeer de volgende ▶",
+    "moreTrendsLink": "meer trends →",
+    "trendNoun": "trend",
+    "unpinAriaLabel": "{year} losmaken",
+    "usesPerMillionCaption": "gebruik per miljoen woorden dialoog",
+    "yAxisLabel": "gebruik per miljoen woorden"
+  },
+  "decadesView": {
+    "decadeLabel": "Jaren {decade}",
+    "eyebrow": "Bladeren op",
+    "filmsCount": "{count} films",
+    "loadError": "Kon decennia niet laden.",
+    "loadingSpinner": "Decennia laden…",
+    "subtitle": "Hoe elk filmtijdperk sprak - {count} studies.",
+    "title": "DECENNIA",
+    "notEnoughFilms": "Niet genoeg films in {langs} hiervoor - voeg talen toe of schakel over naar Alle films."
+  },
+  "entity": {
+    "compareButton": "Vergelijk {label} met…",
+    "decadeEyebrow": "Uit {decade}",
+    "decadeLabel": "DE JAREN {decade}",
+    "decadeSubject": "de jaren {decade}",
+    "genreEyebrow": "Genrestudie",
+    "kindDecade": "decennium",
+    "kindGenre": "genre",
+    "loadingSpinner": "Laden…",
+    "mostSpokenBody": "Gewone tellingen, stopwoorden uitgesloten.",
+    "mostSpokenHeading": "Meest uitgesproken woorden",
+    "notFound": "Geen {kind} “{id}” in de dataset.",
+    "notableScriptsHeading": "Opmerkelijke scripts",
+    "signatureWordsBody": "Waar {subject} veel meer over praat dan films in het algemeen.",
+    "signatureWordsHeading": "Kenmerkende woorden",
+    "statsLine": "{films} films · {words} woorden dialoog",
+    "notEnoughFilms": "Niet genoeg films in {langs} voor {subject} - voeg talen toe of schakel over naar Alle films."
+  },
+  "eras": {
+    "1910": "de eerste filmrollen",
+    "1920": "de komst van de geluidsfilm",
+    "1930": "de gouden eeuw",
+    "1940": "oorlog en film noir",
+    "1950": "het atoomtijdperk",
+    "1960": "de nouvelle vague",
+    "1970": "New Hollywood",
+    "1980": "het blockbustertijdperk",
+    "1990": "de indie-boom",
+    "2000": "de multiplexjaren",
+    "2010": "de opkomst van streaming",
+    "2020": "cinema nu"
+  },
+  "errors": {
+    "body": "Sorry daarvoor - een {reload} lost het meestal op. Nog steeds stuk? Mail {email}.",
+    "eyebrow": "Smash cut naar:",
+    "reload": "herladen",
+    "title": "Er is iets stuk."
+  },
+  "footer": {
+    "creditsBody": "Open source: {github} en niet-commercieel. Alleen afgeleide woordtellingen worden gepubliceerd - er wordt geen ondertiteltekst verspreid.",
+    "creditsHeading": "Credits.",
+    "dataBody": "De volledige dataset is te downloaden - zie {dataGuide} voor links & info ({license}). Vragen over methodologie, bias of auteursrecht? Lees de {faq}.",
+    "dataGuideLink": "de datagids",
+    "dataHeading": "Pak de data.",
+    "dataSourcesBody": "Data: woordtellingen van het {opus} (Lison & Tiedemann, 2016), via {openSubtitles}; filmmetadata van {imdbData} en {tmdb}. Informatie met dank aan IMDb ({imdbUrl}). Gebruikt met toestemming.",
+    "faqLink": "FAQ",
+    "githubLink": "github.com/beveradb/moviewords",
+    "githubProfileLink": "GitHub",
+    "ideaBody": "Er zijn vast interessante analyses waar we nog niet aan hebben gedacht! Als je een idee wilt delen of iets tofs hebt gebouwd met de data, {email}",
+    "ideaEmailLink": "mail andrew@beveridge.uk",
+    "ideaHeading": "Heb je een idee?",
+    "imdbDataLink": "IMDb",
+    "imdbUrlLink": "https://www.imdb.com",
+    "instagramLink": "Instagram",
+    "licenseLink": "CC BY-NC-SA 4.0",
+    "lindsayLink": "Lindsay Wright Graphic Design",
+    "linkedinLink": "LinkedIn",
+    "madeByBody": "Gemaakt door Andrew Beveridge - {github} · {linkedin} · {instagram} - met het originele idee van mijn lieve vrouw {lindsay} - bekijk haar portfolio!",
+    "openSubtitlesLink": "OpenSubtitles.org",
+    "opusLink": "OPUS OpenSubtitles corpus",
+    "takedownEmailLink": "Mail een verwijderingsverzoek",
+    "tmdbDisclaimerBody": "Dit product gebruikt de TMDB API maar is niet goedgekeurd of gecertificeerd door TMDB. Posters via TMDB - copyright bij hun respectievelijke studio's, getoond om de besproken films te identificeren. Rechthebbende? {takedown} en het wordt direct verwijderd.",
+    "tmdbLink": "TMDB"
+  },
+  "genres": {
+    "Action": "Actie",
+    "Adult": "Volwassenen",
+    "Adventure": "Avontuur",
+    "Animation": "Animatie",
+    "Biography": "Biografie",
+    "Comedy": "Komedie",
+    "Crime": "Misdaad",
+    "Documentary": "Documentaire",
+    "Drama": "Drama",
+    "Family": "Familie",
+    "Fantasy": "Fantasy",
+    "Film-Noir": "Film-Noir",
+    "History": "Geschiedenis",
+    "Horror": "Horror",
+    "Music": "Muziek",
+    "Musical": "Musical",
+    "Mystery": "Mysterie",
+    "News": "Nieuws",
+    "Reality-TV": "Reality-TV",
+    "Romance": "Romantiek",
+    "Sci-Fi": "Sci-Fi",
+    "Sport": "Sport",
+    "Thriller": "Thriller",
+    "War": "Oorlog",
+    "Western": "Western"
+  },
+  "genresView": {
+    "eyebrow": "Bladeren op",
+    "filmsCount": "{count} films",
+    "loadError": "Kon genres niet laden.",
+    "loadingSpinner": "Genres laden…",
+    "subtitle": "Waar elk genre over praat - {count} studies.",
+    "title": "GENRES",
+    "notEnoughFilms": "Niet genoeg films in {langs} hiervoor - voeg talen toe of schakel over naar Alle films."
+  },
+  "home": {
+    "aboutHeading": "Over deze dataset",
+    "decadesBody": "Van de geluidsfilm tot de jaren 2020 - hoe elk filmtijdperk sprak.",
+    "decadesHeading": "Dwaal door de decennia",
+    "fadeIn": "Fade-in:",
+    "faqLink": "de FAQ",
+    "heroBody": "We hebben elk gesproken woord geteld in {count} films - {millions} miljoen in totaal. Bekijk {trends}, ontmoet {sweariest}, en beslecht {versus} woord voor woord.",
+    "heroSweariest": "het grofste script ooit gemaakt",
+    "heroTitle": "Elke film heeft een {vocabulary}.",
+    "heroTrends": "hoe 'awesome' 'swell' inhaalt",
+    "heroVersus": "Alien vs Aliens",
+    "heroVocabulary": "woordenschat",
+    "movieMeta": "{year} · {words} woorden",
+    "opusLink": "OPUS OpenSubtitles corpus",
+    "shelfHeading": "Pak een script van de plank",
+    "aboutBody": "Omvat {count} - elk woord van de ondertiteldialoog uit het {opus} voor films met minstens 300 IMDb-stemmen, geteld per film. Alleen woordtellingen worden gepubliceerd; er wordt geen ondertiteltekst verspreid. Methodologie en kanttekeningen: {faq}.",
+    "aboutCountAllFilms": "films - inclusief vertaalde ondertitels",
+    "aboutCountLangFilms": "{langs}-talige films",
+    "aboutCountTemplate": "{count} {kind}",
+    "aboutCountUnknown": "tienduizenden",
+    "aboutSubtitleHint": "Deze tellingen komen uit de Engelse ondertitels van de films, niet uit hun originele dialoog."
+  },
+  "leaderboard": {
+    "tabs": {
+      "everywhere": "Gezegd door elke film",
+      "films": "Filmsuperlatieven",
+      "overview": "Overzicht",
+      "shifts": "Stijgers & dalers",
+      "wonders": "Unieke filmwoorden",
+      "words": "Topwoorden"
+    },
+    "words": {
+      "allGenresOption": "Alle genres",
+      "filmsCount": " · {count} films",
+      "filteringSpinner": "Corpus filteren… (eerste gefilterde zoekopdracht laadt de analyse-engine)",
+      "fromLabel": "Van",
+      "genreLabel": "Genre",
+      "intro": "De meest uitgesproken woorden in alle films in het corpus.",
+      "noMatches": "Geen woorden komen overeen met deze filters - probeer “alle woorden” of “elk type”.",
+      "rankByLabel": "Rangschikken op",
+      "sortMovieishButton": "meest filmachtig",
+      "sortMovieishTitle": "Weegt elk woord op basis van hoeveel vaker films het zeggen dan alledaags Engels",
+      "sortSpokenButton": "meest uitgesproken",
+      "toLabel": "Tot"
+    },
+    "languageNote": "Gebaseerd op {count} {langs}-talige films, gemeten in hun Engelse ondertitels."
+  },
+  "movie": {
+    "compareButton": "Vergelijk met een andere film",
+    "decadeLinkTitle": "Meer uit de jaren {decade}",
+    "distinctWordsLabel": "Unieke woorden",
+    "genreSeparator": " / ",
+    "imdbRatingLabel": "IMDb-beoordeling",
+    "loadingScript": "Script laden…",
+    "mostSpokenHeading": "Meest uitgesproken woorden",
+    "notFound": "Geen film met id “{id}” in de dataset.",
+    "signatureWordsBody": "Woorden die deze film veel vaker gebruikt dan films in het algemeen (log-odds vs het hele corpus).",
+    "signatureWordsHeading": "Kenmerkende woorden",
+    "slugTitle": "{title} - {year}",
+    "vocabRichnessLabel": "Rijkdom van woordenschat",
+    "wordsSpokenLabel": "Uitgesproken woorden",
+    "imdbPosterTitle": "{title} op IMDb",
+    "runtimeLabel": "Speelduur",
+    "runtimeValue": "{minutes} min",
+    "wordsPerMinuteLabel": "Woorden per minuut"
+  },
+  "themeToggle": {
+    "day": "DAG",
+    "dayShoot": "Dagopname",
+    "night": "NACHT",
+    "nightShoot": "Nachtopname",
+    "switchToDay": "Overschakelen naar dagmodus",
+    "switchToNight": "Overschakelen naar nachtmodus"
+  },
+  "trends": {
+    "addAnotherWordPlaceholder": "Voeg nog een woord toe…",
+    "bigMovers": "Grote stijgers en dalers sinds de jaren 1930",
+    "chartItButton": "In grafiek zetten",
+    "chartedWordsAriaLabel": "Woorden in grafiek",
+    "featuredPrefix": "Uitgelicht: {title}",
+    "firstWordPlaceholder": "Typ een woord, bijv. liefde",
+    "fullList": "volledige lijst →",
+    "intro": "Hoe vaak een woord wordt uitgesproken in alle films in het corpus, per miljoen woorden dialoog, per releasejaar.",
+    "navNoun": "trend",
+    "navSuffix": "elke dag een nieuwe verschuiving",
+    "notEnoughData": "Niet genoeg data voor: {words} (heeft ≥20 keer gebruik nodig in het corpus, in jaren met genoeg films).",
+    "perThousandWords": " · {rate}/1k woorden",
+    "queryingCorpus": "Corpus doorzoeken…",
+    "removeWordTitle": "Verwijder “{word}”",
+    "topFilmByYearHeading": "Topfilm voor “{word}” per jaar",
+    "topFilmByYearLoading": "Topfilm voor “{word}” per jaar zoeken…",
+    "topFilmsHeading": "Films die “{word}” het meest zeggen",
+    "topFilmsLoading": "Films zoeken die “{word}” het meest zeggen…",
+    "trimmedYearsNote": "{years} verborgen - te weinig films in het corpus voor betrouwbare ratio's",
+    "tryClassic": "Of probeer een klassieker:",
+    "usesPerMillionWords": "gebruik per miljoen woorden dialoog",
+    "wordDetailsTablist": "Woorddetails",
+    "wordInputAriaLabel": "Woord voor grafiek",
+    "yAxisLabel": "gebruik per miljoen woorden",
+    "languageNote": "Gebaseerd op {count} {langs}-talige films, gemeten in hun Engelse ondertitels.",
+    "notEnoughFilms": "Niet genoeg films in {langs} voor deze trend - voeg talen toe of schakel over naar Alle films."
+  },
+  "languageFilter": {
+    "allFilms": "Alle films",
+    "apply": "Toepassen",
+    "ariaLabel": "Filter films op oorspronkelijke taal",
+    "countLabel": "{count} talen",
+    "hint": "Filtert op de oorspronkelijke taal van een film; woordtellingen komen uit de Engelse ondertitels.",
+    "menuAriaLabel": "Oorspronkelijke taal",
+    "searchAriaLabel": "Zoek talen",
+    "searchPlaceholder": "Zoek talen…"
+  },
+  "localeFilterHint": {
+    "dismissAriaLabel": "Sluiten",
+    "filterButton": "Filteren",
+    "message": "Bekijk je dit in {lang}? Filter op {lang}-talige films."
+  },
+  "modal": {
+    "closeAriaLabel": "Sluiten"
+  },
+  "filterExplainer": {
+    "badgeLabel": "vertaald · {lang}",
+    "badgeTitle": "Oorspronkelijke taal {lang} - tellingen komen uit de Engels vertaalde ondertitels. Hoe werkt dit?",
+    "dialogueNote": "De dialoog in de oorspronkelijke taal zit niet in de dataset - alleen de Engelse vertaling.",
+    "englishSubtitles": "Engelse ondertitels",
+    "englishTranslation": "Engelse vertaling",
+    "filteringBody": "{whatFiltering} de {originalLanguage} van een film - waar deze is gemaakt, uit TMDB-metadata - niet de taal van de woorden hieronder.",
+    "linkText": "Hoe werkt dit?",
+    "modalTitle": "Hoe dit werkt",
+    "origin": "oorsprong",
+    "originalLanguage": "oorspronkelijke taal",
+    "soSpanishMeans": "Dus \"Spaans\" betekent",
+    "spanishBody": "{soSpanishMeans} de Engelse ondertitel-woordenschat van cinema van Spaanse {origin} - hoe woorden als \"solidarity\" of \"dictatorship\" opduiken in de Engelse ondertitels van Spaanse films - geen Spaanse woorden.",
+    "whatFiltering": "Wat je filtert:",
+    "whatWords": "Wat de woorden zijn:",
+    "wordsBody": "{whatWords} elke telling op Movie Words komt uit de {englishSubtitles} van de film. We hebben alleen de Engelse OpenSubtitles-track, dus voor een niet-Engelstalige film zijn dit de woorden van de {englishTranslation}, niet de originele dialoog. Daarom glipt er af en toe een onvertaald woord doorheen - \"panna\", \"cotta\", \"samurai\"."
+  }
+}

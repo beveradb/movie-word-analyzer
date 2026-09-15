@@ -2,7 +2,10 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import type { MovieIndexEntry } from '../lib/data'
 import { getMovieIndex } from '../lib/data'
 import { navigate } from '../lib/route'
+import { ExplainerLink } from './FilterExplainer'
+import { languageName } from '../lib/languages'
 import type { Series } from './LineChart'
+import { useI18n } from '../i18n'
 
 /** ◀/▶ header row for a day-rotated featured pool (trends, matchups). */
 export function FeaturedNav({
@@ -23,10 +26,11 @@ export function FeaturedNav({
   suffix?: string
   className?: string
 }) {
+  const { t, n } = useI18n()
   const btn = (dir: 1 | -1, glyph: string) => (
     <button
       onClick={() => onStep(dir)}
-      aria-label={`${dir === 1 ? 'Next' : 'Previous'} featured ${noun}`}
+      aria-label={t(dir === 1 ? 'ui.featuredNav.nextAriaLabel' : 'ui.featuredNav.prevAriaLabel', { noun })}
       className="border-2 border-ink px-2 font-script font-bold hover:bg-mark"
     >
       {glyph}
@@ -40,7 +44,7 @@ export function FeaturedNav({
         <h2 className="slug text-sm">{title}</h2>
       </div>
       <span className="font-script text-xs text-ink-2">
-        {idx + 1} of {len}
+        {t('ui.featuredNav.position', { idx: n(idx + 1), len: n(len) })}
         {suffix ? ` - ${suffix}` : ''}
       </span>
     </div>
@@ -49,6 +53,7 @@ export function FeaturedNav({
 
 /** Clickable chart legend - one chip per drawn series, linking into Trends. */
 export function SeriesLegend({ series }: { series: Series[] }) {
+  const { t } = useI18n()
   return (
     <div className="mb-3 flex flex-wrap gap-2 font-script text-sm">
       {series.map((s) => (
@@ -56,7 +61,7 @@ export function SeriesLegend({ series }: { series: Series[] }) {
           key={s.name}
           onClick={() => navigate(`/trends?w=${encodeURIComponent(s.name)}`)}
           className="flex items-center gap-1.5 border-2 border-ink bg-paper px-2.5 py-0.5 hover:bg-mark"
-          title={`Explore “${s.name}”`}
+          title={t('ui.seriesLegend.exploreTitle', { word: s.name })}
         >
           <span className="inline-block size-2.5 rounded-full" style={{ background: s.color }} />
           {s.name}
@@ -67,19 +72,12 @@ export function SeriesLegend({ series }: { series: Series[] }) {
 }
 
 /** Screenplay slug-line header: INT. PULP FICTION - 1994 */
-export function Slug({
-  prefix = 'INT.',
-  text,
-  right,
-}: {
-  prefix?: string
-  text: React.ReactNode
-  right?: React.ReactNode
-}) {
+export function Slug({ prefix, text, right }: { prefix?: string; text: React.ReactNode; right?: React.ReactNode }) {
+  const { t } = useI18n()
   return (
     <div className="slug flex items-baseline justify-between border-b-2 border-ink pb-1 text-sm sm:text-base">
       <span>
-        {prefix} {text}
+        {prefix ?? t('ui.slug.defaultPrefix')} {text}
       </span>
       {right && <span className="text-ink-2">{right}</span>}
     </div>
@@ -101,48 +99,41 @@ export function HighlightWord({
   display?: string
   onClick?: () => void
 }) {
+  const { t, n } = useI18n()
   const frac = Math.max(count / max, 0.04)
+  const displayText = display ?? n(count)
   return (
     <button
       onClick={onClick}
-      className="group flex w-full items-baseline gap-3 rounded px-1 py-0.5 text-left hover:bg-paper-2"
-      title={`“${word}” - ${display ?? `spoken ${count.toLocaleString()} times`}`}
+      className="group flex w-full items-baseline gap-3 rounded px-1 py-0.5 text-start hover:bg-paper-2"
+      title={t('ui.highlightWord.title', { word, display: display ?? t('ui.highlightWord.spokenTimes', { count: n(count) }) })}
     >
       <span className="hl min-w-0 flex-1 font-script text-lg leading-6">
         <span className="hl-mark" style={{ width: `calc(${(frac * 100).toFixed(1)}% + 0.3em)` }} />
         <span className="hl-word">{word}</span>
       </span>
-      <span className="ml-auto shrink-0 font-script text-sm text-ink-2 tabular-nums group-hover:text-ink">
-        {display ?? count.toLocaleString()}
+      <span className="ms-auto shrink-0 font-script text-sm text-ink-2 tabular-nums group-hover:text-ink">
+        {displayText}
       </span>
     </button>
   )
 }
 
 /** "translated" marker for non-English originals - shown for any film whose
- * original language isn't English, regardless of the active language filter. */
+ * original language isn't English, regardless of the active language filter.
+ * Clickable: opens the explainer (counts come from the English subtitles). */
 export function LangBadge({ lang, className = '' }: { lang?: string; className?: string }) {
+  const { locale } = useI18n()
   if (!lang || lang === 'en') return null
-  let name = lang.toUpperCase()
-  try {
-    name = new Intl.DisplayNames(['en'], { type: 'language' }).of(lang) ?? name
-  } catch {
-    // unknown/invalid code: keep the raw code
-  }
-  return (
-    <span
-      className={`shrink-0 border border-ink-2 px-1 text-[10px] uppercase tracking-wide text-ink-2 ${className}`}
-      title={`Original language ${name} - counts come from the English translated subtitles`}
-    >
-      translated · {name}
-    </span>
-  )
+  const name = languageName(lang, locale)
+  return <ExplainerLink variant="badge" badgeLang={name} className={className} />
 }
 
 const POSTER_BASE = 'https://data.moviewords.org/posters'
 
 /** Movie poster from our R2 bucket, falling back to a script-cover placeholder. */
 export function Poster({ id, title, className }: { id: string; title: string; className?: string }) {
+  const { t } = useI18n()
   const [failed, setFailed] = useState(false)
   if (failed)
     return (
@@ -155,7 +146,7 @@ export function Poster({ id, title, className }: { id: string; title: string; cl
   return (
     <img
       src={`${POSTER_BASE}/${id}.jpg`}
-      alt={`${title} poster`}
+      alt={t('ui.poster.alt', { title })}
       loading="lazy"
       onError={() => setFailed(true)}
       className={`aspect-[2/3] object-cover ${className ?? ''}`}
@@ -173,13 +164,14 @@ export function Spinner({ label }: { label: string }) {
 }
 
 export function ErrorBox({ message, retry }: { message: string; retry?: () => void }) {
+  const { t } = useI18n()
   return (
     <div className="my-6 border-2 border-s2 bg-paper-2 p-4 font-script text-sm">
-      <p className="font-bold uppercase">Scene missing</p>
+      <p className="font-bold uppercase">{t('ui.errorBox.heading')}</p>
       <p className="mt-1 text-ink-2">{message}</p>
       {retry && (
         <button onClick={retry} className="mt-3 border-2 border-ink px-3 py-1 font-bold uppercase hover:bg-mark">
-          Retry
+          {t('ui.errorBox.retryButton')}
         </button>
       )}
     </div>
@@ -188,7 +180,7 @@ export function ErrorBox({ message, retry }: { message: string; retry?: () => vo
 
 /** Debounced movie search over the small client-side index. */
 export function MovieSearch({
-  placeholder = 'Search a movie title…',
+  placeholder,
   onPick,
   autoFocus,
 }: {
@@ -196,6 +188,7 @@ export function MovieSearch({
   onPick: (m: MovieIndexEntry) => void
   autoFocus?: boolean
 }) {
+  const { t } = useI18n()
   const [index, setIndex] = useState<MovieIndexEntry[] | null>(null)
   const [query, setQuery] = useState('')
   const [open, setOpen] = useState(false)
@@ -232,8 +225,8 @@ export function MovieSearch({
           setOpen(true)
         }}
         onFocus={() => setOpen(true)}
-        placeholder={placeholder}
-        aria-label="Search movies"
+        placeholder={placeholder ?? t('ui.movieSearch.placeholder')}
+        aria-label={t('ui.movieSearch.ariaLabel')}
         className="w-full border-2 border-ink bg-card px-3 py-2 font-script text-base placeholder:text-ink-3"
       />
       {open && hits.length > 0 && (
@@ -241,7 +234,7 @@ export function MovieSearch({
           {hits.map((m) => (
             <li key={m.id}>
               <button
-                className="flex w-full items-baseline justify-between px-3 py-2 text-left font-script hover:bg-mark"
+                className="flex w-full items-baseline justify-between px-3 py-2 text-start font-script hover:bg-mark"
                 onClick={() => {
                   onPick(m)
                   setQuery('')
@@ -249,7 +242,7 @@ export function MovieSearch({
                 }}
               >
                 <span className="truncate">{m.title}</span>
-                <span className="ml-3 flex shrink-0 items-baseline gap-1.5">
+                <span className="ms-3 flex shrink-0 items-baseline gap-1.5">
                   <LangBadge lang={m.lang} />
                   <span className="text-sm text-ink-2">{m.year}</span>
                 </span>

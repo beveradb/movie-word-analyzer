@@ -1,0 +1,411 @@
+{
+  "compare": {
+    "orLabel": "lub",
+    "addDecadeAriaLabel": "Dodaj dekadę",
+    "addDecadeOption": "Dodaj dekadę…",
+    "addFilmPlaceholder": "Dodaj film…",
+    "addGenreAriaLabel": "Dodaj gatunek",
+    "addGenreOption": "Dodaj gatunek…",
+    "decadeLabel": "LATA {decade}",
+    "decadeOptionLabel": "Lata {decade}",
+    "distinctWordsLabel": "Unikalne słowa",
+    "featuredMatchupPrefix": "Polecane starcie: {title}",
+    "filmsLabel": "Filmy",
+    "filmsPerYearLabel": "filmy / rok",
+    "filmsPerYearTitle": "Filmy na rok premiery w tym wycinku korpusu",
+    "fullBreakdownLink": "pełne zestawienie →",
+    "headToHeadHeading": "Łeb w łeb",
+    "introBody": "Zestaw ze sobą filmy, dekady i gatunki - do trzech dowolnych elementów.",
+    "loadingLabel": "Ładowanie…",
+    "movieLabel": "{title} - {year}",
+    "navNoun": "starcie",
+    "navSuffix": "zmienia się codziennie - lub stwórz własne powyżej",
+    "noStandoutWords": "brak wyróżniających się słów",
+    "nothingFoundMessage": "Nic nie znaleziono dla tego wyboru.",
+    "pickFilmPlaceholder": "Wybierz film…",
+    "ratioMoreLabel": "{ratio}× więcej",
+    "removeButton": "usuń",
+    "sharedSignatureWordsHeading": "Wspólne słowa charakterystyczne",
+    "signatureWordsHeading": "Słowa charakterystyczne {note}",
+    "signatureWordsHighlightedNote": "(podświetlone = wspólne)",
+    "swearsPer1kLabel": "Przekleństwa / 1 tys. słów",
+    "wordsPerFilmLabel": "Słowa / film",
+    "wordsSpokenLabel": "Wypowiedziane słowa",
+    "headToHeadIntroMany": "Co każdy z nich mówi znacznie częściej niż pozostałe - częstotliwość na milion słów własnych dialogów.",
+    "headToHeadIntroPair": "Co każdy z nich mówi znacznie częściej niż ten drugi - częstotliwość na milion słów własnych dialogów."
+  },
+  "languageSwitcher": {
+    "current": "Język",
+    "label": "Wybierz język"
+  },
+  "nav": {
+    "sectionsLabel": "Sekcje",
+    "compare": "Porównaj",
+    "decades": "Dekady",
+    "explore": "Eksploruj",
+    "genres": "Gatunki",
+    "leaderboard": "Ranking",
+    "trends": "Trendy"
+  },
+  "pos": {
+    "other": "inne",
+    "a": "przymiotniki",
+    "adjective": "przymiotnik",
+    "adverb": "przysłówek",
+    "n": "rzeczowniki",
+    "noun": "rzeczownik",
+    "r": "przysłówki",
+    "v": "czasowniki",
+    "verb": "czasownik",
+    "x": "imiona i inne"
+  },
+  "ui": {
+    "errorBox": {
+      "retryButton": "Spróbuj ponownie",
+      "heading": "Scene missing"
+    },
+    "featuredNav": {
+      "nextAriaLabel": "Następny polecany {noun}",
+      "position": "{idx} z {len}",
+      "prevAriaLabel": "Poprzedni polecany {noun}"
+    },
+    "highlightWord": {
+      "spokenTimes": "wypowiedziane {count} razy",
+      "title": "„{word}” - {display}"
+    },
+    "movieSearch": {
+      "ariaLabel": "Szukaj filmów",
+      "placeholder": "Szukaj tytułu filmu…"
+    },
+    "poster": {
+      "alt": "Plakat {title}"
+    },
+    "seriesLegend": {
+      "exploreTitle": "Eksploruj „{word}”"
+    },
+    "slug": {
+      "defaultPrefix": "INT."
+    },
+    "wordFilterBar": {
+      "allButton": "wszystkie słowa",
+      "anyKindButton": "dowolny rodzaj",
+      "commonnessAriaLabel": "Powszechność słowa",
+      "hidingDescription": "ukrywanie potocznego angielskiego - ok. 2000 najczęstszych słów (the, know, get…)",
+      "interestingButton": "ciekawe słowa",
+      "onlyKindsSuffix": " · tylko {kinds}",
+      "showingDescription": "pokazywanie każdego słowa, w tym potocznego angielskiego",
+      "excludingKindsSuffix": " · ukryto {kinds}",
+      "posStateExcluded": "{kind}: wykluczone (kliknij, aby zresetować)",
+      "posStateIncluded": "{kind}: uwzględnione (kliknij, aby wykluczyć)",
+      "posStateOff": "{kind}: wyłączone (kliknij, aby uwzględnić)"
+    }
+  },
+  "boards": {
+    "films": {
+      "chattiestBlurb": "najwięcej słów na minutę trwania",
+      "chattiestFmt": "{v} słów/min",
+      "chattiestTitle": "Najszybciej mówiący",
+      "intro": "Rekordziści korpusu, cztery kategorie ekstremalnych scenariuszy.",
+      "loadingSpinner": "Ładowanie filmowych superlatyw…",
+      "repetitiveBlurb": "najniższy udział unikalnych słów",
+      "repetitiveFmt": "{v}% unikalnych",
+      "repetitiveTitle": "Najbardziej powtarzalne scenariusze",
+      "sweariestBlurb": "przekleństwa na 1000 słów",
+      "sweariestFmt": "{v}/1 tys.",
+      "sweariestTitle": "Najbardziej wulgarne scenariusze",
+      "vocabularyBlurb": "najwięcej unikalnych słów w jednym scenariuszu",
+      "vocabularyFmt": "{v} słów",
+      "vocabularyTitle": "Największy zasób słów"
+    },
+    "overview": {
+      "adjectivesBlurb": "najczęściej wypowiadane ciekawe przymiotniki",
+      "adjectivesTitle": "Przymiotniki kina",
+      "fallingBlurb": "wypowiadane znacznie rzadziej teraz niż w początkach kina",
+      "intro": "Nagłówki korpusu - pierwsza piątka z każdej tablicy. Kliknij dowolną kartę, aby zobaczyć pełną listę, filtry i więcej.",
+      "loadingSpinner": "Ładowanie nagłówków…",
+      "risingBlurb": "wypowiadane znacznie częściej teraz niż w początkach kina",
+      "ubiquityBlurb": "słowa, których nie pomija prawie żaden scenariusz",
+      "wondersBlurb": "słowa, które należą do jednego filmu"
+    },
+    "ratio": {
+      "down": "{label}× mniej",
+      "up": "{label}× więcej"
+    },
+    "shifts": {
+      "fallingTitle": "Zanikające",
+      "intro": "Jak zmieniły się dialogi: słowa wypowiadane znacznie częściej (lub znacznie rzadziej) na milion słów teraz (lata 2010–20) niż w początkach kina (lata 1930–40). Linie śledzą każdą dekadę; kliknij słowo, aby zobaczyć pełny wykres.",
+      "loadingSpinner": "Ładowanie zmian…",
+      "risingTitle": "Na fali"
+    },
+    "taster": {
+      "seeAllLink": "zobacz wszystko →"
+    },
+    "ubiquity": {
+      "intro": "Poza zwykłymi spójnikami, te słowa pojawiają się w prawie każdym z {nFilms} filmów.",
+      "loadingSpinner": "Ładowanie…",
+      "shareOfFilms": "{share}% filmów"
+    },
+    "wonders": {
+      "intro": "Słowa, które jeden film wypowiada częściej niż reszta kina razem wzięta - imiona postaci, wymyślone słowa, obsesje.",
+      "item": "wypowiedziane {count}× w {movieLink} ({year}) - {share}% wszystkich przypadków, gdy pada to na ekranie",
+      "loadingSpinner": "Ładowanie cudów jednego filmu…"
+    }
+  },
+  "chart": {
+    "axisAriaLabel": "{yLabel} według roku",
+    "chartingSpinner": "Tworzenie wykresu polecanej zmiany…",
+    "loadFailedMessage": "Nie udało się narysować tego wykresu - spróbuj następny ▶",
+    "moreTrendsLink": "więcej trendów →",
+    "trendNoun": "trend",
+    "unpinAriaLabel": "Odepnij {year}",
+    "usesPerMillionCaption": "użycia na milion słów dialogu",
+    "yAxisLabel": "użycia na milion słów"
+  },
+  "decadesView": {
+    "decadeLabel": "Lata {decade}",
+    "eyebrow": "Przeglądaj według",
+    "filmsCount": "{count} filmów",
+    "loadError": "Nie udało się załadować dekad.",
+    "loadingSpinner": "Ładowanie dekad…",
+    "subtitle": "Jak mówiła każda epoka kina - {count} badań.",
+    "title": "DEKADY",
+    "notEnoughFilms": "Za mało filmów w {langs} na to - dodaj języki lub przełącz na Wszystkie filmy."
+  },
+  "entity": {
+    "compareButton": "Porównaj {label} z…",
+    "decadeEyebrow": "Szac. {decade}",
+    "decadeLabel": "LATA {decade}",
+    "decadeSubject": "lata {decade}",
+    "genreEyebrow": "Badanie gatunku",
+    "kindDecade": "dekada",
+    "kindGenre": "gatunek",
+    "loadingSpinner": "Ładowanie…",
+    "mostSpokenBody": "Zwykłe zliczenia, bez słów potocznych (stopwords).",
+    "mostSpokenHeading": "Najczęściej wypowiadane słowa",
+    "notFound": "Brak {kind} „{id}” w zbiorze danych.",
+    "notableScriptsHeading": "Godne uwagi scenariusze",
+    "signatureWordsBody": "O czym {subject} mówi znacznie częściej niż filmy ogółem.",
+    "signatureWordsHeading": "Słowa charakterystyczne",
+    "statsLine": "{films} filmów · {words} słów dialogu",
+    "notEnoughFilms": "Za mało filmów w {langs} dla {subject} - dodaj języki lub przełącz na Wszystkie filmy."
+  },
+  "eras": {
+    "1910": "pierwsze szpule",
+    "1920": "nadejście kina dźwiękowego",
+    "1930": "złota era",
+    "1940": "wojna i film noir",
+    "1950": "era atomowa",
+    "1960": "nowa fala",
+    "1970": "Nowe Hollywood",
+    "1980": "era blockbusterów",
+    "1990": "boom niezależny",
+    "2000": "lata multipleksów",
+    "2010": "świt streamingu",
+    "2020": "kino dzisiaj"
+  },
+  "errors": {
+    "body": "Przepraszamy za to - {reload} zazwyczaj pomaga. Nadal nie działa? Napisz na {email}.",
+    "eyebrow": "Ostre cięcie:",
+    "reload": "odświeżenie",
+    "title": "Coś się zepsuło."
+  },
+  "footer": {
+    "creditsBody": "Open source: {github} i niekomercyjne. Publikowane są tylko pochodne zliczenia słów - żaden tekst napisów nie jest redystrybuowany.",
+    "creditsHeading": "Twórcy.",
+    "dataBody": "Pełny zbiór danych jest dostępny do pobrania - zobacz {dataGuide} po linki i informacje ({license}). Zastanawiasz się nad metodologią, uprzedzeniami lub prawami autorskimi? Przeczytaj {faq}.",
+    "dataGuideLink": "przewodnik po danych",
+    "dataHeading": "Pobierz dane.",
+    "dataSourcesBody": "Dane: zliczenia słów z {opus} (Lison & Tiedemann, 2016), przez {openSubtitles}; metadane filmów z {imdbData} i {tmdb}. Informacje dzięki uprzejmości IMDb ({imdbUrl}). Użyto za zgodą.",
+    "faqLink": "FAQ",
+    "githubLink": "github.com/beveradb/moviewords",
+    "githubProfileLink": "GitHub",
+    "ideaBody": "Na pewno są ciekawe analizy, o których nie pomyśleliśmy! Jeśli chcesz podzielić się pomysłem lub zbudowałeś coś fajnego z tymi danymi, {email}",
+    "ideaEmailLink": "napisz na andrew@beveridge.uk",
+    "ideaHeading": "Masz pomysł?",
+    "imdbDataLink": "IMDb",
+    "imdbUrlLink": "https://www.imdb.com",
+    "instagramLink": "Instagram",
+    "licenseLink": "CC BY-NC-SA 4.0",
+    "lindsayLink": "Lindsay Wright Graphic Design",
+    "linkedinLink": "LinkedIn",
+    "madeByBody": "Stworzone przez Andrew Beveridge'a - {github} · {linkedin} · {instagram} - z oryginalnym pomysłem mojej kochanej żony {lindsay} - sprawdź jej portfolio!",
+    "openSubtitlesLink": "OpenSubtitles.org",
+    "opusLink": "korpus OPUS OpenSubtitles",
+    "takedownEmailLink": "Zgłoś naruszenie",
+    "tmdbDisclaimerBody": "Ten produkt korzysta z API TMDB, ale nie jest popierany ani certyfikowany przez TMDB. Plakaty przez TMDB - prawa autorskie należą do odpowiednich studiów, pokazane w celu identyfikacji omawianych filmów. Jesteś właścicielem praw? {takedown}, a natychmiast to usuniemy.",
+    "tmdbLink": "TMDB"
+  },
+  "genres": {
+    "Action": "Akcja",
+    "Adult": "Dla dorosłych",
+    "Adventure": "Przygodowy",
+    "Animation": "Animacja",
+    "Biography": "Biografia",
+    "Comedy": "Komedia",
+    "Crime": "Kryminał",
+    "Documentary": "Dokumentalny",
+    "Drama": "Dramat",
+    "Family": "Familijny",
+    "Fantasy": "Fantasy",
+    "Film-Noir": "Film-Noir",
+    "History": "Historyczny",
+    "Horror": "Horror",
+    "Music": "Muzyczny",
+    "Musical": "Musical",
+    "Mystery": "Tajemnica",
+    "News": "Wiadomości",
+    "Reality-TV": "Reality-TV",
+    "Romance": "Romans",
+    "Sci-Fi": "Sci-Fi",
+    "Sport": "Sportowy",
+    "Thriller": "Thriller",
+    "War": "Wojenny",
+    "Western": "Western"
+  },
+  "genresView": {
+    "eyebrow": "Przeglądaj według",
+    "filmsCount": "{count} filmów",
+    "loadError": "Nie udało się załadować gatunków.",
+    "loadingSpinner": "Ładowanie gatunków…",
+    "subtitle": "O czym mówi każdy gatunek - {count} badań.",
+    "title": "GATUNKI",
+    "notEnoughFilms": "Za mało filmów w {langs} na to - dodaj języki lub przełącz na Wszystkie filmy."
+  },
+  "home": {
+    "aboutHeading": "O tym zbiorze danych",
+    "decadesBody": "Od kina dźwiękowego do lat 20. XXI wieku - jak mówiła każda epoka kina.",
+    "decadesHeading": "Przemierzaj dekady",
+    "fadeIn": "Rozjaśnienie:",
+    "faqLink": "FAQ",
+    "heroBody": "Policzyliśmy każde słowo wypowiedziane w {count} filmach - {millions} milionów słów. Obserwuj {trends}, poznaj {sweariest} i rozstrzygnij {versus} słowo po słowie.",
+    "heroSweariest": "najbardziej wulgarny scenariusz, jaki kiedykolwiek powstał",
+    "heroTitle": "Każdy film ma swój {vocabulary}.",
+    "heroTrends": "jak 'super' wyprzedza 'klawo'",
+    "heroVersus": "Obcy kontra Obcy",
+    "heroVocabulary": "słownik",
+    "movieMeta": "{year} · {words} słów",
+    "opusLink": "korpus OPUS OpenSubtitles",
+    "shelfHeading": "Ściągnij scenariusz z półki",
+    "aboutBody": "Obejmuje {count} - każde słowo dialogu z napisów z {opus} dla filmów z co najmniej 300 głosami na IMDb, zliczone na film. Publikowane są tylko zliczenia słów; żaden tekst napisów nie jest redystrybuowany. Metodologia i zastrzeżenia: {faq}.",
+    "aboutCountAllFilms": "filmów - w tym przetłumaczone napisy",
+    "aboutCountLangFilms": "filmów w {langs}",
+    "aboutCountTemplate": "{count} {kind}",
+    "aboutCountUnknown": "dziesiątki tysięcy",
+    "aboutSubtitleHint": "Te zliczenia pochodzą z angielskich napisów do filmów, a nie z ich oryginalnych dialogów."
+  },
+  "leaderboard": {
+    "tabs": {
+      "everywhere": "Wypowiadane w każdym filmie",
+      "films": "Filmowe superlatywy",
+      "overview": "Przegląd",
+      "shifts": "Wzloty i upadki",
+      "wonders": "Cuda jednego filmu",
+      "words": "Najlepsze słowa"
+    },
+    "words": {
+      "allGenresOption": "Wszystkie gatunki",
+      "filmsCount": " · {count} filmów",
+      "filteringSpinner": "Filtrowanie korpusu… (pierwsze przefiltrowane zapytanie ładuje silnik analityczny)",
+      "fromLabel": "Od",
+      "genreLabel": "Gatunek",
+      "intro": "Najczęściej wypowiadane słowa we wszystkich filmach w korpusie.",
+      "noMatches": "Żadne słowa nie pasują do tych filtrów - spróbuj „wszystkie słowa” lub „dowolny rodzaj”.",
+      "rankByLabel": "Sortuj według",
+      "sortMovieishButton": "najbardziej filmowe",
+      "sortMovieishTitle": "Waży każde słowo według tego, o ile częściej filmy używają go niż potoczny angielski",
+      "sortSpokenButton": "najczęściej wypowiadane",
+      "toLabel": "Do"
+    },
+    "languageNote": "Na podstawie {count} filmów w {langs}, zliczonych z ich angielskich napisów."
+  },
+  "movie": {
+    "compareButton": "Porównaj z innym filmem",
+    "decadeLinkTitle": "Więcej z lat {decade}",
+    "distinctWordsLabel": "Unikalne słowa",
+    "genreSeparator": " / ",
+    "imdbRatingLabel": "Ocena IMDb",
+    "loadingScript": "Ładowanie scenariusza…",
+    "mostSpokenHeading": "Najczęściej wypowiadane słowa",
+    "notFound": "Brak filmu o id „{id}” w zbiorze danych.",
+    "signatureWordsBody": "Słowa, których ten film używa znacznie częściej niż filmy ogółem (szanse logarytmiczne w stosunku do całego korpusu).",
+    "signatureWordsHeading": "Słowa charakterystyczne",
+    "slugTitle": "{title} - {year}",
+    "vocabRichnessLabel": "Bogactwo słownictwa",
+    "wordsSpokenLabel": "Wypowiedziane słowa",
+    "imdbPosterTitle": "{title} na IMDb",
+    "runtimeLabel": "Czas trwania",
+    "runtimeValue": "{minutes} min",
+    "wordsPerMinuteLabel": "Słów na minutę"
+  },
+  "themeToggle": {
+    "day": "DZIEŃ",
+    "dayShoot": "Zdjęcia dzienne",
+    "night": "NOC",
+    "nightShoot": "Zdjęcia nocne",
+    "switchToDay": "Przełącz na tryb dzienny",
+    "switchToNight": "Przełącz na tryb nocny"
+  },
+  "trends": {
+    "addAnotherWordPlaceholder": "Dodaj kolejne słowo…",
+    "bigMovers": "Największe zmiany od lat 30.",
+    "chartItButton": "Narysuj wykres",
+    "chartedWordsAriaLabel": "Słowa na wykresie",
+    "featuredPrefix": "Polecane: {title}",
+    "firstWordPlaceholder": "Wpisz słowo, np. miłość",
+    "fullList": "pełna lista →",
+    "intro": "Jak często słowo jest wypowiadane we wszystkich filmach w korpusie, na milion słów dialogu, według roku premiery.",
+    "navNoun": "trend",
+    "navSuffix": "codziennie nowa zmiana",
+    "notEnoughData": "Za mało danych dla: {words} (wymaga ≥20 użyć w całym korpusie, w latach z wystarczającą liczbą filmów).",
+    "perThousandWords": " · {rate}/1 tys. słów",
+    "queryingCorpus": "Przeszukiwanie korpusu…",
+    "removeWordTitle": "Usuń „{word}”",
+    "topFilmByYearHeading": "Najlepszy film dla „{word}” według roku",
+    "topFilmByYearLoading": "Szukanie najlepszego filmu dla „{word}” w każdym roku…",
+    "topFilmsHeading": "Filmy, które mówią „{word}” najczęściej",
+    "topFilmsLoading": "Szukanie filmów, które mówią „{word}” najczęściej…",
+    "trimmedYearsNote": "{years} ukryte - zbyt mało filmów w korpusie dla wiarygodnych wskaźników",
+    "tryClassic": "Albo spróbuj klasyka:",
+    "usesPerMillionWords": "użycia na milion słów dialogu",
+    "wordDetailsTablist": "Szczegóły słowa",
+    "wordInputAriaLabel": "Słowo do wykresu",
+    "yAxisLabel": "użycia na milion słów",
+    "languageNote": "Na podstawie {count} filmów w {langs}, zliczonych z ich angielskich napisów.",
+    "notEnoughFilms": "Za mało filmów w {langs} dla tego trendu - dodaj języki lub przełącz na Wszystkie filmy."
+  },
+  "languageFilter": {
+    "allFilms": "Wszystkie filmy",
+    "apply": "Zastosuj",
+    "ariaLabel": "Filtruj filmy według oryginalnego języka",
+    "countLabel": "{count} języków",
+    "hint": "Filtruje według oryginalnego języka filmu; zliczenia słów pochodzą z angielskich napisów.",
+    "menuAriaLabel": "Oryginalny język",
+    "searchAriaLabel": "Szukaj języków",
+    "searchPlaceholder": "Szukaj języków…"
+  },
+  "localeFilterHint": {
+    "dismissAriaLabel": "Odrzuć",
+    "filterButton": "Filtruj",
+    "message": "Przeglądasz w {lang}? Przefiltruj do filmów w {lang}."
+  },
+  "modal": {
+    "closeAriaLabel": "Zamknij"
+  },
+  "filterExplainer": {
+    "badgeLabel": "przetłumaczone · {lang}",
+    "badgeTitle": "Oryginalny język {lang} - zliczenia pochodzą z przetłumaczonych angielskich napisów. Jak to działa?",
+    "dialogueNote": "Dialogów w oryginalnym języku nie ma w zbiorze danych - jest tylko angielskie tłumaczenie.",
+    "englishSubtitles": "angielskich napisów",
+    "englishTranslation": "angielskiego tłumaczenia",
+    "filteringBody": "{whatFiltering} {originalLanguage} filmu - to, gdzie powstał, na podstawie metadanych TMDB - a nie język słów poniżej.",
+    "linkText": "Jak to działa?",
+    "modalTitle": "Jak to działa",
+    "origin": "pochodzenia",
+    "originalLanguage": "oryginalny język",
+    "soSpanishMeans": "Więc \"hiszpański\" oznacza",
+    "spanishBody": "{soSpanishMeans} słownictwo z angielskich napisów kina hiszpańskiego {origin} - jak słowa takie jak \"solidarity\" czy \"dictatorship\" pojawiają się w angielskich napisach hiszpańskich filmów - a nie hiszpańskie słowa.",
+    "whatFiltering": "Co filtrujesz:",
+    "whatWords": "Czym są te słowa:",
+    "wordsBody": "{whatWords} każde zliczenie na Movie Words pochodzi z {englishSubtitles} filmu. Mamy tylko angielską ścieżkę z OpenSubtitles, więc w przypadku filmu nieanglojęzycznego są to słowa jego {englishTranslation}, a nie oryginalne dialogi. Dlatego czasami prześlizgnie się nieprzetłumaczone słowo - \"panna\", \"cotta\", \"samurai\"."
+  }
+}

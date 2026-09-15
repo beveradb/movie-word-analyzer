@@ -1,0 +1,411 @@
+{
+  "compare": {
+    "orLabel": "أو",
+    "addDecadeAriaLabel": "إضافة عقد",
+    "addDecadeOption": "إضافة عقد…",
+    "addFilmPlaceholder": "إضافة فيلم…",
+    "addGenreAriaLabel": "إضافة تصنيف",
+    "addGenreOption": "إضافة تصنيف…",
+    "decadeLabel": "عقد {decade}",
+    "decadeOptionLabel": "عقد {decade}",
+    "distinctWordsLabel": "كلمات مميزة",
+    "featuredMatchupPrefix": "مواجهة مميزة: {title}",
+    "filmsLabel": "أفلام",
+    "filmsPerYearLabel": "أفلام / سنة",
+    "filmsPerYearTitle": "الأفلام لكل سنة إصدار في هذا الجزء من المجموعة",
+    "fullBreakdownLink": "التفاصيل الكاملة →",
+    "headToHeadHeading": "وجهاً لوجه",
+    "introBody": "ضع الأفلام، والعقود، والتصنيفات جنباً إلى جنب - ما يصل إلى ثلاثة من أي مزيج.",
+    "loadingLabel": "جارٍ التحميل…",
+    "movieLabel": "{title} - {year}",
+    "navNoun": "مواجهة",
+    "navSuffix": "تتغير يومياً - أو قم ببناء مواجهتك الخاصة أعلاه",
+    "noStandoutWords": "لا توجد كلمات بارزة",
+    "nothingFoundMessage": "لم يتم العثور على شيء لهذا الاختيار.",
+    "pickFilmPlaceholder": "اختر فيلماً…",
+    "ratioMoreLabel": "أكثر بـ {ratio}×",
+    "removeButton": "إزالة",
+    "sharedSignatureWordsHeading": "الكلمات المميزة المشتركة بينهم",
+    "signatureWordsHeading": "الكلمات المميزة {note}",
+    "signatureWordsHighlightedNote": "(المظلل = مشترك)",
+    "swearsPer1kLabel": "الشتائم / 1000 كلمة",
+    "wordsPerFilmLabel": "كلمات / فيلم",
+    "wordsSpokenLabel": "الكلمات المنطوقة",
+    "headToHeadIntroMany": "ما يقوله كل منها أكثر بكثير من غيرها - المعدل لكل مليون كلمة من حواره الخاص.",
+    "headToHeadIntroPair": "ما يقوله كل منهما أكثر بكثير من الآخر - المعدل لكل مليون كلمة من حواره الخاص."
+  },
+  "languageSwitcher": {
+    "current": "اللغة",
+    "label": "اختر اللغة"
+  },
+  "nav": {
+    "sectionsLabel": "الأقسام",
+    "compare": "مقارنة",
+    "decades": "عقود",
+    "explore": "استكشاف",
+    "genres": "تصنيفات",
+    "leaderboard": "لوحة المتصدرين",
+    "trends": "اتجاهات"
+  },
+  "pos": {
+    "other": "أخرى",
+    "a": "صفات",
+    "adjective": "صفة",
+    "adverb": "حال",
+    "n": "أسماء",
+    "noun": "اسم",
+    "r": "أحوال",
+    "v": "أفعال",
+    "verb": "فعل",
+    "x": "أسماء وأخرى"
+  },
+  "ui": {
+    "errorBox": {
+      "retryButton": "إعادة المحاولة",
+      "heading": "المشهد مفقود"
+    },
+    "featuredNav": {
+      "nextAriaLabel": "الـ {noun} المميز التالي",
+      "position": "{idx} من {len}",
+      "prevAriaLabel": "الـ {noun} المميز السابق"
+    },
+    "highlightWord": {
+      "spokenTimes": "نُطقت {count} مرة",
+      "title": "“{word}” - {display}"
+    },
+    "movieSearch": {
+      "ariaLabel": "البحث عن أفلام",
+      "placeholder": "ابحث عن عنوان فيلم…"
+    },
+    "poster": {
+      "alt": "ملصق {title}"
+    },
+    "seriesLegend": {
+      "exploreTitle": "استكشف “{word}”"
+    },
+    "slug": {
+      "defaultPrefix": "داخلي."
+    },
+    "wordFilterBar": {
+      "allButton": "جميع الكلمات",
+      "anyKindButton": "أي نوع",
+      "commonnessAriaLabel": "شيوع الكلمة",
+      "hidingDescription": "إخفاء الإنجليزية اليومية - أكثر ~2,000 كلمة شيوعاً (the, know, get…)",
+      "interestingButton": "كلمات مثيرة للاهتمام",
+      "onlyKindsSuffix": " · فقط {kinds}",
+      "showingDescription": "إظهار كل كلمة، بما في ذلك الإنجليزية اليومية",
+      "excludingKindsSuffix": " · إخفاء {kinds}",
+      "posStateExcluded": "{kind}: مستبعد (انقر لإعادة الضبط)",
+      "posStateIncluded": "{kind}: مشمول (انقر للاستبعاد)",
+      "posStateOff": "{kind}: متوقف (انقر للتضمين)"
+    }
+  },
+  "boards": {
+    "films": {
+      "chattiestBlurb": "أكثر الكلمات في الدقيقة من وقت التشغيل",
+      "chattiestFmt": "{v} كلمة/دقيقة",
+      "chattiestTitle": "أسرع المتحدثين",
+      "intro": "حاملو الأرقام القياسية في المجموعة، أربع فئات من النصوص الاستثنائية.",
+      "loadingSpinner": "جارٍ تحميل الأرقام القياسية للأفلام…",
+      "repetitiveBlurb": "أقل نسبة من الكلمات المميزة",
+      "repetitiveFmt": "{v}% فريدة",
+      "repetitiveTitle": "النصوص الأكثر تكراراً",
+      "sweariestBlurb": "الشتائم لكل 1000 كلمة",
+      "sweariestFmt": "{v}/1000",
+      "sweariestTitle": "أكثر النصوص شتائم",
+      "vocabularyBlurb": "أكثر الكلمات المميزة في نص واحد",
+      "vocabularyFmt": "{v} كلمة",
+      "vocabularyTitle": "أكبر المفردات"
+    },
+    "overview": {
+      "adjectivesBlurb": "أكثر الصفات المثيرة للاهتمام استخداماً",
+      "adjectivesTitle": "صفات السينما",
+      "fallingBlurb": "تُقال الآن أقل بكثير مما كانت عليه في السينما المبكرة",
+      "intro": "عناوين المجموعة - أفضل خمسة من كل لوحة. اتبع أي بطاقة للحصول على القائمة الكاملة، والفلاتر، والمزيد.",
+      "loadingSpinner": "جارٍ تحميل العناوين…",
+      "risingBlurb": "تُقال الآن أكثر بكثير مما كانت عليه في السينما المبكرة",
+      "ubiquityBlurb": "كلمات لا يتخطاها أي نص تقريباً",
+      "wondersBlurb": "كلمات يمتلكها فيلم واحد"
+    },
+    "ratio": {
+      "down": "أقل بـ {label}×",
+      "up": "أكثر بـ {label}×"
+    },
+    "shifts": {
+      "fallingTitle": "تتلاشى",
+      "intro": "كيف تغير الحوار: كلمات تُقال أكثر (أو أقل) بكثير لكل مليون كلمة الآن (2010s–20s) مقارنة بالسينما المبكرة (1930s–40s). الخطوط تتبع كل عقد؛ انقر على كلمة لرؤية المخطط الكامل.",
+      "loadingSpinner": "جارٍ تحميل التغييرات…",
+      "risingTitle": "في صعود"
+    },
+    "taster": {
+      "seeAllLink": "عرض الكل →"
+    },
+    "ubiquity": {
+      "intro": "بعيداً عن أدوات الربط البحتة، تظهر هذه الكلمات في كل فيلم تقريباً من أصل {nFilms} فيلم.",
+      "loadingSpinner": "جارٍ التحميل…",
+      "shareOfFilms": "{share}% من الأفلام"
+    },
+    "wonders": {
+      "intro": "كلمات يقولها فيلم واحد أكثر من بقية السينما مجتمعة - أسماء شخصيات، كلمات مخترعة، وهواجس.",
+      "item": "قيلت {count}× في {movieLink} ({year}) - {share}% من كل مرة تقولها السينما",
+      "loadingSpinner": "جارٍ تحميل عجائب الفيلم الواحد…"
+    }
+  },
+  "chart": {
+    "axisAriaLabel": "{yLabel} حسب السنة",
+    "chartingSpinner": "جارٍ رسم مخطط لتغيير مميز…",
+    "loadFailedMessage": "تعذر رسم هذا المخطط - جرب التالي ▶",
+    "moreTrendsLink": "المزيد من الاتجاهات →",
+    "trendNoun": "اتجاه",
+    "unpinAriaLabel": "إلغاء تثبيت {year}",
+    "usesPerMillionCaption": "استخدام لكل مليون كلمة من الحوار",
+    "yAxisLabel": "استخدام لكل مليون كلمة"
+  },
+  "decadesView": {
+    "decadeLabel": "عقد {decade}",
+    "eyebrow": "تصفح حسب",
+    "filmsCount": "{count} فيلم",
+    "loadError": "تعذر تحميل العقود.",
+    "loadingSpinner": "جارٍ تحميل العقود…",
+    "subtitle": "كيف تحدثت كل حقبة سينمائية - {count} دراسة.",
+    "title": "العقود",
+    "notEnoughFilms": "لا يوجد عدد كافٍ من الأفلام باللغة {langs} لهذا - أضف لغات أو بدّل إلى كل الأفلام."
+  },
+  "entity": {
+    "compareButton": "قارن {label} مع…",
+    "decadeEyebrow": "عقد {decade}",
+    "decadeLabel": "عقد {decade}",
+    "decadeSubject": "فترة {decade}",
+    "genreEyebrow": "دراسة التصنيف",
+    "kindDecade": "عقد",
+    "kindGenre": "تصنيف",
+    "loadingSpinner": "جارٍ التحميل…",
+    "mostSpokenBody": "تعداد بسيط، مع استبعاد كلمات التوقف.",
+    "mostSpokenHeading": "أكثر الكلمات المنطوقة",
+    "notFound": "لا يوجد {kind} “{id}” في مجموعة البيانات.",
+    "notableScriptsHeading": "نصوص بارزة",
+    "signatureWordsBody": "ما يتحدث عنه {subject} أكثر بكثير من الأفلام بشكل عام.",
+    "signatureWordsHeading": "الكلمات المميزة",
+    "statsLine": "{films} فيلم · {words} كلمة من الحوار",
+    "notEnoughFilms": "لا يوجد عدد كافٍ من الأفلام باللغة {langs} لـ {subject} - أضف لغات أو بدّل إلى كل الأفلام."
+  },
+  "eras": {
+    "1910": "البكرات الأولى",
+    "1920": "وصول الأفلام الناطقة",
+    "1930": "العصر الذهبي",
+    "1940": "الحرب وأفلام النوار",
+    "1950": "العصر الذري",
+    "1960": "الموجة الجديدة",
+    "1970": "هوليوود الجديدة",
+    "1980": "عصر الأفلام الضخمة",
+    "1990": "طفرة الأفلام المستقلة",
+    "2000": "سنوات المجمعات السينمائية",
+    "2010": "فجر البث المباشر",
+    "2020": "السينما الآن"
+  },
+  "errors": {
+    "body": "نأسف لذلك - عادةً ما يؤدي {reload} إلى إصلاح الأمر. هل ما زال معطلاً؟ راسلنا على {email}.",
+    "eyebrow": "انتقال مفاجئ إلى:",
+    "reload": "إعادة التحميل",
+    "title": "حدث خطأ ما."
+  },
+  "footer": {
+    "creditsBody": "مفتوح المصدر: {github} وغير تجاري. يتم نشر تعداد الكلمات المشتقة فقط - لا يتم إعادة توزيع أي نص ترجمة.",
+    "creditsHeading": "الاعتمادات.",
+    "dataBody": "مجموعة البيانات الكاملة متاحة للتنزيل - راجع {dataGuide} للحصول على الروابط والمعلومات ({license}). هل تتساءل عن المنهجية، أو التحيز، أو حقوق النشر؟ اقرأ {faq}.",
+    "dataGuideLink": "دليل البيانات",
+    "dataHeading": "احصل على البيانات.",
+    "dataSourcesBody": "البيانات: تعداد الكلمات من {opus} (Lison & Tiedemann, 2016)، عبر {openSubtitles}؛ البيانات الوصفية للأفلام من {imdbData} و {tmdb}. المعلومات مقدمة من IMDb ({imdbUrl}). مستخدمة بإذن.",
+    "faqLink": "الأسئلة الشائعة",
+    "githubLink": "github.com/beveradb/moviewords",
+    "githubProfileLink": "GitHub",
+    "ideaBody": "لابد أن هناك تحليلات مثيرة للاهتمام لم نفكر فيها! إذا كنت ترغب في مشاركة فكرة أو قمت ببناء شيء رائع باستخدام البيانات، {email}",
+    "ideaEmailLink": "راسل andrew@beveridge.uk",
+    "ideaHeading": "هل لديك فكرة؟",
+    "imdbDataLink": "IMDb",
+    "imdbUrlLink": "https://www.imdb.com",
+    "instagramLink": "Instagram",
+    "licenseLink": "CC BY-NC-SA 4.0",
+    "lindsayLink": "Lindsay Wright Graphic Design",
+    "linkedinLink": "LinkedIn",
+    "madeByBody": "صُنع بواسطة Andrew Beveridge - {github} · {linkedin} · {instagram} - مع الفكرة الأصلية من زوجتي الرائعة {lindsay} - تحقق من معرض أعمالها!",
+    "openSubtitlesLink": "OpenSubtitles.org",
+    "opusLink": "مجموعة OPUS OpenSubtitles",
+    "takedownEmailLink": "إرسال طلب إزالة عبر البريد الإلكتروني",
+    "tmdbDisclaimerBody": "يستخدم هذا المنتج واجهة برمجة تطبيقات TMDB ولكنه غير معتمد أو موثق من قبل TMDB. الملصقات عبر TMDB - حقوق الطبع والنشر للاستوديوهات الخاصة بها، تُعرض لتحديد الأفلام التي تمت مناقشتها. هل أنت صاحب حقوق؟ {takedown} وسيتم إزالتها على الفور.",
+    "tmdbLink": "TMDB"
+  },
+  "genres": {
+    "Action": "أكشن",
+    "Adult": "للبالغين",
+    "Adventure": "مغامرة",
+    "Animation": "رسوم متحركة",
+    "Biography": "سيرة ذاتية",
+    "Comedy": "كوميديا",
+    "Crime": "جريمة",
+    "Documentary": "وثائقي",
+    "Drama": "دراما",
+    "Family": "عائلي",
+    "Fantasy": "فانتازيا",
+    "Film-Noir": "فيلم نوار",
+    "History": "تاريخ",
+    "Horror": "رعب",
+    "Music": "موسيقى",
+    "Musical": "استعراضي",
+    "Mystery": "غموض",
+    "News": "أخبار",
+    "Reality-TV": "تلفزيون الواقع",
+    "Romance": "رومانسية",
+    "Sci-Fi": "خيال علمي",
+    "Sport": "رياضة",
+    "Thriller": "إثارة",
+    "War": "حرب",
+    "Western": "غربي"
+  },
+  "genresView": {
+    "eyebrow": "تصفح حسب",
+    "filmsCount": "{count} فيلم",
+    "loadError": "تعذر تحميل التصنيفات.",
+    "loadingSpinner": "جارٍ تحميل التصنيفات…",
+    "subtitle": "عما يتحدث كل تصنيف - {count} دراسة.",
+    "title": "التصنيفات",
+    "notEnoughFilms": "لا يوجد عدد كافٍ من الأفلام باللغة {langs} لهذا - أضف لغات أو بدّل إلى كل الأفلام."
+  },
+  "home": {
+    "aboutHeading": "حول مجموعة البيانات هذه",
+    "decadesBody": "من الأفلام الناطقة إلى عشرينيات القرن الحالي - كيف تحدثت كل حقبة سينمائية.",
+    "decadesHeading": "تجول في العقود",
+    "fadeIn": "ظهور تدريجي:",
+    "faqLink": "الأسئلة الشائعة",
+    "heroBody": "قمنا بعد كل كلمة قيلت في {count} فيلم - {millions} مليون منها. شاهد {trends}، وتعرف على {sweariest}، واحسم {versus} كلمة بكلمة.",
+    "heroSweariest": "أكثر النصوص شتائم على الإطلاق",
+    "heroTitle": "كل فيلم له {vocabulary}.",
+    "heroTrends": "تجاوز 'awesome' لـ 'swell'",
+    "heroVersus": "Alien ضد Aliens",
+    "heroVocabulary": "مفردات",
+    "movieMeta": "{year} · {words} كلمة",
+    "opusLink": "مجموعة OPUS OpenSubtitles",
+    "shelfHeading": "اسحب نصاً من الرف",
+    "aboutBody": "يغطي {count} - كل كلمة من حوار الترجمة من {opus} للأفلام التي حصلت على 300 تصويت على الأقل في IMDb، محسوبة لكل فيلم. يتم نشر تعداد الكلمات فقط؛ لا يتم إعادة توزيع أي نص ترجمة. المنهجية والمحاذير: {faq}.",
+    "aboutCountAllFilms": "أفلام - متضمنة الترجمات",
+    "aboutCountLangFilms": "أفلام باللغة {langs}",
+    "aboutCountTemplate": "{count} {kind}",
+    "aboutCountUnknown": "عشرات الآلاف من",
+    "aboutSubtitleHint": "هذه الإحصاءات تأتي من الترجمة الإنجليزية للأفلام، وليس من حوارها الأصلي."
+  },
+  "leaderboard": {
+    "tabs": {
+      "everywhere": "قيلت في كل فيلم",
+      "films": "الأرقام القياسية للأفلام",
+      "overview": "نظرة عامة",
+      "shifts": "الصاعدون والهابطون",
+      "wonders": "عجائب الفيلم الواحد",
+      "words": "أهم الكلمات"
+    },
+    "words": {
+      "allGenresOption": "جميع التصنيفات",
+      "filmsCount": " · {count} فيلم",
+      "filteringSpinner": "جارٍ تصفية المجموعة… (أول استعلام مصفى يقوم بتحميل محرك التحليلات)",
+      "fromLabel": "من",
+      "genreLabel": "التصنيف",
+      "intro": "أكثر الكلمات المنطوقة عبر كل فيلم في المجموعة.",
+      "noMatches": "لا توجد كلمات تتطابق مع هذه الفلاتر - جرب “جميع الكلمات” أو “أي نوع”.",
+      "rankByLabel": "ترتيب حسب",
+      "sortMovieishButton": "الأكثر سينمائية",
+      "sortMovieishTitle": "يوزن كل كلمة بمدى استخدام الأفلام لها أكثر من اللغة الإنجليزية اليومية",
+      "sortSpokenButton": "الأكثر نطقاً",
+      "toLabel": "إلى"
+    },
+    "languageNote": "بناءً على {count} أفلام باللغة {langs}، تم قياسها من ترجمتها الإنجليزية."
+  },
+  "movie": {
+    "compareButton": "قارن مع فيلم آخر",
+    "decadeLinkTitle": "المزيد من فترة {decade}",
+    "distinctWordsLabel": "كلمات مميزة",
+    "genreSeparator": " / ",
+    "imdbRatingLabel": "تقييم IMDb",
+    "loadingScript": "جارٍ تحميل النص…",
+    "mostSpokenHeading": "أكثر الكلمات المنطوقة",
+    "notFound": "لا يوجد فيلم بالمعرف “{id}” في مجموعة البيانات.",
+    "signatureWordsBody": "كلمات يستخدمها هذا الفيلم أكثر بكثير من الأفلام بشكل عام (الاحتمالات اللوغاريتمية مقابل المجموعة بأكملها).",
+    "signatureWordsHeading": "الكلمات المميزة",
+    "slugTitle": "{title} - {year}",
+    "vocabRichnessLabel": "ثراء المفردات",
+    "wordsSpokenLabel": "الكلمات المنطوقة",
+    "imdbPosterTitle": "{title} على IMDb",
+    "runtimeLabel": "مدة العرض",
+    "runtimeValue": "{minutes} دقيقة",
+    "wordsPerMinuteLabel": "كلمة في الدقيقة"
+  },
+  "themeToggle": {
+    "day": "نهار",
+    "dayShoot": "تصوير نهاري",
+    "night": "ليل",
+    "nightShoot": "تصوير ليلي",
+    "switchToDay": "التبديل إلى الوضع النهاري",
+    "switchToNight": "التبديل إلى الوضع الليلي"
+  },
+  "trends": {
+    "addAnotherWordPlaceholder": "إضافة كلمة أخرى…",
+    "bigMovers": "أكبر التغييرات منذ الثلاثينيات",
+    "chartItButton": "رسم المخطط",
+    "chartedWordsAriaLabel": "الكلمات المرسومة",
+    "featuredPrefix": "مميز: {title}",
+    "firstWordPlaceholder": "اكتب كلمة، مثل حب",
+    "fullList": "القائمة الكاملة →",
+    "intro": "مدى تكرار نطق كلمة عبر جميع الأفلام في المجموعة، لكل مليون كلمة من الحوار، حسب سنة الإصدار.",
+    "navNoun": "اتجاه",
+    "navSuffix": "تغيير جديد كل يوم",
+    "notEnoughData": "لا توجد بيانات كافية لـ: {words} (يحتاج إلى ≥20 استخداماً عبر المجموعة، في سنوات بها عدد كافٍ من الأفلام).",
+    "perThousandWords": " · {rate}/1000 كلمة",
+    "queryingCorpus": "جارٍ الاستعلام من المجموعة…",
+    "removeWordTitle": "إزالة “{word}”",
+    "topFilmByYearHeading": "أفضل فيلم لـ “{word}” حسب السنة",
+    "topFilmByYearLoading": "جارٍ البحث عن أفضل فيلم لـ “{word}” لكل سنة…",
+    "topFilmsHeading": "الأفلام التي تقول “{word}” أكثر من غيرها",
+    "topFilmsLoading": "جارٍ البحث عن الأفلام التي تقول “{word}” أكثر من غيرها…",
+    "trimmedYearsNote": "تم إخفاء {years} - عدد الأفلام في المجموعة قليل جداً للحصول على معدلات موثوقة",
+    "tryClassic": "أو جرب كلمة كلاسيكية:",
+    "usesPerMillionWords": "استخدام لكل مليون كلمة من الحوار",
+    "wordDetailsTablist": "تفاصيل الكلمة",
+    "wordInputAriaLabel": "الكلمة المراد رسمها",
+    "yAxisLabel": "استخدام لكل مليون كلمة",
+    "languageNote": "بناءً على {count} أفلام باللغة {langs}، تم قياسها من ترجمتها الإنجليزية.",
+    "notEnoughFilms": "لا يوجد عدد كافٍ من الأفلام باللغة {langs} لهذا الاتجاه - أضف لغات أو بدّل إلى كل الأفلام."
+  },
+  "languageFilter": {
+    "allFilms": "جميع الأفلام",
+    "apply": "تطبيق",
+    "ariaLabel": "تصفية الأفلام حسب اللغة الأصلية",
+    "countLabel": "{count} لغات",
+    "hint": "يصفي حسب اللغة الأصلية للفيلم؛ إحصاءات الكلمات تأتي من الترجمة الإنجليزية.",
+    "menuAriaLabel": "اللغة الأصلية",
+    "searchAriaLabel": "البحث في اللغات",
+    "searchPlaceholder": "البحث في اللغات…"
+  },
+  "localeFilterHint": {
+    "dismissAriaLabel": "تجاهل",
+    "filterButton": "تصفية",
+    "message": "هل تشاهد باللغة {lang}؟ قم بالتصفية إلى الأفلام باللغة {lang}."
+  },
+  "modal": {
+    "closeAriaLabel": "إغلاق"
+  },
+  "filterExplainer": {
+    "badgeLabel": "مترجم · {lang}",
+    "badgeTitle": "اللغة الأصلية {lang} - الإحصاءات تأتي من الترجمة الإنجليزية. كيف يعمل هذا؟",
+    "dialogueNote": "الحوار باللغة الأصلية غير موجود في مجموعة البيانات - فقط الترجمة الإنجليزية.",
+    "englishSubtitles": "الترجمة الإنجليزية",
+    "englishTranslation": "الترجمة الإنجليزية",
+    "filteringBody": "{whatFiltering} {originalLanguage} للفيلم - مكان إنتاجه، من بيانات TMDB - وليس لغة الكلمات أدناه.",
+    "linkText": "كيف يعمل هذا؟",
+    "modalTitle": "كيف يعمل هذا",
+    "origin": "الأصل",
+    "originalLanguage": "اللغة الأصلية",
+    "soSpanishMeans": "لذا \"الإسبانية\" تعني",
+    "spanishBody": "{soSpanishMeans} مفردات الترجمة الإنجليزية للسينما ذات {origin} الإسباني - كيف تظهر كلمات مثل \"solidarity\" أو \"dictatorship\" في الترجمة الإنجليزية للأفلام الإسبانية - وليست الكلمات الإسبانية.",
+    "whatFiltering": "ما تقوم بتصفيته:",
+    "whatWords": "ما هي الكلمات:",
+    "wordsBody": "{whatWords} كل إحصاء في Movie Words يأتي من {englishSubtitles} للفيلم. لدينا فقط مسار OpenSubtitles الإنجليزي، لذا بالنسبة لفيلم غير ناطق بالإنجليزية، هذه هي كلمات {englishTranslation} الخاصة به، وليس الحوار الأصلي. لهذا السبب قد تتسرب أحيانًا كلمة غير مترجمة - \"panna\"، \"cotta\"، \"samurai\"."
+  }
+}

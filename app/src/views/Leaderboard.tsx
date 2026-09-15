@@ -5,7 +5,9 @@ import { langFilterSql, lit, pq, q } from '../lib/duck'
 import { activeLanguages, languageName } from '../lib/languages'
 import { navigate, useRoute } from '../lib/route'
 import { ErrorBox, Spinner } from '../components/ui'
+import { ExplainerLink } from '../components/FilterExplainer'
 import { WordFilterBar, defaultFilter, passesFilter, type WordRow } from '../components/WordFilter'
+import { useI18n } from '../i18n'
 
 interface Row {
   word: string
@@ -33,18 +35,13 @@ function useDebounced<T>(value: T, ms: number): T {
   return v
 }
 
-const TABS: [string, string][] = [
-  [DEFAULT_TAB, 'Overview'],
-  ['words', 'Top words'],
-  ['shifts', 'Risers & fallers'],
-  ['films', 'Film superlatives'],
-  ['wonders', 'One-film wonders'],
-  ['everywhere', 'Said by every film'],
-]
+const TAB_KEYS = [DEFAULT_TAB, 'words', 'shifts', 'films', 'wonders', 'everywhere']
 
 export function LeaderboardView() {
+  const { t, n, locale } = useI18n()
   const { params } = useRoute()
   const tab = params.get('b') ?? DEFAULT_TAB
+  const tabs: [string, string][] = TAB_KEYS.map((key) => [key, t(`leaderboard.tabs.${key}`)])
   const langs = activeLanguages()
   const [filmCount, setFilmCount] = useState<number | null>(null)
 
@@ -58,11 +55,15 @@ export function LeaderboardView() {
     <div>
       {langs.length > 0 && filmCount !== null && (
         <p className="mt-1 text-sm text-ink-2">
-          Based on {filmCount.toLocaleString()} {langs.map((c) => languageName(c)).join(', ')}-language films.
+          {t('leaderboard.languageNote', {
+            count: n(filmCount),
+            langs: langs.map((c) => languageName(c, locale)).join(', '),
+          })}{' '}
+          <ExplainerLink />
         </p>
       )}
       <div className="mt-3 flex flex-wrap gap-2 font-script text-xs">
-        {TABS.map(([key, label]) => (
+        {tabs.map(([key, label]) => (
           <button
             key={key}
             onClick={() => navigate(`/leaderboard${key === DEFAULT_TAB ? '' : `?b=${key}`}`)}
@@ -78,12 +79,13 @@ export function LeaderboardView() {
       {tab === 'films' && <FilmsBoard />}
       {tab === 'wonders' && <WondersBoard />}
       {tab === 'everywhere' && <UbiquityBoard />}
-      {(tab === DEFAULT_TAB || !TABS.some(([k]) => k === tab)) && <OverviewBoard />}
+      {(tab === DEFAULT_TAB || !TAB_KEYS.some((k) => k === tab)) && <OverviewBoard />}
     </div>
   )
 }
 
 function WordsBoard() {
+  const { t, n } = useI18n()
   const { params } = useRoute()
   const [rows, setRows] = useState<Row[] | null>(null)
   // stopword rows from the pre-baked JSON; merged in for 'all words' mode
@@ -182,11 +184,11 @@ function WordsBoard() {
 
   return (
     <div>
-      <p className="mt-3 text-sm text-ink-2">The most spoken words across every film in the corpus.</p>
+      <p className="mt-3 text-sm text-ink-2">{t('leaderboard.words.intro')}</p>
 
       <div className="mt-4 flex flex-wrap items-end gap-4 border-2 border-ink bg-card p-3 font-script text-sm">
         <label className="flex flex-col gap-1">
-          <span className="text-xs uppercase text-ink-2">From</span>
+          <span className="text-xs uppercase text-ink-2">{t('leaderboard.words.fromLabel')}</span>
           <input
             type="number"
             min={YEAR_MIN}
@@ -197,7 +199,7 @@ function WordsBoard() {
           />
         </label>
         <label className="flex flex-col gap-1">
-          <span className="text-xs uppercase text-ink-2">To</span>
+          <span className="text-xs uppercase text-ink-2">{t('leaderboard.words.toLabel')}</span>
           <input
             type="number"
             min={YEAR_MIN}
@@ -208,31 +210,31 @@ function WordsBoard() {
           />
         </label>
         <label className="flex flex-col gap-1">
-          <span className="text-xs uppercase text-ink-2">Genre</span>
+          <span className="text-xs uppercase text-ink-2">{t('leaderboard.words.genreLabel')}</span>
           <select value={genre} onChange={(e) => setGenre(e.target.value)} className="border-2 border-ink px-2 py-1.5">
-            <option value="">All genres</option>
+            <option value="">{t('leaderboard.words.allGenresOption')}</option>
             {genres.map((g) => (
-              <option key={g}>{g}</option>
+              <option key={g} value={g}>{t('genres.' + g)}</option>
             ))}
           </select>
         </label>
-        <div className="mb-0.5 ml-auto flex flex-col gap-1">
-          <span className="text-xs uppercase text-ink-2">Rank by</span>
+        <div className="mb-0.5 ms-auto flex flex-col gap-1">
+          <span className="text-xs uppercase text-ink-2">{t('leaderboard.words.rankByLabel')}</span>
           <div className="flex text-xs">
             <button
               onClick={() => setSort('spoken')}
               aria-pressed={sort === 'spoken'}
               className={`border-2 border-ink px-2 py-1 ${sort === 'spoken' ? 'bg-mark font-bold' : 'hover:bg-mark'}`}
             >
-              most spoken
+              {t('leaderboard.words.sortSpokenButton')}
             </button>
             <button
               onClick={() => setSort('movieish')}
               aria-pressed={sort === 'movieish'}
-              title="Weights each word by how much more movies say it than everyday English"
-              className={`-ml-0.5 border-2 border-ink px-2 py-1 ${sort === 'movieish' ? 'bg-mark font-bold' : 'hover:bg-mark'}`}
+              title={t('leaderboard.words.sortMovieishTitle')}
+              className={`-ms-0.5 border-2 border-ink px-2 py-1 ${sort === 'movieish' ? 'bg-mark font-bold' : 'hover:bg-mark'}`}
             >
-              most movie-ish
+              {t('leaderboard.words.sortMovieishButton')}
             </button>
           </div>
         </div>
@@ -240,29 +242,31 @@ function WordsBoard() {
 
       <WordFilterBar filter={wf} onChange={setWf} />
       {error && <ErrorBox message={error} />}
-      {loading && <Spinner label="Filtering corpus… (first filtered query loads the analytics engine)" />}
+      {loading && <Spinner label={t('leaderboard.words.filteringSpinner')} />}
       {!loading && rows && (
         <ol className="mt-5">
           {visible.map((r, i) => (
             <li key={r.word} className="group flex items-center gap-3 py-1">
-              <span className="w-7 text-right font-script text-xs text-ink-3">{i + 1}</span>
+              <span className="w-7 text-end font-script text-xs text-ink-3">{i + 1}</span>
               <button
                 onClick={() => navigate(`/trends?w=${encodeURIComponent(r.word)}`)}
-                className="w-32 shrink-0 truncate text-left font-script text-base hover:bg-mark sm:w-40"
+                className="w-32 shrink-0 truncate text-start font-script text-base hover:bg-mark sm:w-40"
               >
                 {r.word}
               </button>
-              <div className="h-4 min-w-1 rounded-r-[4px] bg-s1" style={{ width: `${(r.count / max) * 100}%` }} />
-              <span className="ml-1 shrink-0 font-script text-xs tabular-nums text-ink-2">
-                {Number(r.count).toLocaleString()}
-                <span className="hidden text-ink-3 sm:inline"> · {r.movies} films</span>
+              <div className="h-4 min-w-1 rounded-e-[4px] bg-s1" style={{ width: `${(r.count / max) * 100}%` }} />
+              <span className="ms-1 shrink-0 font-script text-xs tabular-nums text-ink-2">
+                {n(r.count)}
+                <span className="hidden text-ink-3 sm:inline">
+                  {t('leaderboard.words.filmsCount', { count: n(r.movies) })}
+                </span>
               </span>
             </li>
           ))}
         </ol>
       )}
       {!loading && rows && visible.length === 0 && (
-        <p className="mt-6 font-script text-sm text-ink-2">No words match these filters - try “all words” or “any kind”.</p>
+        <p className="mt-6 font-script text-sm text-ink-2">{t('leaderboard.words.noMatches')}</p>
       )}
     </div>
   )

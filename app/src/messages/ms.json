@@ -1,0 +1,411 @@
+{
+  "compare": {
+    "orLabel": "atau",
+    "addDecadeAriaLabel": "Tambah dekad",
+    "addDecadeOption": "Tambah dekad…",
+    "addFilmPlaceholder": "Tambah filem…",
+    "addGenreAriaLabel": "Tambah genre",
+    "addGenreOption": "Tambah genre…",
+    "decadeLabel": "DEKAD {decade}-AN",
+    "decadeOptionLabel": "{decade}-an",
+    "distinctWordsLabel": "Perkataan berbeza",
+    "featuredMatchupPrefix": "Pertembungan pilihan: {title}",
+    "filmsLabel": "Filem",
+    "filmsPerYearLabel": "filem / tahun",
+    "filmsPerYearTitle": "Filem per tahun tayangan dalam bahagian korpus ini",
+    "fullBreakdownLink": "pecahan penuh →",
+    "headToHeadHeading": "Satu lawan satu",
+    "introBody": "Letakkan filem, dekad, dan genre bersebelahan - sehingga tiga daripada sebarang campuran.",
+    "loadingLabel": "Memuatkan…",
+    "movieLabel": "{title} - {year}",
+    "navNoun": "pertembungan",
+    "navSuffix": "bertukar setiap hari - atau bina pertembungan anda sendiri di atas",
+    "noStandoutWords": "tiada perkataan menonjol",
+    "nothingFoundMessage": "Tiada apa-apa ditemui untuk pilihan tersebut.",
+    "pickFilmPlaceholder": "Pilih filem…",
+    "ratioMoreLabel": "{ratio}× lebih",
+    "removeButton": "buang",
+    "sharedSignatureWordsHeading": "Perkataan istimewa yang dikongsi",
+    "signatureWordsHeading": "Perkataan istimewa {note}",
+    "signatureWordsHighlightedNote": "(diserlahkan = dikongsi)",
+    "swearsPer1kLabel": "Carutan / 1k perkataan",
+    "wordsPerFilmLabel": "Perkataan / filem",
+    "wordsSpokenLabel": "Perkataan diucapkan",
+    "headToHeadIntroMany": "Apa yang setiap satu ucapkan jauh lebih banyak berbanding yang lain - kadar per juta perkataan daripada dialognya sendiri.",
+    "headToHeadIntroPair": "Apa yang setiap satu ucapkan jauh lebih banyak berbanding yang satu lagi - kadar per juta perkataan daripada dialognya sendiri."
+  },
+  "languageSwitcher": {
+    "current": "Bahasa",
+    "label": "Pilih bahasa"
+  },
+  "nav": {
+    "sectionsLabel": "Bahagian",
+    "compare": "Banding",
+    "decades": "Dekad",
+    "explore": "Teroka",
+    "genres": "Genre",
+    "leaderboard": "Papan Pendahulu",
+    "trends": "Trend"
+  },
+  "pos": {
+    "other": "lain-lain",
+    "a": "kata adjektif",
+    "adjective": "kata adjektif",
+    "adverb": "kata adverba",
+    "n": "kata nama",
+    "noun": "kata nama",
+    "r": "kata adverba",
+    "v": "kata kerja",
+    "verb": "kata kerja",
+    "x": "nama & lain-lain"
+  },
+  "ui": {
+    "errorBox": {
+      "retryButton": "Cuba lagi",
+      "heading": "Adegan hilang"
+    },
+    "featuredNav": {
+      "nextAriaLabel": "{noun} pilihan seterusnya",
+      "position": "{idx} daripada {len}",
+      "prevAriaLabel": "{noun} pilihan sebelumnya"
+    },
+    "highlightWord": {
+      "spokenTimes": "diucapkan {count} kali",
+      "title": "“{word}” - {display}"
+    },
+    "movieSearch": {
+      "ariaLabel": "Cari filem",
+      "placeholder": "Cari tajuk filem…"
+    },
+    "poster": {
+      "alt": "Poster {title}"
+    },
+    "seriesLegend": {
+      "exploreTitle": "Teroka “{word}”"
+    },
+    "slug": {
+      "defaultPrefix": "INT."
+    },
+    "wordFilterBar": {
+      "allButton": "semua perkataan",
+      "anyKindButton": "sebarang jenis",
+      "commonnessAriaLabel": "Kekerapan perkataan",
+      "hidingDescription": "menyembunyikan bahasa Inggeris harian - ~2,000 perkataan paling biasa (the, know, get…)",
+      "interestingButton": "perkataan menarik",
+      "onlyKindsSuffix": " · hanya {kinds}",
+      "showingDescription": "menunjukkan setiap perkataan, termasuk bahasa Inggeris harian",
+      "excludingKindsSuffix": " · menyembunyikan {kinds}",
+      "posStateExcluded": "{kind}: dikecualikan (klik untuk tetapkan semula)",
+      "posStateIncluded": "{kind}: disertakan (klik untuk kecualikan)",
+      "posStateOff": "{kind}: dimatikan (klik untuk sertakan)"
+    }
+  },
+  "boards": {
+    "films": {
+      "chattiestBlurb": "perkataan terbanyak seminit masa tayangan",
+      "chattiestFmt": "{v} p/min",
+      "chattiestTitle": "Paling laju bercakap",
+      "intro": "Pemegang rekod korpus, empat kategori skrip ekstrem.",
+      "loadingSpinner": "Memuatkan superlatif filem…",
+      "repetitiveBlurb": "peratusan perkataan berbeza paling rendah",
+      "repetitiveFmt": "{v}% unik",
+      "repetitiveTitle": "Skrip paling berulang",
+      "sweariestBlurb": "kata kesat bagi setiap 1,000 perkataan",
+      "sweariestFmt": "{v}/1k",
+      "sweariestTitle": "Skrip paling banyak mencarut",
+      "vocabularyBlurb": "perkataan berbeza paling banyak dalam satu skrip",
+      "vocabularyFmt": "{v} perkataan",
+      "vocabularyTitle": "Kosa kata terbesar"
+    },
+    "overview": {
+      "adjectivesBlurb": "kata adjektif menarik yang paling banyak diucapkan",
+      "adjectivesTitle": "Kata adjektif sinema",
+      "fallingBlurb": "kini jauh kurang diucapkan berbanding sinema awal",
+      "intro": "Tajuk utama korpus - lima teratas dari setiap papan. Ikuti mana-mana kad untuk senarai penuh, penapis, dan banyak lagi.",
+      "loadingSpinner": "Memuatkan tajuk utama…",
+      "risingBlurb": "kini jauh lebih banyak diucapkan berbanding sinema awal",
+      "ubiquityBlurb": "perkataan yang hampir ada dalam semua skrip",
+      "wondersBlurb": "perkataan yang dikuasai satu filem"
+    },
+    "ratio": {
+      "down": "{label}× turun",
+      "up": "{label}× naik"
+    },
+    "shifts": {
+      "fallingTitle": "Semakin pudar",
+      "intro": "Bagaimana dialog berubah: perkataan yang diucapkan jauh lebih banyak (atau jauh lebih kurang) per juta perkataan kini (2010-an–20-an) berbanding sinema awal (1930-an–40-an). Garisan menjejaki setiap dekad; klik perkataan untuk carta penuh.",
+      "loadingSpinner": "Memuatkan peralihan…",
+      "risingTitle": "Semakin meningkat"
+    },
+    "taster": {
+      "seeAllLink": "lihat semua →"
+    },
+    "ubiquity": {
+      "intro": "Selain kata hubung biasa, perkataan ini muncul dalam hampir setiap satu daripada {nFilms} filem.",
+      "loadingSpinner": "Memuatkan…",
+      "shareOfFilms": "{share}% daripada filem"
+    },
+    "wonders": {
+      "intro": "Perkataan yang diucapkan oleh satu filem lebih banyak daripada gabungan semua sinema lain - nama watak, perkataan rekaan, obsesi.",
+      "item": "diucapkan {count}× dalam {movieLink} ({year}) - {share}% daripada setiap kali sinema mengucapkannya",
+      "loadingSpinner": "Memuatkan keajaiban satu filem…"
+    }
+  },
+  "chart": {
+    "axisAriaLabel": "{yLabel} mengikut tahun",
+    "chartingSpinner": "Mencartakan peralihan pilihan…",
+    "loadFailedMessage": "Tidak dapat mencartakan yang ini - cuba yang seterusnya ▶",
+    "moreTrendsLink": "lagi trend →",
+    "trendNoun": "trend",
+    "unpinAriaLabel": "Nyahsemat {year}",
+    "usesPerMillionCaption": "penggunaan per juta perkataan dialog",
+    "yAxisLabel": "penggunaan per juta perkataan"
+  },
+  "decadesView": {
+    "decadeLabel": "{decade}-an",
+    "eyebrow": "Layari mengikut",
+    "filmsCount": "{count} filem",
+    "loadError": "Tidak dapat memuatkan dekad.",
+    "loadingSpinner": "Memuatkan dekad…",
+    "subtitle": "Bagaimana setiap era sinema berbicara - {count} kajian.",
+    "title": "DEKAD",
+    "notEnoughFilms": "Tidak cukup filem dalam {langs} untuk ini - tambah bahasa atau tukar kepada Semua filem."
+  },
+  "entity": {
+    "compareButton": "Bandingkan {label} dengan…",
+    "decadeEyebrow": "Anggaran {decade}",
+    "decadeLabel": "DEKAD {decade}-AN",
+    "decadeSubject": "dekad {decade}-an",
+    "genreEyebrow": "Kajian genre",
+    "kindDecade": "dekad",
+    "kindGenre": "genre",
+    "loadingSpinner": "Memuatkan…",
+    "mostSpokenBody": "Kiraan biasa, perkataan henti (stopwords) dikecualikan.",
+    "mostSpokenHeading": "Perkataan paling banyak diucapkan",
+    "notFound": "Tiada {kind} “{id}” dalam set data.",
+    "notableScriptsHeading": "Skrip terkenal",
+    "signatureWordsBody": "Apa yang {subject} bicarakan jauh lebih banyak daripada filem secara keseluruhan.",
+    "signatureWordsHeading": "Perkataan istimewa",
+    "statsLine": "{films} filem · {words} perkataan dialog",
+    "notEnoughFilms": "Tidak cukup filem dalam {langs} untuk {subject} - tambah bahasa atau tukar kepada Semua filem."
+  },
+  "eras": {
+    "1910": "gulungan pertama",
+    "1920": "ketibaan filem bersuara",
+    "1930": "zaman keemasan",
+    "1940": "perang dan filem noir",
+    "1950": "zaman atom",
+    "1960": "gelombang baharu",
+    "1970": "Hollywood Baharu",
+    "1980": "era pecah panggung",
+    "1990": "ledakan indie",
+    "2000": "tahun-tahun multipleks",
+    "2010": "kebangkitan penstriman",
+    "2020": "sinema kini"
+  },
+  "errors": {
+    "body": "Minta maaf tentang itu - {reload} biasanya menyelesaikannya. Masih rosak? E-mel {email}.",
+    "eyebrow": "Potongan pantas ke:",
+    "reload": "muat semula",
+    "title": "Sesuatu telah rosak."
+  },
+  "footer": {
+    "creditsBody": "Sumber terbuka: {github} dan bukan komersial. Hanya kiraan perkataan terbitan diterbitkan - tiada teks sari kata diedarkan semula.",
+    "creditsHeading": "Kredit.",
+    "dataBody": "Set data penuh tersedia untuk dimuat turun - lihat {dataGuide} untuk pautan & info ({license}). Tertanya-tanya tentang metodologi, berat sebelah, atau hak cipta? Baca {faq}.",
+    "dataGuideLink": "panduan data",
+    "dataHeading": "Dapatkan data.",
+    "dataSourcesBody": "Data: kiraan perkataan dari {opus} (Lison & Tiedemann, 2016), melalui {openSubtitles}; metadata filem dari {imdbData} dan {tmdb}. Maklumat ihsan IMDb ({imdbUrl}). Digunakan dengan kebenaran.",
+    "faqLink": "Soalan Lazim",
+    "githubLink": "github.com/beveradb/moviewords",
+    "githubProfileLink": "GitHub",
+    "ideaBody": "Pasti ada analisis menarik yang belum kami fikirkan! Jika anda ingin berkongsi idea atau telah membina sesuatu yang hebat dengan data ini, {email}",
+    "ideaEmailLink": "e-mel andrew@beveridge.uk",
+    "ideaHeading": "Ada idea?",
+    "imdbDataLink": "IMDb",
+    "imdbUrlLink": "https://www.imdb.com",
+    "instagramLink": "Instagram",
+    "licenseLink": "CC BY-NC-SA 4.0",
+    "lindsayLink": "Lindsay Wright Graphic Design",
+    "linkedinLink": "LinkedIn",
+    "madeByBody": "Dibuat oleh Andrew Beveridge - {github} · {linkedin} · {instagram} - dengan idea asal oleh isteri saya yang tercinta {lindsay} - lihat portfolionya!",
+    "openSubtitlesLink": "OpenSubtitles.org",
+    "opusLink": "Korpus OPUS OpenSubtitles",
+    "takedownEmailLink": "E-mel untuk permohonan padam",
+    "tmdbDisclaimerBody": "Produk ini menggunakan API TMDB tetapi tidak disokong atau disahkan oleh TMDB. Poster melalui TMDB - hak cipta studio masing-masing, ditunjukkan untuk mengenal pasti filem yang dibincangkan. Pemegang hak? {takedown} dan ia akan diturunkan segera.",
+    "tmdbLink": "TMDB"
+  },
+  "genres": {
+    "Action": "Aksi",
+    "Adult": "Dewasa",
+    "Adventure": "Pengembaraan",
+    "Animation": "Animasi",
+    "Biography": "Biografi",
+    "Comedy": "Komedi",
+    "Crime": "Jenayah",
+    "Documentary": "Dokumentari",
+    "Drama": "Drama",
+    "Family": "Keluarga",
+    "Fantasy": "Fantasi",
+    "Film-Noir": "Film-Noir",
+    "History": "Sejarah",
+    "Horror": "Seram",
+    "Music": "Muzik",
+    "Musical": "Muzikal",
+    "Mystery": "Misteri",
+    "News": "Berita",
+    "Reality-TV": "Realiti-TV",
+    "Romance": "Romantik",
+    "Sci-Fi": "Fiksyen Sains",
+    "Sport": "Sukan",
+    "Thriller": "Cemas",
+    "War": "Perang",
+    "Western": "Koboi"
+  },
+  "genresView": {
+    "eyebrow": "Layari mengikut",
+    "filmsCount": "{count} filem",
+    "loadError": "Tidak dapat memuatkan genre.",
+    "loadingSpinner": "Memuatkan genre…",
+    "subtitle": "Apa yang dibicarakan oleh setiap genre - {count} kajian.",
+    "title": "GENRE",
+    "notEnoughFilms": "Tidak cukup filem dalam {langs} untuk ini - tambah bahasa atau tukar kepada Semua filem."
+  },
+  "home": {
+    "aboutHeading": "Mengenai set data ini",
+    "decadesBody": "Dari filem bersuara hingga 2020-an - bagaimana setiap era sinema berbicara.",
+    "decadesHeading": "Jelajahi dekad",
+    "fadeIn": "Fade in:",
+    "faqLink": "Soalan Lazim",
+    "heroBody": "Kami mengira setiap perkataan yang diucapkan dalam {count} filem - {millions} juta daripadanya. Tonton {trends}, temui {sweariest}, dan selesaikan {versus} perkataan demi perkataan.",
+    "heroSweariest": "skrip paling banyak mencarut pernah dibuat",
+    "heroTitle": "Setiap filem mempunyai {vocabulary}.",
+    "heroTrends": "'awesome' memintas 'swell'",
+    "heroVersus": "Alien lwn Aliens",
+    "heroVocabulary": "kosa kata",
+    "movieMeta": "{year} · {words} perkataan",
+    "opusLink": "Korpus OPUS OpenSubtitles",
+    "shelfHeading": "Ambil skrip dari rak",
+    "aboutBody": "Meliputi {count} - setiap perkataan dialog sari kata dari {opus} untuk filem dengan sekurang-kurangnya 300 undian IMDb, dikira per filem. Hanya kiraan perkataan diterbitkan; tiada teks sari kata diedarkan semula. Metodologi dan kaveat: {faq}.",
+    "aboutCountAllFilms": "filem - termasuk sari kata yang diterjemahkan",
+    "aboutCountLangFilms": "filem berbahasa {langs}",
+    "aboutCountTemplate": "{count} {kind}",
+    "aboutCountUnknown": "berpuluh-puluh ribu",
+    "aboutSubtitleHint": "Kiraan ini datang daripada sari kata bahasa Inggeris filem, bukan dialog asalnya."
+  },
+  "leaderboard": {
+    "tabs": {
+      "everywhere": "Diucapkan oleh setiap filem",
+      "films": "Superlatif filem",
+      "overview": "Gambaran keseluruhan",
+      "shifts": "Naik & turun",
+      "wonders": "Keajaiban satu filem",
+      "words": "Perkataan teratas"
+    },
+    "words": {
+      "allGenresOption": "Semua genre",
+      "filmsCount": " · {count} filem",
+      "filteringSpinner": "Menapis korpus… (pertanyaan ditapis pertama memuatkan enjin analitik)",
+      "fromLabel": "Dari",
+      "genreLabel": "Genre",
+      "intro": "Perkataan paling banyak diucapkan merentasi setiap filem dalam korpus.",
+      "noMatches": "Tiada perkataan sepadan dengan penapis ini - cuba “semua perkataan” atau “sebarang jenis”.",
+      "rankByLabel": "Kedudukan mengikut",
+      "sortMovieishButton": "paling ala filem",
+      "sortMovieishTitle": "Menimbang setiap perkataan berdasarkan berapa banyak filem mengucapkannya berbanding bahasa Inggeris harian",
+      "sortSpokenButton": "paling banyak diucapkan",
+      "toLabel": "Hingga"
+    },
+    "languageNote": "Berdasarkan {count} filem berbahasa {langs}, diukur daripada sari kata bahasa Inggerisnya."
+  },
+  "movie": {
+    "compareButton": "Bandingkan dengan filem lain",
+    "decadeLinkTitle": "Lebih banyak dari {decade}-an",
+    "distinctWordsLabel": "Perkataan berbeza",
+    "genreSeparator": " / ",
+    "imdbRatingLabel": "Penarafan IMDb",
+    "loadingScript": "Memuatkan skrip…",
+    "mostSpokenHeading": "Perkataan paling banyak diucapkan",
+    "notFound": "Tiada filem dengan id “{id}” dalam set data.",
+    "signatureWordsBody": "Perkataan yang filem ini gunakan jauh lebih banyak daripada filem secara keseluruhan (log-odds lwn seluruh korpus).",
+    "signatureWordsHeading": "Perkataan istimewa",
+    "slugTitle": "{title} - {year}",
+    "vocabRichnessLabel": "Kekayaan kosa kata",
+    "wordsSpokenLabel": "Perkataan diucapkan",
+    "imdbPosterTitle": "{title} di IMDb",
+    "runtimeLabel": "Tempoh Tayangan",
+    "runtimeValue": "{minutes} min",
+    "wordsPerMinuteLabel": "Perkataan seminit"
+  },
+  "themeToggle": {
+    "day": "SIANG",
+    "dayShoot": "Penggambaran siang",
+    "night": "MALAM",
+    "nightShoot": "Penggambaran malam",
+    "switchToDay": "Tukar ke mod siang",
+    "switchToNight": "Tukar ke mod malam"
+  },
+  "trends": {
+    "addAnotherWordPlaceholder": "Tambah perkataan lain…",
+    "bigMovers": "Pergerakan besar sejak 1930-an",
+    "chartItButton": "Cartakannya",
+    "chartedWordsAriaLabel": "Perkataan dicartakan",
+    "featuredPrefix": "Pilihan: {title}",
+    "firstWordPlaceholder": "Taip perkataan, cth. cinta",
+    "fullList": "senarai penuh →",
+    "intro": "Kekerapan perkataan diucapkan merentasi semua filem dalam korpus, per juta perkataan dialog, mengikut tahun tayangan.",
+    "navNoun": "trend",
+    "navSuffix": "peralihan baharu setiap hari",
+    "notEnoughData": "Data tidak mencukupi untuk: {words} (perlu ≥20 penggunaan merentasi korpus, pada tahun dengan filem yang mencukupi).",
+    "perThousandWords": " · {rate}/1k perkataan",
+    "queryingCorpus": "Mencari dalam korpus…",
+    "removeWordTitle": "Buang “{word}”",
+    "topFilmByYearHeading": "Filem teratas untuk “{word}” mengikut tahun",
+    "topFilmByYearLoading": "Mencari filem “{word}” teratas setiap tahun…",
+    "topFilmsHeading": "Filem yang paling banyak mengucapkan “{word}”",
+    "topFilmsLoading": "Mencari filem yang paling banyak mengucapkan “{word}”…",
+    "trimmedYearsNote": "{years} disembunyikan - terlalu sedikit filem dalam korpus untuk kadar yang boleh dipercayai",
+    "tryClassic": "Atau cuba yang klasik:",
+    "usesPerMillionWords": "penggunaan per juta perkataan dialog",
+    "wordDetailsTablist": "Butiran perkataan",
+    "wordInputAriaLabel": "Perkataan untuk dicartakan",
+    "yAxisLabel": "penggunaan per juta perkataan",
+    "languageNote": "Berdasarkan {count} filem berbahasa {langs}, diukur daripada sari kata bahasa Inggerisnya.",
+    "notEnoughFilms": "Tidak cukup filem dalam {langs} untuk trend ini - tambah bahasa atau tukar kepada Semua filem."
+  },
+  "languageFilter": {
+    "allFilms": "Semua filem",
+    "apply": "Guna",
+    "ariaLabel": "Tapis filem mengikut bahasa asal",
+    "countLabel": "{count} bahasa",
+    "hint": "Menapis mengikut bahasa asal filem; kiraan perkataan datang daripada sari kata bahasa Inggeris.",
+    "menuAriaLabel": "Bahasa asal",
+    "searchAriaLabel": "Cari bahasa",
+    "searchPlaceholder": "Cari bahasa…"
+  },
+  "localeFilterHint": {
+    "dismissAriaLabel": "Tolak",
+    "filterButton": "Tapis",
+    "message": "Melihat dalam {lang}? Tapis kepada filem berbahasa {lang}."
+  },
+  "modal": {
+    "closeAriaLabel": "Tutup"
+  },
+  "filterExplainer": {
+    "badgeLabel": "diterjemah · {lang}",
+    "badgeTitle": "Bahasa asal {lang} - kiraan datang daripada sari kata terjemahan bahasa Inggeris. Bagaimana ia berfungsi?",
+    "dialogueNote": "Dialog bahasa asal tiada dalam set data - hanya terjemahan bahasa Inggeris.",
+    "englishSubtitles": "Sari kata bahasa Inggeris",
+    "englishTranslation": "Terjemahan bahasa Inggeris",
+    "filteringBody": "{whatFiltering} {originalLanguage} sesebuah filem - di mana ia dibuat, daripada metadata TMDB - bukan bahasa untuk perkataan di bawah.",
+    "linkText": "Bagaimana ia berfungsi?",
+    "modalTitle": "Bagaimana ia berfungsi",
+    "origin": "asal",
+    "originalLanguage": "bahasa asal",
+    "soSpanishMeans": "Jadi \"Sepanyol\" bermaksud",
+    "spanishBody": "{soSpanishMeans} kosa kata sari kata bahasa Inggeris bagi pawagam {origin} Sepanyol - bagaimana perkataan seperti \"solidarity\" atau \"dictatorship\" muncul dalam sari kata bahasa Inggeris untuk filem Sepanyol - bukan perkataan bahasa Sepanyol.",
+    "whatFiltering": "Apa yang anda tapis:",
+    "whatWords": "Apakah perkataan tersebut:",
+    "wordsBody": "{whatWords} setiap kiraan di Movie Words datang daripada {englishSubtitles} filem tersebut. Kami hanya mempunyai trek OpenSubtitles bahasa Inggeris, jadi untuk filem bukan bahasa Inggeris, ini adalah perkataan daripada {englishTranslation} filem itu, bukan dialog asal. Itulah sebabnya perkataan yang tidak diterjemahkan kadangkala terlepas - \"panna\", \"cotta\", \"samurai\"."
+  }
+}

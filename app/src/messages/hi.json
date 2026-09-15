@@ -1,0 +1,411 @@
+{
+  "compare": {
+    "orLabel": "या",
+    "addDecadeAriaLabel": "एक दशक जोड़ो",
+    "addDecadeOption": "एक दशक जोड़ो…",
+    "addFilmPlaceholder": "एक फ़िल्म जोड़ो…",
+    "addGenreAriaLabel": "एक जॉनर जोड़ो",
+    "addGenreOption": "एक जॉनर जोड़ो…",
+    "decadeLabel": "{decade} का दशक",
+    "decadeOptionLabel": "{decade}s",
+    "distinctWordsLabel": "अलग-अलग शब्द",
+    "featuredMatchupPrefix": "फ़ीचर्ड मैचअप: {title}",
+    "filmsLabel": "फ़िल्में",
+    "filmsPerYearLabel": "फ़िल्में / साल",
+    "filmsPerYearTitle": "कॉर्पस के इस हिस्से में रिलीज़ साल के हिसाब से फ़िल्में",
+    "fullBreakdownLink": "पूरा ब्रेकडाउन →",
+    "headToHeadHeading": "आमने-सामने",
+    "introBody": "फ़िल्मों, दशकों और जॉनर को एक साथ रखो - किसी भी मिक्स के तीन तक।",
+    "loadingLabel": "लोड हो रहा है…",
+    "movieLabel": "{title} - {year}",
+    "navNoun": "मैचअप",
+    "navSuffix": "रोज़ बदलता है - या ऊपर अपना खुद का बनाओ",
+    "noStandoutWords": "कोई स्टैंडआउट शब्द नहीं",
+    "nothingFoundMessage": "उस सिलेक्शन के लिए कुछ नहीं मिला।",
+    "pickFilmPlaceholder": "एक फ़िल्म चुनो…",
+    "ratioMoreLabel": "{ratio}× ज़्यादा",
+    "removeButton": "हटाओ",
+    "sharedSignatureWordsHeading": "सिग्नेचर शब्द जो उनमें कॉमन हैं",
+    "signatureWordsHeading": "सिग्नेचर शब्द {note}",
+    "signatureWordsHighlightedNote": "(हाइलाइटेड = कॉमन)",
+    "swearsPer1kLabel": "गालियां / 1k शब्द",
+    "wordsPerFilmLabel": "शब्द / फ़िल्म",
+    "wordsSpokenLabel": "बोले गए शब्द",
+    "headToHeadIntroMany": "हर एक, बाकियों से कहीं ज़्यादा क्या कहता है - अपने खुद के डायलॉग के प्रति दस लाख शब्दों की दर।",
+    "headToHeadIntroPair": "हर एक, दूसरे से कहीं ज़्यादा क्या कहता है - अपने खुद के डायलॉग के प्रति दस लाख शब्दों की दर।"
+  },
+  "languageSwitcher": {
+    "current": "भाषा",
+    "label": "भाषा चुनो"
+  },
+  "nav": {
+    "sectionsLabel": "सेक्शन",
+    "compare": "तुलना करें",
+    "decades": "दशक",
+    "explore": "एक्सप्लोर करें",
+    "genres": "जॉनर",
+    "leaderboard": "लीडरबोर्ड",
+    "trends": "ट्रेंड्स"
+  },
+  "pos": {
+    "other": "अन्य",
+    "a": "एडजेक्टिव्स",
+    "adjective": "एडजेक्टिव",
+    "adverb": "एडवर्ब",
+    "n": "नाउन्स",
+    "noun": "नाउन",
+    "r": "एडवर्ब्स",
+    "v": "वर्ब्स",
+    "verb": "वर्ब",
+    "x": "नाम और अन्य"
+  },
+  "ui": {
+    "errorBox": {
+      "retryButton": "फिर से कोशिश करो",
+      "heading": "सीन मिसिंग"
+    },
+    "featuredNav": {
+      "nextAriaLabel": "अगला फ़ीचर्ड {noun}",
+      "position": "{len} में से {idx}",
+      "prevAriaLabel": "पिछला फ़ीचर्ड {noun}"
+    },
+    "highlightWord": {
+      "spokenTimes": "{count} बार बोला गया",
+      "title": "“{word}” - {display}"
+    },
+    "movieSearch": {
+      "ariaLabel": "फ़िल्में खोजो",
+      "placeholder": "फ़िल्म का टाइटल खोजो…"
+    },
+    "poster": {
+      "alt": "{title} पोस्टर"
+    },
+    "seriesLegend": {
+      "exploreTitle": "“{word}” को एक्सप्लोर करो"
+    },
+    "slug": {
+      "defaultPrefix": "INT."
+    },
+    "wordFilterBar": {
+      "allButton": "सभी शब्द",
+      "anyKindButton": "किसी भी तरह के",
+      "commonnessAriaLabel": "शब्द का आम होना",
+      "hidingDescription": "रोज़मर्रा की इंग्लिश छिपा रहा है - ~2,000 सबसे आम शब्द (the, know, get…)",
+      "interestingButton": "दिलचस्प शब्द",
+      "onlyKindsSuffix": " · सिर्फ़ {kinds}",
+      "showingDescription": "हर शब्द दिखा रहा है, रोज़मर्रा की इंग्लिश समेत",
+      "excludingKindsSuffix": " · {kinds} छिपाए गए",
+      "posStateExcluded": "{kind}: बाहर रखा गया (रीसेट करने के लिए क्लिक करें)",
+      "posStateIncluded": "{kind}: शामिल (बाहर रखने के लिए क्लिक करें)",
+      "posStateOff": "{kind}: बंद (शामिल करने के लिए क्लिक करें)"
+    }
+  },
+  "boards": {
+    "films": {
+      "chattiestBlurb": "रनटाइम के प्रति मिनट सबसे ज़्यादा शब्द",
+      "chattiestFmt": "{v} शब्द/मिनट",
+      "chattiestTitle": "सबसे तेज़ बोलने वाले",
+      "intro": "कॉर्पस के रिकॉर्ड-होल्डर, एक्सट्रीम स्क्रिप्ट्स की चार कैटेगरी।",
+      "loadingSpinner": "फ़िल्म सुपरलेटिव्स लोड हो रहे हैं…",
+      "repetitiveBlurb": "अलग-अलग शब्दों का सबसे कम हिस्सा",
+      "repetitiveFmt": "{v}% यूनीक",
+      "repetitiveTitle": "सबसे ज़्यादा दोहराई जाने वाली स्क्रिप्ट्स",
+      "sweariestBlurb": "प्रति 1,000 शब्दों पर गालियां",
+      "sweariestFmt": "{v}/1k",
+      "sweariestTitle": "सबसे ज़्यादा गालियों वाली स्क्रिप्ट्स",
+      "vocabularyBlurb": "एक स्क्रिप्ट में सबसे ज़्यादा अलग-अलग शब्द",
+      "vocabularyFmt": "{v} शब्द",
+      "vocabularyTitle": "सबसे बड़ी वोकैबुलरी"
+    },
+    "overview": {
+      "adjectivesBlurb": "सबसे ज़्यादा बोले जाने वाले दिलचस्प एडजेक्टिव्स",
+      "adjectivesTitle": "सिनेमा के एडजेक्टिव्स",
+      "fallingBlurb": "शुरुआती सिनेमा की तुलना में अब बहुत कम बोले जाते हैं",
+      "intro": "कॉर्पस की हेडलाइंस - हर बोर्ड से टॉप पांच। पूरी लिस्ट, फ़िल्टर्स और बहुत कुछ के लिए किसी भी कार्ड पर जाओ।",
+      "loadingSpinner": "हेडलाइंस लोड हो रही हैं…",
+      "risingBlurb": "शुरुआती सिनेमा की तुलना में अब बहुत ज़्यादा बोले जाते हैं",
+      "ubiquityBlurb": "ऐसे शब्द जिन्हें लगभग कोई स्क्रिप्ट नहीं छोड़ती",
+      "wondersBlurb": "ऐसे शब्द जो किसी एक फ़िल्म की पहचान हैं"
+    },
+    "ratio": {
+      "down": "{label}× कम",
+      "up": "{label}× ज़्यादा"
+    },
+    "shifts": {
+      "fallingTitle": "फ़ेड आउट हो रहे हैं",
+      "intro": "डायलॉग कैसे बदले: शुरुआती सिनेमा (1930s–40s) की तुलना में अब (2010s–20s) प्रति मिलियन शब्दों पर बहुत ज़्यादा (या बहुत कम) बोले जाने वाले शब्द। लाइनें हर दशक को दर्शाती हैं; पूरे चार्ट के लिए किसी शब्द पर क्लिक करो।",
+      "loadingSpinner": "शिफ़्ट्स लोड हो रहे हैं…",
+      "risingTitle": "बढ़त पर"
+    },
+    "taster": {
+      "seeAllLink": "सभी देखो →"
+    },
+    "ubiquity": {
+      "intro": "सिर्फ़ कनेक्टर्स के अलावा, ये शब्द {nFilms} फ़िल्मों में से लगभग हर एक में आते हैं।",
+      "loadingSpinner": "लोड हो रहा है…",
+      "shareOfFilms": "{share}% फ़िल्में"
+    },
+    "wonders": {
+      "intro": "ऐसे शब्द जो एक फ़िल्म बाकी पूरे सिनेमा को मिलाकर भी ज़्यादा बोलती है - किरदारों के नाम, बनाए गए शब्द, जुनून।",
+      "item": "{movieLink} ({year}) में {count}× बार बोला गया - सिनेमा में इसके बोले जाने का {share}%",
+      "loadingSpinner": "वन-फ़िल्म वंडर्स लोड हो रहे हैं…"
+    }
+  },
+  "chart": {
+    "axisAriaLabel": "साल के हिसाब से {yLabel}",
+    "chartingSpinner": "एक फ़ीचर्ड शिफ़्ट का चार्ट बन रहा है…",
+    "loadFailedMessage": "इसका चार्ट नहीं बन सका - अगला ट्राई करो ▶",
+    "moreTrendsLink": "और ट्रेंड्स →",
+    "trendNoun": "ट्रेंड",
+    "unpinAriaLabel": "{year} को अनपिन करो",
+    "usesPerMillionCaption": "डायलॉग के प्रति मिलियन शब्दों पर इस्तेमाल",
+    "yAxisLabel": "प्रति मिलियन शब्दों पर इस्तेमाल"
+  },
+  "decadesView": {
+    "decadeLabel": "{decade}s",
+    "eyebrow": "इसके ज़रिए ब्राउज़ करो",
+    "filmsCount": "{count} फ़िल्में",
+    "loadError": "दशक लोड नहीं हो सके।",
+    "loadingSpinner": "दशक लोड हो रहे हैं…",
+    "subtitle": "सिनेमा के हर दौर ने कैसे बात की - {count} स्टडीज़।",
+    "title": "दशक",
+    "notEnoughFilms": "इसके लिए {langs} में पर्याप्त फ़िल्में नहीं हैं - भाषाएँ जोड़ो या All films पर स्विच करो।"
+  },
+  "entity": {
+    "compareButton": "{label} की तुलना करो…",
+    "decadeEyebrow": "अनुमानित {decade}",
+    "decadeLabel": "{decade} का दशक",
+    "decadeSubject": "{decade} का दशक",
+    "genreEyebrow": "जॉनर स्टडी",
+    "kindDecade": "दशक",
+    "kindGenre": "जॉनर",
+    "loadingSpinner": "लोड हो रहा है…",
+    "mostSpokenBody": "सिर्फ़ गिनती, स्टॉपवर्ड्स शामिल नहीं।",
+    "mostSpokenHeading": "सबसे ज़्यादा बोले जाने वाले शब्द",
+    "notFound": "डेटासेट में कोई {kind} “{id}” नहीं है।",
+    "notableScriptsHeading": "ध्यान देने लायक स्क्रिप्ट्स",
+    "signatureWordsBody": "{subject} कुल मिलाकर फ़िल्मों से कहीं ज़्यादा किस बारे में बात करता है।",
+    "signatureWordsHeading": "सिग्नेचर शब्द",
+    "statsLine": "{films} फ़िल्में · डायलॉग के {words} शब्द",
+    "notEnoughFilms": "{subject} के लिए {langs} में पर्याप्त फ़िल्में नहीं हैं - भाषाएँ जोड़ो या All films पर स्विच करो।"
+  },
+  "eras": {
+    "1910": "पहली रील्स",
+    "1920": "टॉकीज़ का आना",
+    "1930": "सुनहरा दौर",
+    "1940": "वॉर और फ़िल्म नॉयर",
+    "1950": "एटॉमिक एज",
+    "1960": "न्यू वेव",
+    "1970": "न्यू हॉलीवुड",
+    "1980": "ब्लॉकबस्टर का दौर",
+    "1990": "इंडी बूम",
+    "2000": "मल्टीप्लेक्स के साल",
+    "2010": "स्ट्रीमिंग की शुरुआत",
+    "2020": "आज का सिनेमा"
+  },
+  "errors": {
+    "body": "माफ़ी चाहेंगे - एक {reload} आमतौर पर इसे ठीक कर देता है। अभी भी काम नहीं कर रहा? {email} पर ईमेल करो।",
+    "eyebrow": "स्मैश कट टू:",
+    "reload": "रीलोड",
+    "title": "कुछ टूट गया।"
+  },
+  "footer": {
+    "creditsBody": "ओपन सोर्स: {github} और नॉन-कमर्शियल। सिर्फ़ निकाले गए शब्दों की गिनती पब्लिश की जाती है - कोई सबटाइटल टेक्स्ट दोबारा नहीं बांटा जाता।",
+    "creditsHeading": "क्रेडिट्स।",
+    "dataBody": "पूरा डेटासेट डाउनलोड के लिए उपलब्ध है - लिंक्स और जानकारी ({license}) के लिए {dataGuide} देखो। मैथडोलॉजी, बायस या कॉपीराइट के बारे में सोच रहे हो? {faq} पढ़ो।",
+    "dataGuideLink": "डेटा गाइड",
+    "dataHeading": "डेटा लो।",
+    "dataSourcesBody": "डेटा: {openSubtitles} के ज़रिए {opus} (Lison & Tiedemann, 2016) से शब्दों की गिनती; {imdbData} और {tmdb} से फ़िल्म मेटाडेटा। जानकारी IMDb ({imdbUrl}) के सौजन्य से। अनुमति के साथ इस्तेमाल किया गया।",
+    "faqLink": "FAQ",
+    "githubLink": "github.com/beveradb/moviewords",
+    "githubProfileLink": "GitHub",
+    "ideaBody": "ज़रूर कुछ दिलचस्प एनालिसिस होंगे जिनके बारे में हमने नहीं सोचा! अगर तुम कोई आइडिया शेयर करना चाहते हो या डेटा के साथ कुछ कूल बनाया है, तो {email}",
+    "ideaEmailLink": "andrew@beveridge.uk पर ईमेल करो",
+    "ideaHeading": "कोई आइडिया है?",
+    "imdbDataLink": "IMDb",
+    "imdbUrlLink": "https://www.imdb.com",
+    "instagramLink": "Instagram",
+    "licenseLink": "CC BY-NC-SA 4.0",
+    "lindsayLink": "Lindsay Wright Graphic Design",
+    "linkedinLink": "LinkedIn",
+    "madeByBody": "Andrew Beveridge द्वारा बनाया गया - {github} · {linkedin} · {instagram} - मेरी प्यारी पत्नी {lindsay} के ओरिजिनल आइडिया के साथ - उनका पोर्टफ़ोलियो चेक करो!",
+    "openSubtitlesLink": "OpenSubtitles.org",
+    "opusLink": "OPUS OpenSubtitles corpus",
+    "takedownEmailLink": "टेकडाउन के लिए ईमेल करो",
+    "tmdbDisclaimerBody": "यह प्रोडक्ट TMDB API का इस्तेमाल करता है लेकिन TMDB द्वारा एंडोर्स या सर्टिफ़ाइड नहीं है। TMDB के ज़रिए पोस्टर्स - उनके संबंधित स्टूडियो का कॉपीराइट, डिस्कस की गई फ़िल्मों की पहचान करने के लिए दिखाए गए हैं। राइट्स होल्डर हो? {takedown} और यह तुरंत हटा दिया जाएगा।",
+    "tmdbLink": "TMDB"
+  },
+  "genres": {
+    "Action": "एक्शन",
+    "Adult": "एडल्ट",
+    "Adventure": "एडवेंचर",
+    "Animation": "एनिमेशन",
+    "Biography": "बायोग्राफी",
+    "Comedy": "कॉमेडी",
+    "Crime": "क्राइम",
+    "Documentary": "डॉक्यूमेंट्री",
+    "Drama": "ड्रामा",
+    "Family": "फ़ैमिली",
+    "Fantasy": "फैंटेसी",
+    "Film-Noir": "फ़िल्म-नॉयर",
+    "History": "हिस्ट्री",
+    "Horror": "हॉरर",
+    "Music": "म्यूज़िक",
+    "Musical": "म्यूज़िकल",
+    "Mystery": "मिस्ट्री",
+    "News": "न्यूज़",
+    "Reality-TV": "रियलिटी-टीवी",
+    "Romance": "रोमांस",
+    "Sci-Fi": "साई-फ़ाई",
+    "Sport": "स्पोर्ट",
+    "Thriller": "थ्रिलर",
+    "War": "वॉर",
+    "Western": "वेस्टर्न"
+  },
+  "genresView": {
+    "eyebrow": "इसके ज़रिए ब्राउज़ करो",
+    "filmsCount": "{count} फ़िल्में",
+    "loadError": "जॉनर लोड नहीं हो सके।",
+    "loadingSpinner": "जॉनर लोड हो रहे हैं…",
+    "subtitle": "हर जॉनर किस बारे में बात करता है - {count} स्टडीज़।",
+    "title": "जॉनर",
+    "notEnoughFilms": "इसके लिए {langs} में पर्याप्त फ़िल्में नहीं हैं - भाषाएँ जोड़ो या All films पर स्विच करो।"
+  },
+  "home": {
+    "aboutHeading": "इस डेटासेट के बारे में",
+    "decadesBody": "टॉकीज़ से लेकर 2020 के दशक तक - सिनेमा के हर दौर ने कैसे बात की।",
+    "decadesHeading": "दशकों में घूमो",
+    "fadeIn": "फ़ेड इन:",
+    "faqLink": "FAQ",
+    "heroBody": "हमने {count} फ़िल्मों में बोले गए हर शब्द को गिना - उनमें से {millions} मिलियन। {trends} देखो, {sweariest} से मिलो, और {versus} को शब्द दर शब्द सुलझाओ।",
+    "heroSweariest": "अब तक की सबसे ज़्यादा गालियों वाली स्क्रिप्ट",
+    "heroTitle": "हर फ़िल्म की एक {vocabulary} होती है।",
+    "heroTrends": "'awesome' का 'swell' से आगे निकलना",
+    "heroVersus": "Alien vs Aliens",
+    "heroVocabulary": "वोकैबुलरी",
+    "movieMeta": "{year} · {words} शब्द",
+    "opusLink": "OPUS OpenSubtitles corpus",
+    "shelfHeading": "शेल्फ़ से एक स्क्रिप्ट निकालो",
+    "aboutBody": "{count} को कवर कर रहा है - कम से कम 300 IMDb वोट्स वाली फ़िल्मों के लिए {opus} से सबटाइटल डायलॉग का हर शब्द, प्रति फ़िल्म गिना गया। सिर्फ़ शब्दों की गिनती पब्लिश की जाती है; कोई सबटाइटल टेक्स्ट दोबारा नहीं बांटा जाता। मैथडोलॉजी और चेतावनियां: {faq}।",
+    "aboutCountAllFilms": "फ़िल्में - अनुवादित सबटाइटल्स शामिल हैं",
+    "aboutCountLangFilms": "{langs}-भाषा की फ़िल्में",
+    "aboutCountTemplate": "{count} {kind}",
+    "aboutCountUnknown": "दसियों हज़ार",
+    "aboutSubtitleHint": "ये गिनतियाँ फ़िल्मों के अंग्रेज़ी सबटाइटल्स से आती हैं, उनके मूल डायलॉग से नहीं।"
+  },
+  "leaderboard": {
+    "tabs": {
+      "everywhere": "हर फ़िल्म द्वारा बोला गया",
+      "films": "फ़िल्म सुपरलेटिव्स",
+      "overview": "ओवरव्यू",
+      "shifts": "राइज़र्स और फ़ॉलर्स",
+      "wonders": "वन-फ़िल्म वंडर्स",
+      "words": "टॉप शब्द"
+    },
+    "words": {
+      "allGenresOption": "सभी जॉनर",
+      "filmsCount": " · {count} फ़िल्में",
+      "filteringSpinner": "कॉर्पस फ़िल्टर हो रहा है… (पहली फ़िल्टर्ड क्वेरी एनालिटिक्स इंजन लोड करती है)",
+      "fromLabel": "से",
+      "genreLabel": "जॉनर",
+      "intro": "कॉर्पस की हर फ़िल्म में सबसे ज़्यादा बोले जाने वाले शब्द।",
+      "noMatches": "इन फ़िल्टर्स से कोई शब्द मेल नहीं खाता - “सभी शब्द” या “किसी भी तरह के” ट्राई करो।",
+      "rankByLabel": "इसके हिसाब से रैंक करो",
+      "sortMovieishButton": "सबसे ज़्यादा मूवी-इश",
+      "sortMovieishTitle": "हर शब्द को इस बात से तौलता है कि रोज़मर्रा की इंग्लिश की तुलना में फ़िल्में इसे कितना ज़्यादा बोलती हैं",
+      "sortSpokenButton": "सबसे ज़्यादा बोले जाने वाले",
+      "toLabel": "तक"
+    },
+    "languageNote": "{count} {langs}-भाषा की फ़िल्मों पर आधारित, जिन्हें उनके अंग्रेज़ी सबटाइटल्स से मापा गया है।"
+  },
+  "movie": {
+    "compareButton": "किसी दूसरी फ़िल्म से तुलना करो",
+    "decadeLinkTitle": "{decade} के दशक से और ज़्यादा",
+    "distinctWordsLabel": "अलग-अलग शब्द",
+    "genreSeparator": " / ",
+    "imdbRatingLabel": "IMDb रेटिंग",
+    "loadingScript": "स्क्रिप्ट लोड हो रही है…",
+    "mostSpokenHeading": "सबसे ज़्यादा बोले जाने वाले शब्द",
+    "notFound": "डेटासेट में “{id}” आईडी वाली कोई फ़िल्म नहीं है।",
+    "signatureWordsBody": "ऐसे शब्द जो यह फ़िल्म कुल मिलाकर फ़िल्मों से कहीं ज़्यादा इस्तेमाल करती है (पूरे कॉर्पस के मुकाबले लॉग-ऑड्स)।",
+    "signatureWordsHeading": "सिग्नेचर शब्द",
+    "slugTitle": "{title} - {year}",
+    "vocabRichnessLabel": "वोकैबुलरी की अमीरी",
+    "wordsSpokenLabel": "बोले गए शब्द",
+    "imdbPosterTitle": "{title} IMDb पर",
+    "runtimeLabel": "रनटाइम",
+    "runtimeValue": "{minutes} मिनट",
+    "wordsPerMinuteLabel": "शब्द प्रति मिनट"
+  },
+  "themeToggle": {
+    "day": "दिन",
+    "dayShoot": "डे शूट",
+    "night": "रात",
+    "nightShoot": "नाइट शूट",
+    "switchToDay": "डे मोड पर स्विच करो",
+    "switchToNight": "नाइट मोड पर स्विच करो"
+  },
+  "trends": {
+    "addAnotherWordPlaceholder": "एक और शब्द जोड़ो…",
+    "bigMovers": "1930 के दशक से बड़े मूवर्स",
+    "chartItButton": "इसका चार्ट बनाओ",
+    "chartedWordsAriaLabel": "चार्ट किए गए शब्द",
+    "featuredPrefix": "फ़ीचर्ड: {title}",
+    "firstWordPlaceholder": "एक शब्द टाइप करो, जैसे love",
+    "fullList": "पूरी लिस्ट →",
+    "intro": "रिलीज़ साल के हिसाब से, डायलॉग के प्रति मिलियन शब्दों पर, कॉर्पस की सभी फ़िल्मों में कोई शब्द कितनी बार बोला जाता है।",
+    "navNoun": "ट्रेंड",
+    "navSuffix": "हर दिन एक नया शिफ़्ट",
+    "notEnoughData": "{words} के लिए पर्याप्त डेटा नहीं है (कॉर्पस में ≥20 बार इस्तेमाल होना चाहिए, उन सालों में जिनमें पर्याप्त फ़िल्में हों)।",
+    "perThousandWords": " · {rate}/1k शब्द",
+    "queryingCorpus": "कॉर्पस क्वेरी हो रहा है…",
+    "removeWordTitle": "“{word}” को हटाओ",
+    "topFilmByYearHeading": "साल के हिसाब से “{word}” के लिए टॉप फ़िल्म",
+    "topFilmByYearLoading": "हर साल टॉप “{word}” फ़िल्म खोजी जा रही है…",
+    "topFilmsHeading": "फ़िल्में जो “{word}” सबसे ज़्यादा बोलती हैं",
+    "topFilmsLoading": "“{word}” सबसे ज़्यादा बोलने वाली फ़िल्में खोजी जा रही हैं…",
+    "trimmedYearsNote": "{years} छिपे हुए - भरोसेमंद दरों के लिए कॉर्पस में बहुत कम फ़िल्में हैं",
+    "tryClassic": "या कोई क्लासिक ट्राई करो:",
+    "usesPerMillionWords": "डायलॉग के प्रति मिलियन शब्दों पर इस्तेमाल",
+    "wordDetailsTablist": "शब्द की डिटेल्स",
+    "wordInputAriaLabel": "चार्ट करने के लिए शब्द",
+    "yAxisLabel": "प्रति मिलियन शब्दों पर इस्तेमाल",
+    "languageNote": "{count} {langs}-भाषा की फ़िल्मों पर आधारित, जिन्हें उनके अंग्रेज़ी सबटाइटल्स से मापा गया है。",
+    "notEnoughFilms": "इस ट्रेंड के लिए {langs} में पर्याप्त फ़िल्में नहीं हैं - भाषाएँ जोड़ो या All films पर स्विच करो।"
+  },
+  "languageFilter": {
+    "allFilms": "सभी फ़िल्में",
+    "apply": "लागू करो",
+    "ariaLabel": "फ़िल्मों को मूल भाषा के अनुसार फ़िल्टर करो",
+    "countLabel": "{count} भाषाएँ",
+    "hint": "फ़िल्म की मूल भाषा के अनुसार फ़िल्टर करता है; शब्दों की गिनती अंग्रेज़ी सबटाइटल्स से आती है।",
+    "menuAriaLabel": "मूल भाषा",
+    "searchAriaLabel": "भाषाएँ खोजो",
+    "searchPlaceholder": "भाषाएँ खोजो…"
+  },
+  "localeFilterHint": {
+    "dismissAriaLabel": "हटाओ",
+    "filterButton": "फ़िल्टर",
+    "message": "क्या {lang} में देख रहे हो? {lang}-भाषा की फ़िल्मों में फ़िल्टर करो।"
+  },
+  "modal": {
+    "closeAriaLabel": "बंद करो"
+  },
+  "filterExplainer": {
+    "badgeLabel": "अनुवादित · {lang}",
+    "badgeTitle": "मूल भाषा {lang} - गिनती अंग्रेज़ी अनुवादित सबटाइटल्स से आती है। यह कैसे काम करता है?",
+    "dialogueNote": "मूल-भाषा के डायलॉग डेटासेट में नहीं हैं - सिर्फ़ अंग्रेज़ी अनुवाद है।",
+    "englishSubtitles": "अंग्रेज़ी सबटाइटल्स",
+    "englishTranslation": "अंग्रेज़ी अनुवाद",
+    "filteringBody": "{whatFiltering} एक फ़िल्म की {originalLanguage} - यह कहाँ बनी थी, TMDB मेटाडेटा से - न कि नीचे दिए गए शब्दों की भाषा।",
+    "linkText": "यह कैसे काम करता है?",
+    "modalTitle": "यह कैसे काम करता है",
+    "origin": "मूल",
+    "originalLanguage": "मूल भाषा",
+    "soSpanishMeans": "तो \"Spanish\" का मतलब है",
+    "spanishBody": "{soSpanishMeans} स्पेनिश-{origin} सिनेमा की अंग्रेज़ी-सबटाइटल शब्दावली - कैसे \"solidarity\" या \"dictatorship\" जैसे शब्द स्पेनिश फ़िल्मों के अंग्रेज़ी सबटाइटल्स में आते हैं - न कि स्पेनिश शब्द।",
+    "whatFiltering": "तुम क्या फ़िल्टर कर रहे हो:",
+    "whatWords": "शब्द क्या हैं:",
+    "wordsBody": "{whatWords} Movie Words पर हर गिनती फ़िल्म के {englishSubtitles} से आती है। हमारे पास सिर्फ़ अंग्रेज़ी OpenSubtitles ट्रैक है, इसलिए किसी गैर-अंग्रेज़ी फ़िल्म के लिए ये उसके {englishTranslation} के शब्द हैं, न कि मूल डायलॉग। यही कारण है कि कभी-कभी कोई बिना अनुवाद वाला शब्द आ जाता है - \"panna\", \"cotta\", \"samurai\"।"
+  }
+}

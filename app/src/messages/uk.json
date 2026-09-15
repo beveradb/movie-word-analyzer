@@ -1,0 +1,411 @@
+{
+  "compare": {
+    "orLabel": "або",
+    "addDecadeAriaLabel": "Додати десятиліття",
+    "addDecadeOption": "Додати десятиліття…",
+    "addFilmPlaceholder": "Додати фільм…",
+    "addGenreAriaLabel": "Додати жанр",
+    "addGenreOption": "Додати жанр…",
+    "decadeLabel": "{decade}-ТІ",
+    "decadeOptionLabel": "{decade}-ті",
+    "distinctWordsLabel": "Унікальні слова",
+    "featuredMatchupPrefix": "Обране протистояння: {title}",
+    "filmsLabel": "Фільми",
+    "filmsPerYearLabel": "фільмів / рік",
+    "filmsPerYearTitle": "Фільмів за роком випуску в цьому зрізі корпусу",
+    "fullBreakdownLink": "повний розбір →",
+    "headToHeadHeading": "Віч-на-віч",
+    "introBody": "Порівняй фільми, десятиліття та жанри пліч-о-пліч - до трьох у будь-якій комбінації.",
+    "loadingLabel": "Завантаження…",
+    "movieLabel": "{title} - {year}",
+    "navNoun": "протистояння",
+    "navSuffix": "змінюється щодня - або створи власне вище",
+    "noStandoutWords": "немає видатних слів",
+    "nothingFoundMessage": "Нічого не знайдено для цього вибору.",
+    "pickFilmPlaceholder": "Вибери фільм…",
+    "ratioMoreLabel": "у {ratio}× більше",
+    "removeButton": "видалити",
+    "sharedSignatureWordsHeading": "Спільні характерні слова",
+    "signatureWordsHeading": "Характерні слова {note}",
+    "signatureWordsHighlightedNote": "(виділені = спільні)",
+    "swearsPer1kLabel": "Лайки / 1 тис. слів",
+    "wordsPerFilmLabel": "Слів / фільм",
+    "wordsSpokenLabel": "Сказано слів",
+    "headToHeadIntroMany": "Що кожен із них каже набагато частіше за інших - частота на мільйон слів власного діалогу.",
+    "headToHeadIntroPair": "Що кожен із них каже набагато частіше за іншого - частота на мільйон слів власного діалогу."
+  },
+  "languageSwitcher": {
+    "current": "Мова",
+    "label": "Вибрати мову"
+  },
+  "nav": {
+    "sectionsLabel": "Розділи",
+    "compare": "Порівняти",
+    "decades": "Десятиліття",
+    "explore": "Дослідити",
+    "genres": "Жанри",
+    "leaderboard": "Таблиця лідерів",
+    "trends": "Тренди"
+  },
+  "pos": {
+    "other": "інше",
+    "a": "прикметники",
+    "adjective": "прикметник",
+    "adverb": "прислівник",
+    "n": "іменники",
+    "noun": "іменник",
+    "r": "прислівники",
+    "v": "дієслова",
+    "verb": "дієслово",
+    "x": "імена та інше"
+  },
+  "ui": {
+    "errorBox": {
+      "retryButton": "Повторити",
+      "heading": "Сцена відсутня"
+    },
+    "featuredNav": {
+      "nextAriaLabel": "Наступний обраний {noun}",
+      "position": "{idx} з {len}",
+      "prevAriaLabel": "Попередній обраний {noun}"
+    },
+    "highlightWord": {
+      "spokenTimes": "сказано {count} разів",
+      "title": "“{word}” - {display}"
+    },
+    "movieSearch": {
+      "ariaLabel": "Пошук фільмів",
+      "placeholder": "Пошук за назвою фільму…"
+    },
+    "poster": {
+      "alt": "Постер {title}"
+    },
+    "seriesLegend": {
+      "exploreTitle": "Дослідити “{word}”"
+    },
+    "slug": {
+      "defaultPrefix": "ІНТ."
+    },
+    "wordFilterBar": {
+      "allButton": "усі слова",
+      "anyKindButton": "будь-який тип",
+      "commonnessAriaLabel": "Поширеність слова",
+      "hidingDescription": "приховано повсякденну англійську - ~2000 найпоширеніших слів (the, know, get…)",
+      "interestingButton": "цікаві слова",
+      "onlyKindsSuffix": " · лише {kinds}",
+      "showingDescription": "показано кожне слово, включно з повсякденною англійською",
+      "excludingKindsSuffix": " · приховано {kinds}",
+      "posStateExcluded": "{kind}: вилучено (натисни, щоб скинути)",
+      "posStateIncluded": "{kind}: додано (натисни, щоб вилучити)",
+      "posStateOff": "{kind}: вимкнено (натисни, щоб додати)"
+    }
+  },
+  "boards": {
+    "films": {
+      "chattiestBlurb": "найбільше слів за хвилину хронометражу",
+      "chattiestFmt": "{v} сл/хв",
+      "chattiestTitle": "Найшвидші базіки",
+      "intro": "Рекордсмени корпусу, чотири категорії екстремальних сценаріїв.",
+      "loadingSpinner": "Завантаження кінорекордів…",
+      "repetitiveBlurb": "найнижча частка унікальних слів",
+      "repetitiveFmt": "{v}% унікальних",
+      "repetitiveTitle": "Найбільш повторювані сценарії",
+      "sweariestBlurb": "лайки на 1000 слів",
+      "sweariestFmt": "{v}/1 тис.",
+      "sweariestTitle": "Найбільш лайливі сценарії",
+      "vocabularyBlurb": "найбільше унікальних слів в одному сценарії",
+      "vocabularyFmt": "{v} слів",
+      "vocabularyTitle": "Найбільші словникові запаси"
+    },
+    "overview": {
+      "adjectivesBlurb": "найуживаніші цікаві прикметники",
+      "adjectivesTitle": "Прикметники кіно",
+      "fallingBlurb": "зараз кажуть значно рідше, ніж у ранньому кіно",
+      "intro": "Головні новини корпусу - п'ятірка найкращих з кожної дошки. Перейди за будь-якою карткою, щоб побачити повний список, фільтри та інше.",
+      "loadingSpinner": "Завантаження головних новин…",
+      "risingBlurb": "зараз кажуть значно частіше, ніж у ранньому кіно",
+      "ubiquityBlurb": "слова, які не пропускає майже жоден сценарій",
+      "wondersBlurb": "слова, які належать одному фільму"
+    },
+    "ratio": {
+      "down": "у {label}× менше",
+      "up": "у {label}× більше"
+    },
+    "shifts": {
+      "fallingTitle": "Зникають",
+      "intro": "Як змінилися діалоги: слова, які зараз (2010-ті–20-ті) кажуть значно частіше (або рідше) на мільйон слів, ніж у ранньому кіно (1930-ті–40-ві). Лінії відстежують кожне десятиліття; натисни на слово, щоб побачити повний графік.",
+      "loadingSpinner": "Завантаження змін…",
+      "risingTitle": "На підйомі"
+    },
+    "taster": {
+      "seeAllLink": "дивитися всі →"
+    },
+    "ubiquity": {
+      "intro": "Окрім звичайних сполучників, ці слова з'являються майже в кожному з {nFilms} фільмів.",
+      "loadingSpinner": "Завантаження…",
+      "shareOfFilms": "{share}% фільмів"
+    },
+    "wonders": {
+      "intro": "Слова, які один фільм використовує частіше, ніж усе інше кіно разом узяте - імена персонажів, вигадані слова, нав'язливі ідеї.",
+      "item": "сказано {count}× у {movieLink} ({year}) - {share}% від усіх випадків, коли це кажуть у кіно",
+      "loadingSpinner": "Завантаження див одного фільму…"
+    }
+  },
+  "chart": {
+    "axisAriaLabel": "{yLabel} за роками",
+    "chartingSpinner": "Побудова графіка обраної зміни…",
+    "loadFailedMessage": "Не вдалося побудувати графік для цього - спробуй наступний ▶",
+    "moreTrendsLink": "більше трендів →",
+    "trendNoun": "тренд",
+    "unpinAriaLabel": "Відкріпити {year}",
+    "usesPerMillionCaption": "використань на мільйон слів діалогу",
+    "yAxisLabel": "використань на мільйон слів"
+  },
+  "decadesView": {
+    "decadeLabel": "{decade}-ті",
+    "eyebrow": "Перегляд за",
+    "filmsCount": "{count} фільмів",
+    "loadError": "Не вдалося завантажити десятиліття.",
+    "loadingSpinner": "Завантаження десятиліть…",
+    "subtitle": "Як розмовляла кожна епоха кіно - {count} досліджень.",
+    "title": "ДЕСЯТИЛІТТЯ",
+    "notEnoughFilms": "Недостатньо фільмів мовою {langs} для цього - додай мови або переключись на Всі фільми."
+  },
+  "entity": {
+    "compareButton": "Порівняти {label} з…",
+    "decadeEyebrow": "Засн. {decade}",
+    "decadeLabel": "{decade}-ТІ",
+    "decadeSubject": "{decade}-ті",
+    "genreEyebrow": "Дослідження жанру",
+    "kindDecade": "десятиліття",
+    "kindGenre": "жанр",
+    "loadingSpinner": "Завантаження…",
+    "mostSpokenBody": "Прості підрахунки, без урахування стоп-слів.",
+    "mostSpokenHeading": "Найуживаніші слова",
+    "notFound": "У наборі даних немає {kind} “{id}”.",
+    "notableScriptsHeading": "Визначні сценарії",
+    "signatureWordsBody": "Про що {subject} говорить значно більше, ніж кіно загалом.",
+    "signatureWordsHeading": "Характерні слова",
+    "statsLine": "{films} фільмів · {words} слів діалогу",
+    "notEnoughFilms": "Недостатньо фільмів мовою {langs} для {subject} - додай мови або переключись на Всі фільми."
+  },
+  "eras": {
+    "1910": "перші плівки",
+    "1920": "поява звукового кіно",
+    "1930": "золотий вік",
+    "1940": "війна та фільм-нуар",
+    "1950": "атомна ера",
+    "1960": "нова хвиля",
+    "1970": "Новий Голлівуд",
+    "1980": "ера блокбастерів",
+    "1990": "бум інді-кіно",
+    "2000": "роки мультиплексів",
+    "2010": "світанок стримінгів",
+    "2020": "кіно зараз"
+  },
+  "errors": {
+    "body": "Вибач за це - {reload} зазвичай допомагає. Досі не працює? Напиши на {email}.",
+    "eyebrow": "Різкий монтажний перехід до:",
+    "reload": "перезавантаження",
+    "title": "Щось зламалося."
+  },
+  "footer": {
+    "creditsBody": "Відкритий вихідний код: {github} і некомерційний проєкт. Публікуються лише похідні підрахунки слів - текст субтитрів не розповсюджується.",
+    "creditsHeading": "Титри.",
+    "dataBody": "Повний набір даних доступний для завантаження - дивись {dataGuide} для посилань та інформації ({license}). Цікавить методологія, упередження чи авторські права? Читай {faq}.",
+    "dataGuideLink": "посібник з даних",
+    "dataHeading": "Забирай дані.",
+    "dataSourcesBody": "Дані: підрахунок слів з {opus} (Lison & Tiedemann, 2016), через {openSubtitles}; метадані фільмів з {imdbData} та {tmdb}. Інформація надана IMDb ({imdbUrl}). Використовується з дозволу.",
+    "faqLink": "FAQ",
+    "githubLink": "github.com/beveradb/moviewords",
+    "githubProfileLink": "GitHub",
+    "ideaBody": "Мабуть, є цікаві аналізи, про які ми не подумали! Якщо ти хочеш поділитися ідеєю або створив щось круте з цими даними, {email}",
+    "ideaEmailLink": "напиши на andrew@beveridge.uk",
+    "ideaHeading": "Є ідея?",
+    "imdbDataLink": "IMDb",
+    "imdbUrlLink": "https://www.imdb.com",
+    "instagramLink": "Instagram",
+    "licenseLink": "CC BY-NC-SA 4.0",
+    "lindsayLink": "Lindsay Wright Graphic Design",
+    "linkedinLink": "LinkedIn",
+    "madeByBody": "Створено Andrew Beveridge - {github} · {linkedin} · {instagram} - з оригінальною ідеєю моєї коханої дружини {lindsay} - заціни її портфоліо!",
+    "openSubtitlesLink": "OpenSubtitles.org",
+    "opusLink": "Корпус OPUS OpenSubtitles",
+    "takedownEmailLink": "Написати запит на видалення",
+    "tmdbDisclaimerBody": "Цей продукт використовує TMDB API, але не схвалений і не сертифікований TMDB. Постери через TMDB - авторські права належать відповідним студіям, показані для ідентифікації обговорюваних фільмів. Правовласник? {takedown} і ми швидко це видалимо.",
+    "tmdbLink": "TMDB"
+  },
+  "genres": {
+    "Action": "Бойовик",
+    "Adult": "Для дорослих",
+    "Adventure": "Пригоди",
+    "Animation": "Анімація",
+    "Biography": "Біографія",
+    "Comedy": "Комедія",
+    "Crime": "Кримінал",
+    "Documentary": "Документальний",
+    "Drama": "Драма",
+    "Family": "Сімейний",
+    "Fantasy": "Фентезі",
+    "Film-Noir": "Фільм-нуар",
+    "History": "Історія",
+    "Horror": "Жахи",
+    "Music": "Музика",
+    "Musical": "Мюзикл",
+    "Mystery": "Детектив",
+    "News": "Новини",
+    "Reality-TV": "Реаліті-шоу",
+    "Romance": "Мелодрама",
+    "Sci-Fi": "Фантастика",
+    "Sport": "Спорт",
+    "Thriller": "Трилер",
+    "War": "Військовий",
+    "Western": "Вестерн"
+  },
+  "genresView": {
+    "eyebrow": "Перегляд за",
+    "filmsCount": "{count} фільмів",
+    "loadError": "Не вдалося завантажити жанри.",
+    "loadingSpinner": "Завантаження жанрів…",
+    "subtitle": "Про що говорять у кожному жанрі - {count} досліджень.",
+    "title": "ЖАНРИ",
+    "notEnoughFilms": "Недостатньо фільмів мовою {langs} для цього - додай мови або переключись на Всі фільми."
+  },
+  "home": {
+    "aboutHeading": "Про цей набір даних",
+    "decadesBody": "Від звукового кіно до 2020-х - як розмовляла кожна епоха кінематографа.",
+    "decadesHeading": "Блукай десятиліттями",
+    "fadeIn": "Поступова поява:",
+    "faqLink": "FAQ",
+    "heroBody": "Ми підрахували кожне слово, сказане у {count} фільмах - їх аж {millions} мільйонів. Спостерігай за {trends}, зустрічай {sweariest} та вирішуй {versus} слово за словом.",
+    "heroSweariest": "найбільш лайливий сценарій в історії",
+    "heroTitle": "Кожен фільм має свій {vocabulary}.",
+    "heroTrends": "як 'awesome' обганяє 'swell'",
+    "heroVersus": "Чужий проти Чужих",
+    "heroVocabulary": "словниковий запас",
+    "movieMeta": "{year} · {words} слів",
+    "opusLink": "Корпус OPUS OpenSubtitles",
+    "shelfHeading": "Візьми сценарій з полиці",
+    "aboutBody": "Охоплює {count} - кожне слово діалогу з субтитрів з {opus} для фільмів, що мають щонайменше 300 голосів на IMDb, підраховано для кожного фільму. Публікуються лише підрахунки слів; текст субтитрів не розповсюджується. Методологія та застереження: {faq}.",
+    "aboutCountAllFilms": "фільмів - включно з перекладеними субтитрами",
+    "aboutCountLangFilms": "фільмів мовою {langs}",
+    "aboutCountTemplate": "{count} {kind}",
+    "aboutCountUnknown": "десятки тисяч",
+    "aboutSubtitleHint": "Ці підрахунки беруться з англійських субтитрів до фільмів, а не з їхніх оригінальних діалогів."
+  },
+  "leaderboard": {
+    "tabs": {
+      "everywhere": "Кажуть у кожному фільмі",
+      "films": "Кінорекорди",
+      "overview": "Огляд",
+      "shifts": "Злети та падіння",
+      "wonders": "Дива одного фільму",
+      "words": "Топові слова"
+    },
+    "words": {
+      "allGenresOption": "Усі жанри",
+      "filmsCount": " · {count} фільмів",
+      "filteringSpinner": "Фільтрація корпусу… (перший відфільтрований запит завантажує аналітичний рушій)",
+      "fromLabel": "Від",
+      "genreLabel": "Жанр",
+      "intro": "Найуживаніші слова в усіх фільмах корпусу.",
+      "noMatches": "Жодне слово не відповідає цим фільтрам - спробуй “усі слова” або “будь-який тип”.",
+      "rankByLabel": "Ранжувати за",
+      "sortMovieishButton": "найбільш кіношні",
+      "sortMovieishTitle": "Оцінює кожне слово за тим, наскільки частіше його кажуть у кіно, ніж у повсякденній англійській",
+      "sortSpokenButton": "найуживаніші",
+      "toLabel": "До"
+    },
+    "languageNote": "На основі {count} фільмів мовою {langs}, підраховано за їхніми англійськими субтитрами."
+  },
+  "movie": {
+    "compareButton": "Порівняти з іншим фільмом",
+    "decadeLinkTitle": "Більше з {decade}-х",
+    "distinctWordsLabel": "Унікальні слова",
+    "genreSeparator": " / ",
+    "imdbRatingLabel": "Рейтинг IMDb",
+    "loadingScript": "Завантаження сценарію…",
+    "mostSpokenHeading": "Найуживаніші слова",
+    "notFound": "У наборі даних немає фільму з id “{id}”.",
+    "signatureWordsBody": "Слова, які цей фільм використовує значно частіше, ніж кіно загалом (логарифм шансів порівняно з усім корпусом).",
+    "signatureWordsHeading": "Характерні слова",
+    "slugTitle": "{title} - {year}",
+    "vocabRichnessLabel": "Багатство словникового запасу",
+    "wordsSpokenLabel": "Сказано слів",
+    "imdbPosterTitle": "{title} на IMDb",
+    "runtimeLabel": "Хронометраж",
+    "runtimeValue": "{minutes} хв",
+    "wordsPerMinuteLabel": "Слів за хвилину"
+  },
+  "themeToggle": {
+    "day": "ДЕНЬ",
+    "dayShoot": "Денна зйомка",
+    "night": "НІЧ",
+    "nightShoot": "Нічна зйомка",
+    "switchToDay": "Перемкнути на денний режим",
+    "switchToNight": "Перемкнути на нічний режим"
+  },
+  "trends": {
+    "addAnotherWordPlaceholder": "Додати ще одне слово…",
+    "bigMovers": "Значні зміни з 1930-х",
+    "chartItButton": "Побудувати графік",
+    "chartedWordsAriaLabel": "Слова на графіку",
+    "featuredPrefix": "Обране: {title}",
+    "firstWordPlaceholder": "Введи слово, напр. love",
+    "fullList": "повний список →",
+    "intro": "Як часто слово вимовляється в усіх фільмах корпусу, на мільйон слів діалогу, за роком випуску.",
+    "navNoun": "тренд",
+    "navSuffix": "нова зміна щодня",
+    "notEnoughData": "Недостатньо даних для: {words} (потрібно ≥20 використань у корпусі, у роки з достатньою кількістю фільмів).",
+    "perThousandWords": " · {rate}/1 тис. слів",
+    "queryingCorpus": "Опитування корпусу…",
+    "removeWordTitle": "Видалити “{word}”",
+    "topFilmByYearHeading": "Найкращий фільм для “{word}” за роком",
+    "topFilmByYearLoading": "Пошук найкращого фільму для “{word}” за роком…",
+    "topFilmsHeading": "Фільми, де найчастіше кажуть “{word}”",
+    "topFilmsLoading": "Пошук фільмів, де найчастіше кажуть “{word}”…",
+    "trimmedYearsNote": "{years} приховано - занадто мало фільмів у корпусі для надійних показників",
+    "tryClassic": "Або спробуй класику:",
+    "usesPerMillionWords": "використань на мільйон слів діалогу",
+    "wordDetailsTablist": "Деталі слова",
+    "wordInputAriaLabel": "Слово для графіка",
+    "yAxisLabel": "використань на мільйон слів",
+    "languageNote": "На основі {count} фільмів мовою {langs}, підраховано за їхніми англійськими субтитрами.",
+    "notEnoughFilms": "Недостатньо фільмів мовою {langs} для цього тренду - додай мови або переключись на Всі фільми."
+  },
+  "languageFilter": {
+    "allFilms": "Усі фільми",
+    "apply": "Застосувати",
+    "ariaLabel": "Фільтрувати фільми за мовою оригіналу",
+    "countLabel": "{count} мов",
+    "hint": "Фільтрує за мовою оригіналу фільму; підрахунок слів ведеться за англійськими субтитрами.",
+    "menuAriaLabel": "Мова оригіналу",
+    "searchAriaLabel": "Пошук мов",
+    "searchPlaceholder": "Пошук мов…"
+  },
+  "localeFilterHint": {
+    "dismissAriaLabel": "Закрити",
+    "filterButton": "Фільтрувати",
+    "message": "Переглядаєш мовою {lang}? Відфільтруй до фільмів мовою {lang}."
+  },
+  "modal": {
+    "closeAriaLabel": "Закрити"
+  },
+  "filterExplainer": {
+    "badgeLabel": "перекладено · {lang}",
+    "badgeTitle": "Мова оригіналу {lang} - підрахунки беруться з перекладених англійських субтитрів. Як це працює?",
+    "dialogueNote": "Діалогів мовою оригіналу немає в наборі даних - лише англійський переклад.",
+    "englishSubtitles": "англійських субтитрів",
+    "englishTranslation": "англійського перекладу",
+    "filteringBody": "{whatFiltering} це {originalLanguage} фільму - де він був створений, з метаданих TMDB - а не мова слів нижче.",
+    "linkText": "Як це працює?",
+    "modalTitle": "Як це працює",
+    "origin": "походження",
+    "originalLanguage": "мова оригіналу",
+    "soSpanishMeans": "Тож \"Іспанська\" означає",
+    "spanishBody": "{soSpanishMeans} словниковий запас англійських субтитрів кіно іспанського {origin} - як слова на кшталт \"solidarity\" чи \"dictatorship\" з'являються в англійських субтитрах іспанських фільмів - а не іспанські слова.",
+    "whatFiltering": "Що ти фільтруєш:",
+    "whatWords": "Що це за слова:",
+    "wordsBody": "{whatWords} кожен підрахунок на Movie Words береться з {englishSubtitles} фільму. Ми маємо лише англійську доріжку OpenSubtitles, тому для неангломовного фільму це слова його {englishTranslation}, а не оригінальний діалог. Ось чому іноді проскакує неперекладене слово - \"panna\", \"cotta\", \"samurai\"."
+  }
+}

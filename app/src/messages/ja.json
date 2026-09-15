@@ -1,0 +1,411 @@
+{
+  "compare": {
+    "orLabel": "または",
+    "addDecadeAriaLabel": "年代を追加",
+    "addDecadeOption": "年代を追加…",
+    "addFilmPlaceholder": "映画を追加…",
+    "addGenreAriaLabel": "ジャンルを追加",
+    "addGenreOption": "ジャンルを追加…",
+    "decadeLabel": "{decade}年代",
+    "decadeOptionLabel": "{decade}年代",
+    "distinctWordsLabel": "異なり語",
+    "featuredMatchupPrefix": "注目の対決：{title}",
+    "filmsLabel": "映画",
+    "filmsPerYearLabel": "映画 / 年",
+    "filmsPerYearTitle": "このコーパス部分における公開年ごとの映画数",
+    "fullBreakdownLink": "詳細な内訳 →",
+    "headToHeadHeading": "直接対決",
+    "introBody": "映画、年代、ジャンルを並べて比較 - 任意の組み合わせで最大3つまで。",
+    "loadingLabel": "読み込み中…",
+    "movieLabel": "{title} - {year}",
+    "navNoun": "対決",
+    "navSuffix": "毎日更新 - または上記で独自に作成",
+    "noStandoutWords": "目立つ言葉はありません",
+    "nothingFoundMessage": "その選択に該当するものが見つかりませんでした。",
+    "pickFilmPlaceholder": "映画を選ぶ…",
+    "ratioMoreLabel": "{ratio}倍 多い",
+    "removeButton": "削除",
+    "sharedSignatureWordsHeading": "共通する特徴的な言葉",
+    "signatureWordsHeading": "特徴的な言葉 {note}",
+    "signatureWordsHighlightedNote": "（ハイライト = 共通）",
+    "swearsPer1kLabel": "罵倒語 / 1k語",
+    "wordsPerFilmLabel": "単語 / 映画",
+    "wordsSpokenLabel": "話された単語",
+    "headToHeadIntroMany": "それぞれが他の作品よりも圧倒的に多く使っている言葉 - 各作品のセリフ100万語あたりの出現率。",
+    "headToHeadIntroPair": "それぞれがもう一方の作品よりも圧倒的に多く使っている言葉 - 各作品のセリフ100万語あたりの出現率。"
+  },
+  "languageSwitcher": {
+    "current": "言語",
+    "label": "言語を選択"
+  },
+  "nav": {
+    "sectionsLabel": "セクション",
+    "compare": "比較",
+    "decades": "年代",
+    "explore": "探索",
+    "genres": "ジャンル",
+    "leaderboard": "リーダーボード",
+    "trends": "トレンド"
+  },
+  "pos": {
+    "other": "その他",
+    "a": "形容詞",
+    "adjective": "形容詞",
+    "adverb": "副詞",
+    "n": "名詞",
+    "noun": "名詞",
+    "r": "副詞",
+    "v": "動詞",
+    "verb": "動詞",
+    "x": "名前とその他"
+  },
+  "ui": {
+    "errorBox": {
+      "retryButton": "再試行",
+      "heading": "シーン欠落"
+    },
+    "featuredNav": {
+      "nextAriaLabel": "次の注目の {noun}",
+      "position": "{len} 中 {idx}",
+      "prevAriaLabel": "前の注目の {noun}"
+    },
+    "highlightWord": {
+      "spokenTimes": "{count} 回使用",
+      "title": "「{word}」 - {display}"
+    },
+    "movieSearch": {
+      "ariaLabel": "映画を検索",
+      "placeholder": "映画のタイトルを検索…"
+    },
+    "poster": {
+      "alt": "{title} のポスター"
+    },
+    "seriesLegend": {
+      "exploreTitle": "「{word}」を探索"
+    },
+    "slug": {
+      "defaultPrefix": "INT."
+    },
+    "wordFilterBar": {
+      "allButton": "すべての言葉",
+      "anyKindButton": "すべての種類",
+      "commonnessAriaLabel": "単語の一般的な度合い",
+      "hidingDescription": "日常英語を非表示 - 最も一般的な約2,000語（the, know, get…）",
+      "interestingButton": "興味深い言葉",
+      "onlyKindsSuffix": " · {kinds} のみ",
+      "showingDescription": "日常英語を含むすべての言葉を表示",
+      "excludingKindsSuffix": " · {kinds}を非表示",
+      "posStateExcluded": "{kind}: 除外（クリックしてリセット）",
+      "posStateIncluded": "{kind}: 対象（クリックして除外）",
+      "posStateOff": "{kind}: オフ（クリックして追加）"
+    }
+  },
+  "boards": {
+    "films": {
+      "chattiestBlurb": "上映時間1分あたりの単語数が最多",
+      "chattiestFmt": "{v} 語/分",
+      "chattiestTitle": "早口な映画",
+      "intro": "コーパスの記録保持者たち - 4つの極端なスクリプトのカテゴリー。",
+      "loadingSpinner": "映画の最高記録を読み込み中…",
+      "repetitiveBlurb": "異なり語の割合が最低",
+      "repetitiveFmt": "ユニーク率 {v}%",
+      "repetitiveTitle": "最も反復が多いスクリプト",
+      "sweariestBlurb": "1,000語あたりの罵倒語",
+      "sweariestFmt": "{v}語/1k",
+      "sweariestTitle": "最も口が悪いスクリプト",
+      "vocabularyBlurb": "1つのスクリプト内の異なり語が最多",
+      "vocabularyFmt": "{v} 語",
+      "vocabularyTitle": "最大の語彙数"
+    },
+    "overview": {
+      "adjectivesBlurb": "最もよく使われる興味深い形容詞",
+      "adjectivesTitle": "映画の形容詞",
+      "fallingBlurb": "初期の映画よりも現在では使われなくなった言葉",
+      "intro": "コーパスのヘッドライン - 各ボードのトップ5。カードをクリックすると、完全なリストやフィルターなどを確認できます。",
+      "loadingSpinner": "ヘッドラインを読み込み中…",
+      "risingBlurb": "初期の映画よりも現在の方がはるかに多く使われる言葉",
+      "ubiquityBlurb": "ほぼすべてのスクリプトに登場する言葉",
+      "wondersBlurb": "1つの映画だけが独占している言葉"
+    },
+    "ratio": {
+      "down": "{label}倍 減少",
+      "up": "{label}倍 増加"
+    },
+    "shifts": {
+      "fallingTitle": "フェードアウト",
+      "intro": "セリフの変化：初期の映画（1930–40年代）と比べて、現在（2010–20年代）の100万語あたりの使用頻度が大きく増加（または減少）した言葉。線は各年代をたどります。単語をクリックすると完全なチャートが表示されます。",
+      "loadingSpinner": "変化を読み込み中…",
+      "risingTitle": "上昇中"
+    },
+    "taster": {
+      "seeAllLink": "すべて見る →"
+    },
+    "ubiquity": {
+      "intro": "純粋な接続詞を除き、これらの言葉は {nFilms} 本の映画のほぼすべてに登場します。",
+      "loadingSpinner": "読み込み中…",
+      "shareOfFilms": "映画の {share}%"
+    },
+    "wonders": {
+      "intro": "他のすべての映画を合わせたよりも、1つの映画で多く使われている言葉 - キャラクター名、造語、執着など。",
+      "item": "{movieLink} ({year}) で {count} 回使用 - 映画全体での使用回数の {share}%",
+      "loadingSpinner": "1つの映画だけの言葉を読み込み中…"
+    }
+  },
+  "chart": {
+    "axisAriaLabel": "年ごとの {yLabel}",
+    "chartingSpinner": "注目の変化をチャート化中…",
+    "loadFailedMessage": "このチャートは作成できませんでした - 次を試してください ▶",
+    "moreTrendsLink": "さらにトレンドを見る →",
+    "trendNoun": "トレンド",
+    "unpinAriaLabel": "{year} のピン留めを解除",
+    "usesPerMillionCaption": "セリフ100万語あたりの使用回数",
+    "yAxisLabel": "100万語あたりの使用回数"
+  },
+  "decadesView": {
+    "decadeLabel": "{decade}年代",
+    "eyebrow": "ブラウズ：",
+    "filmsCount": "{count} 本の映画",
+    "loadError": "年代を読み込めませんでした。",
+    "loadingSpinner": "年代を読み込み中…",
+    "subtitle": "各時代の映画がどう語ったか - {count} の研究。",
+    "title": "年代",
+    "notEnoughFilms": "{langs}の映画が足りません - 言語を追加するか、「すべての映画」に切り替えてください。"
+  },
+  "entity": {
+    "compareButton": "{label} を比較…",
+    "decadeEyebrow": "誕生 {decade}年代",
+    "decadeLabel": "{decade}年代",
+    "decadeSubject": "{decade}年代",
+    "genreEyebrow": "ジャンル研究",
+    "kindDecade": "年代",
+    "kindGenre": "ジャンル",
+    "loadingSpinner": "読み込み中…",
+    "mostSpokenBody": "単純なカウント（ストップワードを除く）。",
+    "mostSpokenHeading": "最もよく使われる言葉",
+    "notFound": "データセットに {kind}「{id}」はありません。",
+    "notableScriptsHeading": "注目のスクリプト",
+    "signatureWordsBody": "{subject} が映画全体よりもはるかに多く使っている言葉。",
+    "signatureWordsHeading": "特徴的な言葉",
+    "statsLine": "{films} 本の映画 · {words} 語のセリフ",
+    "notEnoughFilms": "{subject}に関する{langs}の映画が足りません - 言語を追加するか、「すべての映画」に切り替えてください。"
+  },
+  "eras": {
+    "1910": "最初のリール",
+    "1920": "トーキーの到来",
+    "1930": "黄金時代",
+    "1940": "戦争とフィルム・ノワール",
+    "1950": "原子力の時代",
+    "1960": "ニューウェーブ",
+    "1970": "ニュー・ハリウッド",
+    "1980": "大作映画の時代",
+    "1990": "インディーズブーム",
+    "2000": "シネコンの時代",
+    "2010": "ストリーミングの夜明け",
+    "2020": "現在の映画"
+  },
+  "errors": {
+    "body": "申し訳ありません - 通常は {reload} で直ります。まだ壊れていますか？ {email} までメールしてください。",
+    "eyebrow": "スマッシュカット：",
+    "reload": "リロード",
+    "title": "何かが壊れました。"
+  },
+  "footer": {
+    "creditsBody": "オープンソース：{github} および非営利。派生した単語のカウントのみが公開され、字幕テキストは再配布されません。",
+    "creditsHeading": "クレジット。",
+    "dataBody": "完全なデータセットはダウンロード可能です - リンクと情報については {dataGuide} をご覧ください（{license}）。方法論、バイアス、著作権について疑問がありますか？ {faq} をお読みください。",
+    "dataGuideLink": "データガイド",
+    "dataHeading": "データを取得。",
+    "dataSourcesBody": "データ：{openSubtitles} 経由の {opus} (Lison & Tiedemann, 2016) からの単語カウント。映画のメタデータは {imdbData} および {tmdb} から。情報は IMDb ({imdbUrl}) の提供によるものです。許可を得て使用しています。",
+    "faqLink": "FAQ",
+    "githubLink": "github.com/beveradb/moviewords",
+    "githubProfileLink": "GitHub",
+    "ideaBody": "私たちが思いつかなかった面白い分析がきっとあるはずです！アイデアを共有したい、またはデータを使って何かクールなものを作った場合は、{email} までご連絡を！",
+    "ideaEmailLink": "andrew@beveridge.uk にメール",
+    "ideaHeading": "アイデアがありますか？",
+    "imdbDataLink": "IMDb",
+    "imdbUrlLink": "https://www.imdb.com",
+    "instagramLink": "Instagram",
+    "licenseLink": "CC BY-NC-SA 4.0",
+    "lindsayLink": "Lindsay Wright Graphic Design",
+    "linkedinLink": "LinkedIn",
+    "madeByBody": "Andrew Beveridge 制作 - {github} · {linkedin} · {instagram} - オリジナルのアイデアは私の愛する妻 {lindsay} によるものです - 彼女のポートフォリオをチェックしてください！",
+    "openSubtitlesLink": "OpenSubtitles.org",
+    "opusLink": "OPUS OpenSubtitles corpus",
+    "takedownEmailLink": "削除リクエストをメールする",
+    "tmdbDisclaimerBody": "この製品は TMDB API を使用していますが、TMDB によって承認または認定されていません。ポスターは TMDB 経由 - 著作権はそれぞれのスタジオに帰属し、議論されている映画を特定するために表示されています。権利者の方ですか？ {takedown} していただければ、速やかに削除します。",
+    "tmdbLink": "TMDB"
+  },
+  "genres": {
+    "Action": "アクション",
+    "Adult": "アダルト",
+    "Adventure": "アドベンチャー",
+    "Animation": "アニメーション",
+    "Biography": "伝記",
+    "Comedy": "コメディ",
+    "Crime": "犯罪",
+    "Documentary": "ドキュメンタリー",
+    "Drama": "ドラマ",
+    "Family": "ファミリー",
+    "Fantasy": "ファンタジー",
+    "Film-Noir": "フィルム・ノワール",
+    "History": "歴史",
+    "Horror": "ホラー",
+    "Music": "音楽",
+    "Musical": "ミュージカル",
+    "Mystery": "ミステリー",
+    "News": "ニュース",
+    "Reality-TV": "リアリティ番組",
+    "Romance": "ロマンス",
+    "Sci-Fi": "SF",
+    "Sport": "スポーツ",
+    "Thriller": "スリラー",
+    "War": "戦争",
+    "Western": "西部劇"
+  },
+  "genresView": {
+    "eyebrow": "ブラウズ：",
+    "filmsCount": "{count} 本の映画",
+    "loadError": "ジャンルを読み込めませんでした。",
+    "loadingSpinner": "ジャンルを読み込み中…",
+    "subtitle": "各ジャンルが何を語っているか - {count} の研究。",
+    "title": "ジャンル",
+    "notEnoughFilms": "{langs}の映画が足りません - 言語を追加するか、「すべての映画」に切り替えてください。"
+  },
+  "home": {
+    "aboutHeading": "このデータセットについて",
+    "decadesBody": "トーキーから2020年代まで - 各時代の映画がどう語ったか。",
+    "decadesHeading": "年代を巡る",
+    "fadeIn": "フェードイン：",
+    "faqLink": "FAQ",
+    "heroBody": "{count} 本の映画で話されたすべての単語をカウントしました - その数 {millions} 百万語。{trends} を観察し、{sweariest} に出会い、{versus} を単語ごとに決着させましょう。",
+    "heroSweariest": "史上最も口が悪いスクリプト",
+    "heroTitle": "すべての映画には {vocabulary} がある。",
+    "heroTrends": "「awesome」が「swell」を追い抜く",
+    "heroVersus": "エイリアン vs エイリアンズ",
+    "heroVocabulary": "語彙",
+    "movieMeta": "{year} · {words} 語",
+    "opusLink": "OPUS OpenSubtitles corpus",
+    "shelfHeading": "棚からスクリプトを取り出す",
+    "aboutBody": "{count} を網羅 - IMDb で300票以上を獲得した映画の {opus} からの字幕セリフのすべての単語を、映画ごとにカウントしました。単語のカウントのみが公開され、字幕テキストは再配布されません。方法論と注意事項：{faq}。",
+    "aboutCountAllFilms": "作品 - 翻訳字幕を含む",
+    "aboutCountLangFilms": "{langs}の映画",
+    "aboutCountTemplate": "{count} {kind}",
+    "aboutCountUnknown": "数万の",
+    "aboutSubtitleHint": "これらのカウントは映画のオリジナルのセリフではなく、英語字幕に基づいています。"
+  },
+  "leaderboard": {
+    "tabs": {
+      "everywhere": "すべての映画で使われる言葉",
+      "films": "映画の最高記録",
+      "overview": "概要",
+      "shifts": "上昇と下降",
+      "wonders": "1つの映画だけの言葉",
+      "words": "トップワード"
+    },
+    "words": {
+      "allGenresOption": "すべてのジャンル",
+      "filmsCount": " · {count} 本の映画",
+      "filteringSpinner": "コーパスをフィルタリング中…（最初のフィルタークエリで分析エンジンを読み込みます）",
+      "fromLabel": "開始",
+      "genreLabel": "ジャンル",
+      "intro": "コーパス内のすべての映画で最もよく使われる言葉。",
+      "noMatches": "これらのフィルターに一致する言葉はありません - 「すべての言葉」または「すべての種類」を試してください。",
+      "rankByLabel": "ランク付け",
+      "sortMovieishButton": "最も映画らしい",
+      "sortMovieishTitle": "日常英語よりも映画でどれだけ多く使われているかで各単語を重み付けします",
+      "sortSpokenButton": "最も使われる",
+      "toLabel": "終了"
+    },
+    "languageNote": "{count}本の{langs}映画の英語字幕に基づいて測定されています。"
+  },
+  "movie": {
+    "compareButton": "他の映画と比較",
+    "decadeLinkTitle": "{decade}年代の他の作品",
+    "distinctWordsLabel": "異なり語",
+    "genreSeparator": " / ",
+    "imdbRatingLabel": "IMDb 評価",
+    "loadingScript": "スクリプトを読み込み中…",
+    "mostSpokenHeading": "最もよく使われる言葉",
+    "notFound": "データセットにID「{id}」の映画はありません。",
+    "signatureWordsBody": "この映画が映画全体よりもはるかに多く使用している言葉（コーパス全体に対する対数オッズ）。",
+    "signatureWordsHeading": "特徴的な言葉",
+    "slugTitle": "{title} - {year}",
+    "vocabRichnessLabel": "語彙の豊富さ",
+    "wordsSpokenLabel": "話された単語",
+    "imdbPosterTitle": "IMDbでの{title}",
+    "runtimeLabel": "上映時間",
+    "runtimeValue": "{minutes}分",
+    "wordsPerMinuteLabel": "1分あたりの単語数"
+  },
+  "themeToggle": {
+    "day": "昼",
+    "dayShoot": "昼間撮影",
+    "night": "夜",
+    "nightShoot": "夜間撮影",
+    "switchToDay": "デイモードに切り替え",
+    "switchToNight": "ナイトモードに切り替え"
+  },
+  "trends": {
+    "addAnotherWordPlaceholder": "別の単語を追加…",
+    "bigMovers": "1930年代からの大きな変化",
+    "chartItButton": "チャート化",
+    "chartedWordsAriaLabel": "チャート化された単語",
+    "featuredPrefix": "注目：{title}",
+    "firstWordPlaceholder": "単語を入力（例：love）",
+    "fullList": "完全なリスト →",
+    "intro": "コーパス内のすべての映画で、公開年ごとにセリフ100万語あたりその単語がどれくらい話されているか。",
+    "navNoun": "トレンド",
+    "navSuffix": "毎日新しい変化",
+    "notEnoughData": "データが不足しています：{words}（コーパス全体で20回以上の使用、かつ十分な映画がある年が必要です）。",
+    "perThousandWords": " · {rate}語/1k語",
+    "queryingCorpus": "コーパスをクエリ中…",
+    "removeWordTitle": "「{word}」を削除",
+    "topFilmByYearHeading": "年ごとの「{word}」のトップ映画",
+    "topFilmByYearLoading": "年ごとの「{word}」のトップ映画を検索中…",
+    "topFilmsHeading": "「{word}」を最も多く言う映画",
+    "topFilmsLoading": "「{word}」を最も多く言う映画を検索中…",
+    "trimmedYearsNote": "{years} を非表示 - コーパス内の映画が少なすぎるため、信頼できる割合が出せません",
+    "tryClassic": "または定番を試す：",
+    "usesPerMillionWords": "セリフ100万語あたりの使用回数",
+    "wordDetailsTablist": "単語の詳細",
+    "wordInputAriaLabel": "チャート化する単語",
+    "yAxisLabel": "100万語あたりの使用回数",
+    "languageNote": "{count}本の{langs}映画の英語字幕に基づいて測定されています。",
+    "notEnoughFilms": "このトレンドを表示するには{langs}の映画が足りません - 言語を追加するか、「すべての映画」に切り替えてください。"
+  },
+  "languageFilter": {
+    "allFilms": "すべての映画",
+    "apply": "適用",
+    "ariaLabel": "オリジナル言語で映画を絞り込む",
+    "countLabel": "{count}言語",
+    "hint": "映画のオリジナル言語で絞り込みます。単語のカウントは英語字幕に基づいています。",
+    "menuAriaLabel": "オリジナル言語",
+    "searchAriaLabel": "言語を検索",
+    "searchPlaceholder": "言語を検索…"
+  },
+  "localeFilterHint": {
+    "dismissAriaLabel": "閉じる",
+    "filterButton": "絞り込む",
+    "message": "{lang}で表示していますか？{lang}の映画に絞り込みます。"
+  },
+  "modal": {
+    "closeAriaLabel": "閉じる"
+  },
+  "filterExplainer": {
+    "badgeLabel": "翻訳済み · {lang}",
+    "badgeTitle": "オリジナル言語 {lang} - カウントは英語の翻訳字幕に基づいています。この仕組みについて",
+    "dialogueNote": "オリジナル言語のセリフはデータセットに含まれていません - 英語の翻訳のみです。",
+    "englishSubtitles": "英語字幕",
+    "englishTranslation": "英語の翻訳",
+    "filteringBody": "{whatFiltering} 映画の{originalLanguage} - TMDBのメタデータに基づく制作地であり、下の単語の言語ではありません。",
+    "linkText": "仕組みについて",
+    "modalTitle": "仕組み",
+    "origin": "制作",
+    "originalLanguage": "オリジナル言語",
+    "soSpanishMeans": "つまり「スペイン語」とは",
+    "spanishBody": "{soSpanishMeans} スペイン{origin}の映画の英語字幕の語彙を意味します - 「solidarity（連帯）」や「dictatorship（独裁）」といった単語がスペイン映画の英語字幕にどう現れるかであり、スペイン語の単語そのものではありません。",
+    "whatFiltering": "フィルターの対象:",
+    "whatWords": "単語の正体:",
+    "wordsBody": "{whatWords} Movie Wordsのすべてのカウントは映画の{englishSubtitles}に基づいています。英語のOpenSubtitlesトラックしか保持していないため、非英語映画の場合、これらはオリジナル言語のセリフではなく{englishTranslation}の単語になります。そのため、翻訳されていない単語が時折紛れ込むことがあります - 「panna」、「cotta」、「samurai」など。"
+  }
+}

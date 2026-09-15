@@ -1,0 +1,20 @@
+name: i18n
+on:
+  pull_request:
+    paths:
+      - 'app/src/messages/**'
+      - 'app/src/i18n/**'
+      - 'pipeline/scripts/i18n/**'
+jobs:
+  translation-check:
+    name: Translation validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate translations
+        run: |
+          python pipeline/scripts/i18n/validate-translations.py \
+            --messages-dir app/src/messages

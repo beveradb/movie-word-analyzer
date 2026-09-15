@@ -5,9 +5,11 @@ import { activeLanguages, languageName } from '../lib/languages'
 import { navigate } from '../lib/route'
 import { ErrorBox, HighlightWord, Poster, Spinner } from '../components/ui'
 import { DecadeMotif, GenreMotif } from '../components/motifs'
+import { useI18n } from '../i18n'
 
 /** Themed page for a decade (kind=decade, id="1980") or genre (kind=genre, id="Crime"). */
 export function EntityView({ kind, id }: { kind: 'decade' | 'genre'; id: string }) {
+  const { t, n, locale } = useI18n()
   const [sig, setSig] = useState<SignatureEntry | null | undefined>(undefined)
   const [films, setFilms] = useState<MovieIndexEntry[]>([])
 
@@ -29,20 +31,31 @@ export function EntityView({ kind, id }: { kind: 'decade' | 'genre'; id: string 
       .catch(() => {})
   }, [kind, id])
 
-  const label = kind === 'decade' ? `THE ${id}S` : id.toUpperCase()
+  const label = kind === 'decade' ? t('entity.decadeLabel', { decade: id }) : t('genres.' + id).toUpperCase()
+  const subject = kind === 'decade' ? t('entity.decadeSubject', { decade: id }) : t('genres.' + id)
   const sigMax = useMemo(() => (sig?.signature.length ? sig.signature[0][1] : 1), [sig])
   const topMax = useMemo(() => (sig?.top.length ? sig.top[0][1] : 1), [sig])
 
-  if (sig === undefined) return <Spinner label="Loading…" />
+  if (sig === undefined) return <Spinner label={t('entity.loadingSpinner')} />
   if (sig === null)
-    return <ErrorBox message={`No ${kind} “${id}” in the dataset.`} retry={() => navigate('/')} />
+    return (
+      <ErrorBox
+        message={t('entity.notFound', {
+          kind: kind === 'decade' ? t('entity.kindDecade') : t('entity.kindGenre'),
+          id,
+        })}
+        retry={() => navigate('/')}
+      />
+    )
 
   const langs = activeLanguages()
   if (sig.movie_count === 0) {
     return (
       <p className="mt-8 font-script text-sm text-ink-2">
-        Not enough films in {langs.map((c) => languageName(c)).join(', ')} for {label.toLowerCase()} - add
-        languages or switch to All films.
+        {t('entity.notEnoughFilms', {
+          langs: langs.map((c) => languageName(c, locale)).join(', '),
+          subject: label.toLowerCase(),
+        })}
       </p>
     )
   }
@@ -52,11 +65,11 @@ export function EntityView({ kind, id }: { kind: 'decade' | 'genre'; id: string 
       <div className="flex items-end justify-between gap-4 border-b-2 border-ink pb-2">
         <div>
           <p className="font-script text-xs uppercase tracking-widest text-ink-2">
-            {kind === 'decade' ? 'Est. ' + id : 'Genre study'}
+            {kind === 'decade' ? t('entity.decadeEyebrow', { decade: id }) : t('entity.genreEyebrow')}
           </p>
           <h1 className="slug mt-1 text-3xl sm:text-4xl">{label}</h1>
           <p className="mt-1 font-script text-sm text-ink-2">
-            {sig.movie_count.toLocaleString()} films · {sig.total_words.toLocaleString()} words of dialogue
+            {t('entity.statsLine', { films: n(sig.movie_count), words: n(sig.total_words) })}
           </p>
         </div>
         {kind === 'decade' ? (
@@ -68,10 +81,8 @@ export function EntityView({ kind, id }: { kind: 'decade' | 'genre'; id: string 
 
       <div className="mt-8 grid gap-10 md:grid-cols-2">
         <section>
-          <h2 className="slug text-sm">Signature words</h2>
-          <p className="mt-1 text-xs text-ink-2">
-            What {kind === 'decade' ? `the ${id}s` : id} talks about far more than movies overall.
-          </p>
+          <h2 className="slug text-sm">{t('entity.signatureWordsHeading')}</h2>
+          <p className="mt-1 text-xs text-ink-2">{t('entity.signatureWordsBody', { subject })}</p>
           <div className="mt-3">
             {sig.signature.slice(0, 20).map(([w, z]) => (
               <HighlightWord
@@ -79,7 +90,7 @@ export function EntityView({ kind, id }: { kind: 'decade' | 'genre'; id: string 
                 word={w}
                 count={z}
                 max={sigMax}
-                display={z.toFixed(1)}
+                display={n(z, { minimumFractionDigits: 1, maximumFractionDigits: 1 })}
                 onClick={() => navigate(`/trends?w=${encodeURIComponent(w)}`)}
               />
             ))}
@@ -87,17 +98,17 @@ export function EntityView({ kind, id }: { kind: 'decade' | 'genre'; id: string 
         </section>
 
         <section>
-          <h2 className="slug text-sm">Most spoken words</h2>
-          <p className="mt-1 text-xs text-ink-2">Plain counts, stopwords excluded.</p>
+          <h2 className="slug text-sm">{t('entity.mostSpokenHeading')}</h2>
+          <p className="mt-1 text-xs text-ink-2">{t('entity.mostSpokenBody')}</p>
           <ol className="mt-3 grid grid-cols-2 gap-x-6">
             {sig.top.slice(0, 20).map(([w, c], i) => (
               <li key={w} className="flex items-baseline gap-2 border-b border-paper-2 py-1.5 font-script">
-                <span className="w-5 text-right text-xs text-ink-3">{i + 1}</span>
+                <span className="w-5 text-end text-xs text-ink-3">{i + 1}</span>
                 <button className="hover:bg-mark" onClick={() => navigate(`/trends?w=${encodeURIComponent(w)}`)}>
                   {w}
                 </button>
-                <span className="ml-auto text-xs tabular-nums text-ink-2">
-                  {((c / topMax) * 100).toFixed(0)}%
+                <span className="ms-auto text-xs tabular-nums text-ink-2">
+                  {n(c / topMax, { style: 'percent', maximumFractionDigits: 0 })}
                 </span>
               </li>
             ))}
@@ -107,10 +118,10 @@ export function EntityView({ kind, id }: { kind: 'decade' | 'genre'; id: string 
 
       {films.length > 0 && (
         <section className="mt-10">
-          <h2 className="slug border-b-2 border-ink pb-1 text-sm">Notable scripts</h2>
+          <h2 className="slug border-b-2 border-ink pb-1 text-sm">{t('entity.notableScriptsHeading')}</h2>
           <div className="mt-4 grid grid-cols-3 gap-3 sm:grid-cols-6">
             {films.map((m) => (
-              <button key={m.id} onClick={() => navigate(`/movie/${m.id}`)} className="group text-left">
+              <button key={m.id} onClick={() => navigate(`/movie/${m.id}`)} className="group text-start">
                 <Poster id={m.id} title={m.title} className="w-full border-2 border-ink group-hover:shadow-[4px_4px_0_0_var(--color-ink)]" />
                 <div className="mt-1 line-clamp-1 font-script text-xs group-hover:bg-mark">{m.title}</div>
               </button>
@@ -124,7 +135,7 @@ export function EntityView({ kind, id }: { kind: 'decade' | 'genre'; id: string 
           onClick={() => navigate(`/compare?e=${kind === 'decade' ? 'd' : 'g'}:${id}`)}
           className="border-2 border-ink px-4 py-2 font-script font-bold uppercase hover:bg-mark"
         >
-          Compare {label} with…
+          {t('entity.compareButton', { label })}
         </button>
       </div>
     </div>

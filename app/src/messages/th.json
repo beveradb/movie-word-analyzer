@@ -1,0 +1,411 @@
+{
+  "compare": {
+    "orLabel": "หรือ",
+    "addDecadeAriaLabel": "เพิ่มทศวรรษ",
+    "addDecadeOption": "เพิ่มทศวรรษ…",
+    "addFilmPlaceholder": "เพิ่มหนัง…",
+    "addGenreAriaLabel": "เพิ่มประเภทหนัง",
+    "addGenreOption": "เพิ่มประเภทหนัง…",
+    "decadeLabel": "ยุค {decade}S",
+    "decadeOptionLabel": "ยุค {decade}s",
+    "distinctWordsLabel": "คำที่ไม่ซ้ำกัน",
+    "featuredMatchupPrefix": "การจับคู่แนะนำ: {title}",
+    "filmsLabel": "ภาพยนตร์",
+    "filmsPerYearLabel": "เรื่อง / ปี",
+    "filmsPerYearTitle": "จำนวนหนังต่อปีที่ฉายในส่วนนี้ของคลังข้อมูล",
+    "fullBreakdownLink": "ดูรายละเอียดแบบเต็ม →",
+    "headToHeadHeading": "ประชันกัน",
+    "introBody": "นำหนัง ทศวรรษ และประเภทหนังมาเทียบกัน - ผสมกันได้สูงสุดสามอย่าง",
+    "loadingLabel": "กำลังโหลด…",
+    "movieLabel": "{title} - {year}",
+    "navNoun": "การจับคู่",
+    "navSuffix": "สลับเปลี่ยนทุกวัน - หรือสร้างของคุณเองด้านบน",
+    "noStandoutWords": "ไม่มีคำที่โดดเด่น",
+    "nothingFoundMessage": "ไม่พบข้อมูลสำหรับตัวเลือกนั้น",
+    "pickFilmPlaceholder": "เลือกหนัง…",
+    "ratioMoreLabel": "มากกว่า {ratio} เท่า",
+    "removeButton": "ลบ",
+    "sharedSignatureWordsHeading": "คำเอกลักษณ์ที่ใช้ร่วมกัน",
+    "signatureWordsHeading": "คำเอกลักษณ์ {note}",
+    "signatureWordsHighlightedNote": "(ไฮไลต์ = ใช้ร่วมกัน)",
+    "swearsPer1kLabel": "คำหยาบ / 1พันคำ",
+    "wordsPerFilmLabel": "คำ / เรื่อง",
+    "wordsSpokenLabel": "คำที่พูด",
+    "headToHeadIntroMany": "คำที่แต่ละเรื่องพูดมากกว่าเรื่องอื่นๆ อย่างเห็นได้ชัด - อัตราต่อหนึ่งล้านคำของบทสนทนาในเรื่องนั้นๆ",
+    "headToHeadIntroPair": "คำที่แต่ละเรื่องพูดมากกว่าอีกเรื่องอย่างเห็นได้ชัด - อัตราต่อหนึ่งล้านคำของบทสนทนาในเรื่องนั้นๆ"
+  },
+  "languageSwitcher": {
+    "current": "ภาษา",
+    "label": "เลือกภาษา"
+  },
+  "nav": {
+    "sectionsLabel": "ส่วนต่างๆ",
+    "compare": "เปรียบเทียบ",
+    "decades": "ทศวรรษ",
+    "explore": "สำรวจ",
+    "genres": "ประเภทหนัง",
+    "leaderboard": "กระดานผู้นำ",
+    "trends": "เทรนด์"
+  },
+  "pos": {
+    "other": "อื่นๆ",
+    "a": "คำคุณศัพท์",
+    "adjective": "คำคุณศัพท์",
+    "adverb": "คำกริยาวิเศษณ์",
+    "n": "คำนาม",
+    "noun": "คำนาม",
+    "r": "คำกริยาวิเศษณ์",
+    "v": "คำกริยา",
+    "verb": "คำกริยา",
+    "x": "ชื่อ & อื่นๆ"
+  },
+  "ui": {
+    "errorBox": {
+      "retryButton": "ลองใหม่",
+      "heading": "ฉากหายไป"
+    },
+    "featuredNav": {
+      "nextAriaLabel": "{noun} แนะนำถัดไป",
+      "position": "{idx} จาก {len}",
+      "prevAriaLabel": "{noun} แนะนำก่อนหน้า"
+    },
+    "highlightWord": {
+      "spokenTimes": "พูด {count} ครั้ง",
+      "title": "“{word}” - {display}"
+    },
+    "movieSearch": {
+      "ariaLabel": "ค้นหาภาพยนตร์",
+      "placeholder": "ค้นหาชื่อภาพยนตร์…"
+    },
+    "poster": {
+      "alt": "โปสเตอร์ {title}"
+    },
+    "seriesLegend": {
+      "exploreTitle": "สำรวจ “{word}”"
+    },
+    "slug": {
+      "defaultPrefix": "INT."
+    },
+    "wordFilterBar": {
+      "allButton": "คำทั้งหมด",
+      "anyKindButton": "ประเภทใดก็ได้",
+      "commonnessAriaLabel": "ความธรรมดาของคำ",
+      "hidingDescription": "ซ่อนภาษาอังกฤษในชีวิตประจำวัน - คำที่พบบ่อยที่สุด ~2,000 คำ (the, know, get…)",
+      "interestingButton": "คำที่น่าสนใจ",
+      "onlyKindsSuffix": " · เฉพาะ {kinds}",
+      "showingDescription": "แสดงทุกคำ รวมถึงภาษาอังกฤษในชีวิตประจำวัน",
+      "excludingKindsSuffix": " · ซ่อน {kinds}",
+      "posStateExcluded": "{kind}: ไม่รวม (คลิกเพื่อรีเซ็ต)",
+      "posStateIncluded": "{kind}: รวมอยู่ (คลิกเพื่อเอาออก)",
+      "posStateOff": "{kind}: ปิด (คลิกเพื่อรวม)"
+    }
+  },
+  "boards": {
+    "films": {
+      "chattiestBlurb": "จำนวนคำต่อนาทีของความยาวหนังมากที่สุด",
+      "chattiestFmt": "{v} คำ/นาที",
+      "chattiestTitle": "พูดเร็วที่สุด",
+      "intro": "เจ้าของสถิติในคลังข้อมูล สี่หมวดหมู่ของบทหนังสุดโต่ง",
+      "loadingSpinner": "กำลังโหลดที่สุดของหนัง…",
+      "repetitiveBlurb": "สัดส่วนคำที่ไม่ซ้ำกันต่ำที่สุด",
+      "repetitiveFmt": "ไม่ซ้ำ {v}%",
+      "repetitiveTitle": "บทหนังที่พูดซ้ำมากที่สุด",
+      "sweariestBlurb": "คำหยาบต่อ 1,000 คำ",
+      "sweariestFmt": "{v}/1พัน",
+      "sweariestTitle": "บทหนังที่หยาบคายที่สุด",
+      "vocabularyBlurb": "คำที่ไม่ซ้ำกันมากที่สุดในหนึ่งบทหนัง",
+      "vocabularyFmt": "{v} คำ",
+      "vocabularyTitle": "คลังคำศัพท์ใหญ่ที่สุด"
+    },
+    "overview": {
+      "adjectivesBlurb": "คำคุณศัพท์ที่น่าสนใจที่ถูกพูดบ่อยที่สุด",
+      "adjectivesTitle": "คำคุณศัพท์แห่งวงการภาพยนตร์",
+      "fallingBlurb": "ถูกพูดน้อยลงมากในปัจจุบันเทียบกับยุคแรกของภาพยนตร์",
+      "intro": "พาดหัวข่าวของคลังข้อมูล - ห้าอันดับแรกจากทุกกระดาน คลิกที่การ์ดเพื่อดูรายการเต็ม ตัวกรอง และอื่นๆ",
+      "loadingSpinner": "กำลังโหลดพาดหัวข่าว…",
+      "risingBlurb": "ถูกพูดมากขึ้นในปัจจุบันเทียบกับยุคแรกของภาพยนตร์",
+      "ubiquityBlurb": "คำที่แทบไม่มีบทหนังไหนข้ามไป",
+      "wondersBlurb": "คำที่เป็นของหนังเรื่องเดียว"
+    },
+    "ratio": {
+      "down": "ลดลง {label} เท่า",
+      "up": "เพิ่มขึ้น {label} เท่า"
+    },
+    "shifts": {
+      "fallingTitle": "ค่อยๆ เลือนหายไป",
+      "intro": "บทสนทนาเปลี่ยนไปอย่างไร: คำที่ถูกพูดมากขึ้น (หรือน้อยลง) ต่อล้านคำในปัจจุบัน (ยุค 2010s–20s) เทียบกับยุคแรกของภาพยนตร์ (ยุค 1930s–40s) เส้นกราฟแสดงแต่ละทศวรรษ คลิกที่คำเพื่อดูกราฟเต็ม",
+      "loadingSpinner": "กำลังโหลดความเปลี่ยนแปลง…",
+      "risingTitle": "กำลังมาแรง"
+    },
+    "taster": {
+      "seeAllLink": "ดูทั้งหมด →"
+    },
+    "ubiquity": {
+      "intro": "นอกเหนือจากคำเชื่อมทั่วไป คำเหล่านี้ปรากฏในหนังแทบทุกเรื่องจากทั้งหมด {nFilms} เรื่อง",
+      "loadingSpinner": "กำลังโหลด…",
+      "shareOfFilms": "{share}% ของหนังทั้งหมด"
+    },
+    "wonders": {
+      "intro": "คำที่หนังเรื่องหนึ่งพูดมากกว่าหนังเรื่องอื่นๆ ในวงการรวมกัน - ชื่อตัวละคร คำที่แต่งขึ้น ความลุ่มหลง",
+      "item": "พูด {count} ครั้งใน {movieLink} ({year}) - {share}% ของทุกครั้งที่วงการภาพยนตร์พูดคำนี้",
+      "loadingSpinner": "กำลังโหลดคำฮิตเฉพาะเรื่อง…"
+    }
+  },
+  "chart": {
+    "axisAriaLabel": "{yLabel} ตามปี",
+    "chartingSpinner": "กำลังสร้างกราฟความเปลี่ยนแปลงที่น่าสนใจ…",
+    "loadFailedMessage": "ไม่สามารถสร้างกราฟนี้ได้ - ลองอันถัดไป ▶",
+    "moreTrendsLink": "เทรนด์เพิ่มเติม →",
+    "trendNoun": "เทรนด์",
+    "unpinAriaLabel": "เลิกปักหมุด {year}",
+    "usesPerMillionCaption": "การใช้ต่อบทสนทนาหนึ่งล้านคำ",
+    "yAxisLabel": "การใช้ต่อหนึ่งล้านคำ"
+  },
+  "decadesView": {
+    "decadeLabel": "ยุค {decade}s",
+    "eyebrow": "เลือกดูตาม",
+    "filmsCount": "หนัง {count} เรื่อง",
+    "loadError": "ไม่สามารถโหลดทศวรรษได้",
+    "loadingSpinner": "กำลังโหลดทศวรรษ…",
+    "subtitle": "แต่ละยุคของภาพยนตร์พูดคุยกันอย่างไร - {count} กรณีศึกษา",
+    "title": "ทศวรรษ",
+    "notEnoughFilms": "มีภาพยนตร์ภาษา {langs} ไม่เพียงพอสำหรับสิ่งนี้ - โปรดเพิ่มภาษาหรือสลับไปที่ภาพยนตร์ทั้งหมด"
+  },
+  "entity": {
+    "compareButton": "เปรียบเทียบ {label} กับ…",
+    "decadeEyebrow": "ประมาณปี {decade}",
+    "decadeLabel": "ยุค {decade}S",
+    "decadeSubject": "ยุค {decade}s",
+    "genreEyebrow": "ศึกษาประเภทหนัง",
+    "kindDecade": "ทศวรรษ",
+    "kindGenre": "ประเภทหนัง",
+    "loadingSpinner": "กำลังโหลด…",
+    "mostSpokenBody": "การนับแบบปกติ ไม่รวมคำหยุด (stopwords)",
+    "mostSpokenHeading": "คำที่พูดบ่อยที่สุด",
+    "notFound": "ไม่มี {kind} “{id}” ในชุดข้อมูล",
+    "notableScriptsHeading": "บทหนังที่น่าสนใจ",
+    "signatureWordsBody": "สิ่งที่ {subject} พูดถึงมากกว่าภาพยนตร์โดยรวมอย่างเห็นได้ชัด",
+    "signatureWordsHeading": "คำเอกลักษณ์",
+    "statsLine": "หนัง {films} เรื่อง · บทสนทนา {words} คำ",
+    "notEnoughFilms": "มีภาพยนตร์ภาษา {langs} ไม่เพียงพอสำหรับ {subject} - โปรดเพิ่มภาษาหรือสลับไปที่ภาพยนตร์ทั้งหมด"
+  },
+  "eras": {
+    "1910": "ม้วนฟิล์มแรก",
+    "1920": "ยุคหนังมีเสียง",
+    "1930": "ยุคทอง",
+    "1940": "สงครามและฟิล์มนัวร์",
+    "1950": "ยุคปรมาณู",
+    "1960": "คลื่นลูกใหม่",
+    "1970": "ฮอลลีวูดใหม่",
+    "1980": "ยุคบล็อกบัสเตอร์",
+    "1990": "ยุคอินดี้เฟื่องฟู",
+    "2000": "ยุคโรงมัลติเพล็กซ์",
+    "2010": "รุ่งอรุณแห่งสตรีมมิ่ง",
+    "2020": "ภาพยนตร์ยุคปัจจุบัน"
+  },
+  "errors": {
+    "body": "ขออภัยด้วย - การ {reload} มักจะแก้ปัญหานี้ได้ ยังพังอยู่ไหม? อีเมล {email}",
+    "eyebrow": "ตัดฉับไปที่:",
+    "reload": "โหลดใหม่",
+    "title": "มีบางอย่างพัง"
+  },
+  "footer": {
+    "creditsBody": "โอเพนซอร์ส: {github} และไม่แสวงหาผลกำไร เผยแพร่เฉพาะการนับคำที่ได้มา - ไม่มีการแจกจ่ายข้อความซับไตเติล",
+    "creditsHeading": "เครดิต",
+    "dataBody": "สามารถดาวน์โหลดชุดข้อมูลเต็มได้ - ดู {dataGuide} สำหรับลิงก์และข้อมูล ({license}) สงสัยเกี่ยวกับระเบียบวิธี อคติ หรือลิขสิทธิ์ใช่ไหม? อ่าน {faq}",
+    "dataGuideLink": "คู่มือข้อมูล",
+    "dataHeading": "รับข้อมูล",
+    "dataSourcesBody": "ข้อมูล: การนับคำจาก {opus} (Lison & Tiedemann, 2016) ผ่าน {openSubtitles}; ข้อมูลอภิพันธุ์ของภาพยนตร์จาก {imdbData} และ {tmdb} ข้อมูลได้รับความอนุเคราะห์จาก IMDb ({imdbUrl}) ใช้โดยได้รับอนุญาต",
+    "faqLink": "คำถามที่พบบ่อย",
+    "githubLink": "github.com/beveradb/moviewords",
+    "githubProfileLink": "GitHub",
+    "ideaBody": "ต้องมีการวิเคราะห์ที่น่าสนใจที่เรายังนึกไม่ถึงแน่ๆ! หากคุณต้องการแบ่งปันไอเดียหรือสร้างอะไรเจ๋งๆ จากข้อมูลนี้ {email}",
+    "ideaEmailLink": "อีเมล andrew@beveridge.uk",
+    "ideaHeading": "มีไอเดียไหม?",
+    "imdbDataLink": "IMDb",
+    "imdbUrlLink": "https://www.imdb.com",
+    "instagramLink": "Instagram",
+    "licenseLink": "CC BY-NC-SA 4.0",
+    "lindsayLink": "Lindsay Wright Graphic Design",
+    "linkedinLink": "LinkedIn",
+    "madeByBody": "สร้างโดย Andrew Beveridge - {github} · {linkedin} · {instagram} - พร้อมไอเดียเริ่มต้นจากภรรยาที่น่ารักของผม {lindsay} - ลองดูผลงานของเธอสิ!",
+    "openSubtitlesLink": "OpenSubtitles.org",
+    "opusLink": "OPUS OpenSubtitles corpus",
+    "takedownEmailLink": "อีเมลแจ้งลบเนื้อหา",
+    "tmdbDisclaimerBody": "ผลิตภัณฑ์นี้ใช้ TMDB API แต่ไม่ได้รับการรับรองหรือรับรองโดย TMDB โปสเตอร์ผ่าน TMDB - ลิขสิทธิ์เป็นของสตูดิโอที่เกี่ยวข้อง แสดงเพื่อระบุภาพยนตร์ที่พูดถึง หากคุณเป็นเจ้าของสิทธิ์? {takedown} และเราจะนำลงทันที",
+    "tmdbLink": "TMDB"
+  },
+  "genres": {
+    "Action": "แอ็กชัน",
+    "Adult": "ผู้ใหญ่",
+    "Adventure": "ผจญภัย",
+    "Animation": "แอนิเมชัน",
+    "Biography": "ชีวประวัติ",
+    "Comedy": "ตลก",
+    "Crime": "อาชญากรรม",
+    "Documentary": "สารคดี",
+    "Drama": "ดราม่า",
+    "Family": "ครอบครัว",
+    "Fantasy": "แฟนตาซี",
+    "Film-Noir": "ฟิล์มนัวร์",
+    "History": "ประวัติศาสตร์",
+    "Horror": "สยองขวัญ",
+    "Music": "ดนตรี",
+    "Musical": "มิวสิคัล",
+    "Mystery": "ลึกลับ",
+    "News": "ข่าว",
+    "Reality-TV": "เรียลลิตี้ทีวี",
+    "Romance": "โรแมนติก",
+    "Sci-Fi": "ไซไฟ",
+    "Sport": "กีฬา",
+    "Thriller": "ระทึกขวัญ",
+    "War": "สงคราม",
+    "Western": "คาวบอย"
+  },
+  "genresView": {
+    "eyebrow": "เลือกดูตาม",
+    "filmsCount": "หนัง {count} เรื่อง",
+    "loadError": "ไม่สามารถโหลดประเภทหนังได้",
+    "loadingSpinner": "กำลังโหลดประเภทหนัง…",
+    "subtitle": "แต่ละประเภทหนังพูดถึงอะไร - {count} กรณีศึกษา",
+    "title": "ประเภทหนัง",
+    "notEnoughFilms": "มีภาพยนตร์ภาษา {langs} ไม่เพียงพอสำหรับสิ่งนี้ - โปรดเพิ่มภาษาหรือสลับไปที่ภาพยนตร์ทั้งหมด"
+  },
+  "home": {
+    "aboutHeading": "เกี่ยวกับชุดข้อมูลนี้",
+    "decadesBody": "จากยุคหนังมีเสียงจนถึงยุค 2020s - แต่ละยุคของภาพยนตร์พูดคุยกันอย่างไร",
+    "decadesHeading": "ท่องไปในทศวรรษ",
+    "fadeIn": "เฟดอิน:",
+    "faqLink": "คำถามที่พบบ่อย",
+    "heroBody": "เรานับทุกคำที่พูดในหนัง {count} เรื่อง - จำนวนกว่า {millions} ล้านคำ ดู {trends} พบกับ {sweariest} และตัดสิน {versus} แบบคำต่อคำ",
+    "heroSweariest": "บทหนังที่หยาบคายที่สุดเท่าที่เคยสร้างมา",
+    "heroTitle": "หนังทุกเรื่องมี {vocabulary} เป็นของตัวเอง",
+    "heroTrends": "คำว่า 'awesome' แซงหน้า 'swell'",
+    "heroVersus": "Alien ปะทะ Aliens",
+    "heroVocabulary": "คลังคำศัพท์",
+    "movieMeta": "{year} · {words} คำ",
+    "opusLink": "OPUS OpenSubtitles corpus",
+    "shelfHeading": "หยิบบทหนังจากชั้นวาง",
+    "aboutBody": "ครอบคลุม {count} - ทุกคำของบทสนทนาซับไตเติลจาก {opus} สำหรับหนังที่มีคะแนนโหวตบน IMDb อย่างน้อย 300 โหวต นับแยกตามเรื่อง เผยแพร่เฉพาะการนับคำเท่านั้น ไม่มีการแจกจ่ายข้อความซับไตเติล ระเบียบวิธีและข้อควรระวัง: {faq}",
+    "aboutCountAllFilms": "ภาพยนตร์ - รวมคำบรรยายที่แปลแล้ว",
+    "aboutCountLangFilms": "ภาพยนตร์ภาษา {langs}",
+    "aboutCountTemplate": "{count} {kind}",
+    "aboutCountUnknown": "หลายหมื่น",
+    "aboutSubtitleHint": "การนับเหล่านี้มาจากคำบรรยายภาษาอังกฤษของภาพยนตร์ ไม่ใช่บทสนทนาต้นฉบับ"
+  },
+  "leaderboard": {
+    "tabs": {
+      "everywhere": "พูดโดยหนังทุกเรื่อง",
+      "films": "ที่สุดของหนัง",
+      "overview": "ภาพรวม",
+      "shifts": "คำดาวรุ่ง & ดาวร่วง",
+      "wonders": "คำฮิตเฉพาะเรื่อง",
+      "words": "คำยอดฮิต"
+    },
+    "words": {
+      "allGenresOption": "ทุกประเภท",
+      "filmsCount": " · หนัง {count} เรื่อง",
+      "filteringSpinner": "กำลังกรองคลังข้อมูล… (การกรองครั้งแรกจะโหลดเอนจินวิเคราะห์)",
+      "fromLabel": "จาก",
+      "genreLabel": "ประเภทหนัง",
+      "intro": "คำที่พูดบ่อยที่สุดจากหนังทุกเรื่องในคลังข้อมูล",
+      "noMatches": "ไม่มีคำที่ตรงกับตัวกรองเหล่านี้ - ลอง “คำทั้งหมด” หรือ “ประเภทใดก็ได้”",
+      "rankByLabel": "จัดอันดับตาม",
+      "sortMovieishButton": "ความเป็นหนังที่สุด",
+      "sortMovieishTitle": "ให้น้ำหนักแต่ละคำตามความถี่ที่หนังใช้มากกว่าภาษาอังกฤษในชีวิตประจำวัน",
+      "sortSpokenButton": "พูดบ่อยที่สุด",
+      "toLabel": "ถึง"
+    },
+    "languageNote": "อิงจากภาพยนตร์ภาษา {langs} จำนวน {count} เรื่อง โดยวัดจากคำบรรยายภาษาอังกฤษ"
+  },
+  "movie": {
+    "compareButton": "เปรียบเทียบกับหนังเรื่องอื่น",
+    "decadeLinkTitle": "เพิ่มเติมจากยุค {decade}s",
+    "distinctWordsLabel": "คำที่ไม่ซ้ำกัน",
+    "genreSeparator": " / ",
+    "imdbRatingLabel": "คะแนน IMDb",
+    "loadingScript": "กำลังโหลดบทหนัง…",
+    "mostSpokenHeading": "คำที่พูดบ่อยที่สุด",
+    "notFound": "ไม่มีหนังรหัส “{id}” ในชุดข้อมูล",
+    "signatureWordsBody": "คำที่หนังเรื่องนี้ใช้มากกว่าภาพยนตร์โดยรวมอย่างเห็นได้ชัด (log-odds เทียบกับคลังข้อมูลทั้งหมด)",
+    "signatureWordsHeading": "คำเอกลักษณ์",
+    "slugTitle": "{title} - {year}",
+    "vocabRichnessLabel": "ความหลากหลายของคำศัพท์",
+    "wordsSpokenLabel": "คำที่พูด",
+    "imdbPosterTitle": "{title} บน IMDb",
+    "runtimeLabel": "ความยาว",
+    "runtimeValue": "{minutes} นาที",
+    "wordsPerMinuteLabel": "คำต่อนาที"
+  },
+  "themeToggle": {
+    "day": "กลางวัน",
+    "dayShoot": "ถ่ายทำกลางวัน",
+    "night": "กลางคืน",
+    "nightShoot": "ถ่ายทำกลางคืน",
+    "switchToDay": "สลับเป็นโหมดกลางวัน",
+    "switchToNight": "สลับเป็นโหมดกลางคืน"
+  },
+  "trends": {
+    "addAnotherWordPlaceholder": "เพิ่มคำอื่น…",
+    "bigMovers": "คำที่เปลี่ยนแปลงมากตั้งแต่ยุค 1930s",
+    "chartItButton": "สร้างกราฟ",
+    "chartedWordsAriaLabel": "คำที่สร้างกราฟแล้ว",
+    "featuredPrefix": "แนะนำ: {title}",
+    "firstWordPlaceholder": "พิมพ์คำ เช่น love",
+    "fullList": "รายการเต็ม →",
+    "intro": "ความถี่ที่คำถูกพูดในหนังทุกเรื่องในคลังข้อมูล ต่อบทสนทนาหนึ่งล้านคำ แบ่งตามปีที่ฉาย",
+    "navNoun": "เทรนด์",
+    "navSuffix": "ความเปลี่ยนแปลงใหม่ทุกวัน",
+    "notEnoughData": "ข้อมูลไม่เพียงพอสำหรับ: {words} (ต้องการการใช้งาน ≥20 ครั้งในคลังข้อมูล ในปีที่มีหนังเพียงพอ)",
+    "perThousandWords": " · {rate}/1พันคำ",
+    "queryingCorpus": "กำลังค้นหาในคลังข้อมูล…",
+    "removeWordTitle": "ลบ “{word}”",
+    "topFilmByYearHeading": "หนังยอดฮิตสำหรับ “{word}” ตามปี",
+    "topFilmByYearLoading": "กำลังค้นหาหนังยอดฮิตสำหรับ “{word}” ในแต่ละปี…",
+    "topFilmsHeading": "หนังที่พูด “{word}” มากที่สุด",
+    "topFilmsLoading": "กำลังค้นหาหนังที่พูด “{word}” มากที่สุด…",
+    "trimmedYearsNote": "ซ่อน {years} ปี - มีหนังในคลังข้อมูลน้อยเกินกว่าจะได้อัตราที่เชื่อถือได้",
+    "tryClassic": "หรือลองคำคลาสสิก:",
+    "usesPerMillionWords": "การใช้ต่อบทสนทนาหนึ่งล้านคำ",
+    "wordDetailsTablist": "รายละเอียดคำ",
+    "wordInputAriaLabel": "คำที่จะสร้างกราฟ",
+    "yAxisLabel": "การใช้ต่อหนึ่งล้านคำ",
+    "languageNote": "อิงจากภาพยนตร์ภาษา {langs} จำนวน {count} เรื่อง โดยวัดจากคำบรรยายภาษาอังกฤษ",
+    "notEnoughFilms": "มีภาพยนตร์ภาษา {langs} ไม่เพียงพอสำหรับเทรนด์นี้ - โปรดเพิ่มภาษาหรือสลับไปที่ภาพยนตร์ทั้งหมด"
+  },
+  "languageFilter": {
+    "allFilms": "หนังทั้งหมด",
+    "apply": "นำไปใช้",
+    "ariaLabel": "กรองภาพยนตร์ตามภาษาต้นฉบับ",
+    "countLabel": "{count} ภาษา",
+    "hint": "กรองตามภาษาต้นฉบับของภาพยนตร์ การนับคำมาจากคำบรรยายภาษาอังกฤษ",
+    "menuAriaLabel": "ภาษาต้นฉบับ",
+    "searchAriaLabel": "ค้นหาภาษา",
+    "searchPlaceholder": "ค้นหาภาษา…"
+  },
+  "localeFilterHint": {
+    "dismissAriaLabel": "ปิดทิ้ง",
+    "filterButton": "กรอง",
+    "message": "กำลังดูในภาษา {lang} ใช่ไหม? กรองเฉพาะภาพยนตร์ภาษา {lang}"
+  },
+  "modal": {
+    "closeAriaLabel": "ปิด"
+  },
+  "filterExplainer": {
+    "badgeLabel": "แปลแล้ว · {lang}",
+    "badgeTitle": "ภาษาต้นฉบับ {lang} - การนับคำมาจากคำบรรยายแปลภาษาอังกฤษ ระบบนี้ทำงานอย่างไร?",
+    "dialogueNote": "บทสนทนาภาษาต้นฉบับไม่ได้อยู่ในชุดข้อมูล - มีเพียงคำแปลภาษาอังกฤษเท่านั้น",
+    "englishSubtitles": "คำบรรยายภาษาอังกฤษ",
+    "englishTranslation": "คำแปลภาษาอังกฤษ",
+    "filteringBody": "{whatFiltering} {originalLanguage} ของภาพยนตร์ - สถานที่ที่สร้างขึ้น จากข้อมูลเมตาของ TMDB - ไม่ใช่ภาษาของคำที่อยู่ด้านล่าง",
+    "linkText": "ระบบนี้ทำงานอย่างไร?",
+    "modalTitle": "ระบบนี้ทำงานอย่างไร",
+    "origin": "ต้นกำเนิด",
+    "originalLanguage": "ภาษาต้นฉบับ",
+    "soSpanishMeans": "ดังนั้น \"ภาษาสเปน\" จึงหมายถึง",
+    "spanishBody": "{soSpanishMeans} คำศัพท์ในคำบรรยายภาษาอังกฤษของภาพยนตร์ที่มี {origin} จากสเปน - เช่นคำว่า \"solidarity\" หรือ \"dictatorship\" ปรากฏในคำบรรยายภาษาอังกฤษของภาพยนตร์สเปนอย่างไร - ไม่ใช่คำในภาษาสเปน",
+    "whatFiltering": "สิ่งที่คุณกำลังกรอง:",
+    "whatWords": "คำเหล่านี้คืออะไร:",
+    "wordsBody": "{whatWords} ทุกการนับบน Movie Words มาจาก {englishSubtitles} ของภาพยนตร์ เรามีเฉพาะแทร็ก OpenSubtitles ภาษาอังกฤษเท่านั้น ดังนั้นสำหรับภาพยนตร์ที่ไม่ใช่ภาษาอังกฤษ คำเหล่านี้จึงเป็นคำจาก {englishTranslation} ไม่ใช่บทสนทนาต้นฉบับ นั่นเป็นเหตุผลว่าทำไมบางครั้งถึงมีคำที่ไม่ได้แปลหลุดรอดมาบ้าง - \"panna\", \"cotta\", \"samurai\""
+  }
+}
