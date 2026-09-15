@@ -91,7 +91,10 @@ function LanguageFilter() {
     !query || languageName(o.code).toLowerCase().includes(query.toLowerCase()) || o.code.includes(query.toLowerCase()))
   const toggle = (code: string) => setSel((s) => s.includes(code) ? s.filter((c) => c !== code) : [...s, code])
   const apply = () => switchLanguages(sel)
-  const dirty = sel.join(',') !== active.join(',')
+  // compare as sets, not order-sensitive lists - unchecking then rechecking a
+  // language (or any other reordering) shouldn't read as a change and shuffle
+  // ?langs= on Apply when membership is actually unchanged
+  const dirty = [...sel].sort().join(',') !== [...active].sort().join(',')
 
   return (
     <div ref={ref} className="relative">

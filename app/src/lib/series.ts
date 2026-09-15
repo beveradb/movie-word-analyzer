@@ -28,10 +28,30 @@ export async function yearTotals(): Promise<Map<number, number>> {
   return yearTotalsCache
 }
 
+/** Language-scoped word total per release year: word_year.parquet is a single
+ * global pre-aggregation with no per-language breakdown, so a language-scoped
+ * rate needs its own denominator - sum every film's word count via
+ * `words_by_movie` (unfiltered per-word rows, unlike the floored word_year
+ * table) joined to `movies` for the language filter. Not cached across
+ * language selections; callers already scope each call to the active filter
+ * and this is a rare (engine-fallback) path. */
+async function yearTotalsForLangs(filter: string): Promise<Map<number, number>> {
+  const rows = await q<{ year: number; total: number }>(
+    `SELECT m.year AS year, SUM(w.count)::DOUBLE AS total
+     FROM ${pq('words_by_movie/data.parquet')} w
+     JOIN ${pq('movies.parquet')} m USING (imdb_id)
+     WHERE 1=1${filter}
+     GROUP BY m.year`,
+  )
+  return new Map(rows.map((r) => [r.year, r.total]))
+}
+
 /** Load per-year usage rates for the given words and shape them into chart
  * series. 0 languages -> word_year.parquet only (small, no top-movie join),
  * same as today. 1+ -> language-scoped: join movies for the language filter,
- * so this pays for words_by_word instead of the pre-aggregated table. */
+ * so this pays for words_by_word instead of the pre-aggregated table - and the
+ * denominator is language-scoped too (yearTotalsForLangs), otherwise the rate
+ * would divide a filtered numerator by the unfiltered whole-corpus total. */
 export async function loadWordSeries(words: string[], colors: string[]): Promise<WordSeries> {
   const inList = words.map(lit).join(',')
   const filter = langFilterSql('m')
@@ -43,7 +63,10 @@ export async function loadWordSeries(words: string[], colors: string[]): Promise
        GROUP BY w.word, m.year ORDER BY w.word, m.year`
     : `SELECT word, year, count::DOUBLE AS count FROM ${pq('word_year.parquet')}
        WHERE word IN (${inList}) ORDER BY word, year`
-  const [rows, totals] = await Promise.all([q<YearRow>(sql), yearTotals()])
+  const [rows, totals] = await Promise.all([
+    q<YearRow>(sql),
+    filter ? yearTotalsForLangs(filter) : yearTotals(),
+  ])
   return toSeries(rows, totals, words, colors)
 }
 

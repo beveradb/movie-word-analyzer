@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import {
   mergeWordRows, mergeYearTotals, mergeTrendLines, mergeSuperlatives, mergeSignatures,
+  mergeShifts, mergeWonders, mergeUbiquity,
 } from './merge'
 
 describe('mergeWordRows', () => {
@@ -34,6 +35,78 @@ describe('mergeSuperlatives', () => {
     const b = { chattiest: [{ id: '2', title: 'B', year: 2001, value: 12 }], vocabulary: [], sweariest: [], repetitive: [] }
     const out = mergeSuperlatives([a, b])
     expect(out.chattiest.map((f) => f.id)).toEqual(['2', '1'])
+  })
+})
+
+describe('mergeShifts', () => {
+  it('dedups risers/fallers by word, keeping the larger |score| entry', () => {
+    const es = {
+      decades: [1990, 2000],
+      risers: [
+        { word: 'amor', score: 5, rates: [[1990, 1], [2000, 2]] as [number, number][] },
+        { word: 'gato', score: 3, rates: [] as [number, number][] },
+      ],
+      fallers: [
+        { word: 'triste', score: -6, rates: [] as [number, number][] },
+      ],
+    }
+    const fr = {
+      decades: [2000, 2010],
+      risers: [
+        { word: 'amor', score: 8, rates: [[1990, 2], [2000, 3]] as [number, number][] },
+        { word: 'chat', score: 4, rates: [] as [number, number][] },
+      ],
+      fallers: [
+        { word: 'triste', score: -2, rates: [] as [number, number][] },
+      ],
+    }
+    const out = mergeShifts([es, fr])
+    expect(out.decades).toEqual([1990, 2000, 2010])
+    // 'amor' appears once, keeping fr's entry (larger |score|), not duplicated
+    expect(out.risers.filter((r) => r.word === 'amor')).toHaveLength(1)
+    expect(out.risers.find((r) => r.word === 'amor')?.score).toBe(8)
+    expect(out.risers.map((r) => r.word)).toEqual(['amor', 'chat', 'gato'])
+    // 'triste' appears once, keeping es's entry (larger |score|)
+    expect(out.fallers).toHaveLength(1)
+    expect(out.fallers[0].score).toBe(-6)
+  })
+})
+
+describe('mergeWonders', () => {
+  it('drops words contributed by more than one language slice', () => {
+    const es = [
+      { word: 'amor', id: 'tt1', title: 'A', year: 2000, count: 5, total: 100, share: 0.05 },
+      { word: 'unico', id: 'tt2', title: 'B', year: 2001, count: 2, total: 50, share: 0.04 },
+    ]
+    const fr = [
+      { word: 'amor', id: 'tt3', title: 'C', year: 1999, count: 9, total: 90, share: 0.1 },
+      { word: 'chat', id: 'tt4', title: 'D', year: 2002, count: 1, total: 20, share: 0.05 },
+    ]
+    const out = mergeWonders([es, fr])
+    // 'amor' is a one-film wonder in each slice individually, but it's really
+    // a 2-film word once merged - it must not appear at all
+    expect(out.find((r) => r.word === 'amor')).toBeUndefined()
+    expect(out.map((r) => r.word)).toEqual(['chat', 'unico'])
+  })
+})
+
+describe('mergeUbiquity', () => {
+  it('derives merged share from summed films / summed nFilms, not max(share)', () => {
+    // es: 10 films out of 100; fr: 90 films out of 100 -> merged: 100/200 = 0.5
+    const es = [{ word: 'amor', films: 10, share: 0.1 }]
+    const fr = [{ word: 'amor', films: 90, share: 0.9 }]
+    const out = mergeUbiquity([es, fr])
+    const amor = out.find((r) => r.word === 'amor')
+    expect(amor?.films).toBe(100)
+    expect(amor?.share).toBeCloseTo(0.5)
+  })
+
+  it('leaves a single-language word untouched', () => {
+    const es = [{ word: 'unico', films: 10, share: 0.2 }]
+    const out = mergeUbiquity([es, []])
+    const unico = out.find((r) => r.word === 'unico')
+    expect(unico?.films).toBe(10)
+    expect(unico?.share).toBeCloseTo(0.2)
   })
 })
 

@@ -55,27 +55,54 @@ export function mergeSuperlatives(parts: Superlatives[]): Superlatives {
 }
 
 export function mergeWonders(parts: WonderRow[][]): WonderRow[] {
-  // one-film wonders are per-film facts; union then re-rank by share desc
-  return parts.flat().sort((a, b) => b.share - a.share).slice(0, 50)
+  // one-film wonders are per-film facts: a word that shows up in more than
+  // one language's slice was really seen in >1 film, so it's no longer a
+  // one-film wonder - drop it rather than let the union re-surface it as one.
+  const byWord = new Map<string, WonderRow[]>()
+  for (const rows of parts) for (const r of rows) {
+    const cur = byWord.get(r.word)
+    if (cur) cur.push(r)
+    else byWord.set(r.word, [r])
+  }
+  return [...byWord.values()]
+    .filter((rows) => rows.length === 1)
+    .map((rows) => rows[0])
+    .sort((a, b) => b.share - a.share)
+    .slice(0, 50)
 }
 
 export function mergeUbiquity(parts: UbiquityRow[][]): UbiquityRow[] {
-  // ubiquity = films-appeared / total; sum films, keep max share (head-accurate)
-  const by = new Map<string, UbiquityRow>()
+  // ubiquity = films-appeared / total-films-in-corpus; each part's share is
+  // films/nFilms for that language, so recover nFilms, sum films and nFilms
+  // across the contributing parts, and derive the merged share from those
+  // sums rather than taking a (meaningless once merged) max of the shares.
+  const by = new Map<string, { word: string; films: number; nFilms: number }>()
   for (const rows of parts) for (const r of rows) {
+    const nFilms = r.share > 0 ? Math.round(r.films / r.share) : 0
     const cur = by.get(r.word)
-    if (!cur) by.set(r.word, { ...r })
-    else { cur.films += r.films; cur.share = Math.max(cur.share, r.share) }
+    if (!cur) by.set(r.word, { word: r.word, films: r.films, nFilms })
+    else { cur.films += r.films; cur.nFilms += nFilms }
   }
-  return [...by.values()].sort((a, b) => b.films - a.films).slice(0, 200)
+  return [...by.values()]
+    .map(({ word, films, nFilms }) => ({ word, films, share: nFilms > 0 ? films / nFilms : 0 }))
+    .sort((a, b) => b.films - a.films)
+    .slice(0, 200)
 }
 
 export function mergeShifts(parts: Shifts[]): Shifts {
   // rate-delta board: single-language is exact; multi-language unions the
-  // risers/fallers and re-ranks by the pre-computed score (head-accurate).
+  // risers/fallers, dedupes by word (a word can be a riser/faller in more
+  // than one language slice - keep whichever entry has the larger |score|),
+  // and re-ranks by the pre-computed score (head-accurate).
   const decades = [...new Set(parts.flatMap((p) => p.decades))].sort((a, b) => a - b)
-  const top = (key: 'risers' | 'fallers') =>
-    parts.flatMap((p) => p[key]).sort((a, b) => Math.abs(b.score) - Math.abs(a.score)).slice(0, 30)
+  const top = (key: 'risers' | 'fallers') => {
+    const by = new Map<string, (typeof parts)[number][typeof key][number]>()
+    for (const p of parts) for (const r of p[key]) {
+      const cur = by.get(r.word)
+      if (!cur || Math.abs(r.score) > Math.abs(cur.score)) by.set(r.word, r)
+    }
+    return [...by.values()].sort((a, b) => Math.abs(b.score) - Math.abs(a.score)).slice(0, 30)
+  }
   return { decades, risers: top('risers'), fallers: top('fallers') }
 }
 
