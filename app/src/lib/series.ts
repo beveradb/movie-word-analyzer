@@ -1,5 +1,7 @@
-import { dataUrl, fetchJSON } from './data'
-import { lit, pq, q } from './duck'
+import { fetchJSON, globalUrl, langUrl } from './data'
+import { langFilterSql, lit, pq, q } from './duck'
+import { activeLanguages } from './languages'
+import { mergeTopFilms, mergeTrendLines, mergeYearTotals } from './merge'
 import {
   groupTopMovies,
   toSeries,
@@ -27,15 +29,21 @@ export async function yearTotals(): Promise<Map<number, number>> {
 }
 
 /** Load per-year usage rates for the given words and shape them into chart
- * series. Reads only word_year.parquet (small) - no top-movie join. */
+ * series. 0 languages -> word_year.parquet only (small, no top-movie join),
+ * same as today. 1+ -> language-scoped: join movies for the language filter,
+ * so this pays for words_by_word instead of the pre-aggregated table. */
 export async function loadWordSeries(words: string[], colors: string[]): Promise<WordSeries> {
-  const [rows, totals] = await Promise.all([
-    q<YearRow>(
-      `SELECT word, year, count::DOUBLE AS count FROM ${pq('word_year.parquet')}
-       WHERE word IN (${words.map(lit).join(',')}) ORDER BY word, year`,
-    ),
-    yearTotals(),
-  ])
+  const inList = words.map(lit).join(',')
+  const filter = langFilterSql('m')
+  const sql = filter
+    ? `SELECT w.word, m.year, SUM(w.count)::DOUBLE AS count
+       FROM ${pq('words_by_word/data.parquet')} w
+       JOIN ${pq('movies.parquet')} m USING (imdb_id)
+       WHERE w.word IN (${inList})${filter}
+       GROUP BY w.word, m.year ORDER BY w.word, m.year`
+    : `SELECT word, year, count::DOUBLE AS count FROM ${pq('word_year.parquet')}
+       WHERE word IN (${inList}) ORDER BY word, year`
+  const [rows, totals] = await Promise.all([q<YearRow>(sql), yearTotals()])
   return toSeries(rows, totals, words, colors)
 }
 
@@ -44,12 +52,40 @@ interface FeaturedSeriesFile {
   words: Record<string, [number, number][]>
 }
 
+/** Fetch one language's featured-series.json; throws on any non-OK status
+ * (no 404-as-empty here - unlike per-word trend files, this aggregate is
+ * expected to exist for every language in the manifest). */
+async function fetchFeaturedFile(code: string): Promise<FeaturedSeriesFile> {
+  const res = await fetch(langUrl(code, 'json/featured-series.json'))
+  if (!res.ok) throw new Error(`${res.status} fetching featured-series [${code}]`)
+  return res.json() as Promise<FeaturedSeriesFile>
+}
+
+/** Merge per-language featured-series files: totals summed per year (exact),
+ * each word's [year,count] line summed via mergeTrendLines. A word absent
+ * from one language's file just contributes nothing for that language. */
+function mergeFeaturedFiles(parts: FeaturedSeriesFile[]): FeaturedSeriesFile {
+  const totalsMaps = parts.map((p) => new Map(Object.entries(p.totals).map(([y, t]) => [Number(y), t])))
+  const totals = Object.fromEntries(
+    [...mergeYearTotals(totalsMaps)].map(([y, t]) => [String(y), t]),
+  )
+  const words: Record<string, [number, number][]> = {}
+  for (const w of new Set(parts.flatMap((p) => Object.keys(p.words)))) {
+    words[w] = mergeTrendLines(parts.map((p) => p.words[w] ?? []))
+  }
+  return { totals, words }
+}
+
 /** Featured-chart data from the pre-baked JSON (a few KB), so the homepage
  * never pays for the SQL engine. Any word missing from the bake (stale file,
- * fetch failure) falls back to the live DuckDB path. */
+ * fetch failure) falls back to the live DuckDB path. 0 languages -> the global
+ * file as today; 1+ -> fetch+merge the selected languages' files. */
 export async function loadFeaturedSeries(words: string[], colors: string[]): Promise<WordSeries> {
   try {
-    const baked = await fetchJSON<FeaturedSeriesFile>('json/featured-series.json')
+    const langs = activeLanguages()
+    const baked = langs.length
+      ? mergeFeaturedFiles(await Promise.all(langs.map(fetchFeaturedFile)))
+      : await fetchJSON<FeaturedSeriesFile>('json/featured-series.json')
     if (words.every((w) => baked.words[w])) {
       const totals = new Map(Object.entries(baked.totals).map(([y, t]) => [Number(y), t]))
       const rows: YearRow[] = words.flatMap((w) =>
@@ -78,29 +114,84 @@ export interface TrendsData {
 
 let yearTotalsBakeCache: Map<number, number> | null = null
 
+const toYearMap = (obj: Record<string, number>) =>
+  new Map(Object.entries(obj).map(([y, t]) => [Number(y), t]))
+
 /** Whole-corpus year totals from the pre-baked JSON (a couple of KB), cached
- * for the session. This is the rate denominator shared by every word. */
+ * for the session. This is the rate denominator shared by every word. 0
+ * languages -> the global file as today; 1+ -> fetch+sum the selected
+ * languages' files. */
 async function bakedYearTotals(): Promise<Map<number, number>> {
   if (yearTotalsBakeCache) return yearTotalsBakeCache
-  const obj = await fetchJSON<Record<string, number>>('json/year-totals.json')
-  yearTotalsBakeCache = new Map(Object.entries(obj).map(([y, t]) => [Number(y), t]))
+  const langs = activeLanguages()
+  if (!langs.length) {
+    const obj = await fetchJSON<Record<string, number>>('json/year-totals.json')
+    yearTotalsBakeCache = toYearMap(obj)
+    return yearTotalsBakeCache
+  }
+  const maps = await Promise.all(
+    langs.map(async (code) => {
+      const res = await fetch(langUrl(code, 'json/year-totals.json'))
+      if (!res.ok) throw new Error(`${res.status} fetching year-totals [${code}]`)
+      return toYearMap(await res.json())
+    }),
+  )
+  yearTotalsBakeCache = mergeYearTotals(maps)
   return yearTotalsBakeCache
 }
 
-/** A single word's baked trend file, or null on 404 (the word isn't in the
- * baked corpus, i.e. below the eligibility threshold = "not enough data"). Any
- * other failure throws so `loadTrends` can fall back to the live engine. */
+/** Merge per-language TrendFiles: line summed exactly, top/byYear unioned and
+ * re-ranked. */
+export function mergeTrendFiles(parts: TrendFile[]): TrendFile {
+  const top = mergeTopFilms(
+    [parts.flatMap((p) => p.top).map((t) => ({ t, count: t[3] }))], 15,
+  ).map((x) => x.t)
+  const byYear = new Map<number, TrendFile['byYear'][number]>()
+  for (const p of parts) for (const r of p.byYear) {
+    const cur = byYear.get(r[0])
+    if (!cur || r[3] > cur[3]) byYear.set(r[0], r)
+  }
+  return {
+    line: mergeTrendLines(parts.map((p) => p.line)),
+    top,
+    byYear: [...byYear.values()].sort((a, b) => a[0] - b[0]),
+  }
+}
+
+/** A single word's baked trend file, or null when no selected language has
+ * data for it (the word isn't in the baked corpus, i.e. below the eligibility
+ * threshold = "not enough data"). 0 languages -> the global file, same 404
+ * contract as before. 1+ -> fetch each selected language's file; a 404 there
+ * contributes nothing, and only if ALL of them 404 do we return null -
+ * otherwise the non-404 parts are merged. Any other failure throws so
+ * `loadTrends` can fall back to the live engine. */
 async function fetchTrendFile(word: string): Promise<TrendFile | null> {
-  const res = await fetch(dataUrl(`json/trend/${wordKey(word)}.json`))
-  if (res.status === 404) return null
-  if (!res.ok) throw new Error(`${res.status} fetching trend/${word}`)
-  return res.json() as Promise<TrendFile>
+  const key = wordKey(word)
+  const langs = activeLanguages()
+  if (!langs.length) {
+    const res = await fetch(globalUrl(`json/trend/${key}.json`))
+    if (res.status === 404) return null
+    if (!res.ok) throw new Error(`${res.status} fetching trend/${word}`)
+    return res.json() as Promise<TrendFile>
+  }
+  const parts = await Promise.all(
+    langs.map(async (code) => {
+      const res = await fetch(langUrl(code, `json/trend/${key}.json`))
+      if (res.status === 404) return null
+      if (!res.ok) throw new Error(`${res.status} fetching trend/${word} [${code}]`)
+      return res.json() as Promise<TrendFile>
+    }),
+  )
+  const present = parts.filter((p): p is TrendFile => p !== null)
+  if (!present.length) return null
+  return mergeTrendFiles(present)
 }
 
 /** Trends data from the pre-baked per-word JSON - no SQL engine, so mobile
- * never pays the ~35 MB DuckDB-WASM cold-boot. A 404 for a word is treated as
- * "not enough data" (it drops through `toSeries`'s missing list); any other
- * failure degrades to the live engine, same contract as loadFeaturedSeries. */
+ * never pays the ~35 MB DuckDB-WASM cold-boot. A word with no data for any
+ * selected language is treated as "not enough data" (it drops through
+ * `toSeries`'s missing list); any other failure degrades to the live engine,
+ * same contract as loadFeaturedSeries. */
 export async function loadTrends(words: string[], colors: string[]): Promise<TrendsData> {
   try {
     const [totals, files] = await Promise.all([
@@ -127,16 +218,19 @@ export async function loadTrends(words: string[], colors: string[]): Promise<Tre
 }
 
 /** Live-engine fallback: the pre-bake queries this replaced, kept working so a
- * stale/missing bake still renders (at the cost of the engine download). */
+ * stale/missing bake still renders (at the cost of the engine download). Also
+ * language-scoped via `langFilterSql`, so a bake miss while a language filter
+ * is active doesn't silently show the whole corpus. */
 async function loadTrendsEngine(words: string[], colors: string[]): Promise<TrendsData> {
   const inList = words.map(lit).join(',')
+  const filter = langFilterSql('m')
   const [wordSeries, filmRows, movieRows] = await Promise.all([
     loadWordSeries(words, colors),
     q<TopFilm & { word: string }>(
       `SELECT w.word, w.imdb_id, m.title, m.year, w.count::DOUBLE AS count, m.total_words::DOUBLE AS total_words
        FROM ${pq('words_by_word/data.parquet')} w
        JOIN ${pq('movies.parquet')} m USING (imdb_id)
-       WHERE w.word IN (${inList})
+       WHERE w.word IN (${inList})${filter}
        QUALIFY ROW_NUMBER() OVER (PARTITION BY w.word ORDER BY w.count DESC, m.title) <= 15
        ORDER BY w.word, count DESC, m.title`,
     ),
@@ -146,7 +240,7 @@ async function loadTrendsEngine(words: string[], colors: string[]): Promise<Tren
                 ROW_NUMBER() OVER (PARTITION BY w.word, m.year ORDER BY w.count DESC, m.title) AS rn
          FROM ${pq('words_by_word/data.parquet')} w
          JOIN ${pq('movies.parquet')} m USING (imdb_id)
-         WHERE w.word IN (${inList})
+         WHERE w.word IN (${inList})${filter}
        ) WHERE rn = 1`,
     ),
   ])
