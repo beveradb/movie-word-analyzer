@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRoute } from './lib/route'
 import { trackPageview } from './lib/analytics'
 import { CORPORA, activeCorpus, switchCorpus } from './lib/corpus'
@@ -63,29 +63,85 @@ function ThemeToggle() {
   )
 }
 
-/** Corpus switch: English originals (default) vs all films with translated
- * subtitles. Switching persists + reloads - see lib/corpus.ts. */
-function CorpusToggle() {
+/** Corpus filter: a dropdown standing in for the coming multi-language filter.
+ * Today it offers the two baked corpora (all films / English originals) as a
+ * single-select menu; selecting one persists + reloads - see lib/corpus.ts.
+ * The globe hints that this is where you narrow the corpus by language. */
+function CorpusDropdown() {
   const corpus = activeCorpus()
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  // Close on outside click or Escape - only wired up while the menu is open.
+  useEffect(() => {
+    if (!open) return
+    const onDown = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+    }
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    document.addEventListener('mousedown', onDown)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('mousedown', onDown)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [open])
+
   return (
-    <div
-      role="group"
-      aria-label="Film corpus"
-      className="flex items-center border-2 border-ink font-script text-sm font-bold"
-    >
-      {Object.values(CORPORA).map((c) => (
-        <button
-          key={c.id}
-          onClick={() => corpus.id !== c.id && switchCorpus(c.id)}
-          aria-pressed={corpus.id === c.id}
-          title={c.description}
-          className={`px-2.5 py-1 uppercase ${
-            corpus.id === c.id ? 'bg-ink text-paper' : 'hover:bg-mark'
-          }`}
+    <div ref={ref} className="relative">
+      <button
+        onClick={() => setOpen((o) => !o)}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        aria-label="Filter film corpus"
+        title={corpus.description}
+        className="flex items-center gap-1.5 border-2 border-ink px-2.5 py-1 font-script text-sm font-bold uppercase hover:bg-mark"
+      >
+        {/* globe */}
+        <svg viewBox="0 0 24 24" className="size-3.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M3 12h18" />
+          <path d="M12 3c2.6 2.7 3.9 5.9 3.9 9s-1.3 6.3-3.9 9c-2.6-2.7-3.9-5.9-3.9-9S9.4 5.7 12 3Z" />
+        </svg>
+        {corpus.short}
+        {/* chevron */}
+        <svg viewBox="0 0 24 24" className={`size-3 transition-transform ${open ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="M6 9l6 6 6-6" />
+        </svg>
+      </button>
+      {open && (
+        <div
+          role="menu"
+          aria-label="Film corpus"
+          className="absolute right-0 z-20 mt-1 min-w-max border-2 border-ink bg-paper font-script text-sm font-bold"
         >
-          {c.short}
-        </button>
-      ))}
+          {Object.values(CORPORA).map((c) => {
+            const active = corpus.id === c.id
+            return (
+              <button
+                key={c.id}
+                role="menuitemradio"
+                aria-checked={active}
+                onClick={() => {
+                  setOpen(false)
+                  if (!active) switchCorpus(c.id)
+                }}
+                title={c.description}
+                className={`flex w-full items-center gap-2 px-2.5 py-1.5 text-left uppercase ${
+                  active ? 'bg-ink text-paper' : 'hover:bg-mark'
+                }`}
+              >
+                <span aria-hidden="true" className="w-3 text-center">
+                  {active ? '✓' : ''}
+                </span>
+                {c.label}
+              </button>
+            )
+          })}
+        </div>
+      )}
     </div>
   )
 }
@@ -142,7 +198,7 @@ export default function App() {
               </a>
             ))}
           </nav>
-          <CorpusToggle />
+          <CorpusDropdown />
           <ThemeToggle />
         </div>
       </header>
