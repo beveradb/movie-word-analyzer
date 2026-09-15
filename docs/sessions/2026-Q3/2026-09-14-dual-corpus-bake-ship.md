@@ -85,12 +85,19 @@ near-shot-for-shot remake by the same director; Burn!/Hercules/Malala at
   in the main checkout) - the schema contract lives in the plan Task 17 and
   `rebuild_web_data.py` itself.
 
-## Open threads
+## VM retired (added 2026-09-15, same session)
 
-- **VM moviewords-pipeline-tmp is still RUNNING and now deletable** (Andrew's
-  call): everything is published; a from-scratch rebuild is ~3h + ~$1.
-  Credits expire ~2026-09-19. `gcloud compute instances delete
-  moviewords-pipeline-tmp --project=nomadkaraoke --zone=us-central1-a`
+Andrew confirmed neither the i18n work nor flipping the default corpus
+needs the pipeline, so the VM was retired: `data/work/` caches (51,671
+counts + 51,686 tmdb + parquets) archived as a 554MB tar.zst + sha256 to
+the **private R2 bucket `moviewords-pipeline-cache`** (~$0.01/mo,
+rclone-check verified), then **moviewords-pipeline-tmp was DELETED** (PR
+#18). Recreate-and-restore runbook (fresh cached VM in ~30-45 min):
+**docs/PIPELINE-RESTORE.md**. The 34GB OPUS zip was deliberately not
+archived - it re-downloads from the public OPUS server and the count
+caches pin its zip entries.
+
+## Open threads
 - Stale `json/trend/*.json` for words that later drop below threshold are
   never cleaned (additive uploads) - harmless, note for a future manifest
   diff.
