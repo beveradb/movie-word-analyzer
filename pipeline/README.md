@@ -89,7 +89,19 @@ uv run python scripts/build_movies_index.py --corpus all
 # policy). Resumable; ~40 min for ~19k films at 8 workers.
 uv run python scripts/fetch_posters.py --workers 8
 
+# Fetch thorough per-film TMDB metadata (one call per film via
+# append_to_response=credits,keywords). Writes three tiers:
+#   data/work/tmdb_meta/<id>.json     raw response (future-proof, resumable)
+#   webdata/out/all/json/blurb/<id>.json  {overview, tagline, runtime} for the app
+#   data/out/tmdb_meta.parquet        flat analysis record (credits, keywords,
+#                                     collection, budget/revenue, tmdb votes)
+# No VM / no recompute: driven by the published movies-index.json id list.
+# Resumable (skips cached films); ~45 min for the full corpus at ~20 req/s.
+TMDB_API_KEY=... uv run python scripts/fetch_tmdb_meta.py --workers 8
+
 # Upload to R2 (requires env vars CLOUDFLARE_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY)
+# The blurb sidecars ride the long-TTL cache group; tmdb_meta.parquet is
+# archived under data/out/ and not auto-published (no app consumer yet).
 ./scripts/upload_r2.sh
 ```
 
@@ -187,6 +199,15 @@ Artifacts land in `data/out/`:
 - `json/movies-index.json` — slim all-movies search index (built by the
   post-derive snippet in the Full Run section)
 - `posters/<imdb_id>.jpg` — TMDB w342 posters (via `scripts/fetch_posters.py`)
+- `json/blurb/<imdb_id>.json` — `{overview, tagline, runtime}` sidecar the movie
+  page fetches lazily (via `scripts/fetch_tmdb_meta.py`; written under
+  `webdata/out/all/json/blurb/` for publish). Missing files degrade gracefully -
+  the page just omits the blurb.
+- `tmdb_meta.parquet` — one row per film of thorough TMDB metadata (overview,
+  tagline, runtime, release_date, collection, budget/revenue, TMDB
+  popularity/votes, genres, keywords, spoken languages, production
+  countries/companies, director/writers/composer/cinematographer/producers, top
+  cast). Archived for future analyses; not auto-published (no app consumer yet).
 - `report.md` — summary statistics and stage-by-stage drop reasons
 
 All outputs are uploaded to the R2 bucket `moviewords-data/` via `upload_r2.sh`.
