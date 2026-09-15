@@ -4,3 +4,11 @@
 # A bare imdb_id drops the film entirely; with a zip_name only that file is
 # banned and select_best picks the next candidate.
 tt0149624 OpenSubtitles/raw/en/2000/149624/267165.xml LOTR:FotR sub filed under All the Pretty Horses
+# 2026-09-14 scan_mislabels --adjudicate over the 51.6k-film corpus. Method:
+# in each cosine>=0.98 duplicate pair, the true owner's directory siblings
+# cluster at cos 0.94-0.99 with the shared content (same-film rip variants)
+# while the victim's own siblings sit at <=0.92 (its genuine, different subs).
+tt0119947 OpenSubtitles/raw/en/1997/119947/1954373643.xml Prince Valiant 1954 sub filed under the 1997 remake
+tt0338477 OpenSubtitles/raw/en/2003/338477/1955600854.xml Talaash 2012 sub filed under Talaash 2003
+tt0401233 OpenSubtitles/raw/en/2004/401233/1955035061.xml Appleseed Ex Machina 2007 sub filed under Appleseed 2004
+tt0044741 OpenSubtitles/raw/en/1952/44741/286736.xml To Live 1994 sub filed under Ikiru
