@@ -4,16 +4,18 @@
  * (older cached JSON) fall back to their first `classes` letter. */
 export type WordRow = [string, number, ...unknown[]]
 
+export type PosState = 'include' | 'exclude'
+
 export interface WordFilterState {
   /** 'interesting' hides everyday English (stopwords + Zipf ≥ 5). */
   common: 'interesting' | 'all'
-  /** Parts of speech to show; empty = every kind. */
-  pos: Set<string>
+  /** Per-kind include/exclude; absent key = neutral. Empty = every kind. */
+  pos: Map<string, PosState>
 }
 
 export const defaultFilter = (): WordFilterState => ({
   common: 'interesting',
-  pos: new Set(),
+  pos: new Map(),
 })
 
 export const COMMON_ZIPF = 5.0 // "the/get/know" tier; "sheriff" is 4.2
@@ -31,8 +33,24 @@ export function passesFilter(row: WordRow, f: WordFilterState, stopwords?: Set<s
     const zipf = typeof row[2] === 'number' ? row[2] : 0
     if (zipf >= COMMON_ZIPF || stopwords?.has(row[0])) return false
   }
-  if (f.pos.size > 0 && !f.pos.has(rowPos(row))) return false
+  if (f.pos.size > 0) {
+    const p = rowPos(row)
+    if (f.pos.get(p) === 'exclude') return false
+    let hasIncludes = false
+    for (const v of f.pos.values()) if (v === 'include') { hasIncludes = true; break }
+    if (hasIncludes && f.pos.get(p) !== 'include') return false
+  }
   return true
+}
+
+/** off -> include -> exclude -> off. Returns a new map (never mutates). */
+export function rotatePos(pos: Map<string, PosState>, c: string): Map<string, PosState> {
+  const next = new Map(pos)
+  const cur = next.get(c)
+  if (cur === undefined) next.set(c, 'include')
+  else if (cur === 'include') next.set(c, 'exclude')
+  else next.delete(c)
+  return next
 }
 
 const POS_CHIPS: [string, string][] = [
@@ -53,10 +71,14 @@ export function WordFilterBar({
   filter: WordFilterState
   onChange: (f: WordFilterState) => void
 }) {
+  // TODO(Task 6): wire up rotatePos for the full off->include->exclude->off
+  // tri-state UI. For now this preserves prior on/off toggle behavior (every
+  // selected kind is 'include'), so the file compiles against the new
+  // Map<string, PosState> shape without building the tri-state chips yet.
   const togglePos = (c: string) => {
-    const pos = new Set(filter.pos)
+    const pos = new Map(filter.pos)
     if (pos.has(c)) pos.delete(c)
-    else pos.add(c)
+    else pos.set(c, 'include')
     onChange({ ...filter, pos })
   }
   return (
@@ -82,7 +104,7 @@ export function WordFilterBar({
           |
         </span>
         <button
-          onClick={() => onChange({ ...filter, pos: new Set() })}
+          onClick={() => onChange({ ...filter, pos: new Map() })}
           aria-pressed={filter.pos.size === 0}
           className={chipCls(filter.pos.size === 0)}
         >

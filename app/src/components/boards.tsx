@@ -224,7 +224,7 @@ export function OverviewBoard() {
             .filter((r) =>
               passesFilter(
                 [r[0], r[1], r[3], r[4], r[5]] as WordRow,
-                { common: 'interesting', pos: new Set(['a']) },
+                { common: 'interesting', pos: new Map([['a', 'include']]) },
                 stop,
               ),
             )

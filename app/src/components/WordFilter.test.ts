@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { defaultFilter, passesFilter, rowPos, type WordRow } from './WordFilter'
+import { defaultFilter, passesFilter, rotatePos, rowPos, type WordRow } from './WordFilter'
 
 // [word, value, zipf, classes, pos]
 const know: WordRow = ['know', 100, 6.1, 'nv', 'v']
@@ -44,29 +44,45 @@ describe('passesFilter: commonness', () => {
   })
 })
 
-describe('passesFilter: word kinds', () => {
+const inc = (...cs: string[]) => new Map(cs.map((c) => [c, 'include' as const]))
+
+describe('passesFilter: word kinds (include/exclude)', () => {
   const rows = [know, sheriff, reckon, quickly, beautiful, wilson]
   it('empty selection shows every kind', () => {
     expect(rows.filter((r) => passesFilter(r, f({ common: 'all' })))).toHaveLength(rows.length)
   })
-  it('single kind shows only that kind', () => {
-    const nouns = rows.filter((r) => passesFilter(r, f({ common: 'all', pos: new Set(['n']) })))
-    expect(nouns).toEqual([sheriff])
+  it('single include shows only that kind', () => {
+    expect(rows.filter((r) => passesFilter(r, f({ common: 'all', pos: inc('n') })))).toEqual([sheriff])
   })
-  it('multi-select unions kinds', () => {
-    const nv = rows.filter((r) => passesFilter(r, f({ common: 'all', pos: new Set(['n', 'v']) })))
-    expect(nv).toEqual([know, sheriff, reckon])
+  it('multiple includes union kinds', () => {
+    expect(rows.filter((r) => passesFilter(r, f({ common: 'all', pos: inc('n', 'v') }))))
+      .toEqual([know, sheriff, reckon])
   })
-  it('names & other catches interjections/contractions/names', () => {
-    const x = rows.filter((r) => passesFilter(r, f({ common: 'all', pos: new Set(['x']) })))
-    expect(x).toEqual([wilson])
+  it('a single exclude hides only that kind, shows the rest', () => {
+    const pos = new Map([['n', 'exclude' as const]])
+    expect(rows.filter((r) => passesFilter(r, f({ common: 'all', pos }))))
+      .toEqual([know, reckon, quickly, beautiful, wilson])
   })
-  it('selecting every kind except nouns excludes only nouns', () => {
-    const notN = rows.filter((r) => passesFilter(r, f({ common: 'all', pos: new Set(['v', 'a', 'r', 'x']) })))
-    expect(notN).toEqual([know, reckon, quickly, beautiful, wilson])
+  it('excludes win and includes still restrict when both are set', () => {
+    const pos = new Map([['v', 'include' as const], ['x', 'exclude' as const]])
+    // includes present -> only verbs; exclude of x is moot here but must not throw
+    expect(rows.filter((r) => passesFilter(r, f({ common: 'all', pos })))).toEqual([know, reckon])
   })
-  it('kind filters compose with interesting mode', () => {
-    const interestingNouns = rows.filter((r) => passesFilter(r, f({ pos: new Set(['n']) })))
-    expect(interestingNouns).toEqual([sheriff])
+  it('include filters compose with interesting mode', () => {
+    expect(rows.filter((r) => passesFilter(r, f({ pos: inc('n') })))).toEqual([sheriff])
+  })
+})
+
+describe('rotatePos', () => {
+  it('cycles off -> include -> exclude -> off', () => {
+    let pos = new Map<string, 'include' | 'exclude'>()
+    pos = rotatePos(pos, 'n'); expect(pos.get('n')).toBe('include')
+    pos = rotatePos(pos, 'n'); expect(pos.get('n')).toBe('exclude')
+    pos = rotatePos(pos, 'n'); expect(pos.has('n')).toBe(false)
+  })
+  it('does not mutate the input map', () => {
+    const pos = new Map<string, 'include' | 'exclude'>()
+    rotatePos(pos, 'n')
+    expect(pos.size).toBe(0)
   })
 })
