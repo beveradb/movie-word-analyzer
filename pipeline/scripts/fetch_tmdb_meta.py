@@ -91,9 +91,14 @@ def build_parquet(cache_dir: Path, out_path: Path) -> int:
     jsonl = out_path.with_suffix(".jsonl")
     if records:
         jsonl.write_text("\n".join(json.dumps(r) for r in records))
+        # sample_size=-1 scans every row for schema inference (the default
+        # samples ~20k rows, which misses fields that are empty/null across the
+        # whole sample but populated later — e.g. cast/keywords on a film deep in
+        # the corpus — and then errors out); maximum_depth=-1 keeps nested
+        # structs/lists fully typed rather than collapsing to JSON strings.
         duckdb.sql(
-            f"COPY (SELECT * FROM read_json_auto('{jsonl}', format='newline_delimited')) "
-            f"TO '{out_path}' (FORMAT parquet)")
+            f"COPY (SELECT * FROM read_json_auto('{jsonl}', format='newline_delimited', "
+            f"sample_size=-1, maximum_depth=-1)) TO '{out_path}' (FORMAT parquet)")
         jsonl.unlink(missing_ok=True)
     return len(records)
 
