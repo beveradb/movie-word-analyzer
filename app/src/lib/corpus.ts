@@ -32,12 +32,13 @@ export const CORPORA: Record<string, Corpus> = {
 
 const STORAGE_KEY = 'corpus'
 
-/** Pure resolver: URL ?c= wins, then stored preference, then 'en'. */
+/** Pure resolver: URL ?c= wins, then stored preference, then the default
+ * ('all'). */
 export function resolveCorpus(search: string, stored: string | null): Corpus {
   const fromUrl = new URLSearchParams(search).get('c')
   if (fromUrl && CORPORA[fromUrl]) return CORPORA[fromUrl]
   if (stored && CORPORA[stored]) return CORPORA[stored]
-  return CORPORA.en
+  return CORPORA.all
 }
 
 let active: Corpus | null = null
@@ -73,7 +74,7 @@ export function switchCorpus(id: Corpus['id']): void {
     // Storage blocked - the URL param still carries the choice.
   }
   const url = new URL(window.location.href)
-  if (id === 'en') url.searchParams.delete('c')
+  if (id === 'all') url.searchParams.delete('c')
   else url.searchParams.set('c', id)
   window.location.href = url.toString()
 }
