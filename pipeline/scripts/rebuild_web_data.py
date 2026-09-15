@@ -35,11 +35,14 @@ ROOT = Path(__file__).resolve().parent.parent / "webdata"
 IN, OUT = ROOT / "in", ROOT / "out"
 
 
-def set_corpus(corpus):
+def set_corpus(corpus, lang=None):
     """Point IN/OUT at the corpus subtree. 'en' keeps the historical flat
-    layout; 'all' nests under all/ mirroring the bucket prefix."""
+    layout; 'all' nests under all/; a lang nests under all/lang/<code>/
+    mirroring the bucket prefix."""
     global IN, OUT
     sub = () if corpus == "en" else ("all",)
+    if lang:
+        sub = ("all", "lang", lang)
     IN = ROOT.joinpath("in", *sub)
     OUT = ROOT.joinpath("out", *sub)
 
@@ -263,8 +266,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--stage", default="all", choices=["all", *STAGES])
     ap.add_argument("--corpus", default="en", choices=["en", "all"])
+    ap.add_argument("--lang", default=None)
     args = ap.parse_args()
-    set_corpus(args.corpus)
+    set_corpus(args.corpus, lang=args.lang)
     OUT.mkdir(parents=True, exist_ok=True)
     for name in STAGES if args.stage == "all" else [args.stage]:
         t0 = time.time()
