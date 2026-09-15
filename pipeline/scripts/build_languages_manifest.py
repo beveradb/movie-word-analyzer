@@ -12,8 +12,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 import duckdb  # noqa: E402
 
-from moviewords_pipeline import config  # noqa: E402
-
 MIN_FILMS = 100
 MERGE = {"cn": "zh"}  # TMDB splits Chinese; fold cn into zh
 
