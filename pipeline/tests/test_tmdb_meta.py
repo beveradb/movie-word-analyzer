@@ -89,6 +89,21 @@ def test_blurb_of_omits_empty_and_zero():
     assert blurb_of(r) == {}
 
 
+def test_parse_record_dedupes_crew_credited_under_two_matching_jobs():
+    raw = {
+        "id": 1,
+        "credits": {
+            "crew": [
+                {"name": "Charlie Kaufman", "job": "Screenplay", "department": "Writing"},
+                {"name": "Charlie Kaufman", "job": "Story", "department": "Writing"},
+                {"name": "Susan Orlean", "job": "Novel", "department": "Writing"},
+            ],
+        },
+    }
+    r = parse_record(raw, "tt0000004")
+    assert r["writers"] == ["Charlie Kaufman", "Susan Orlean"]
+
+
 def test_parse_record_cast_with_null_order_sorts_last():
     raw = {
         "id": 1,

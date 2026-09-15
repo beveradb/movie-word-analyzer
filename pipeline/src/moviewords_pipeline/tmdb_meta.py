@@ -9,8 +9,9 @@ def _names(items, key="name"):
 
 
 def _crew_by_job(crew, jobs):
-    return [c["name"] for c in (crew or [])
-            if c.get("job") in jobs and c.get("name")]
+    names = [c["name"] for c in (crew or [])
+             if c.get("job") in jobs and c.get("name")]
+    return list(dict.fromkeys(names))
 
 
 def parse_record(raw: dict, imdb_id: str) -> dict:

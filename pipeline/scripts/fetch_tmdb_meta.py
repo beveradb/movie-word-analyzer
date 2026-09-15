@@ -74,7 +74,9 @@ def fetch_one(session, imdb_id):
 
 def load_ids(data_base):
     url = f"{data_base}/all/json/movies-index.json"
-    return [m["id"] for m in requests.get(url, timeout=60).json()]
+    resp = requests.get(url, timeout=60)
+    resp.raise_for_status()
+    return [m["id"] for m in resp.json()]
 
 
 def build_parquet(cache_dir: Path, out_path: Path) -> int:
@@ -87,11 +89,12 @@ def build_parquet(cache_dir: Path, out_path: Path) -> int:
         records.append(parse_record(raw, p.stem))
     out_path.parent.mkdir(parents=True, exist_ok=True)
     jsonl = out_path.with_suffix(".jsonl")
-    jsonl.write_text("\n".join(json.dumps(r) for r in records))
     if records:
+        jsonl.write_text("\n".join(json.dumps(r) for r in records))
         duckdb.sql(
             f"COPY (SELECT * FROM read_json_auto('{jsonl}', format='newline_delimited')) "
             f"TO '{out_path}' (FORMAT parquet)")
+        jsonl.unlink(missing_ok=True)
     return len(records)
 
 
