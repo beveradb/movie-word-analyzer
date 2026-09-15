@@ -55,21 +55,21 @@ def _write_json(path, obj):
 
 def fetch_one(session, imdb_id):
     raw_path = CACHE / f"{imdb_id}.json"
-    if raw_path.exists():
-        raw = json.loads(raw_path.read_text())
-    else:
-        try:
+    try:
+        if raw_path.exists():
+            raw = json.loads(raw_path.read_text())
+        else:
             raw = detail(session, imdb_id)
-        except Exception as exc:  # never let one film kill the batch
-            print(f"tmdb-meta {imdb_id}: {exc}", flush=True)
-            return "failed"
-        _write_json(raw_path, raw)  # 'null' cached too
-    if raw is None:
-        return "no-match"
-    blurb = blurb_of(parse_record(raw, imdb_id))
-    if blurb:
-        _write_json(BLURB_OUT / f"{imdb_id}.json", blurb)
-    return "ok"
+            _write_json(raw_path, raw)  # 'null' cached too
+        if raw is None:
+            return "no-match"
+        blurb = blurb_of(parse_record(raw, imdb_id))
+        if blurb:
+            _write_json(BLURB_OUT / f"{imdb_id}.json", blurb)
+        return "ok"
+    except Exception as exc:  # never let one film kill the batch
+        print(f"tmdb-meta {imdb_id}: {exc}", flush=True)
+        return "failed"
 
 
 def load_ids(data_base):
