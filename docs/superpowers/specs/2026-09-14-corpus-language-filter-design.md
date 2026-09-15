@@ -39,15 +39,23 @@ ko 1067, zh 965, ru 883, cn 778, ta 576, sv 565, pt 557, te 514, nl 506,
 pl 506, tr 479, ml 469, da 446, no 301, fi 296, cs 279, tl 260, hu 241,
 th 237, id 234, fa 216, ro 202, ar 197 … then 90 languages sharing 1,857 films.
 
-**Decision:** offer the **35 languages with ≥100 films** as filter options.
-Unlisted languages still count toward "All films"; they just don't get their own
-selectable slice. This keeps every *selectable* language robust enough to carry
-its own leaderboards/signatures while covering 98% of the corpus.
+**Decision:** offer the **35 languages with ≥100 films** as filter options,
+presented as **34 rows** because **`cn` + `zh` are merged into one "Chinese"
+option** (see below). Unlisted languages still count toward "All films"; they
+just don't get their own selectable slice. This keeps every *selectable*
+language robust enough to carry its own leaderboards/signatures while covering
+98% of the corpus.
+
+**Chinese (`cn` + `zh`):** TMDB splits Chinese across two codes (`zh` 965,
+`cn` 778). They are merged into a single **"Chinese"** slice built from
+`original_language IN ('zh','cn')` (1,743 films), keyed `zh`. This is the one
+slice whose bake filters on two codes; all others filter on one.
 
 ## Design decisions (locked)
 
 1. **Scope:** every feature is language-aware (all-at-once design).
-2. **Language list:** the 35 languages with ≥100 films.
+2. **Language list:** the 35 languages with ≥100 films, as 34 options (`cn`+`zh`
+   merged into "Chinese").
 3. **Architecture:** per-language bake + client-side merge (below).
 4. **Degradation:** data-driven per-view, honest "based on N films" labels, film
    counts in the dropdown.
@@ -93,14 +101,14 @@ inputs it consumes from `derive.py`) by language:
   stays global under `all/`), `json/wordlists.json` (language-independent),
   `json/movies-index.json` (global, carries `lang` for client-side filtering).
 - **New manifest `all/json/languages.json`:** `[{ "code": "es", "films": 1929 },
-  …]` for the 35, sorted by film count, generated from `movies.parquet`. Drives
+  …]` for the 34 options, sorted by film count, generated from `movies.parquet`. Drives
   the dropdown, its counts, and every view's "based on N films" label.
 - `derive.py` must emit the per-language `signature/{decades,genres}.json` base
   inputs (the log-odds baselines) for each language, since `rebuild_web_data`'s
   `stage_signatures` extends an input file. Alternatively, compute the base
   inline in the language-parameterized run.
 
-Bake is fast (runs on already-published parquets, no VM); 35× is acceptable and
+Bake is fast (runs on already-published parquets, no VM); 34× is acceptable and
 can run sequentially. Trend files per language are bounded (few words clear the
 ≥20 floor in small languages). R2 storage is cheap.
 
@@ -138,9 +146,15 @@ selection-aware fetch+merge:
     sum `count` + `movie_count` by word across slices, re-sort, take top-K.
   - **Trends** (`series.ts`): sum per-year counts across slices (exact) and sum
     the per-language `year-totals` for the rate denominator.
-  - **Signatures:** merge entity `top`/count vectors, then **recompute log-odds
-    client-side** — a small TS port of `derive.py:log_odds` — against the merged
-    corpus counts and summed `n_corpus` / `movie_count`.
+  - **Signatures:** single language uses the exact baked log-odds (no
+    recompute). For 2+ languages, merge entity `top`/count vectors and
+    **recompute log-odds client-side** — a small TS port of `derive.py:log_odds`
+    — against the merged corpus counts and summed `n_corpus` / `movie_count`.
+    **Decision:** the multi-language reference corpus is the merged per-language
+    top-word lists (head-accurate), *not* full per-language frequency vectors.
+    Exact only where it's visible (the panel's head words); the invisible tail
+    is approximate. Full-vector exactness is a non-goal — large data for a
+    difference no user sees.
   - **Superlatives / film lists:** merge film arrays, re-rank (exact for films).
   - **Movie index / search:** fetch the global index, filter `lang ∈ selected`.
 - **1 language → skip merge**, fetch the single slice. **0 → global `all/`.**
@@ -153,7 +167,7 @@ Extend the shipped `CorpusDropdown`:
 
 - **Trigger:** globe + summary label ("All films" / the single language's name /
   "N languages") + chevron.
-- **Menu:** a search box; an "All films" reset row at top; 35 language rows, each
+- **Menu:** a search box; an "All films" reset row at top; 34 language rows, each
   a checkbox + **localized name + film count** (e.g. "Español · 1,929"); the
   user's UI-locale language floated to the top. Batch selection with an
   **Apply** button that calls `switchLanguages` (persist + reload). Escape /
@@ -179,7 +193,7 @@ axes.
   the i18n catalog lacks them); float the user's language to the top of the
   dropdown.
 - **Gentle opt-in:** on first visit in a non-English locale whose language is one
-  of the 35, with no stored selection, show a dismissible hint — "Viewing in
+  of the 34 options, with no stored selection, show a dismissible hint — "Viewing in
   Spanish? Filter to Spanish-language films." One click applies; dismissal is
   persisted; never forced (avoids silently degrading small-corpus-language
   users). Default remains All films.
@@ -204,9 +218,7 @@ axes.
 
 ## Open details (resolve during implementation, not blockers)
 
-- **`cn` vs `zh`** are both Chinese in TMDB — merge into one option or list
-  separately with clear labels.
-- Exact bake time + R2 object count for 35× trend files (measure; parallelize if
+- Exact bake time + R2 object count for 34× trend files (measure; parallelize if
   needed).
 - Whether to keep the root `en` bake as a live alias during migration or cut
   straight to `all/lang/en/`.
