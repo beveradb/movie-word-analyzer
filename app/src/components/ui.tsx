@@ -67,7 +67,15 @@ export function SeriesLegend({ series }: { series: Series[] }) {
 }
 
 /** Screenplay slug-line header: INT. PULP FICTION - 1994 */
-export function Slug({ prefix = 'INT.', text, right }: { prefix?: string; text: string; right?: React.ReactNode }) {
+export function Slug({
+  prefix = 'INT.',
+  text,
+  right,
+}: {
+  prefix?: string
+  text: React.ReactNode
+  right?: React.ReactNode
+}) {
   return (
     <div className="slug flex items-baseline justify-between border-b-2 border-ink pb-1 text-sm sm:text-base">
       <span>
