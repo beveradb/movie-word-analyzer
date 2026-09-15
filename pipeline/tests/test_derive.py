@@ -47,3 +47,27 @@ def test_run_rejects_unknown_corpus():
     from moviewords_pipeline import derive
     with pytest.raises(ValueError, match="unknown corpus"):
         derive.run(corpus="fr")
+
+
+def test_build_signature_base_returns_decades_and_genres():
+    import duckdb
+    from moviewords_pipeline.derive import build_signature_base
+    con = duckdb.connect()
+    con.sql("""
+        CREATE TABLE movies AS SELECT * FROM (VALUES
+            ('tt1','A',1994, ['Crime']),
+            ('tt2','B',1995, ['Crime','Drama'])
+        ) t(imdb_id,title,year,genres);
+        CREATE TABLE wc AS SELECT * FROM (VALUES
+            ('tt1','heist',30),('tt1','gun',20),
+            ('tt2','heist',10),('tt2','love',25)
+        ) t(imdb_id,word,count);
+    """)
+    base = build_signature_base(con)
+    assert set(base) == {"decades", "genres"}
+    assert "1990" in base["decades"]
+    assert "Crime" in base["genres"]
+    entry = base["decades"]["1990"]
+    assert entry["movie_count"] == 2
+    assert entry["total_words"] > 0
+    assert isinstance(entry["top"], list)

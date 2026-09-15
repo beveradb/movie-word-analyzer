@@ -133,26 +133,22 @@ def run(corpus="en"):
     _write_report(con, out, corpus)
 
 
-def _write_signatures(con, out):
-    """Signature (log-odds) and top words for whole decades and genres.
-
-    A decade/genre is treated exactly like a movie: one bag of words compared
-    against the whole corpus. Output is one small JSON per entity kind so the
-    frontend can compare decades/genres without scanning the big parquets.
-    """
+def build_signature_base(con) -> dict:
+    """Compute the decade/genre log-odds signature payloads from the `movies`
+    and `wc` views. Returned as {kind: {key: entry}} so callers can write it to
+    a per-corpus or per-language signature/*.json base."""
     stop = load_stopwords()
     corpus = dict(con.sql(
         "SELECT word, SUM(count) FROM wc JOIN movies USING (imdb_id) GROUP BY word"
     ).fetchall())
     n_corpus = sum(corpus.values())
-    (out / "json" / "signature").mkdir(parents=True, exist_ok=True)
-
     kinds = {
         "decades": ("(m.year // 10) * 10",
                     "SELECT DISTINCT (year // 10) * 10 FROM movies ORDER BY 1"),
         "genres": ("g.genre",
                    "SELECT DISTINCT UNNEST(genres) FROM movies ORDER BY 1"),
     }
+    out = {}
     for kind, (key_expr, keys_sql) in kinds.items():
         genre_join = ("JOIN (SELECT imdb_id, UNNEST(genres) AS genre FROM movies) g "
                       "USING (imdb_id)") if kind == "genres" else ""
@@ -184,6 +180,16 @@ def _write_signatures(con, out):
                               for w, z in log_odds(counts, corpus, min_count=20,
                                                    n_corpus=n_corpus)[:100]],
             }
+        out[kind] = payload
+    return out
+
+
+def _write_signatures(con, out):
+    """Signature (log-odds) and top words for whole decades and genres, one
+    small JSON per entity kind (see build_signature_base)."""
+    base = build_signature_base(con)
+    (out / "json" / "signature").mkdir(parents=True, exist_ok=True)
+    for kind, payload in base.items():
         (out / "json" / "signature" / f"{kind}.json").write_text(json.dumps(payload))
 
 
