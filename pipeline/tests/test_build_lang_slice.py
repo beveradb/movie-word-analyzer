@@ -7,8 +7,9 @@ from scripts_path import add_scripts_to_path  # noqa: F401
 
 
 def _make_all_inputs(root: Path):
-    """Two es films, one en film, plus word_year_lang covering them."""
-    (root / "words_by_movie").mkdir(parents=True)
+    """Two es films, one en film, plus word_year_lang covering them. Mirrors the
+    fetched webdata/in layout: words_by_movie stored flat as words_by_movie.parquet."""
+    root.mkdir(parents=True, exist_ok=True)
     con = duckdb.connect()
     con.sql(f"""
         COPY (SELECT * FROM (VALUES
@@ -20,7 +21,7 @@ def _make_all_inputs(root: Path):
         COPY (SELECT * FROM (VALUES
             ('tt_es1','amor',40),('tt_es2','amor',60),('tt_en1','gun',50)
         ) t(imdb_id,word,count))
-        TO '{root}/words_by_movie/data.parquet' (FORMAT parquet);
+        TO '{root}/words_by_movie.parquet' (FORMAT parquet);
         COPY (SELECT * FROM (VALUES
             ('amor',2000,'es',40,1),('amor',2004,'es',60,1),('gun',1995,'en',50,1)
         ) t(word,year,lang,count,movie_count))
@@ -54,7 +55,7 @@ def test_chinese_merges_two_codes(tmp_path):
     from build_lang_slice import build_slice, CODES
     assert CODES["zh"] == ["zh", "cn"]
     all_in = tmp_path / "all"
-    (all_in / "words_by_movie").mkdir(parents=True)
+    all_in.mkdir(parents=True, exist_ok=True)
     con = duckdb.connect()
     con.sql(f"""
         COPY (SELECT * FROM (VALUES
@@ -63,7 +64,7 @@ def test_chinese_merges_two_codes(tmp_path):
         ) t(imdb_id,title,year,genres,original_language,total_words))
         TO '{all_in}/movies.parquet' (FORMAT parquet);
         COPY (SELECT * FROM (VALUES ('tt_zh','fight',20),('tt_cn','fight',22)) t(imdb_id,word,count))
-        TO '{all_in}/words_by_movie/data.parquet' (FORMAT parquet);
+        TO '{all_in}/words_by_movie.parquet' (FORMAT parquet);
         COPY (SELECT * FROM (VALUES ('fight',2002,'zh',20,1),('fight',2008,'cn',22,1)) t(word,year,lang,count,movie_count))
         TO '{all_in}/word_year_lang.parquet' (FORMAT parquet);
     """)

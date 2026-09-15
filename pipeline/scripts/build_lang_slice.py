@@ -20,16 +20,19 @@ CODES = {"zh": ["zh", "cn"]}
 
 
 def build_slice(all_in: Path, out_in: Path, codes: list[str]) -> int:
-    (out_in / "words_by_movie").mkdir(parents=True, exist_ok=True)
+    out_in.mkdir(parents=True, exist_ok=True)
     (out_in / "signature").mkdir(parents=True, exist_ok=True)
     in_list = ", ".join(f"'{c}'" for c in codes)
     con = duckdb.connect()
+    # words_by_movie is stored flat (words_by_movie.parquet) in the fetched
+    # webdata/in tree - fetch_published.sh flattens the R2 words_by_movie/data.parquet
+    # to match rebuild_web_data.connect()'s flat read.
     con.sql(f"""
         CREATE TABLE movies AS
             SELECT * FROM '{all_in}/movies.parquet'
             WHERE original_language IN ({in_list});
         CREATE TABLE wc AS
-            SELECT w.* FROM '{all_in}/words_by_movie/data.parquet' w
+            SELECT w.* FROM '{all_in}/words_by_movie.parquet' w
             WHERE w.imdb_id IN (SELECT imdb_id FROM movies);
     """)
     con.sql(f"COPY movies TO '{out_in}/movies.parquet' (FORMAT parquet)")
