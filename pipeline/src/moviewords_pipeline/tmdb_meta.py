@@ -19,7 +19,8 @@ def parse_record(raw: dict, imdb_id: str) -> dict:
     credits = raw.get("credits") or {}
     crew = credits.get("crew") or []
     cast = sorted((c for c in (credits.get("cast") or []) if c.get("name")),
-                  key=lambda c: c.get("order", 1_000_000))[:CAST_LIMIT]
+                  key=lambda c: c.get("order") if c.get("order") is not None
+                  else 1_000_000)[:CAST_LIMIT]
     kw = (raw.get("keywords") or {}).get("keywords") or []
     composers = _crew_by_job(crew, {"Original Music Composer", "Music", "Composer"})
     dops = _crew_by_job(crew, {"Director of Photography", "Cinematography"})

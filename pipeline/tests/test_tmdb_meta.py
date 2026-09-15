@@ -87,3 +87,17 @@ def test_blurb_of_keeps_only_present_fields():
 def test_blurb_of_omits_empty_and_zero():
     r = parse_record({"id": 1, "overview": "", "tagline": "", "runtime": 0}, "tt0000001")
     assert blurb_of(r) == {}
+
+
+def test_parse_record_cast_with_null_order_sorts_last():
+    raw = {
+        "id": 1,
+        "credits": {
+            "cast": [
+                {"name": "No Order", "character": "X", "order": None},
+                {"name": "Edward Norton", "character": "The Narrator", "order": 0},
+            ],
+        },
+    }
+    r = parse_record(raw, "tt0000003")
+    assert [c["name"] for c in r["cast"]] == ["Edward Norton", "No Order"]
