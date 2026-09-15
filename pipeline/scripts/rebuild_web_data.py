@@ -24,7 +24,6 @@ import json
 import re
 import time
 from pathlib import Path
-from urllib.parse import quote
 
 import duckdb
 
@@ -190,10 +189,14 @@ def stage_featured(con):
 
 
 def _word_key(w: str) -> str:
-    # RFC3986 unreserved stays literal; everything else percent-encoded
-    # (UTF-8, uppercase hex). MUST match the frontend encoder exactly -
-    # see docs/superpowers/specs/2026-09-14-trends-static-bake-pipeline-handoff.md
-    return quote(w, safe="")
+    # The object key/filename is the RAW word: the Cloudflare/R2 edge
+    # percent-decodes the request path exactly once before key lookup
+    # (verified live 2026-09-14: /json/trend/don%27t.json 404d against a
+    # don%27t.json key while the double-encoded URL 200d), so the frontend's
+    # percent-encoded URL must decode INTO the key, not equal it. Tokens are
+    # lowercase letters/apostrophes (plus rare unfolded non-Latin), all safe
+    # as filenames and R2 keys.
+    return w
 
 
 def stage_trends(con):
