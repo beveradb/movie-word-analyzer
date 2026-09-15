@@ -5,6 +5,7 @@ import { langFilterSql, lit, pq, q } from '../lib/duck'
 import { activeLanguages, languageName } from '../lib/languages'
 import { navigate, useRoute } from '../lib/route'
 import { ErrorBox, Spinner } from '../components/ui'
+import { ExplainerLink } from '../components/FilterExplainer'
 import { WordFilterBar, defaultFilter, passesFilter, type WordRow } from '../components/WordFilter'
 
 interface Row {
@@ -58,7 +59,8 @@ export function LeaderboardView() {
     <div>
       {langs.length > 0 && filmCount !== null && (
         <p className="mt-1 text-sm text-ink-2">
-          Based on {filmCount.toLocaleString()} {langs.map((c) => languageName(c)).join(', ')}-language films.
+          Based on {filmCount.toLocaleString()} {langs.map((c) => languageName(c)).join(', ')}-language films, measured
+          from their English subtitles. <ExplainerLink />
         </p>
       )}
       <div className="mt-3 flex flex-wrap gap-2 font-script text-xs">

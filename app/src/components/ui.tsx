@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import type { MovieIndexEntry } from '../lib/data'
 import { getMovieIndex } from '../lib/data'
 import { navigate } from '../lib/route'
+import { ExplainerLink } from './FilterExplainer'
 import type { Series } from './LineChart'
 
 /** ◀/▶ header row for a day-rotated featured pool (trends, matchups). */
@@ -112,7 +113,8 @@ export function HighlightWord({
 }
 
 /** "translated" marker for non-English originals - shown for any film whose
- * original language isn't English, regardless of the active language filter. */
+ * original language isn't English, regardless of the active language filter.
+ * Clickable: opens the explainer (counts come from the English subtitles). */
 export function LangBadge({ lang, className = '' }: { lang?: string; className?: string }) {
   if (!lang || lang === 'en') return null
   let name = lang.toUpperCase()
@@ -121,14 +123,7 @@ export function LangBadge({ lang, className = '' }: { lang?: string; className?:
   } catch {
     // unknown/invalid code: keep the raw code
   }
-  return (
-    <span
-      className={`shrink-0 border border-ink-2 px-1 text-[10px] uppercase tracking-wide text-ink-2 ${className}`}
-      title={`Original language ${name} - counts come from the English translated subtitles`}
-    >
-      translated · {name}
-    </span>
-  )
+  return <ExplainerLink variant="badge" badgeLang={name} className={className} />
 }
 
 const POSTER_BASE = 'https://data.moviewords.org/posters'
