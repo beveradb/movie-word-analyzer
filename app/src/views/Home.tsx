@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import type { MovieIndexEntry } from '../lib/data'
-import { getMovieIndex } from '../lib/data'
+import { getFilteredMovieIndex } from '../lib/data'
 import { navigate } from '../lib/route'
 import { MovieSearch, Poster } from '../components/ui'
 import { FeaturedChart } from '../components/FeaturedChart'
 import { EraMotif } from '../components/motifs'
-import { activeCorpus } from '../lib/corpus'
+import { activeLanguages, languageName } from '../lib/languages'
 
 const HOME_DECADES = ['1930', '1950', '1970', '1990', '2010']
 
@@ -52,7 +52,7 @@ export function HomeView() {
   const [words, setWords] = useState(0)
 
   useEffect(() => {
-    getMovieIndex()
+    getFilteredMovieIndex()
       .then((idx) => {
         setCount(idx.length)
         setWords(idx.reduce((sum, m) => sum + m.total_words, 0))
@@ -120,9 +120,9 @@ export function HomeView() {
           Covering{' '}
           <strong>
             {count ? count.toLocaleString() : 'tens of thousands of'}{' '}
-            {activeCorpus().id === 'all'
+            {activeLanguages().length === 0
               ? 'films - translated subtitles included'
-              : 'English-original films'}
+              : `${activeLanguages().map((c) => languageName(c)).join(', ')}-language films`}
           </strong>{' '}
           - every word of subtitle dialogue from the{' '}
           <a className="underline" href="https://opus.nlpl.eu/datasets/OpenSubtitles">

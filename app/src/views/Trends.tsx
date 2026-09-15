@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
-import { getShifts, type Shifts } from '../lib/data'
+import { getFilteredMovieIndex, getShifts, type Shifts } from '../lib/data'
+import { activeLanguages, languageName } from '../lib/languages'
 import { navigate, useRoute } from '../lib/route'
 import { type TopFilm, type YearTopMovie, topMovieRows } from '../lib/trends'
 import { FEATURED, dayIndex, stepFeatured } from '../lib/featured'
@@ -162,7 +163,10 @@ export function TrendsView() {
     () => (params.get('w') ?? '').split(',').map((w) => w.trim().toLowerCase()).filter(Boolean).slice(0, MAX_WORDS),
     [params],
   )
+  const langs = activeLanguages()
+  const langLabel = useMemo(() => langs.map((c) => languageName(c)).join(', '), [langs])
   const [input, setInput] = useState('')
+  const [filmCount, setFilmCount] = useState<number | null>(null)
   const [series, setSeries] = useState<Series[] | null>(null)
   // per-word top-movie notes + films tables; null while the trend fetch runs
   const [topMovies, setTopMovies] = useState<Map<string, Map<number, YearTopMovie>> | null>(null)
@@ -180,6 +184,12 @@ export function TrendsView() {
   const chartWords = featured ? featured.words : words
 
   const wordsKey = chartWords.join(',')
+
+  useEffect(() => {
+    if (langs.length === 0) return
+    getFilteredMovieIndex().then((idx) => setFilmCount(idx.length)).catch(() => {})
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     let cancelled = false
@@ -244,6 +254,11 @@ export function TrendsView() {
       <p className="mt-1 text-sm text-ink-2">
         How often a word is spoken across all films in the corpus, per million words of dialogue, by release year.
       </p>
+      {langs.length > 0 && filmCount !== null && (
+        <p className="mt-1 text-sm text-ink-2">
+          Based on {filmCount.toLocaleString()} {langLabel}-language films.
+        </p>
+      )}
 
       <form
         className="mt-4 flex gap-2"
@@ -283,6 +298,11 @@ export function TrendsView() {
       {missing.length > 0 && !featured && (
         <p className="mt-3 font-script text-sm text-s2">
           Not enough data for: {missing.join(', ')} (needs ≥20 uses across the corpus, in years with enough films).
+        </p>
+      )}
+      {langs.length > 0 && !loading && !error && chartWords.length > 0 && series !== null && series.length === 0 && (
+        <p className="mt-3 font-script text-sm text-ink-2">
+          Not enough films in {langLabel} for this trend - add languages or switch to All films.
         </p>
       )}
       {error && <ErrorBox message={error} />}

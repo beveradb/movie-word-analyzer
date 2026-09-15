@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getSignatures } from '../lib/data'
+import { activeLanguages, languageName } from '../lib/languages'
 import { navigate } from '../lib/route'
 import { ErrorBox, Spinner } from '../components/ui'
 import { GenreMotif } from '../components/motifs'
@@ -20,6 +21,7 @@ export function GenresView() {
         setGenres(
           Object.entries(all)
             .map(([name, e]) => ({ name, movie_count: e.movie_count }))
+            .filter((g) => g.movie_count > 0)
             .sort((a, b) => b.movie_count - a.movie_count),
         ),
       )
@@ -29,6 +31,16 @@ export function GenresView() {
   if (genres === undefined) return <Spinner label="Loading genres…" />
   if (genres === null)
     return <ErrorBox message="Couldn't load genres." retry={() => navigate('/')} />
+
+  const langs = activeLanguages()
+  if (genres.length === 0) {
+    return (
+      <p className="mt-8 font-script text-sm text-ink-2">
+        Not enough films in {langs.map((c) => languageName(c)).join(', ')} for this - add languages or switch to All
+        films.
+      </p>
+    )
+  }
 
   return (
     <div>
