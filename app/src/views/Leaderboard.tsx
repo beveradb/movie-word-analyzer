@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { FilmsBoard, OverviewBoard, ShiftsBoard, UbiquityBoard, WondersBoard } from '../components/boards'
 import { getLeaderboard, getMovieIndex, getWordlists } from '../lib/data'
-import { lit, pq, q } from '../lib/duck'
+import { langFilterSql, lit, pq, q } from '../lib/duck'
 import { navigate, useRoute } from '../lib/route'
 import { ErrorBox, Spinner } from '../components/ui'
 import { WordFilterBar, defaultFilter, passesFilter, type WordRow } from '../components/WordFilter'
@@ -138,6 +138,7 @@ function WordsBoard() {
        LEFT JOIN ${pq('word_meta.parquet')} wm ON wm.word = w.word
        WHERE m.year BETWEEN ${qFrom} AND ${qTo}
          ${genre ? `AND list_contains(m.genres, ${lit(genre)})` : ''}
+         ${langFilterSql('m')}
        GROUP BY w.word ORDER BY count DESC LIMIT 400`,
     )
       .then((r) => !cancelled && setRows(r))
