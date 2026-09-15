@@ -42,8 +42,16 @@ def log_odds(movie_counts: dict[str, int], corpus_counts: dict[str, int],
         prior = alpha0 * y_c / n_corpus if n_corpus else 0
         if prior == 0:
             continue
-        delta = (math.log((y + prior) / (n_movie + alpha0 - y - prior))
-                 - math.log((y_c + prior) / (n_corpus + alpha0 - y_c - prior)))
+        denom_movie = n_movie + alpha0 - y - prior
+        denom_corpus = n_corpus + alpha0 - y_c - prior
+        if denom_movie <= 0 or denom_corpus <= 0:
+            # Degenerate only when a single word accounts for the *entire*
+            # movie/corpus word count (e.g. tiny test fixtures, or a
+            # language slice with one repeated word) - no real signal to
+            # compute a ratio against, so skip rather than divide by <=0.
+            continue
+        delta = (math.log((y + prior) / denom_movie)
+                 - math.log((y_c + prior) / denom_corpus))
         variance = 1.0 / (y + prior) + 1.0 / (y_c + prior)
         out.append((word, delta / math.sqrt(variance)))
     return sorted(out, key=lambda t: -t[1])
