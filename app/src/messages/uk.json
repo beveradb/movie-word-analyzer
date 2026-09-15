@@ -93,7 +93,11 @@
       "hidingDescription": "приховано повсякденну англійську - ~2000 найпоширеніших слів (the, know, get…)",
       "interestingButton": "цікаві слова",
       "onlyKindsSuffix": " · лише {kinds}",
-      "showingDescription": "показано кожне слово, включно з повсякденною англійською"
+      "showingDescription": "показано кожне слово, включно з повсякденною англійською",
+      "excludingKindsSuffix": " · приховано {kinds}",
+      "posStateExcluded": "{kind}: вилучено (натисни, щоб скинути)",
+      "posStateIncluded": "{kind}: додано (натисни, щоб вилучити)",
+      "posStateOff": "{kind}: вимкнено (натисни, щоб додати)"
     }
   },
   "boards": {
@@ -327,7 +331,11 @@
     "signatureWordsHeading": "Характерні слова",
     "slugTitle": "{title} - {year}",
     "vocabRichnessLabel": "Багатство словникового запасу",
-    "wordsSpokenLabel": "Сказано слів"
+    "wordsSpokenLabel": "Сказано слів",
+    "imdbPosterTitle": "{title} на IMDb",
+    "runtimeLabel": "Хронометраж",
+    "runtimeValue": "{minutes} хв",
+    "wordsPerMinuteLabel": "Слів за хвилину"
   },
   "themeToggle": {
     "day": "ДЕНЬ",

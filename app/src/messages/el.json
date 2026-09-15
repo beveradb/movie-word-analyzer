@@ -93,7 +93,11 @@
       "hidingDescription": "απόκρυψη καθημερινών αγγλικών - οι ~2.000 πιο κοινές λέξεις (the, know, get…)",
       "interestingButton": "ενδιαφέρουσες λέξεις",
       "onlyKindsSuffix": " · μόνο {kinds}",
-      "showingDescription": "εμφάνιση κάθε λέξης, συμπεριλαμβανομένων των καθημερινών αγγλικών"
+      "showingDescription": "εμφάνιση κάθε λέξης, συμπεριλαμβανομένων των καθημερινών αγγλικών",
+      "excludingKindsSuffix": " · απόκρυψη {kinds}",
+      "posStateExcluded": "{kind}: εξαιρείται (κλικ για επαναφορά)",
+      "posStateIncluded": "{kind}: περιλαμβάνεται (κλικ για εξαίρεση)",
+      "posStateOff": "{kind}: ανενεργό (κλικ για συμπερίληψη)"
     }
   },
   "boards": {
@@ -327,7 +331,11 @@
     "signatureWordsHeading": "Χαρακτηριστικές λέξεις",
     "slugTitle": "{title} - {year}",
     "vocabRichnessLabel": "Πλούτος λεξιλογίου",
-    "wordsSpokenLabel": "Λέξεις που ειπώθηκαν"
+    "wordsSpokenLabel": "Λέξεις που ειπώθηκαν",
+    "imdbPosterTitle": "{title} στο IMDb",
+    "runtimeLabel": "Διάρκεια",
+    "runtimeValue": "{minutes} λεπτά",
+    "wordsPerMinuteLabel": "Λέξεις ανά λεπτό"
   },
   "themeToggle": {
     "day": "ΜΕΡΑ",

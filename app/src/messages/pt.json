@@ -93,7 +93,11 @@
       "hidingDescription": "ocultando o inglês do dia a dia - as ~2.000 palavras mais comuns (the, know, get…)",
       "interestingButton": "palavras interessantes",
       "onlyKindsSuffix": " · apenas {kinds}",
-      "showingDescription": "mostrando todas as palavras, incluindo o inglês do dia a dia"
+      "showingDescription": "mostrando todas as palavras, incluindo o inglês do dia a dia",
+      "excludingKindsSuffix": " · ocultando {kinds}",
+      "posStateExcluded": "{kind}: excluído (clique para redefinir)",
+      "posStateIncluded": "{kind}: incluído (clique para excluir)",
+      "posStateOff": "{kind}: desativado (clique para incluir)"
     }
   },
   "boards": {
@@ -327,7 +331,11 @@
     "signatureWordsHeading": "Palavras de assinatura",
     "slugTitle": "{title} - {year}",
     "vocabRichnessLabel": "Riqueza de vocabulário",
-    "wordsSpokenLabel": "Palavras faladas"
+    "wordsSpokenLabel": "Palavras faladas",
+    "imdbPosterTitle": "{title} no IMDb",
+    "runtimeLabel": "Duração",
+    "runtimeValue": "{minutes} min",
+    "wordsPerMinuteLabel": "Palavras por minuto"
   },
   "themeToggle": {
     "day": "DIA",

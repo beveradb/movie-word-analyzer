@@ -93,7 +93,11 @@
       "hidingDescription": "ocultant l'idioma quotidià - les ~2.000 paraules més comunes (el, saber, aconseguir…)",
       "interestingButton": "paraules interessants",
       "onlyKindsSuffix": " · només {kinds}",
-      "showingDescription": "mostrant totes les paraules, inclòs l'idioma quotidià"
+      "showingDescription": "mostrant totes les paraules, inclòs l'idioma quotidià",
+      "excludingKindsSuffix": " · amagant {kinds}",
+      "posStateExcluded": "{kind}: exclòs (fes clic per restablir)",
+      "posStateIncluded": "{kind}: inclòs (fes clic per excloure)",
+      "posStateOff": "{kind}: desactivat (fes clic per incloure)"
     }
   },
   "boards": {
@@ -327,7 +331,11 @@
     "signatureWordsHeading": "Paraules característiques",
     "slugTitle": "{title} - {year}",
     "vocabRichnessLabel": "Riquesa de vocabulari",
-    "wordsSpokenLabel": "Paraules pronunciades"
+    "wordsSpokenLabel": "Paraules pronunciades",
+    "imdbPosterTitle": "{title} a IMDb",
+    "runtimeLabel": "Durada",
+    "runtimeValue": "{minutes} min",
+    "wordsPerMinuteLabel": "Paraules per minut"
   },
   "themeToggle": {
     "day": "DIA",

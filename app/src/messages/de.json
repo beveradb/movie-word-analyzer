@@ -93,7 +93,11 @@
       "hidingDescription": "versteckt alltägliches Englisch - die ~2.000 häufigsten Wörter (the, know, get…)",
       "interestingButton": "interessante Wörter",
       "onlyKindsSuffix": " · nur {kinds}",
-      "showingDescription": "zeigt jedes Wort, einschließlich alltäglichem Englisch"
+      "showingDescription": "zeigt jedes Wort, einschließlich alltäglichem Englisch",
+      "excludingKindsSuffix": " · {kinds} ausgeblendet",
+      "posStateExcluded": "{kind}: ausgeschlossen (Klicken zum Zurücksetzen)",
+      "posStateIncluded": "{kind}: eingeschlossen (Klicken zum Ausschließen)",
+      "posStateOff": "{kind}: aus (Klicken zum Einschließen)"
     }
   },
   "boards": {
@@ -327,7 +331,11 @@
     "signatureWordsHeading": "Charakteristische Wörter",
     "slugTitle": "{title} - {year}",
     "vocabRichnessLabel": "Wortschatz-Reichtum",
-    "wordsSpokenLabel": "Gesprochene Wörter"
+    "wordsSpokenLabel": "Gesprochene Wörter",
+    "imdbPosterTitle": "{title} auf IMDb",
+    "runtimeLabel": "Laufzeit",
+    "runtimeValue": "{minutes} min",
+    "wordsPerMinuteLabel": "Wörter pro Minute"
   },
   "themeToggle": {
     "day": "TAG",

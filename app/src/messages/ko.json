@@ -93,7 +93,11 @@
       "hidingDescription": "일상 영어 숨기기 - 가장 흔한 약 2,000개 단어 (the, know, get…)",
       "interestingButton": "흥미로운 단어",
       "onlyKindsSuffix": " · {kinds}만",
-      "showingDescription": "일상 영어를 포함한 모든 단어 표시"
+      "showingDescription": "일상 영어를 포함한 모든 단어 표시",
+      "excludingKindsSuffix": " · {kinds} 숨김",
+      "posStateExcluded": "{kind}: 제외됨 (클릭하여 초기화)",
+      "posStateIncluded": "{kind}: 포함됨 (클릭하여 제외)",
+      "posStateOff": "{kind}: 꺼짐 (클릭하여 포함)"
     }
   },
   "boards": {
@@ -327,7 +331,11 @@
     "signatureWordsHeading": "시그니처 단어",
     "slugTitle": "{title} - {year}",
     "vocabRichnessLabel": "어휘 풍부도",
-    "wordsSpokenLabel": "사용된 단어"
+    "wordsSpokenLabel": "사용된 단어",
+    "imdbPosterTitle": "IMDb의 {title}",
+    "runtimeLabel": "러닝타임",
+    "runtimeValue": "{minutes}분",
+    "wordsPerMinuteLabel": "분당 단어 수"
   },
   "themeToggle": {
     "day": "주간",

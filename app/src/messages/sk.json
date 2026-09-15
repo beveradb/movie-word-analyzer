@@ -93,7 +93,11 @@
       "hidingDescription": "skrývam bežnú angličtinu - ~2 000 najbežnejších slov (the, know, get…)",
       "interestingButton": "zaujímavé slová",
       "onlyKindsSuffix": " · len {kinds}",
-      "showingDescription": "zobrazujem každé slovo, vrátane bežnej angličtiny"
+      "showingDescription": "zobrazujem každé slovo, vrátane bežnej angličtiny",
+      "excludingKindsSuffix": " · skryté {kinds}",
+      "posStateExcluded": "{kind}: vylúčené (kliknutím resetuješ)",
+      "posStateIncluded": "{kind}: zahrnuté (kliknutím vylúčiš)",
+      "posStateOff": "{kind}: vypnuté (kliknutím zahrnieš)"
     }
   },
   "boards": {
@@ -327,7 +331,11 @@
     "signatureWordsHeading": "Charakteristické slová",
     "slugTitle": "{title} - {year}",
     "vocabRichnessLabel": "Bohatosť slovníka",
-    "wordsSpokenLabel": "Hovorené slová"
+    "wordsSpokenLabel": "Hovorené slová",
+    "imdbPosterTitle": "{title} na IMDb",
+    "runtimeLabel": "Dĺžka",
+    "runtimeValue": "{minutes} min",
+    "wordsPerMinuteLabel": "Slov za minútu"
   },
   "themeToggle": {
     "day": "DEŇ",

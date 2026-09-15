@@ -93,7 +93,11 @@
       "hidingDescription": "skriva svakodnevni engleski - oko 2.000 najčešćih riječi (the, know, get…)",
       "interestingButton": "zanimljive riječi",
       "onlyKindsSuffix": " · samo {kinds}",
-      "showingDescription": "prikazuje svaku riječ, uključujući svakodnevni engleski"
+      "showingDescription": "prikazuje svaku riječ, uključujući svakodnevni engleski",
+      "excludingKindsSuffix": " · skriveno {kinds}",
+      "posStateExcluded": "{kind}: izostavljeno (klikni za poništavanje)",
+      "posStateIncluded": "{kind}: uključeno (klikni za izostavljanje)",
+      "posStateOff": "{kind}: isključeno (klikni za uključivanje)"
     }
   },
   "boards": {
@@ -327,7 +331,11 @@
     "signatureWordsHeading": "Prepoznatljive riječi",
     "slugTitle": "{title} - {year}",
     "vocabRichnessLabel": "Bogatstvo vokabulara",
-    "wordsSpokenLabel": "Izgovorene riječi"
+    "wordsSpokenLabel": "Izgovorene riječi",
+    "imdbPosterTitle": "{title} na IMDb-u",
+    "runtimeLabel": "Trajanje",
+    "runtimeValue": "{minutes} min",
+    "wordsPerMinuteLabel": "Riječi u minuti"
   },
   "themeToggle": {
     "day": "DAN",

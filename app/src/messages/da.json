@@ -93,7 +93,11 @@
       "hidingDescription": "skjuler hverdagsengelsk - de ~2.000 mest almindelige ord (the, know, get…)",
       "interestingButton": "interessante ord",
       "onlyKindsSuffix": " · kun {kinds}",
-      "showingDescription": "viser alle ord, inklusiv hverdagsengelsk"
+      "showingDescription": "viser alle ord, inklusiv hverdagsengelsk",
+      "excludingKindsSuffix": " · skjuler {kinds}",
+      "posStateExcluded": "{kind}: ekskluderet (klik for at nulstille)",
+      "posStateIncluded": "{kind}: inkluderet (klik for at ekskludere)",
+      "posStateOff": "{kind}: fra (klik for at inkludere)"
     }
   },
   "boards": {
@@ -327,7 +331,11 @@
     "signatureWordsHeading": "Signaturord",
     "slugTitle": "{title} - {year}",
     "vocabRichnessLabel": "Ordforrådets rigdom",
-    "wordsSpokenLabel": "Talte ord"
+    "wordsSpokenLabel": "Talte ord",
+    "imdbPosterTitle": "{title} på IMDb",
+    "runtimeLabel": "Spilletid",
+    "runtimeValue": "{minutes} min",
+    "wordsPerMinuteLabel": "Ord i minuttet"
   },
   "themeToggle": {
     "day": "DAG",

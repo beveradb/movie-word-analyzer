@@ -93,7 +93,11 @@
       "hidingDescription": "מסתיר אנגלית יומיומית - כ-2,000 המילים הנפוצות ביותר (the, know, get…)",
       "interestingButton": "מילים מעניינות",
       "onlyKindsSuffix": " · רק {kinds}",
-      "showingDescription": "מציג כל מילה, כולל אנגלית יומיומית"
+      "showingDescription": "מציג כל מילה, כולל אנגלית יומיומית",
+      "excludingKindsSuffix": " · מסתיר {kinds}",
+      "posStateExcluded": "{kind}: מוחרג (לחיצה לאיפוס)",
+      "posStateIncluded": "{kind}: נכלל (לחיצה להחרגה)",
+      "posStateOff": "{kind}: כבוי (לחיצה להכללה)"
     }
   },
   "boards": {
@@ -327,7 +331,11 @@
     "signatureWordsHeading": "מילות חותם",
     "slugTitle": "{title} - {year}",
     "vocabRichnessLabel": "עושר אוצר מילים",
-    "wordsSpokenLabel": "מילים שנאמרו"
+    "wordsSpokenLabel": "מילים שנאמרו",
+    "imdbPosterTitle": "{title} ב-IMDb",
+    "runtimeLabel": "אורך הסרט",
+    "runtimeValue": "{minutes} דק'",
+    "wordsPerMinuteLabel": "מילים לדקה"
   },
   "themeToggle": {
     "day": "יום",

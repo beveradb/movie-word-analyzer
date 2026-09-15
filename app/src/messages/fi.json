@@ -93,7 +93,11 @@
       "hidingDescription": "piilotetaan arkikieli - noin 2 000 yleisintä sanaa (the, know, get…)",
       "interestingButton": "mielenkiintoiset sanat",
       "onlyKindsSuffix": " · vain {kinds}",
-      "showingDescription": "näytetään kaikki sanat, arkikieli mukaan lukien"
+      "showingDescription": "näytetään kaikki sanat, arkikieli mukaan lukien",
+      "excludingKindsSuffix": " · piilotetaan {kinds}",
+      "posStateExcluded": "{kind}: poissuljettu (klikkaa palauttaaksesi)",
+      "posStateIncluded": "{kind}: sisällytetty (klikkaa poissulkeaksesi)",
+      "posStateOff": "{kind}: pois päältä (klikkaa sisällyttääksesi)"
     }
   },
   "boards": {
@@ -327,7 +331,11 @@
     "signatureWordsHeading": "Tunnusomaiset sanat",
     "slugTitle": "{title} - {year}",
     "vocabRichnessLabel": "Sanavaraston rikkaus",
-    "wordsSpokenLabel": "Puhuttuja sanoja"
+    "wordsSpokenLabel": "Puhuttuja sanoja",
+    "imdbPosterTitle": "{title} IMDb:ssä",
+    "runtimeLabel": "Kesto",
+    "runtimeValue": "{minutes} min",
+    "wordsPerMinuteLabel": "Sanoja minuutissa"
   },
   "themeToggle": {
     "day": "PÄIVÄ",

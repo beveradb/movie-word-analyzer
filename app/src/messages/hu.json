@@ -93,7 +93,11 @@
       "hidingDescription": "mindennapi angol elrejtése - a ~2000 leggyakoribb szó (the, know, get…)",
       "interestingButton": "érdekes szavak",
       "onlyKindsSuffix": " · csak {kinds}",
-      "showingDescription": "minden szó megjelenítése, beleértve a mindennapi angolt is"
+      "showingDescription": "minden szó megjelenítése, beleértve a mindennapi angolt is",
+      "excludingKindsSuffix": " · {kinds} elrejtve",
+      "posStateExcluded": "{kind}: kizárva (kattints a visszaállításhoz)",
+      "posStateIncluded": "{kind}: hozzáadva (kattints a kizáráshoz)",
+      "posStateOff": "{kind}: kikapcsolva (kattints a hozzáadáshoz)"
     }
   },
   "boards": {
@@ -327,7 +331,11 @@
     "signatureWordsHeading": "Jellegzetes szavak",
     "slugTitle": "{title} - {year}",
     "vocabRichnessLabel": "Szókincs gazdagsága",
-    "wordsSpokenLabel": "Kimondott szavak"
+    "wordsSpokenLabel": "Kimondott szavak",
+    "imdbPosterTitle": "{title} az IMDb-n",
+    "runtimeLabel": "Játékidő",
+    "runtimeValue": "{minutes} perc",
+    "wordsPerMinuteLabel": "Szavak percenként"
   },
   "themeToggle": {
     "day": "NAPPAL",

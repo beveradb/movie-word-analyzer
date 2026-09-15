@@ -93,7 +93,11 @@
       "hidingDescription": "ukrywanie potocznego angielskiego - ok. 2000 najczęstszych słów (the, know, get…)",
       "interestingButton": "ciekawe słowa",
       "onlyKindsSuffix": " · tylko {kinds}",
-      "showingDescription": "pokazywanie każdego słowa, w tym potocznego angielskiego"
+      "showingDescription": "pokazywanie każdego słowa, w tym potocznego angielskiego",
+      "excludingKindsSuffix": " · ukryto {kinds}",
+      "posStateExcluded": "{kind}: wykluczone (kliknij, aby zresetować)",
+      "posStateIncluded": "{kind}: uwzględnione (kliknij, aby wykluczyć)",
+      "posStateOff": "{kind}: wyłączone (kliknij, aby uwzględnić)"
     }
   },
   "boards": {
@@ -327,7 +331,11 @@
     "signatureWordsHeading": "Słowa charakterystyczne",
     "slugTitle": "{title} - {year}",
     "vocabRichnessLabel": "Bogactwo słownictwa",
-    "wordsSpokenLabel": "Wypowiedziane słowa"
+    "wordsSpokenLabel": "Wypowiedziane słowa",
+    "imdbPosterTitle": "{title} na IMDb",
+    "runtimeLabel": "Czas trwania",
+    "runtimeValue": "{minutes} min",
+    "wordsPerMinuteLabel": "Słów na minutę"
   },
   "themeToggle": {
     "day": "DZIEŃ",

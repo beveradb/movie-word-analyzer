@@ -93,7 +93,11 @@
       "hidingDescription": "ascunde engleza de zi cu zi - cele mai comune ~2.000 de cuvinte (the, know, get…)",
       "interestingButton": "cuvinte interesante",
       "onlyKindsSuffix": " · doar {kinds}",
-      "showingDescription": "arată fiecare cuvânt, inclusiv engleza de zi cu zi"
+      "showingDescription": "arată fiecare cuvânt, inclusiv engleza de zi cu zi",
+      "excludingKindsSuffix": " · ascunzând {kinds}",
+      "posStateExcluded": "{kind}: exclus (dă click pentru a reseta)",
+      "posStateIncluded": "{kind}: inclus (dă click pentru a exclude)",
+      "posStateOff": "{kind}: dezactivat (dă click pentru a include)"
     }
   },
   "boards": {
@@ -327,7 +331,11 @@
     "signatureWordsHeading": "Cuvinte distinctive",
     "slugTitle": "{title} - {year}",
     "vocabRichnessLabel": "Bogăția vocabularului",
-    "wordsSpokenLabel": "Cuvinte rostite"
+    "wordsSpokenLabel": "Cuvinte rostite",
+    "imdbPosterTitle": "{title} pe IMDb",
+    "runtimeLabel": "Durată",
+    "runtimeValue": "{minutes} min",
+    "wordsPerMinuteLabel": "Cuvinte pe minut"
   },
   "themeToggle": {
     "day": "ZI",

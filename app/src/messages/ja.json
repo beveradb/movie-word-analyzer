@@ -93,7 +93,11 @@
       "hidingDescription": "日常英語を非表示 - 最も一般的な約2,000語（the, know, get…）",
       "interestingButton": "興味深い言葉",
       "onlyKindsSuffix": " · {kinds} のみ",
-      "showingDescription": "日常英語を含むすべての言葉を表示"
+      "showingDescription": "日常英語を含むすべての言葉を表示",
+      "excludingKindsSuffix": " · {kinds}を非表示",
+      "posStateExcluded": "{kind}: 除外（クリックしてリセット）",
+      "posStateIncluded": "{kind}: 対象（クリックして除外）",
+      "posStateOff": "{kind}: オフ（クリックして追加）"
     }
   },
   "boards": {
@@ -327,7 +331,11 @@
     "signatureWordsHeading": "特徴的な言葉",
     "slugTitle": "{title} - {year}",
     "vocabRichnessLabel": "語彙の豊富さ",
-    "wordsSpokenLabel": "話された単語"
+    "wordsSpokenLabel": "話された単語",
+    "imdbPosterTitle": "IMDbでの{title}",
+    "runtimeLabel": "上映時間",
+    "runtimeValue": "{minutes}分",
+    "wordsPerMinuteLabel": "1分あたりの単語数"
   },
   "themeToggle": {
     "day": "昼",

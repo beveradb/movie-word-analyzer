@@ -41,10 +41,12 @@ export RCLONE_CONFIG_R2_ENDPOINT="https://${CLOUDFLARE_ACCOUNT_ID}.r2.cloudflare
 rclone copy . r2:moviewords-data/ --checksum --progress \
   --filter '+ json/trend/**' --filter '+ all/json/trend/**' --filter '+ all/lang/*/json/trend/**' \
   --filter '+ json/year-totals.json' --filter '+ all/json/year-totals.json' --filter '+ all/lang/*/json/year-totals.json' \
+  --filter '+ json/blurb/**' --filter '+ all/json/blurb/**' \
   --filter '- *' --header-upload "Cache-Control: public, max-age=3600"
 rclone copy . r2:moviewords-data/ --checksum --progress \
   --filter '- json/trend/**' --filter '- all/json/trend/**' --filter '- all/lang/*/json/trend/**' \
   --filter '- json/year-totals.json' --filter '- all/json/year-totals.json' --filter '- all/lang/*/json/year-totals.json' \
+  --filter '- json/blurb/**' --filter '- all/json/blurb/**' \
   --filter '+ *.json' --filter '- *' \
   --header-upload "Cache-Control: public, max-age=300"
 rclone copy . r2:moviewords-data/ --checksum --progress \

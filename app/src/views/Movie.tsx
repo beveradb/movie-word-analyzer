@@ -1,26 +1,35 @@
 import { useEffect, useState } from 'react'
-import type { MovieDetail, MovieIndexEntry } from '../lib/data'
-import { getMovie, getMovieIndex } from '../lib/data'
+import type { MovieBlurb, MovieDetail, MovieIndexEntry } from '../lib/data'
+import { getMovie, getMovieBlurb, getMovieIndex } from '../lib/data'
 import { navigate } from '../lib/route'
 import { ErrorBox, HighlightWord, LangBadge, Poster, Slug, Spinner } from '../components/ui'
 import { WordFilterBar, defaultFilter, passesFilter, type WordRow } from '../components/WordFilter'
 import { useI18n } from '../i18n'
 
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="border-2 border-ink bg-card px-4 py-3">
+function Stat({ label, value, href }: { label: string; value: string; href?: string }) {
+  const inner = (
+    <>
       <div className="font-script text-2xl font-bold tabular-nums">{value}</div>
       <div className="mt-0.5 text-xs uppercase tracking-wide text-ink-2">{label}</div>
-    </div>
+    </>
+  )
+  const cls = 'block border-2 border-ink bg-card px-4 py-3'
+  return href ? (
+    <a href={href} target="_blank" rel="noopener noreferrer" className={`${cls} hover:bg-mark`}>
+      {inner}
+    </a>
+  ) : (
+    <div className={cls}>{inner}</div>
   )
 }
 
 export function MovieView({ id }: { id: string }) {
-  const { t, n } = useI18n()
+  const { t, n, tn } = useI18n()
   const [movie, setMovie] = useState<MovieDetail | null>(null)
   const [meta, setMeta] = useState<MovieIndexEntry | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [filter, setFilter] = useState(defaultFilter())
+  const [blurb, setBlurb] = useState<MovieBlurb | null>(null)
 
   useEffect(() => {
     setMovie(null)
@@ -29,10 +38,15 @@ export function MovieView({ id }: { id: string }) {
       .then(setMovie)
       .catch(() => setError(t('movie.notFound', { id })))
     getMovieIndex().then((idx) => setMeta(idx.find((m) => m.id === id) ?? null)).catch(() => {})
+    setBlurb(null)
+    getMovieBlurb(id).then(setBlurb).catch(() => {})
   }, [id, t])
 
   if (error) return <ErrorBox message={error} retry={() => navigate('/')} />
   if (!movie) return <Spinner label={t('movie.loadingScript')} />
+
+  const imdbUrl = `https://www.imdb.com/title/${movie.imdb_id}/`
+  const decade = Math.floor(movie.year / 10) * 10
 
   // 'all words' mode merges the raw head (stopwords included) with the wider
   // stopword-free top list, so mid-list common words stay reachable
@@ -50,7 +64,18 @@ export function MovieView({ id }: { id: string }) {
   return (
     <div>
       <Slug
-        text={t('movie.slugTitle', { title: movie.title, year: movie.year })}
+        text={tn('movie.slugTitle', {
+          title: movie.title,
+          year: (
+            <a
+              href={`#/decade/${decade}`}
+              className="hover:bg-mark"
+              title={t('movie.decadeLinkTitle', { decade })}
+            >
+              {movie.year}
+            </a>
+          ),
+        })}
         right={
           <span className="inline-flex items-baseline gap-2">
             <LangBadge lang={meta?.lang ?? movie.original_language} />
@@ -70,13 +95,15 @@ export function MovieView({ id }: { id: string }) {
 
       <div className="mt-5 flex gap-4">
         <a
-          href={`#/decade/${Math.floor(movie.year / 10) * 10}`}
+          href={imdbUrl}
+          target="_blank"
+          rel="noopener noreferrer"
           className="w-28 shrink-0 sm:w-36"
-          title={t('movie.decadeLinkTitle', { decade: Math.floor(movie.year / 10) * 10 })}
+          title={t('movie.imdbPosterTitle', { title: movie.title })}
         >
           <Poster id={movie.imdb_id} title={movie.title} className="w-full border-2 border-ink" />
         </a>
-        <div className="grid flex-1 grid-cols-2 content-start gap-3">
+        <div className="grid flex-1 grid-cols-2 content-start gap-3 sm:grid-cols-3">
           <Stat label={t('movie.wordsSpokenLabel')} value={n(movie.stats.total_words)} />
           <Stat label={t('movie.distinctWordsLabel')} value={n(movie.stats.unique_words)} />
           <Stat
@@ -88,11 +115,27 @@ export function MovieView({ id }: { id: string }) {
             })}
           />
           <Stat
+            label={t('movie.wordsPerMinuteLabel')}
+            value={movie.stats.words_per_minute != null ? n(Math.round(movie.stats.words_per_minute)) : '—'}
+          />
+          <Stat
+            label={t('movie.runtimeLabel')}
+            value={blurb?.runtime ? t('movie.runtimeValue', { minutes: blurb.runtime }) : '—'}
+          />
+          <Stat
             label={t('movie.imdbRatingLabel')}
             value={meta ? n(meta.rating, { minimumFractionDigits: 1, maximumFractionDigits: 1 }) : '—'}
+            href={imdbUrl}
           />
         </div>
       </div>
+
+      {(blurb?.tagline || blurb?.overview) && (
+        <div className="mt-5 border-l-2 border-ink-3 pl-4">
+          {blurb.tagline && <p className="font-script text-sm italic text-ink-2">“{blurb.tagline}”</p>}
+          {blurb.overview && <p className="mt-1 max-w-prose text-sm text-ink">{blurb.overview}</p>}
+        </div>
+      )}
 
       <WordFilterBar filter={filter} onChange={setFilter} />
 

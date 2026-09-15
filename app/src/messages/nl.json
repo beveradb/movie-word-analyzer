@@ -93,7 +93,11 @@
       "hidingDescription": "verbergt alledaags Engels - de ~2.000 meest voorkomende woorden (the, know, get…)",
       "interestingButton": "interessante woorden",
       "onlyKindsSuffix": " · alleen {kinds}",
-      "showingDescription": "toont elk woord, inclusief alledaags Engels"
+      "showingDescription": "toont elk woord, inclusief alledaags Engels",
+      "excludingKindsSuffix": " · {kinds} verborgen",
+      "posStateExcluded": "{kind}: uitgesloten (klik om te resetten)",
+      "posStateIncluded": "{kind}: inbegrepen (klik om uit te sluiten)",
+      "posStateOff": "{kind}: uit (klik om toe te voegen)"
     }
   },
   "boards": {
@@ -327,7 +331,11 @@
     "signatureWordsHeading": "Kenmerkende woorden",
     "slugTitle": "{title} - {year}",
     "vocabRichnessLabel": "Rijkdom van woordenschat",
-    "wordsSpokenLabel": "Uitgesproken woorden"
+    "wordsSpokenLabel": "Uitgesproken woorden",
+    "imdbPosterTitle": "{title} op IMDb",
+    "runtimeLabel": "Speelduur",
+    "runtimeValue": "{minutes} min",
+    "wordsPerMinuteLabel": "Woorden per minuut"
   },
   "themeToggle": {
     "day": "DAG",

@@ -93,7 +93,11 @@
       "hidingDescription": "itinatago ang pang-araw-araw na Ingles - ang ~2,000 pinakakaraniwang salita (the, know, get…)",
       "interestingButton": "mga kawili-wiling salita",
       "onlyKindsSuffix": " · tanging {kinds} lamang",
-      "showingDescription": "ipinapakita ang bawat salita, kabilang ang pang-araw-araw na Ingles"
+      "showingDescription": "ipinapakita ang bawat salita, kabilang ang pang-araw-araw na Ingles",
+      "excludingKindsSuffix": " · itinatago ang {kinds}",
+      "posStateExcluded": "{kind}: hindi kasama (i-click para i-reset)",
+      "posStateIncluded": "{kind}: kasama (i-click para alisin)",
+      "posStateOff": "{kind}: naka-off (i-click para isama)"
     }
   },
   "boards": {
@@ -327,7 +331,11 @@
     "signatureWordsHeading": "Mga signature na salita",
     "slugTitle": "{title} - {year}",
     "vocabRichnessLabel": "Yaman ng bokabularyo",
-    "wordsSpokenLabel": "Mga salitang sinabi"
+    "wordsSpokenLabel": "Mga salitang sinabi",
+    "imdbPosterTitle": "{title} sa IMDb",
+    "runtimeLabel": "Haba",
+    "runtimeValue": "{minutes} min",
+    "wordsPerMinuteLabel": "Mga salita kada minuto"
   },
   "themeToggle": {
     "day": "ARAW",

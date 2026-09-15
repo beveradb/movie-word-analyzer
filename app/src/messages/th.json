@@ -93,7 +93,11 @@
       "hidingDescription": "ซ่อนภาษาอังกฤษในชีวิตประจำวัน - คำที่พบบ่อยที่สุด ~2,000 คำ (the, know, get…)",
       "interestingButton": "คำที่น่าสนใจ",
       "onlyKindsSuffix": " · เฉพาะ {kinds}",
-      "showingDescription": "แสดงทุกคำ รวมถึงภาษาอังกฤษในชีวิตประจำวัน"
+      "showingDescription": "แสดงทุกคำ รวมถึงภาษาอังกฤษในชีวิตประจำวัน",
+      "excludingKindsSuffix": " · ซ่อน {kinds}",
+      "posStateExcluded": "{kind}: ไม่รวม (คลิกเพื่อรีเซ็ต)",
+      "posStateIncluded": "{kind}: รวมอยู่ (คลิกเพื่อเอาออก)",
+      "posStateOff": "{kind}: ปิด (คลิกเพื่อรวม)"
     }
   },
   "boards": {
@@ -327,7 +331,11 @@
     "signatureWordsHeading": "คำเอกลักษณ์",
     "slugTitle": "{title} - {year}",
     "vocabRichnessLabel": "ความหลากหลายของคำศัพท์",
-    "wordsSpokenLabel": "คำที่พูด"
+    "wordsSpokenLabel": "คำที่พูด",
+    "imdbPosterTitle": "{title} บน IMDb",
+    "runtimeLabel": "ความยาว",
+    "runtimeValue": "{minutes} นาที",
+    "wordsPerMinuteLabel": "คำต่อนาที"
   },
   "themeToggle": {
     "day": "กลางวัน",

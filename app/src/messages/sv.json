@@ -93,7 +93,11 @@
       "hidingDescription": "döljer vardaglig engelska - de ~2 000 vanligaste orden (the, know, get…)",
       "interestingButton": "intressanta ord",
       "onlyKindsSuffix": " · endast {kinds}",
-      "showingDescription": "visar varje ord, inklusive vardaglig engelska"
+      "showingDescription": "visar varje ord, inklusive vardaglig engelska",
+      "excludingKindsSuffix": " · döljer {kinds}",
+      "posStateExcluded": "{kind}: exkluderad (klicka för att återställa)",
+      "posStateIncluded": "{kind}: inkluderad (klicka för att exkludera)",
+      "posStateOff": "{kind}: av (klicka för att inkludera)"
     }
   },
   "boards": {
@@ -327,7 +331,11 @@
     "signatureWordsHeading": "Signaturord",
     "slugTitle": "{title} - {year}",
     "vocabRichnessLabel": "Ordförrådets rikedom",
-    "wordsSpokenLabel": "Talade ord"
+    "wordsSpokenLabel": "Talade ord",
+    "imdbPosterTitle": "{title} på IMDb",
+    "runtimeLabel": "Speltid",
+    "runtimeValue": "{minutes} min",
+    "wordsPerMinuteLabel": "Ord per minut"
   },
   "themeToggle": {
     "day": "DAG",

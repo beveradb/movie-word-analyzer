@@ -93,7 +93,11 @@
       "hidingDescription": "menyembunyikan bahasa Inggeris harian - ~2,000 perkataan paling biasa (the, know, get…)",
       "interestingButton": "perkataan menarik",
       "onlyKindsSuffix": " · hanya {kinds}",
-      "showingDescription": "menunjukkan setiap perkataan, termasuk bahasa Inggeris harian"
+      "showingDescription": "menunjukkan setiap perkataan, termasuk bahasa Inggeris harian",
+      "excludingKindsSuffix": " · menyembunyikan {kinds}",
+      "posStateExcluded": "{kind}: dikecualikan (klik untuk tetapkan semula)",
+      "posStateIncluded": "{kind}: disertakan (klik untuk kecualikan)",
+      "posStateOff": "{kind}: dimatikan (klik untuk sertakan)"
     }
   },
   "boards": {
@@ -327,7 +331,11 @@
     "signatureWordsHeading": "Perkataan istimewa",
     "slugTitle": "{title} - {year}",
     "vocabRichnessLabel": "Kekayaan kosa kata",
-    "wordsSpokenLabel": "Perkataan diucapkan"
+    "wordsSpokenLabel": "Perkataan diucapkan",
+    "imdbPosterTitle": "{title} di IMDb",
+    "runtimeLabel": "Tempoh Tayangan",
+    "runtimeValue": "{minutes} min",
+    "wordsPerMinuteLabel": "Perkataan seminit"
   },
   "themeToggle": {
     "day": "SIANG",

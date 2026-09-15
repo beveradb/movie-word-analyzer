@@ -96,7 +96,11 @@
       "anyKindButton": "any kind",
       "hidingDescription": "hiding everyday English - the ~2,000 most common words (the, know, get…)",
       "showingDescription": "showing every word, including everyday English",
-      "onlyKindsSuffix": " · only {kinds}"
+      "onlyKindsSuffix": " · only {kinds}",
+      "excludingKindsSuffix": " · hiding {kinds}",
+      "posStateOff": "{kind}: off (click to include)",
+      "posStateIncluded": "{kind}: included (click to exclude)",
+      "posStateExcluded": "{kind}: excluded (click to reset)"
     }
   },
   "boards": {
@@ -240,7 +244,11 @@
     "signatureWordsHeading": "Signature words",
     "signatureWordsBody": "Words this film uses far more than movies overall (log-odds vs the whole corpus).",
     "mostSpokenHeading": "Most spoken words",
-    "compareButton": "Compare with another film"
+    "compareButton": "Compare with another film",
+    "imdbPosterTitle": "{title} on IMDb",
+    "wordsPerMinuteLabel": "Words per minute",
+    "runtimeLabel": "Runtime",
+    "runtimeValue": "{minutes} min"
   },
   "leaderboard": {
     "tabs": {

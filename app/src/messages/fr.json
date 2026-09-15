@@ -93,7 +93,11 @@
       "hidingDescription": "masque l'anglais courant - les ~2 000 mots les plus fréquents (le, savoir, obtenir…)",
       "interestingButton": "mots intéressants",
       "onlyKindsSuffix": " · uniquement {kinds}",
-      "showingDescription": "affiche tous les mots, y compris l'anglais courant"
+      "showingDescription": "affiche tous les mots, y compris l'anglais courant",
+      "excludingKindsSuffix": " · masquant {kinds}",
+      "posStateExcluded": "{kind} : exclu (clique pour réinitialiser)",
+      "posStateIncluded": "{kind} : inclus (clique pour exclure)",
+      "posStateOff": "{kind} : désactivé (clique pour inclure)"
     }
   },
   "boards": {
@@ -327,7 +331,11 @@
     "signatureWordsHeading": "Mots signatures",
     "slugTitle": "{title} - {year}",
     "vocabRichnessLabel": "Richesse du vocabulaire",
-    "wordsSpokenLabel": "Mots prononcés"
+    "wordsSpokenLabel": "Mots prononcés",
+    "imdbPosterTitle": "{title} sur IMDb",
+    "runtimeLabel": "Durée",
+    "runtimeValue": "{minutes} min",
+    "wordsPerMinuteLabel": "Mots par minute"
   },
   "themeToggle": {
     "day": "JOUR",

@@ -100,7 +100,7 @@ function WordsBoard() {
   const [wf, setWf] = useState(() => {
     const f = defaultFilter()
     const pos = params.get('pos')
-    if (pos) f.pos = new Set(pos.split(',').filter(Boolean))
+    if (pos) f.pos = new Map(pos.split(',').filter(Boolean).map((c) => [c, 'include']))
     return f
   })
   const [sort, setSort] = useState<'spoken' | 'movieish'>('spoken')

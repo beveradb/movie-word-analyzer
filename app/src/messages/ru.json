@@ -93,7 +93,11 @@
       "hidingDescription": "скрываем повседневный английский - ~2000 самых частых слов (the, know, get…)",
       "interestingButton": "интересные слова",
       "onlyKindsSuffix": " · только {kinds}",
-      "showingDescription": "показываем все слова, включая повседневный английский"
+      "showingDescription": "показываем все слова, включая повседневный английский",
+      "excludingKindsSuffix": " · скрываем {kinds}",
+      "posStateExcluded": "{kind}: исключено (нажми, чтобы сбросить)",
+      "posStateIncluded": "{kind}: включено (нажми, чтобы исключить)",
+      "posStateOff": "{kind}: выключено (нажми, чтобы включить)"
     }
   },
   "boards": {
@@ -327,7 +331,11 @@
     "signatureWordsHeading": "Характерные слова",
     "slugTitle": "{title} - {year}",
     "vocabRichnessLabel": "Богатство словаря",
-    "wordsSpokenLabel": "Произнесено слов"
+    "wordsSpokenLabel": "Произнесено слов",
+    "imdbPosterTitle": "{title} на IMDb",
+    "runtimeLabel": "Хронометраж",
+    "runtimeValue": "{minutes} мин",
+    "wordsPerMinuteLabel": "Слов в минуту"
   },
   "themeToggle": {
     "day": "ДЕНЬ",

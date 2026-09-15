@@ -93,7 +93,11 @@
       "hidingDescription": "menyembunyikan bahasa Inggris sehari-hari - ~2.000 kata paling umum (the, know, get…)",
       "interestingButton": "kata menarik",
       "onlyKindsSuffix": " · hanya {kinds}",
-      "showingDescription": "menampilkan setiap kata, termasuk bahasa Inggris sehari-hari"
+      "showingDescription": "menampilkan setiap kata, termasuk bahasa Inggris sehari-hari",
+      "excludingKindsSuffix": " · menyembunyikan {kinds}",
+      "posStateExcluded": "{kind}: dikecualikan (klik untuk reset)",
+      "posStateIncluded": "{kind}: disertakan (klik untuk mengecualikan)",
+      "posStateOff": "{kind}: nonaktif (klik untuk menyertakan)"
     }
   },
   "boards": {
@@ -327,7 +331,11 @@
     "signatureWordsHeading": "Kata khas",
     "slugTitle": "{title} - {year}",
     "vocabRichnessLabel": "Kekayaan kosakata",
-    "wordsSpokenLabel": "Kata yang diucapkan"
+    "wordsSpokenLabel": "Kata yang diucapkan",
+    "imdbPosterTitle": "{title} di IMDb",
+    "runtimeLabel": "Durasi",
+    "runtimeValue": "{minutes} menit",
+    "wordsPerMinuteLabel": "Kata per menit"
   },
   "themeToggle": {
     "day": "SIANG",

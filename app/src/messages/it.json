@@ -93,7 +93,11 @@
       "hidingDescription": "nascondendo l'inglese di tutti i giorni - le ~2.000 parole più comuni (the, know, get…)",
       "interestingButton": "parole interessanti",
       "onlyKindsSuffix": " · solo {kinds}",
-      "showingDescription": "mostrando ogni parola, incluso l'inglese di tutti i giorni"
+      "showingDescription": "mostrando ogni parola, incluso l'inglese di tutti i giorni",
+      "excludingKindsSuffix": " · nascondendo {kinds}",
+      "posStateExcluded": "{kind}: escluso (clicca per ripristinare)",
+      "posStateIncluded": "{kind}: incluso (clicca per escludere)",
+      "posStateOff": "{kind}: disattivato (clicca per includere)"
     }
   },
   "boards": {
@@ -327,7 +331,11 @@
     "signatureWordsHeading": "Parole distintive",
     "slugTitle": "{title} - {year}",
     "vocabRichnessLabel": "Ricchezza del vocabolario",
-    "wordsSpokenLabel": "Parole pronunciate"
+    "wordsSpokenLabel": "Parole pronunciate",
+    "imdbPosterTitle": "{title} su IMDb",
+    "runtimeLabel": "Durata",
+    "runtimeValue": "{minutes} min",
+    "wordsPerMinuteLabel": "Parole al minuto"
   },
   "themeToggle": {
     "day": "GIORNO",

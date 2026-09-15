@@ -93,7 +93,11 @@
       "hidingDescription": "रोज़मर्रा की इंग्लिश छिपा रहा है - ~2,000 सबसे आम शब्द (the, know, get…)",
       "interestingButton": "दिलचस्प शब्द",
       "onlyKindsSuffix": " · सिर्फ़ {kinds}",
-      "showingDescription": "हर शब्द दिखा रहा है, रोज़मर्रा की इंग्लिश समेत"
+      "showingDescription": "हर शब्द दिखा रहा है, रोज़मर्रा की इंग्लिश समेत",
+      "excludingKindsSuffix": " · {kinds} छिपाए गए",
+      "posStateExcluded": "{kind}: बाहर रखा गया (रीसेट करने के लिए क्लिक करें)",
+      "posStateIncluded": "{kind}: शामिल (बाहर रखने के लिए क्लिक करें)",
+      "posStateOff": "{kind}: बंद (शामिल करने के लिए क्लिक करें)"
     }
   },
   "boards": {
@@ -327,7 +331,11 @@
     "signatureWordsHeading": "सिग्नेचर शब्द",
     "slugTitle": "{title} - {year}",
     "vocabRichnessLabel": "वोकैबुलरी की अमीरी",
-    "wordsSpokenLabel": "बोले गए शब्द"
+    "wordsSpokenLabel": "बोले गए शब्द",
+    "imdbPosterTitle": "{title} IMDb पर",
+    "runtimeLabel": "रनटाइम",
+    "runtimeValue": "{minutes} मिनट",
+    "wordsPerMinuteLabel": "शब्द प्रति मिनट"
   },
   "themeToggle": {
     "day": "दिन",

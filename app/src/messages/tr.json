@@ -93,7 +93,11 @@
       "hidingDescription": "günlük İngilizceyi gizliyor - en yaygın ~2.000 kelime (the, know, get…)",
       "interestingButton": "ilginç kelimeler",
       "onlyKindsSuffix": " · sadece {kinds}",
-      "showingDescription": "günlük İngilizce dahil her kelimeyi gösteriyor"
+      "showingDescription": "günlük İngilizce dahil her kelimeyi gösteriyor",
+      "excludingKindsSuffix": " · {kinds} gizleniyor",
+      "posStateExcluded": "{kind}: hariç tutuldu (sıfırlamak için tıkla)",
+      "posStateIncluded": "{kind}: dahil edildi (hariç tutmak için tıkla)",
+      "posStateOff": "{kind}: kapalı (dahil etmek için tıkla)"
     }
   },
   "boards": {
@@ -327,7 +331,11 @@
     "signatureWordsHeading": "İmza kelimeler",
     "slugTitle": "{title} - {year}",
     "vocabRichnessLabel": "Kelime dağarcığı zenginliği",
-    "wordsSpokenLabel": "Konuşulan kelimeler"
+    "wordsSpokenLabel": "Konuşulan kelimeler",
+    "imdbPosterTitle": "{title} IMDb'de",
+    "runtimeLabel": "Süre",
+    "runtimeValue": "{minutes} dk",
+    "wordsPerMinuteLabel": "Dakika başına kelime"
   },
   "themeToggle": {
     "day": "GÜNDÜZ",

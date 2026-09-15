@@ -93,7 +93,11 @@
       "hidingDescription": "ẩn tiếng Anh thường ngày - ~2.000 từ phổ biến nhất (the, know, get…)",
       "interestingButton": "những từ thú vị",
       "onlyKindsSuffix": " · chỉ {kinds}",
-      "showingDescription": "hiển thị mọi từ, bao gồm cả tiếng Anh thường ngày"
+      "showingDescription": "hiển thị mọi từ, bao gồm cả tiếng Anh thường ngày",
+      "excludingKindsSuffix": " · đang ẩn {kinds}",
+      "posStateExcluded": "{kind}: đã loại trừ (nhấp để đặt lại)",
+      "posStateIncluded": "{kind}: đã bao gồm (nhấp để loại trừ)",
+      "posStateOff": "{kind}: tắt (nhấp để bao gồm)"
     }
   },
   "boards": {
@@ -327,7 +331,11 @@
     "signatureWordsHeading": "Những từ đặc trưng",
     "slugTitle": "{title} - {year}",
     "vocabRichnessLabel": "Độ phong phú từ vựng",
-    "wordsSpokenLabel": "Số từ được nói"
+    "wordsSpokenLabel": "Số từ được nói",
+    "imdbPosterTitle": "{title} trên IMDb",
+    "runtimeLabel": "Thời lượng",
+    "runtimeValue": "{minutes} phút",
+    "wordsPerMinuteLabel": "Số từ mỗi phút"
   },
   "themeToggle": {
     "day": "NGÀY",

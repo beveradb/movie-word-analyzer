@@ -93,7 +93,11 @@
       "hidingDescription": "隐藏日常英语 - 约 2,000 个最常见的词 (the, know, get…)",
       "interestingButton": "有趣的词",
       "onlyKindsSuffix": " · 仅 {kinds}",
-      "showingDescription": "显示所有词，包括日常英语"
+      "showingDescription": "显示所有词，包括日常英语",
+      "excludingKindsSuffix": " · 隐藏 {kinds}",
+      "posStateExcluded": "{kind}：已排除（点击重置）",
+      "posStateIncluded": "{kind}：已包含（点击排除）",
+      "posStateOff": "{kind}：已关闭（点击包含）"
     }
   },
   "boards": {
@@ -327,7 +331,11 @@
     "signatureWordsHeading": "标志性词汇",
     "slugTitle": "{title} - {year}",
     "vocabRichnessLabel": "词汇丰富度",
-    "wordsSpokenLabel": "说出的词数"
+    "wordsSpokenLabel": "说出的词数",
+    "imdbPosterTitle": "IMDb 上的 {title}",
+    "runtimeLabel": "片长",
+    "runtimeValue": "{minutes} 分钟",
+    "wordsPerMinuteLabel": "每分钟词数"
   },
   "themeToggle": {
     "day": "日间",

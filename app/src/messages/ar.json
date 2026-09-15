@@ -93,7 +93,11 @@
       "hidingDescription": "إخفاء الإنجليزية اليومية - أكثر ~2,000 كلمة شيوعاً (the, know, get…)",
       "interestingButton": "كلمات مثيرة للاهتمام",
       "onlyKindsSuffix": " · فقط {kinds}",
-      "showingDescription": "إظهار كل كلمة، بما في ذلك الإنجليزية اليومية"
+      "showingDescription": "إظهار كل كلمة، بما في ذلك الإنجليزية اليومية",
+      "excludingKindsSuffix": " · إخفاء {kinds}",
+      "posStateExcluded": "{kind}: مستبعد (انقر لإعادة الضبط)",
+      "posStateIncluded": "{kind}: مشمول (انقر للاستبعاد)",
+      "posStateOff": "{kind}: متوقف (انقر للتضمين)"
     }
   },
   "boards": {
@@ -327,7 +331,11 @@
     "signatureWordsHeading": "الكلمات المميزة",
     "slugTitle": "{title} - {year}",
     "vocabRichnessLabel": "ثراء المفردات",
-    "wordsSpokenLabel": "الكلمات المنطوقة"
+    "wordsSpokenLabel": "الكلمات المنطوقة",
+    "imdbPosterTitle": "{title} على IMDb",
+    "runtimeLabel": "مدة العرض",
+    "runtimeValue": "{minutes} دقيقة",
+    "wordsPerMinuteLabel": "كلمة في الدقيقة"
   },
   "themeToggle": {
     "day": "نهار",
