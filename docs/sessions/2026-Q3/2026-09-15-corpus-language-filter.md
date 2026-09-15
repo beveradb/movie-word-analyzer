@@ -93,10 +93,14 @@ with honest framing about what it measures. Three ships:
 
 ## Open threads & next steps
 
-- **Parallel i18n-localization session:** main now has my `App.tsx`,
-  `Home/Trends/Leaderboard/Decades/Genres/Entity.tsx`, `ui.tsx` changes and
-  **`corpus.ts` is deleted** — expect conflicts when that session rebases onto
-  the new main.
+- **Parallel i18n-localization session — RESOLVED:** it merged **PR #23**
+  (`c2b2e1c`) on top of this work, localizing the new language-filter UI too, so
+  the anticipated conflicts were handled at their merge. Main is now at `c2b2e1c`
+  (full 33-language i18n). Note: the language dropdown, explainer copy, and
+  "based on N films" labels I added should now be going through the i18n `t()`/
+  `tn()` runtime — worth a glance that the explainer strings got translated (they
+  were added in PR #22, after the i18n en.json baseline; may need keys added to
+  `app/src/messages/en.json` + a translate run).
 - **Original-language words** would be a large follow-up (ingest OPUS
   `raw/<lang>.zip` per language; VM was deleted, caches archived to private R2 —
   see PIPELINE-RESTORE.md).
