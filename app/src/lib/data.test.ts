@@ -27,3 +27,24 @@ describe('fetchLangMerged', () => {
     expect(out).toEqual({ v: 3 })
   })
 })
+
+describe('getMovieBlurb', () => {
+  it('returns the parsed blurb on 200', async () => {
+    const data = await withLangs([])
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+      new Response(JSON.stringify({ overview: 'o', runtime: 139 })))
+    expect(await data.getMovieBlurb('tt1')).toEqual({ overview: 'o', runtime: 139 })
+  })
+
+  it('returns null when the sidecar is missing (404)', async () => {
+    const data = await withLangs([])
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response('', { status: 404 }))
+    expect(await data.getMovieBlurb('tt2')).toBeNull()
+  })
+
+  it('returns null when fetch rejects', async () => {
+    const data = await withLangs([])
+    vi.spyOn(globalThis, 'fetch').mockRejectedValue(new Error('offline'))
+    expect(await data.getMovieBlurb('tt3')).toBeNull()
+  })
+})

@@ -39,6 +39,12 @@ export interface MovieDetail {
   distinctive: [string, number][]
 }
 
+export interface MovieBlurb {
+  overview?: string
+  tagline?: string
+  runtime?: number
+}
+
 export interface Leaderboard {
   words: [string, number, number, ...unknown[]][]
   stopwords: [string, number, number, ...unknown[]][]
@@ -144,6 +150,24 @@ export const getLeaderboard = () => fetchLangMerged<Leaderboard>('json/leaderboa
 export const getMovieIndex = () => fetchJSON<MovieIndexEntry[]>('json/movies-index.json')
 export const getMovie = (id: string) => fetchJSON<MovieDetail>(`json/movie/${id}.json`)
 export const getWordlists = () => fetchJSON<Wordlists>('json/wordlists.json')
+
+// Own in-flight cache (not fetchOne): a missing sidecar (404) must resolve to
+// null and be cached as such, not treated as an error to retry/delete.
+const blurbCache = new Map<string, Promise<MovieBlurb | null>>()
+
+/** Lazy, 404-tolerant blurb sidecar. Missing file -> null (page renders fine). */
+export function getMovieBlurb(id: string): Promise<MovieBlurb | null> {
+  const url = globalUrl(`json/blurb/${id}.json`)
+  if (!blurbCache.has(url)) {
+    blurbCache.set(
+      url,
+      fetch(url)
+        .then((res) => (res.ok ? (res.json() as Promise<MovieBlurb>) : null))
+        .catch(() => null),
+    )
+  }
+  return blurbCache.get(url) as Promise<MovieBlurb | null>
+}
 
 /** The movie index filtered to the active language selection (empty = all). */
 export async function getFilteredMovieIndex(): Promise<MovieIndexEntry[]> {
